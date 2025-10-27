@@ -1,46 +1,434 @@
 <!DOCTYPE html>
-<html>
+<html lang="zh-CN">
+<head>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-  <title>Terms of Agreement</title>
+  <title>Linutech 隐私政策</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<head>
+  <link rel="stylesheet" href="stylesheets/site.css">
+  <style>
+    .policy-page main {
+      padding-top: 48px;
+      padding-bottom: 160px;
+    }
 
-<style>
-  li {
-    font-size: 20px;
-    font-weight: 100;
-    margin: 8px 0px;
-  }
-</style>
+    .policy-hero {
+      display: grid;
+      gap: 24px;
+      padding: 48px;
+      border-radius: var(--radius-lg);
+      background: var(--surface-glass);
+      border: 1px solid var(--stroke-light);
+      box-shadow: var(--shadow-lg);
+      margin-bottom: 48px;
+    }
+
+    .policy-hero__title {
+      font-size: clamp(2.4rem, 4vw, 3.4rem);
+      margin: 0;
+    }
+
+    .policy-hero__subtitle {
+      color: var(--text-secondary);
+      font-size: 1.05rem;
+      max-width: 720px;
+      margin: 0;
+    }
+
+    .policy-hero__meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 14px;
+      color: var(--text-muted);
+      font-size: 0.9rem;
+    }
+
+    .policy-toc {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 14px;
+      margin-bottom: 64px;
+      list-style: none;
+      padding: 0;
+    }
+
+    .policy-toc a {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 16px 20px;
+      border-radius: var(--radius-md);
+      background: rgba(15, 23, 42, 0.55);
+      border: 1px solid rgba(148, 163, 184, 0.2);
+      color: var(--text-secondary);
+      transition: transform var(--transition), border-color var(--transition), color var(--transition);
+    }
+
+    .policy-toc a::after {
+      content: "→";
+      opacity: 0.6;
+    }
+
+    .policy-toc a:hover,
+    .policy-toc a:focus-visible {
+      transform: translateY(-3px);
+      border-color: rgba(56, 189, 248, 0.45);
+      color: var(--text-primary);
+    }
+
+    .policy-grid {
+      display: grid;
+      gap: 36px;
+    }
+
+    .policy-card {
+      display: grid;
+      gap: 28px;
+      padding: 40px;
+      border-radius: var(--radius-lg);
+      background: rgba(15, 23, 42, 0.68);
+      border: 1px solid rgba(148, 163, 184, 0.24);
+      box-shadow: var(--shadow-sm);
+    }
+
+    .policy-card__header {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+    }
+
+    .policy-card__title {
+      margin: 0;
+      font-size: clamp(1.8rem, 3vw, 2.4rem);
+    }
+
+    .policy-tag {
+      padding: 8px 14px;
+      border-radius: 999px;
+      border: 1px solid rgba(148, 163, 184, 0.24);
+      background: rgba(15, 23, 42, 0.55);
+      color: var(--text-muted);
+      font-size: 0.85rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+
+    .policy-card__sections {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 24px;
+    }
+
+    .policy-topic h3 {
+      margin-top: 0;
+      font-size: 1.1rem;
+    }
+
+    .policy-topic p,
+    .policy-topic ul {
+      color: var(--text-secondary);
+      margin: 0;
+      font-size: 0.95rem;
+    }
+
+    .policy-topic ul {
+      list-style: none;
+      padding: 0;
+      display: grid;
+      gap: 12px;
+    }
+
+    .policy-topic ul li {
+      display: flex;
+      gap: 10px;
+      align-items: flex-start;
+    }
+
+    .policy-topic ul li::before {
+      content: "•";
+      color: var(--accent-blue);
+      margin-top: -2px;
+    }
+
+    .policy-footer {
+      margin-top: 80px;
+      padding: 32px;
+      border-radius: var(--radius-md);
+      background: rgba(15, 23, 42, 0.55);
+      border: 1px solid rgba(148, 163, 184, 0.16);
+      color: var(--text-muted);
+      font-size: 0.9rem;
+      display: grid;
+      gap: 6px;
+    }
+
+    @media (max-width: 768px) {
+      .policy-hero {
+        padding: 32px;
+      }
+
+      .policy-card {
+        padding: 28px;
+      }
+    }
+  </style>
 </head>
+<body class="policy-page">
+  <header class="top-nav">
+    <a class="brand" href="index.html">Linutech</a>
+    <nav class="top-nav__links">
+      <a href="index.html#products">全部产品</a>
+      <a href="privacy.html" aria-current="page">隐私政策</a>
+      <a href="mailto:yutang_work@163.com">联系客服</a>
+    </nav>
+  </header>
 
-<body class="normal firstload">
-  <div id="wrapper" style="width: 80%;margin: auto;">
-    <h1 id="privacypolicy">TimeHabit隐私政策</h1>
-    <ul>
-      <li>在<em>TimeHabit</em>内部选择的应用程序由iOS Screen Time以不透明的形式提供<em>TimeHabit</em>永远不会知道你选择了哪些应用程序。</li>
-      <li><em>TimeHabit</em>不收集任何数据，包括您选择的应用程序以及它们的使用信息。</li>
-      <li><em>TimeHabit</em>不使用任何第三方SDK或服务。</li>
+  <main>
+    <section class="policy-hero">
+      <h1 class="policy-hero__title">Linutech 产品隐私政策</h1>
+      <p class="policy-hero__subtitle">
+        我们致力于构建安全、透明的数字工具。无论您使用 TimeHabit、GoalHabit、TimingHabit、TaskMatrix、LimStar
+        或 TastePost，所有产品均遵循相同的核心原则：尽量减少数据收集、本地优先存储、绝不出售个人信息，并提供清晰的控制选项。
+      </p>
+      <div class="policy-hero__meta">
+        <span>适用产品：TimeHabit · GoalHabit · TimingHabit · TaskMatrix · LimStar · TastePost</span>
+        <span>最近更新：2025 年 2 月 22 日</span>
+        <span>如有疑问，请发送邮件至 <a href="mailto:yutang_work@163.com">yutang_work@163.com</a></span>
+      </div>
+    </section>
+
+    <ul class="policy-toc">
+      <li><a href="#timehabit">TimeHabit · 屏幕与专注管理</a></li>
+      <li><a href="#goalhabit">GoalHabit · 目标追踪</a></li>
+      <li><a href="#timinghabit">TimingHabit · 计时专注</a></li>
+      <li><a href="#taskmatrix">TaskMatrix · 项目协作</a></li>
+      <li><a href="#limstar">LimStar · 创意灵感库</a></li>
+      <li><a href="#tastepost">TastePost · 美食记录</a></li>
     </ul>
 
-    <p><strong>最近更新：</strong> <strong>2024年4月1日</strong></p>
-    <!-- ##END MARKED WRAPPER## -->
-  </div>
+    <div class="policy-grid">
+      <section class="policy-card" id="timehabit">
+        <header class="policy-card__header">
+          <h2 class="policy-card__title">TimeHabit</h2>
+          <span class="policy-tag">iOS · 专注与屏幕时间管理</span>
+        </header>
+        <div class="policy-card__sections">
+          <div class="policy-topic">
+            <h3>我们收集的数据</h3>
+            <ul>
+              <li>TimeHabit 不会上传您选择的应用、使用时长或任何屏幕时间统计。</li>
+              <li>设备分组、自动化规则和限制设置均仅保存在您的本地设备中。</li>
+            </ul>
+          </div>
+          <div class="policy-topic">
+            <h3>使用的权限与存储</h3>
+            <ul>
+              <li>需要 Screen Time API 授权以隐藏或限制应用，此授权由系统弹窗统一管理。</li>
+              <li>可选开启 iCloud 同步，便于在多台设备间共享设置；数据加密后传输，Linutech 无法访问。</li>
+            </ul>
+          </div>
+          <div class="policy-topic">
+            <h3>第三方服务</h3>
+            <p>TimeHabit 不集成任何第三方分析、广告或追踪 SDK。</p>
+          </div>
+          <div class="policy-topic">
+            <h3>您的控制权</h3>
+            <ul>
+              <li>可随时在 iOS 设置中撤销 Screen Time 权限。</li>
+              <li>删除应用即自动清除本地和 iCloud（如启用）的 TimeHabit 数据。</li>
+            </ul>
+          </div>
+        </div>
+      </section>
 
+      <section class="policy-card" id="goalhabit">
+        <header class="policy-card__header">
+          <h2 class="policy-card__title">GoalHabit</h2>
+          <span class="policy-tag">iOS · 目标与习惯追踪</span>
+        </header>
+        <div class="policy-card__sections">
+          <div class="policy-topic">
+            <h3>我们收集的数据</h3>
+            <ul>
+              <li>GoalHabit 不会收集或上传任何目标、习惯或备忘数据。</li>
+              <li>所有记录、提醒和完成状态都保存在用户设备的加密数据库中。</li>
+            </ul>
+          </div>
+          <div class="policy-topic">
+            <h3>同步与备份</h3>
+            <ul>
+              <li>可选启用 iCloud 同步以备份目标数据；Linutech 不会访问同步内容。</li>
+              <li>关闭同步后，所有数据将仅保留在本机，随时可以导出备份。</li>
+            </ul>
+          </div>
+          <div class="policy-topic">
+            <h3>第三方服务</h3>
+            <p>GoalHabit 不集成广告或统计 SDK，不与第三方共享任何个人信息。</p>
+          </div>
+          <div class="policy-topic">
+            <h3>您的控制权</h3>
+            <ul>
+              <li>可在应用内导出或删除所有记录。</li>
+              <li>卸载应用时，所有本地数据将一并删除。</li>
+            </ul>
+          </div>
+        </div>
+      </section>
 
-  <div id="wrapper" style="width: 80%;margin: auto;">
-    <h1 id="privacypolicy">GoalHabit隐私政策</h1>
-    <ul>
-      <!-- <li>在<em>GoalHabit</em>内部选择的应用程序由iOS Screen Time以不透明的形式提供<em>GoalHabit</em>永远不会知道你选择了哪些应用程序。</li> -->
-      <li><em>GoalHabit</em>不收集任何数据，包括您选择的应用程序以及它们的使用信息。</li>
-      <li><em>GoalHabit</em>不使用任何第三方SDK或服务。</li>
-    </ul>
+      <section class="policy-card" id="timinghabit">
+        <header class="policy-card__header">
+          <h2 class="policy-card__title">TimingHabit</h2>
+          <span class="policy-tag">iOS · 番茄钟与效率计时</span>
+        </header>
+        <div class="policy-card__sections">
+          <div class="policy-topic">
+            <h3>我们收集的数据</h3>
+            <ul>
+              <li>TimingHabit 不会收集任何计时任务、标签或备注信息。</li>
+              <li>历史计时记录只在本地生成，供您查看完成情况。</li>
+            </ul>
+          </div>
+          <div class="policy-topic">
+            <h3>设备权限</h3>
+            <ul>
+              <li>如启用提醒或通知，仅使用系统通知权限，不访问您的通讯录或定位信息。</li>
+              <li>音效、提示音均来自系统资源，不会访问麦克风。</li>
+            </ul>
+          </div>
+          <div class="policy-topic">
+            <h3>第三方服务</h3>
+            <p>应用不接入任何第三方追踪、广告或崩溃统计服务。</p>
+          </div>
+          <div class="policy-topic">
+            <h3>您的控制权</h3>
+            <ul>
+              <li>可手动清空历史记录并撤销通知权限。</li>
+              <li>删除应用将清除全部本地数据。</li>
+            </ul>
+          </div>
+        </div>
+      </section>
 
-    <p><strong>最近更新：</strong> <strong>2025年1月2日</strong></p>
-    <!-- ##END MARKED WRAPPER## -->
-  </div>
-  
+      <section class="policy-card" id="taskmatrix">
+        <header class="policy-card__header">
+          <h2 class="policy-card__title">TaskMatrix</h2>
+          <span class="policy-tag">Web &amp; 桌面 · 项目协同</span>
+        </header>
+        <div class="policy-card__sections">
+          <div class="policy-topic">
+            <h3>我们收集的数据</h3>
+            <ul>
+              <li>注册账号仅需邮箱，用于创建团队空间和接收重要通知。</li>
+              <li>任务、评论、文件等内容存储在受控的云端数据库，用于提供实时协同能力。</li>
+            </ul>
+          </div>
+          <div class="policy-topic">
+            <h3>数据存储与安全</h3>
+            <ul>
+              <li>所有传输均通过 HTTPS 加密。</li>
+              <li>团队数据与系统日志隔离存储，限制内部访问权限并记录审计日志。</li>
+            </ul>
+          </div>
+          <div class="policy-topic">
+            <h3>第三方服务</h3>
+            <ul>
+              <li>使用行业标准的对象存储服务托管附件，仅用于文件交付。</li>
+              <li>可选启用企业级单点登录（SSO），我们不会保存您的第三方登录凭证。</li>
+            </ul>
+          </div>
+          <div class="policy-topic">
+            <h3>您的控制权</h3>
+            <ul>
+              <li>管理员可导出或删除整个团队空间的数据。</li>
+              <li>账号注销后，相关个人数据将在 30 天内从生产环境移除。</li>
+            </ul>
+          </div>
+        </div>
+      </section>
+
+      <section class="policy-card" id="limstar">
+        <header class="policy-card__header">
+          <h2 class="policy-card__title">LimStar</h2>
+          <span class="policy-tag">iOS &amp; Web · 灵感收集与创作</span>
+        </header>
+        <div class="policy-card__sections">
+          <div class="policy-topic">
+            <h3>我们收集的数据</h3>
+            <ul>
+              <li>保存的灵感、标签和附件文件默认存储在本地设备。</li>
+              <li>如启用跨设备同步，将在云端创建加密副本，Linutech 不会用于广告或推荐。</li>
+            </ul>
+          </div>
+          <div class="policy-topic">
+            <h3>访问的系统权限</h3>
+            <ul>
+              <li>仅在您授权时访问相册或文件，以便导入图片或文档。</li>
+              <li>可选使用相机拍摄灵感素材，拍摄内容不会离开设备除非您主动上传。</li>
+            </ul>
+          </div>
+          <div class="policy-topic">
+            <h3>第三方服务</h3>
+            <p>LimStar 不植入广告，不与第三方共享您的创作内容。</p>
+          </div>
+          <div class="policy-topic">
+            <h3>您的控制权</h3>
+            <ul>
+              <li>可随时导出灵感库或彻底删除某个项目。</li>
+              <li>关闭同步功能后，云端备份会自动清除。</li>
+            </ul>
+          </div>
+        </div>
+      </section>
+
+      <section class="policy-card" id="tastepost">
+        <header class="policy-card__header">
+          <h2 class="policy-card__title">TastePost</h2>
+          <span class="policy-tag">移动端 · 美食日记</span>
+        </header>
+        <div class="policy-card__sections">
+          <div class="policy-topic">
+            <h3>我们收集的数据</h3>
+            <ul>
+              <li>TastePost 不会自动收集位置信息或联系人资料。</li>
+              <li>餐厅记录、评分、照片由您自行创建，可选择是否同步到云端。</li>
+            </ul>
+          </div>
+          <div class="policy-topic">
+            <h3>照片与定位权限</h3>
+            <ul>
+              <li>仅在您主动添加照片时请求相册或相机权限，系统可随时撤销。</li>
+              <li>可选手动填写地址或使用定位以便回顾，我们不会在后台持续追踪。</li>
+            </ul>
+          </div>
+          <div class="policy-topic">
+            <h3>第三方服务</h3>
+            <p>我们不使用广告联盟。若启用地图定位，仅调用系统地图服务，不会上传历史轨迹。</p>
+          </div>
+          <div class="policy-topic">
+            <h3>您的控制权</h3>
+            <ul>
+              <li>应用内提供批量删除与数据导出工具。</li>
+              <li>注销账号后，TastePost 会在 30 天内清除云端备份。</li>
+            </ul>
+          </div>
+        </div>
+      </section>
+    </div>
+
+    <footer class="policy-footer">
+      <span>如需访问、更新或删除您的个人信息，请发送邮件至 <a href="mailto:yutang_work@163.com">yutang_work@163.com</a>，我们将在 7 个工作日内响应。</span>
+      <span>本隐私政策适用于 Linutech 旗下所有面向公众发布的产品与服务，如有重大变更，我们将通过站内公告或邮件通知。</span>
+    </footer>
+  </main>
+
+  <footer class="page-footer">
+    <span>© 2025 Linutech</span>
+    <div class="page-footer__links">
+      <a href="privacy.html" aria-current="page">隐私政策</a>
+      <a href="mailto:yutang_work@163.com">客服邮箱</a>
+    </div>
+  </footer>
 </body>
-
 </html>
