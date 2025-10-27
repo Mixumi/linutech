@@ -26,43 +26,42 @@ a{
 }
 
 .showcase_title_box{
-	margin: 0 0px 50px;
+	margin: 60px 10px 40px;
 }
 
 .showcase_title_box h1{
-	font-size: 32px;
-	margin: 0 15px 0.2em;
+	font-size: 40px;
+	margin: 0 0 0.2em;
 	text-align: left;
 }
 
 .showcase_title_box p{
-	font-size: 16px;
+	font-size: 22px;
 	font-weight: 200;
-	margin: 0 15px 0.2em;
 	text-align: left;
 }
 
 .showcases{
 	display: flex;
 	flex-wrap: wrap;
-	margin-bottom: 40px;
+	margin-bottom: 60px;
 }
 
 h2{
-	margin: 0 15px 0.2em;
-	font-size: 24px;
+	margin: 0 10px 0.2em;
+	font-size: 26px;
 }
 
 .showcase{
-	flex: 0 0 calc(100% - 30px);
-	margin: 10px 15px;
+	flex: 0 0 calc(50% - 20px);
+	margin: 10px;
 	background-color: rgba(255, 255, 255, 0.9);
 	/* background-image:  url("/images/chevron.right.svg"); */
 	background-position: calc(100% - 10px) center;
 	background-size: 15px 15px;
 	background-repeat: no-repeat;
 	border-radius: 20px;
-	padding: 15px 30px 15px 20px;
+	padding: 20px 30px 20px 20px;
 	box-sizing: border-box;
 	box-shadow: 0 5px 15px rgba(0,0,0,0.05);
 	position: relative;
@@ -86,7 +85,7 @@ h2{
 	width: 50px;
 	height: 50px;
 	position: absolute;
-	top: 15px;
+	top: 20px;
 	left: 20px;
 	background-repeat: no-repeat;
 	background-position: center;
@@ -94,17 +93,17 @@ h2{
 
 
 .showcase h3{
-	font-size: 18px;
+	font-size: 20px;
 	font-weight: 600;
-	margin: 0 0 0.2em 65px;
+	margin: 0 0 10px 65px;
 	color: #000;
 }
 
 .showcase p{
-	line-height: 24px;
+	line-height: 26px;
 	font-weight: 300;
 	margin: 0 0 0px 65px;
-	font-size: 16px;
+	font-size: 18px;
 	color: #444;
 }
 
@@ -120,8 +119,8 @@ h2{
 }
 
 .appicon{
-	width: 80px;
-	height: 80px;
+	width: 100px;
+	height: 100px;
 	background-image: url("/images/LOGO.png");
 	background-size: contain;
 	margin: 0 auto;
@@ -132,14 +131,14 @@ h2{
 	text-align: center;
 	font-weight: 800;
 	margin: 30px 0px 0px;
-	font-size: 28px;
+	font-size: 30px;
 }
 
 .subtitle{
 	text-align: center;
-	font-weight: 100;
+	font-weight: 200;
 	margin: 5px 0px;
-	font-size: 22px;
+	font-size: 24px;
 }
 
 .ios_download_btn{
@@ -163,12 +162,10 @@ h2{
 }
 
 .feature_icon{
-	width: 10vw;
-	height: 10vw;
-	max-width: 70px;
-	max-height: 70px;
+	width: 50px;
+	height: 50px;
 	position: absolute;
-	left: 5vw;
+	left: 80px;
 	background-repeat: no-repeat;
 	background-position: center;
 }
@@ -258,48 +255,28 @@ h2{
 	background-size: contain;
 }
 
-.icon_color{
-	background-image: url("/images/color.svg");
-	background-size: contain;
-}
-
-.icon_prompt{
-	background-image: url("/images/prompt.svg");
-	background-size: contain;
-}
-.icon_forbidden{
-	background-image: url("/images/forbidden.svg");
-	background-size: contain;
-}
-.icon_replace{
-	background-image: url("/images/replace.svg");
-	background-size: contain;
-}
-
 .intro_text{
-	margin: 0 5vw 5vw 21vw;
+	margin: 0 0 30px 150px;
+	width: 760px;
 }
 
 .intro_text h3{
-	font-size: 20px;
-	font-weight: 700;
+	font-size: 22px;
+	font-weight: 500;
 	margin-bottom: 5px;
 }
 
 .intro_text .descr{
-	font-size: 15px;
-	line-height: 22px;
+	line-height: 24px;
 	font-weight: 300;
 }
 
 .intro_pics {
-/*
   display: flex;
   justify-content: center;
   align-items: center;
   gap: 80px;
-*/
-  margin-bottom: 100px;
+  margin-bottom: 80px;
 }
 
 .intro_pic {
@@ -308,9 +285,8 @@ h2{
 	width: 300px;
 	height: 650px;
 	border-radius: 20px;
-	border: 1px solid rgba(23,33,44,0.15);
-	box-shadow: 0px 10px 20px rgba(0,0,0,0.2);
-	margin: 20px auto 30px;
+	border: 1px solid rgba(23,33,44,0.1);
+	box-shadow: 0px 20px 40px rgba(0,0,0,0.3);
 }
 
 .intro_pic_1_1 {
@@ -328,7 +304,6 @@ h2{
 .intro_pic_2_2 {
   background-image: url("/images/intro_pic_2_2.png");
 }
-
 
 .intro_pic_4_1 {
   background-image: url("/images/intro_pic_4_1.jpg");
@@ -374,7 +349,7 @@ h2{
 	bottom: 0px;
 	text-align: center;
 	padding: 10px;
-	font-size: 12px;
+	font-size: 14px;
 }
 
 .language-switcher {
@@ -383,7 +358,7 @@ h2{
 	cursor: pointer;
 	z-index: 999;
 	top: 20px;
-	right: 20px;
+	right: 40px;
 }
 
 .language-switcher .selected-language {
@@ -418,10 +393,9 @@ h2{
   display: none;
   right: 0px;
   position: absolute;
-  padding: 15px 10px;
-  background-color: rgba(255, 255, 255, 0.95);
-  width: calc(100vw - 60px);
-  max-width: 400px;
+  padding: 12px 8px;
+  background-color: rgba(255, 255, 255, 0.8);
+  min-width: 400px;
   box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.1);
   z-index: 1;
   column-count: 3;
@@ -440,11 +414,30 @@ h2{
 	border-radius: 4px;
 	text-decoration: none;
 	color: #000;
+	
 }
 
 .language-switcher .language-list a:hover {
 	background-color: rgba(90, 90, 255, 0.2);
-	border-radius: 5px;
+}
+
+
+.icon_color{
+	background-image: url("/images/color.svg");
+	background-size: contain;
+}
+
+.icon_prompt{
+	background-image: url("/images/prompt.svg");
+	background-size: contain;
+}
+.icon_forbidden{
+	background-image: url("/images/forbidden.svg");
+	background-size: contain;
+}
+.icon_replace{
+	background-image: url("/images/replace.svg");
+	background-size: contain;
 }
 
 
