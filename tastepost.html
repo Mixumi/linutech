@@ -1,358 +1,102 @@
 <!DOCTYPE html>
 <html lang="zh-CN">
-
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>TastePost - 美食邮票</title>
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        body {
-            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
-            line-height: 1.6;
-        }
-
-        .header {
-            display: flex;
-            justify-content: space-between;
-            padding: 20px 5%;
-            align-items: center;
-        }
-
-        .logo {
-            font-size: 24px;
-            font-weight: bold;
-        }
-
-        .contact {
-            text-decoration: none;
-            color: #333;
-        }
-
-        .main {
-            display: grid;
-            grid-template-columns: minmax(300px, 1fr) minmax(400px, 2fr);
-            gap: 40px;
-            align-items: center;
-            padding: 0;
-        }
-
-        .content {
-            padding: 40px;
-            max-width: 600px;
-        }
-
-        .title {
-            font-size: 48px;
-            margin-bottom: 20px;
-            font-weight: bold;
-        }
-
-        .subtitle {
-            font-size: 16px;
-            color: #666;
-            margin-bottom: 40px;
-            line-height: 1.8;
-        }
-
-        .download-buttons {
-            display: flex;
-            gap: 20px;
-            flex-wrap: wrap;
-        }
-
-        .download-button {
-            padding: 12px 24px;
-            border-radius: 8px;
-            text-decoration: none;
-            font-weight: 500;
-            transition: all 0.3s ease;
-        }
-
-        .app-store {
-            background: #000;
-            color: white;
-        }
-
-        .google-play {
-            background: #000;
-            color: white;
-        }
-
-        .android-download {
-            background: #f5f5f5;
-            color: #333;
-        }
-
-        .phone-container {
-            position: relative;
-            max-width: 400px;
-            margin: 0 auto;
-        }
-
-        .phone-image {
-            width: 100%;
-            height: auto;
-            border-radius: 40px;
-            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
-        }
-
-        .store-note {
-            font-size: 12px;
-            color: #666;
-            margin-top: 10px;
-        }
-
-        @media (max-width: 768px) {
-            .main {
-                grid-template-columns: 1fr;
-                gap: 20px;
-            }
-
-            .content {
-                padding: 20px;
-                text-align: center;
-            }
-        }
-
-        /* 轮播图样式 */
-        .phone-slider {
-            position: relative;
-            width: 200px;
-            height: 100%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-
-        .phone-container {
-            position: relative;
-            width: 240px;
-            height: 100%;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-        }
-
-        .phone-image {
-            position: absolute;
-            width: 200px;
-            height: auto;
-            opacity: 0;
-            transition: opacity 0.5s ease-in-out;
-            border-radius: 40px;
-            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
-            object-fit: contain;
-        }
-
-        .phone-image.active {
-            opacity: 1;
-        }
-
-        .slider-dots {
-            position: absolute;
-            bottom: 20px;
-            left: 0;
-            right: 0;
-            display: flex;
-            justify-content: center;
-            gap: 10px;
-            margin-top: 20px;
-        }
-
-        .dot {
-            width: 8px;
-            height: 8px;
-            border-radius: 50%;
-            background: #ddd;
-            cursor: pointer;
-            transition: all 0.3s ease;
-        }
-
-        .dot.active {
-            background: #333;
-            transform: scale(1.2);
-        }
-
-        /* 动画效果 */
-        .download-button:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
-        }
-
-        .app-store:hover,
-        .google-play:hover {
-            background: #333;
-        }
-
-        .android-download:hover {
-            background: #eee;
-        }
-
-        /* 手机动画效果 */
-        .phone-container {
-            animation: float 6s ease-in-out infinite;
-        }
-
-        @keyframes float {
-            0% {
-                transform: translateY(0px);
-            }
-
-            50% {
-                transform: translateY(-20px);
-            }
-
-            100% {
-                transform: translateY(0px);
-            }
-        }
-
-        /* 响应式优化 */
-        @media (min-width: 1200px) {
-            .phone-container {
-                width: 240px;
-            }
-        }
-
-        @media (max-width: 768px) {
-            .phone-slider {
-                height: 70vh;
-            }
-
-            .phone-container {
-                width: 240px;
-                padding: 10px;
-            }
-        }
-
-        @media (max-width: 480px) {
-            .phone-container {
-                width: 240px;
-            }
-
-            .title {
-                font-size: 36px;
-            }
-
-            .download-buttons {
-                flex-direction: column;
-            }
-
-            .download-button {
-                width: 100%;
-                text-align: center;
-            }
-        }
-    </style>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>TastePost | 记录独一无二的风味记忆</title>
+  <meta name="description" content="TastePost 以邮票式卡片记录美食体验，让每一次灵感、地点与风味都被细致保存与分享。">
+  <link rel="stylesheet" href="stylesheets/site.css">
+  <script src="javascripts/site.js" defer></script>
 </head>
+<body class="product-page">
+  <header class="top-nav">
+    <a class="brand" href="index.html">Linutech</a>
+    <nav class="top-nav__links">
+      <a href="index.html#products">全部产品</a>
+      <a href="privacy.html">隐私政策</a>
+      <a href="mailto:yutang_work@163.com">联系客服</a>
+    </nav>
+  </header>
 
-<body>
-    <header class="header">
-        <div class="logo">TastePost</div>
-        <a href="#" class="contact">联系我们</a>
-    </header>
-
-    <main class="main">
-        <div class="content">
-            <h3 style="margin-bottom: 10px;">完成目标，走向成功</h3>
-            <h1 class="title">TastePost</h1>
-            <p class="subtitle">TastePost，美食邮票集。</p>
-            <div class="download-buttons">
-                <a href="#" class="download-button app-store">已上架App Store</a>
-            </div>
-            <p class="store-note">即将上架小米、酷安、华为等应用商店</p>
+  <main>
+    <section class="product-hero">
+      <div class="product-hero__content">
+        <span class="product-hero__eyebrow">灵感表达</span>
+        <h1 class="product-hero__title">TastePost</h1>
+        <p class="product-hero__lead">TastePost 将每次餐桌灵感化为邮票，结合地点、心情、风味标签与照片，让你的美食记忆更具故事性。</p>
+        <div class="product-meta">
+          <span class="product-tag">美食日记</span>
+          <span class="product-tag">灵感采集</span>
+          <span class="product-tag">卡片社交</span>
         </div>
-
-        <div class="phone-container">
-            <div class="phone-slider">
-                <img src="../images/Taste-1.png" alt="TastePost Interface 1" class="phone-image active">
-                <img src="../images/Taste-2.png" alt="TastePost Interface 2" class="phone-image">
-                <img src="../images/Taste-3.png" alt="TastePost Interface 3" class="phone-image">
-                <img src="../images/Taste-4.png" alt="TastePost Interface 4" class="phone-image">
-            </div>
-            <div class="slider-dots">
-                <span class="dot active"></span>
-                <span class="dot"></span>
-                <span class="dot"></span>
-                <span class="dot"></span>
-            </div>
+        <ul class="highlight-list">
+          <li>卡片式记录方式，涵盖菜品、味型、氛围与灵感注记。</li>
+          <li>支持地点、风味、伙伴等多维标签，快速检索过往体验。</li>
+          <li>以邮票墙呈现你的风味地图，并可一键生成分享故事。</li>
+        </ul>
+        <div class="cta-group">
+          <a class="button button--primary" href="mailto:yutang_work@163.com?subject=TastePost%20合作咨询">加入内测名单</a>
+          <a class="button button--ghost" href="goalhabit.html">探索 GoalHabit</a>
         </div>
-    </main>
+      </div>
 
-    <div class="copyright" style="text-align:center;margin-top: 240px;">
-        <a href="../privacy.html" style="color:#000">隐私政策</a>&nbsp;|&nbsp;<a href="../terms.html"
-            style="color:#000">协议条款</a>
+      <div class="device-gallery" data-gallery-autoplay="false">
+        <div class="device-gallery__frame">
+          <div class="device-gallery__screen">
+            <img src="images/browser-bar.png" alt="TastePost 卡片预览" class="device-gallery__slide is-active" data-gallery-slide>
+            <img src="images/apps.svg" alt="TastePost 标签图标" class="device-gallery__slide" data-gallery-slide>
+            <img src="images/chevron.right.svg" alt="TastePost 分享元素" class="device-gallery__slide" data-gallery-slide>
+          </div>
+        </div>
+        <p class="device-gallery__caption">视觉符号示例，展现 TastePost 的卡片化设计语言。</p>
+      </div>
+    </section>
+
+    <section class="feature-section">
+      <h2 class="section__title">体验亮点</h2>
+      <div class="feature-grid">
+        <div class="feature-card">
+          <strong>邮票墙</strong>
+          <p>自动生成风味邮票墙，按时间轴或城市浏览你的独特味觉旅程。</p>
+        </div>
+        <div class="feature-card">
+          <strong>灵感草稿箱</strong>
+          <p>灵感随手记支持语音、图片与手写，出门在外也能快速记录。</p>
+        </div>
+        <div class="feature-card">
+          <strong>故事模板</strong>
+          <p>提供多款图文排版模板，一键生成可分享的美食故事卡片。</p>
+        </div>
+        <div class="feature-card">
+          <strong>私密空间</strong>
+          <p>可设置私密或共享模式，灵活管理个人记忆与好友互动。</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="feature-section">
+      <h2 class="section__title">适合谁</h2>
+      <ul class="use-case-list">
+        <li>热爱探店、料理或记录生活日常的你。</li>
+        <li>想要整理口味偏好，打造专属食谱收藏夹。</li>
+        <li>餐饮品牌主理人，希望更好呈现菜品故事。</li>
+        <li>喜欢创作内容，想在社交平台分享风味见闻的创作者。</li>
+      </ul>
+      <div class="pill-group">
+        <span class="pill">探店达人</span>
+        <span class="pill">料理爱好者</span>
+        <span class="pill">品牌主理人</span>
+        <span class="pill">内容创作者</span>
+      </div>
+    </section>
+  </main>
+
+  <footer class="page-footer">
+    <span>© 2025 Linutech · TastePost</span>
+    <div class="page-footer__links">
+      <a href="privacy.html">隐私政策</a>
+      <a href="mailto:yutang_work@163.com">客服邮箱</a>
     </div>
-    <div style="text-align:center">Customer Support: yutang_work@163.com</div>
-
-    <script>
-        document.addEventListener('DOMContentLoaded', function () {
-            const images = document.querySelectorAll('.phone-image');
-            const dots = document.querySelectorAll('.dot');
-            let currentImage = 0;
-            let interval;
-
-            // 预加载图片
-            function preloadImages() {
-                const imagePromises = Array.from(images).map(img => {
-                    return new Promise((resolve, reject) => {
-                        if (img.complete) {
-                            resolve();
-                        } else {
-                            img.onload = resolve;
-                            img.onerror = reject;
-                        }
-                    });
-                });
-
-                return Promise.all(imagePromises);
-            }
-
-            function showImage(index) {
-                if (!images[index]) return;
-
-                images.forEach(img => img.classList.remove('active'));
-                dots.forEach(dot => dot.classList.remove('active'));
-
-                images[index].classList.add('active');
-                dots[index].classList.add('active');
-            }
-
-            function nextImage() {
-                currentImage = (currentImage + 1) % images.length;
-                showImage(currentImage);
-            }
-
-            function startSlideshow() {
-                if (interval) clearInterval(interval);
-                interval = setInterval(nextImage, 3000);
-            }
-
-            // 点击圆点切换图片
-            dots.forEach((dot, index) => {
-                dot.addEventListener('click', () => {
-                    currentImage = index;
-                    showImage(currentImage);
-                    startSlideshow(); // 重置定时器
-                });
-            });
-
-            // 等待图片加载完成后开始轮播
-            preloadImages().then(() => {
-                showImage(0); // 显示第一张图片
-                startSlideshow(); // 开始自动轮播
-            }).catch(error => {
-                console.error('图片加载失败:', error);
-            });
-        });
-    </script>
+  </footer>
 </body>
-
 </html>

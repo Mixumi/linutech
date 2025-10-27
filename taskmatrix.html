@@ -1,358 +1,102 @@
 <!DOCTYPE html>
 <html lang="zh-CN">
-
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>TaskMatrix - 四象限工作法</title>
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        body {
-            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
-            line-height: 1.6;
-        }
-
-        .header {
-            display: flex;
-            justify-content: space-between;
-            padding: 20px 5%;
-            align-items: center;
-        }
-
-        .logo {
-            font-size: 24px;
-            font-weight: bold;
-        }
-
-        .contact {
-            text-decoration: none;
-            color: #333;
-        }
-
-        .main {
-            display: grid;
-            grid-template-columns: minmax(300px, 1fr) minmax(400px, 2fr);
-            gap: 40px;
-            align-items: center;
-            padding: 0;
-        }
-
-        .content {
-            padding: 40px;
-            max-width: 600px;
-        }
-
-        .title {
-            font-size: 48px;
-            margin-bottom: 20px;
-            font-weight: bold;
-        }
-
-        .subtitle {
-            font-size: 16px;
-            color: #666;
-            margin-bottom: 40px;
-            line-height: 1.8;
-        }
-
-        .download-buttons {
-            display: flex;
-            gap: 20px;
-            flex-wrap: wrap;
-        }
-
-        .download-button {
-            padding: 12px 24px;
-            border-radius: 8px;
-            text-decoration: none;
-            font-weight: 500;
-            transition: all 0.3s ease;
-        }
-
-        .app-store {
-            background: #000;
-            color: white;
-        }
-
-        .google-play {
-            background: #000;
-            color: white;
-        }
-
-        .android-download {
-            background: #f5f5f5;
-            color: #333;
-        }
-
-        .phone-container {
-            position: relative;
-            max-width: 400px;
-            margin: 0 auto;
-        }
-
-        .phone-image {
-            width: 100%;
-            height: auto;
-            border-radius: 40px;
-            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
-        }
-
-        .store-note {
-            font-size: 12px;
-            color: #666;
-            margin-top: 10px;
-        }
-
-        @media (max-width: 768px) {
-            .main {
-                grid-template-columns: 1fr;
-                gap: 20px;
-            }
-
-            .content {
-                padding: 20px;
-                text-align: center;
-            }
-        }
-
-        /* 轮播图样式 */
-        .phone-slider {
-            position: relative;
-            width: 200px;
-            height: 100%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-
-        .phone-container {
-            position: relative;
-            width: 240px;
-            height: 100%;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-        }
-
-        .phone-image {
-            position: absolute;
-            width: 200px;
-            height: auto;
-            opacity: 0;
-            transition: opacity 0.5s ease-in-out;
-            border-radius: 40px;
-            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
-            object-fit: contain;
-        }
-
-        .phone-image.active {
-            opacity: 1;
-        }
-
-        .slider-dots {
-            position: absolute;
-            bottom: 20px;
-            left: 0;
-            right: 0;
-            display: flex;
-            justify-content: center;
-            gap: 10px;
-            margin-top: 20px;
-        }
-
-        .dot {
-            width: 8px;
-            height: 8px;
-            border-radius: 50%;
-            background: #ddd;
-            cursor: pointer;
-            transition: all 0.3s ease;
-        }
-
-        .dot.active {
-            background: #333;
-            transform: scale(1.2);
-        }
-
-        /* 动画效果 */
-        .download-button:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
-        }
-
-        .app-store:hover,
-        .google-play:hover {
-            background: #333;
-        }
-
-        .android-download:hover {
-            background: #eee;
-        }
-
-        /* 手机动画效果 */
-        .phone-container {
-            animation: float 6s ease-in-out infinite;
-        }
-
-        @keyframes float {
-            0% {
-                transform: translateY(0px);
-            }
-
-            50% {
-                transform: translateY(-20px);
-            }
-
-            100% {
-                transform: translateY(0px);
-            }
-        }
-
-        /* 响应式优化 */
-        @media (min-width: 1200px) {
-            .phone-container {
-                width: 240px;
-            }
-        }
-
-        @media (max-width: 768px) {
-            .phone-slider {
-                height: 70vh;
-            }
-
-            .phone-container {
-                width: 240px;
-                padding: 10px;
-            }
-        }
-
-        @media (max-width: 480px) {
-            .phone-container {
-                width: 240px;
-            }
-
-            .title {
-                font-size: 36px;
-            }
-
-            .download-buttons {
-                flex-direction: column;
-            }
-
-            .download-button {
-                width: 100%;
-                text-align: center;
-            }
-        }
-    </style>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>TaskMatrix | 四象限任务协同系统</title>
+  <meta name="description" content="TaskMatrix 将四象限工作法与现代协作工具融合，帮助团队和个人聚焦真正重要的工作。">
+  <link rel="stylesheet" href="stylesheets/site.css">
+  <script src="javascripts/site.js" defer></script>
 </head>
+<body class="product-page">
+  <header class="top-nav">
+    <a class="brand" href="index.html">Linutech</a>
+    <nav class="top-nav__links">
+      <a href="index.html#products">全部产品</a>
+      <a href="privacy.html">隐私政策</a>
+      <a href="mailto:yutang_work@163.com">联系客服</a>
+    </nav>
+  </header>
 
-<body>
-    <header class="header">
-        <div class="logo">TaskMatrix</div>
-        <a href="#" class="contact">联系我们</a>
-    </header>
-
-    <main class="main">
-        <div class="content">
-            <h3 style="margin-bottom: 10px;">将时间用在刀刃上</h3>
-            <h1 class="title">TaskMatrix</h1>
-            <p class="subtitle">TaskMatrix，四象限工作法。</p>
-            <div class="download-buttons">
-                <a href="#" class="download-button app-store">已上架App Store</a>
-            </div>
-            <p class="store-note">即将上架小米、酷安、华为等应用商店</p>
+  <main>
+    <section class="product-hero">
+      <div class="product-hero__content">
+        <span class="product-hero__eyebrow">团队效率</span>
+        <h1 class="product-hero__title">TaskMatrix</h1>
+        <p class="product-hero__lead">TaskMatrix 将经典的“重要/紧急”四象限方法与现代协同体验结合，帮助个人与团队建立聚焦、透明、可复盘的工作节奏。</p>
+        <div class="product-meta">
+          <span class="product-tag">四象限法</span>
+          <span class="product-tag">实时协作</span>
+          <span class="product-tag">跨平台</span>
         </div>
-
-        <div class="phone-container">
-            <div class="phone-slider">
-                <img src="../images/TaskMatrix-1.png" alt="TaskMatrix Interface 1" class="phone-image active">
-                <img src="../images/TaskMatrix-2.png" alt="TaskMatrix Interface 2" class="phone-image">
-                <img src="../images/TaskMatrix-3.png" alt="TaskMatrix Interface 3" class="phone-image">
-
-            </div>
-            <div class="slider-dots">
-                <span class="dot active"></span>
-                <span class="dot"></span>
-                <span class="dot"></span>
-                <span class="dot"></span>
-            </div>
+        <ul class="highlight-list">
+          <li>自定义象限模板和看板视图，适配不同项目阶段。</li>
+          <li>自动提醒、优先级标记、进度燃尽图，确保重要事项按时推进。</li>
+          <li>支持成员评论与文件同步，让团队沟通留痕更高效。</li>
+        </ul>
+        <div class="cta-group">
+          <a class="button button--primary" href="mailto:yutang_work@163.com?subject=TaskMatrix%20合作咨询">申请团队试用</a>
+          <a class="button button--ghost" href="timehabit.html">查看 TimeHabit</a>
         </div>
-    </main>
+      </div>
 
-    <div class="copyright" style="text-align:center;margin-top: 240px;">
-        <a href="../privacy.html" style="color:#000">隐私政策</a>&nbsp;|&nbsp;<a href="../terms.html"
-            style="color:#000">协议条款</a>
+      <div class="device-gallery" data-gallery>
+        <div class="device-gallery__frame">
+          <div class="device-gallery__screen">
+            <img src="images/TaskMatrix-1.png" alt="TaskMatrix 四象限面板" class="device-gallery__slide is-active" data-gallery-slide>
+            <img src="images/TaskMatrix-2.png" alt="TaskMatrix 任务详情" class="device-gallery__slide" data-gallery-slide>
+            <img src="images/TaskMatrix-3.png" alt="TaskMatrix 进度统计" class="device-gallery__slide" data-gallery-slide>
+          </div>
+        </div>
+        <p class="device-gallery__caption">以原型为基础的界面示例，展示四象限与统计功能。</p>
+      </div>
+    </section>
+
+    <section class="feature-section">
+      <h2 class="section__title">核心能力</h2>
+      <div class="feature-grid">
+        <div class="feature-card">
+          <strong>象限智能调度</strong>
+          <p>根据任务完成情况与截止时间自动调整优先级，减少人工维护负担。</p>
+        </div>
+        <div class="feature-card">
+          <strong>节奏化复盘</strong>
+          <p>周/月度复盘模板、回顾摘要与趋势分析帮助团队沉淀经验。</p>
+        </div>
+        <div class="feature-card">
+          <strong>集成生态</strong>
+          <p>可与主流日历、IM、云盘对接，让信息流贯通在同一工作台。</p>
+        </div>
+        <div class="feature-card">
+          <strong>权限与安全</strong>
+          <p>细粒度权限控制、操作日志与企业级加密保障数据安全。</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="feature-section">
+      <h2 class="section__title">适用团队</h2>
+      <ul class="use-case-list">
+        <li>需要清晰优先级的项目团队，如产品、市场、内容、研发协作。</li>
+        <li>正在推行 OKR 或季度目标管理的中小企业。</li>
+        <li>个人自由职业者与助理协同，快速梳理每日焦点。</li>
+        <li>希望在碎片化沟通中保持结构化记录的远程团队。</li>
+      </ul>
+      <div class="pill-group">
+        <span class="pill">产品运营</span>
+        <span class="pill">创意团队</span>
+        <span class="pill">远程协作</span>
+        <span class="pill">个人效率</span>
+      </div>
+    </section>
+  </main>
+
+  <footer class="page-footer">
+    <span>© 2025 Linutech · TaskMatrix</span>
+    <div class="page-footer__links">
+      <a href="privacy.html">隐私政策</a>
+      <a href="mailto:yutang_work@163.com">客服邮箱</a>
     </div>
-    <div style="text-align:center">Customer Support: yutang_work@163.com</div>
-
-    <script>
-        document.addEventListener('DOMContentLoaded', function () {
-            const images = document.querySelectorAll('.phone-image');
-            const dots = document.querySelectorAll('.dot');
-            let currentImage = 0;
-            let interval;
-
-            // 预加载图片
-            function preloadImages() {
-                const imagePromises = Array.from(images).map(img => {
-                    return new Promise((resolve, reject) => {
-                        if (img.complete) {
-                            resolve();
-                        } else {
-                            img.onload = resolve;
-                            img.onerror = reject;
-                        }
-                    });
-                });
-
-                return Promise.all(imagePromises);
-            }
-
-            function showImage(index) {
-                if (!images[index]) return;
-
-                images.forEach(img => img.classList.remove('active'));
-                dots.forEach(dot => dot.classList.remove('active'));
-
-                images[index].classList.add('active');
-                dots[index].classList.add('active');
-            }
-
-            function nextImage() {
-                currentImage = (currentImage + 1) % images.length;
-                showImage(currentImage);
-            }
-
-            function startSlideshow() {
-                if (interval) clearInterval(interval);
-                interval = setInterval(nextImage, 3000);
-            }
-
-            // 点击圆点切换图片
-            dots.forEach((dot, index) => {
-                dot.addEventListener('click', () => {
-                    currentImage = index;
-                    showImage(currentImage);
-                    startSlideshow(); // 重置定时器
-                });
-            });
-
-            // 等待图片加载完成后开始轮播
-            preloadImages().then(() => {
-                showImage(0); // 显示第一张图片
-                startSlideshow(); // 开始自动轮播
-            }).catch(error => {
-                console.error('图片加载失败:', error);
-            });
-        });
-    </script>
+  </footer>
 </body>
-
 </html>

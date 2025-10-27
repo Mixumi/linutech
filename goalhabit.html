@@ -1,360 +1,104 @@
 <!DOCTYPE html>
 <html lang="zh-CN">
-
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>GoalHabit - 养成好习惯</title>
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        body {
-            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
-            line-height: 1.6;
-        }
-
-        .header {
-            display: flex;
-            justify-content: space-between;
-            padding: 20px 5%;
-            align-items: center;
-        }
-
-        .logo {
-            font-size: 24px;
-            font-weight: bold;
-        }
-
-        .contact {
-            text-decoration: none;
-            color: #333;
-        }
-
-        .main {
-            display: grid;
-            grid-template-columns: minmax(300px, 1fr) minmax(400px, 2fr);
-            gap: 40px;
-            align-items: center;
-            padding: 0;
-        }
-
-        .content {
-            padding: 40px;
-            max-width: 600px;
-        }
-
-        .title {
-            font-size: 48px;
-            margin-bottom: 20px;
-            font-weight: bold;
-        }
-
-        .subtitle {
-            font-size: 16px;
-            color: #666;
-            margin-bottom: 40px;
-            line-height: 1.8;
-        }
-
-        .download-buttons {
-            display: flex;
-            gap: 20px;
-            flex-wrap: wrap;
-        }
-
-        .download-button {
-            padding: 12px 24px;
-            border-radius: 8px;
-            text-decoration: none;
-            font-weight: 500;
-            transition: all 0.3s ease;
-        }
-
-        .app-store {
-            background: #000;
-            color: white;
-        }
-
-        .google-play {
-            background: #000;
-            color: white;
-        }
-
-        .android-download {
-            background: #f5f5f5;
-            color: #333;
-        }
-
-        .phone-container {
-            position: relative;
-            max-width: 400px;
-            margin: 0 auto;
-        }
-
-        .phone-image {
-            width: 100%;
-            height: auto;
-            border-radius: 40px;
-            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
-        }
-
-        .store-note {
-            font-size: 12px;
-            color: #666;
-            margin-top: 10px;
-        }
-
-        @media (max-width: 768px) {
-            .main {
-                grid-template-columns: 1fr;
-                gap: 20px;
-            }
-
-            .content {
-                padding: 20px;
-                text-align: center;
-            }
-        }
-
-        /* 轮播图样式 */
-        .phone-slider {
-            position: relative;
-            width: 200px;
-            height: 100%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-
-        .phone-container {
-            position: relative;
-            width: 240px;
-            height: 100%;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-        }
-
-        .phone-image {
-            position: absolute;
-            width: 200px;
-            height: auto;
-            opacity: 0;
-            transition: opacity 0.5s ease-in-out;
-            border-radius: 40px;
-            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
-            object-fit: contain;
-        }
-
-        .phone-image.active {
-            opacity: 1;
-        }
-
-        .slider-dots {
-            position: absolute;
-            bottom: 20px;
-            left: 0;
-            right: 0;
-            display: flex;
-            justify-content: center;
-            gap: 10px;
-            margin-top: 20px;
-        }
-
-        .dot {
-            width: 8px;
-            height: 8px;
-            border-radius: 50%;
-            background: #ddd;
-            cursor: pointer;
-            transition: all 0.3s ease;
-        }
-
-        .dot.active {
-            background: #333;
-            transform: scale(1.2);
-        }
-
-        /* 动画效果 */
-        .download-button:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
-        }
-
-        .app-store:hover,
-        .google-play:hover {
-            background: #333;
-        }
-
-        .android-download:hover {
-            background: #eee;
-        }
-
-        /* 手机动画效果 */
-        .phone-container {
-            animation: float 6s ease-in-out infinite;
-        }
-
-        @keyframes float {
-            0% {
-                transform: translateY(0px);
-            }
-
-            50% {
-                transform: translateY(-20px);
-            }
-
-            100% {
-                transform: translateY(0px);
-            }
-        }
-
-        /* 响应式优化 */
-        @media (min-width: 1200px) {
-            .phone-container {
-                width: 240px;
-            }
-        }
-
-        @media (max-width: 768px) {
-            .phone-slider {
-                height: 70vh;
-            }
-
-            .phone-container {
-                width: 240px;
-                padding: 10px;
-            }
-        }
-
-        @media (max-width: 480px) {
-            .phone-container {
-                width: 240px;
-            }
-
-            .title {
-                font-size: 36px;
-            }
-
-            .download-buttons {
-                flex-direction: column;
-            }
-
-            .download-button {
-                width: 100%;
-                text-align: center;
-            }
-        }
-    </style>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>GoalHabit | 目标与习惯双引擎</title>
+  <meta name="description" content="GoalHabit 通过可视化目标与数据洞察，帮助你记录习惯、追踪成果并保持长期动力。">
+  <link rel="stylesheet" href="stylesheets/site.css">
+  <script src="javascripts/site.js" defer></script>
 </head>
+<body class="product-page">
+  <header class="top-nav">
+    <a class="brand" href="index.html">Linutech</a>
+    <nav class="top-nav__links">
+      <a href="index.html#products">全部产品</a>
+      <a href="privacy.html">隐私政策</a>
+      <a href="mailto:yutang_work@163.com">联系客服</a>
+    </nav>
+  </header>
 
-<body>
-    <header class="header">
-        <div class="logo">GoalHabit</div>
-        <a href="#" class="contact">联系我们</a>
-    </header>
-
-    <main class="main">
-        <div class="content">
-            <h3 style="margin-bottom: 10px;">完成目标，走向成功</h3>
-            <h1 class="title">GoalHabit</h1>
-            <p class="subtitle">点击形状，将今天未完成的目标消除。多维度统计，让你的进步看得见。</p>
-            <div class="download-buttons">
-                <a href="#" class="download-button app-store">已上架App Store</a>
-            </div>
-            <p class="store-note">即将上架小米、酷安、华为等应用商店</p>
+  <main>
+    <section class="product-hero">
+      <div class="product-hero__content">
+        <span class="product-hero__eyebrow">个人成长</span>
+        <h1 class="product-hero__title">GoalHabit</h1>
+        <p class="product-hero__lead">GoalHabit 将目标拆解为可视化的日常行动，通过多维度统计与提醒机制，帮助你看见每一次坚持的价值。</p>
+        <div class="product-meta">
+          <span class="product-tag">可视化目标</span>
+          <span class="product-tag">多维统计</span>
+          <span class="product-tag">激励机制</span>
         </div>
-
-        <div class="phone-container">
-            <div class="phone-slider">
-                <img src="../images/goalhabit-1.png" alt="GoalHabit Interface 1" class="phone-image active">
-                <img src="../images/goalhabit-2.jpg" alt="GoalHabit Interface 2" class="phone-image">
-                <img src="../images/goalhabit-3.png" alt="GoalHabit Interface 3" class="phone-image">
-                <img src="../images/goalhabit-4.png" alt="GoalHabit Interface 4" class="phone-image">
-                <img src="../images/goalhabit-5.jpg" alt="GoalHabit Interface 4" class="phone-image">
-
-            </div>
-            <div class="slider-dots">
-                <span class="dot active"></span>
-                <span class="dot"></span>
-                <span class="dot"></span>
-                <span class="dot"></span>
-            </div>
+        <ul class="highlight-list">
+          <li>目标形状墙帮助你直观感受完成度，点击即可标记进展。</li>
+          <li>按照标签、时间、情绪维度输出统计，洞察最佳习惯节奏。</li>
+          <li>自定义奖章、语音提醒与节日挑战，让坚持更具仪式感。</li>
+        </ul>
+        <div class="cta-group">
+          <a class="button button--primary" href="mailto:yutang_work@163.com?subject=GoalHabit%20合作咨询">申请测试资格</a>
+          <a class="button button--ghost" href="limstar.html">了解 Limstar</a>
         </div>
-    </main>
+      </div>
 
-    <div class="copyright" style="text-align:center;margin-top: 240px;">
-        <a href="./privacy.html" style="color:#000">隐私政策</a>&nbsp;|&nbsp;<a href="./terms.html"
-            style="color:#000">协议条款</a>
+      <div class="device-gallery" data-gallery>
+        <div class="device-gallery__frame">
+          <div class="device-gallery__screen">
+            <img src="images/goalhabit-1.png" alt="GoalHabit 目标墙" class="device-gallery__slide is-active" data-gallery-slide>
+            <img src="images/goalhabit-2.jpg" alt="GoalHabit 统计报表" class="device-gallery__slide" data-gallery-slide>
+            <img src="images/goalhabit-3.png" alt="GoalHabit 奖章体系" class="device-gallery__slide" data-gallery-slide>
+            <img src="images/goalhabit-4.png" alt="GoalHabit 日历视图" class="device-gallery__slide" data-gallery-slide>
+            <img src="images/goalhabit-5.jpg" alt="GoalHabit 习惯详情" class="device-gallery__slide" data-gallery-slide>
+          </div>
+        </div>
+        <p class="device-gallery__caption">GoalHabit 多个真实界面，涵盖目标墙、统计和奖章体系。</p>
+      </div>
+    </section>
+
+    <section class="feature-section">
+      <h2 class="section__title">数据驱动习惯养成</h2>
+      <div class="feature-grid">
+        <div class="feature-card">
+          <strong>多维统计面板</strong>
+          <p>按周、月、年度输出趋势图，自动识别高效时间段。</p>
+        </div>
+        <div class="feature-card">
+          <strong>目标拆解向导</strong>
+          <p>以倒推法拆解目标，生成每日行动清单与缓冲时间。</p>
+        </div>
+        <div class="feature-card">
+          <strong>激励体系</strong>
+          <p>完成动作即可解锁奖章与鼓励语，支持自定义提示语。</p>
+        </div>
+        <div class="feature-card">
+          <strong>社群互助</strong>
+          <p>邀请朋友加入目标小组，相互见证成长，分享经验。</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="feature-section">
+      <h2 class="section__title">适用人群</h2>
+      <ul class="use-case-list">
+        <li>准备考试、考证或语言学习，希望提升学习节奏的用户。</li>
+        <li>正在坚持健身、阅读、写作等长期习惯的人群。</li>
+        <li>希望量化目标、复盘数据并寻找成长曲线的自驱人士。</li>
+        <li>需要与伙伴互相监督、共享进展的好友或团队。</li>
+      </ul>
+      <div class="pill-group">
+        <span class="pill">考研考证</span>
+        <span class="pill">创作者</span>
+        <span class="pill">运动健康</span>
+        <span class="pill">学习成长</span>
+      </div>
+    </section>
+  </main>
+
+  <footer class="page-footer">
+    <span>© 2025 Linutech · GoalHabit</span>
+    <div class="page-footer__links">
+      <a href="privacy.html">隐私政策</a>
+      <a href="mailto:yutang_work@163.com">客服邮箱</a>
     </div>
-    <div style="text-align:center">Customer Support: yutang_work@163.com</div>
-
-    <script>
-        document.addEventListener('DOMContentLoaded', function () {
-            const images = document.querySelectorAll('.phone-image');
-            const dots = document.querySelectorAll('.dot');
-            let currentImage = 0;
-            let interval;
-
-            // 预加载图片
-            function preloadImages() {
-                const imagePromises = Array.from(images).map(img => {
-                    return new Promise((resolve, reject) => {
-                        if (img.complete) {
-                            resolve();
-                        } else {
-                            img.onload = resolve;
-                            img.onerror = reject;
-                        }
-                    });
-                });
-
-                return Promise.all(imagePromises);
-            }
-
-            function showImage(index) {
-                if (!images[index]) return;
-
-                images.forEach(img => img.classList.remove('active'));
-                dots.forEach(dot => dot.classList.remove('active'));
-
-                images[index].classList.add('active');
-                dots[index].classList.add('active');
-            }
-
-            function nextImage() {
-                currentImage = (currentImage + 1) % images.length;
-                showImage(currentImage);
-            }
-
-            function startSlideshow() {
-                if (interval) clearInterval(interval);
-                interval = setInterval(nextImage, 3000);
-            }
-
-            // 点击圆点切换图片
-            dots.forEach((dot, index) => {
-                dot.addEventListener('click', () => {
-                    currentImage = index;
-                    showImage(currentImage);
-                    startSlideshow(); // 重置定时器
-                });
-            });
-
-            // 等待图片加载完成后开始轮播
-            preloadImages().then(() => {
-                showImage(0); // 显示第一张图片
-                startSlideshow(); // 开始自动轮播
-            }).catch(error => {
-                console.error('图片加载失败:', error);
-            });
-        });
-    </script>
+  </footer>
 </body>
-
 </html>

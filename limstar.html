@@ -1,360 +1,102 @@
 <!DOCTYPE html>
 <html lang="zh-CN">
-
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>LIMSTAR - 驶入星际纪元，开启你的自律航行</title>
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        body {
-            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
-            line-height: 1.6;
-        }
-
-        .header {
-            display: flex;
-            justify-content: space-between;
-            padding: 20px 5%;
-            align-items: center;
-        }
-
-        .logo {
-            font-size: 24px;
-            font-weight: bold;
-        }
-
-        .contact {
-            text-decoration: none;
-            color: #333;
-        }
-
-        .main {
-            display: grid;
-            grid-template-columns: minmax(300px, 1fr) minmax(400px, 2fr);
-            gap: 40px;
-            align-items: center;
-            padding: 0;
-        }
-
-        .content {
-            padding: 40px;
-            max-width: 600px;
-        }
-
-        .title {
-            font-size: 48px;
-            margin-bottom: 20px;
-            font-weight: bold;
-        }
-
-        .subtitle {
-            font-size: 16px;
-            color: #666;
-            margin-bottom: 40px;
-            line-height: 1.8;
-        }
-
-        .download-buttons {
-            display: flex;
-            gap: 20px;
-            flex-wrap: wrap;
-        }
-
-        .download-button {
-            padding: 12px 24px;
-            border-radius: 8px;
-            text-decoration: none;
-            font-weight: 500;
-            transition: all 0.3s ease;
-        }
-
-        .app-store {
-            background: #000;
-            color: white;
-        }
-
-        .google-play {
-            background: #000;
-            color: white;
-        }
-
-        .android-download {
-            background: #f5f5f5;
-            color: #333;
-        }
-
-        .phone-container {
-            position: relative;
-            max-width: 400px;
-            margin: 0 auto;
-        }
-
-        .phone-image {
-            width: 100%;
-            height: auto;
-            border-radius: 40px;
-            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
-        }
-
-        .store-note {
-            font-size: 12px;
-            color: #666;
-            margin-top: 10px;
-        }
-
-        @media (max-width: 768px) {
-            .main {
-                grid-template-columns: 1fr;
-                gap: 20px;
-            }
-
-            .content {
-                padding: 20px;
-                text-align: center;
-            }
-        }
-
-        /* 轮播图样式 */
-        .phone-slider {
-            position: relative;
-            width: 200px;
-            height: 100%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-
-        .phone-container {
-            position: relative;
-            width: 240px;
-            height: 100%;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-        }
-
-        .phone-image {
-            position: absolute;
-            width: 200px;
-            height: auto;
-            opacity: 0;
-            transition: opacity 0.5s ease-in-out;
-            border-radius: 40px;
-            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
-            object-fit: contain;
-        }
-
-        .phone-image.active {
-            opacity: 1;
-        }
-
-        .slider-dots {
-            position: absolute;
-            bottom: 20px;
-            left: 0;
-            right: 0;
-            display: flex;
-            justify-content: center;
-            gap: 10px;
-            margin-top: 20px;
-        }
-
-        .dot {
-            width: 8px;
-            height: 8px;
-            border-radius: 50%;
-            background: #ddd;
-            cursor: pointer;
-            transition: all 0.3s ease;
-        }
-
-        .dot.active {
-            background: #333;
-            transform: scale(1.2);
-        }
-
-        /* 动画效果 */
-        .download-button:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
-        }
-
-        .app-store:hover,
-        .google-play:hover {
-            background: #333;
-        }
-
-        .android-download:hover {
-            background: #eee;
-        }
-
-        /* 手机动画效果 */
-        .phone-container {
-            animation: float 6s ease-in-out infinite;
-        }
-
-        @keyframes float {
-            0% {
-                transform: translateY(0px);
-            }
-
-            50% {
-                transform: translateY(-20px);
-            }
-
-            100% {
-                transform: translateY(0px);
-            }
-        }
-
-        /* 响应式优化 */
-        @media (min-width: 1200px) {
-            .phone-container {
-                width: 240px;
-            }
-        }
-
-        @media (max-width: 768px) {
-            .phone-slider {
-                height: 70vh;
-            }
-
-            .phone-container {
-                width: 240px;
-                padding: 10px;
-            }
-        }
-
-        @media (max-width: 480px) {
-            .phone-container {
-                width: 240px;
-            }
-
-            .title {
-                font-size: 36px;
-            }
-
-            .download-buttons {
-                flex-direction: column;
-            }
-
-            .download-button {
-                width: 100%;
-                text-align: center;
-            }
-        }
-    </style>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Limstar | 星际主题的自律航行</title>
+  <meta name="description" content="Limstar 以星际航行为灵感，把自律计划化为宇宙旅程，通过任务航线、里程碑与沉浸式激励陪你达成目标。">
+  <link rel="stylesheet" href="stylesheets/site.css">
+  <script src="javascripts/site.js" defer></script>
 </head>
+<body class="product-page">
+  <header class="top-nav">
+    <a class="brand" href="index.html">Linutech</a>
+    <nav class="top-nav__links">
+      <a href="index.html#products">全部产品</a>
+      <a href="privacy.html">隐私政策</a>
+      <a href="mailto:yutang_work@163.com">联系客服</a>
+    </nav>
+  </header>
 
-<body>
-    <header class="header">
-        <div class="logo">LIMSTAR</div>
-        <a href="#" class="contact">联系我们</a>
-    </header>
-
-    <main class="main">
-        <div class="content">
-            <h3 style="margin-bottom: 10px;">完驶入星际纪元，开启你的自律航行</h3>
-            <h1 class="title">LIMSTAR</h1>
-            <p class="subtitle">TimimingHabit，掌控时间，像舰长一样果断。</p>
-            <div class="download-buttons">
-                <a href="#" class="download-button app-store">已上架App Store</a>
-            </div>
-            <p class="store-note">即将上架小米、酷安、华为等应用商店</p>
+  <main>
+    <section class="product-hero">
+      <div class="product-hero__content">
+        <span class="product-hero__eyebrow">自律养成</span>
+        <h1 class="product-hero__title">Limstar</h1>
+        <p class="product-hero__lead">Limstar 将日常计划设计成一次次星际航行。通过航线式任务、丰富的宇宙主题演绎与实时激励，让自律不再枯燥。</p>
+        <div class="product-meta">
+          <span class="product-tag">游戏化体验</span>
+          <span class="product-tag">仪式感</span>
+          <span class="product-tag">成长档案</span>
         </div>
-
-        <div class="phone-container">
-            <div class="phone-slider">
-                <img src="../images/limstar-c-1.png" alt="LIMSTAR Interface 1" class="phone-image active">
-                <img src="../images/limstar-c-2.png" alt="LIMSTAR Interface 2" class="phone-image">
-                <img src="../images/limstar-c-3.png" alt="LIMSTAR Interface 3" class="phone-image">
-                <img src="../images/limstar-c-4.png" alt="LIMSTAR Interface 4" class="phone-image">
-                <img src="../images/limstar-c-5.png" alt="LIMSTAR Interface 4" class="phone-image">
-
-            </div>
-            <div class="slider-dots">
-                <span class="dot active"></span>
-                <span class="dot"></span>
-                <span class="dot"></span>
-                <span class="dot"></span>
-            </div>
+        <ul class="highlight-list">
+          <li>从“起航”到“跃迁”的航线式任务，帮助你拆解长期目标。</li>
+          <li>日常打卡化为推进燃料，解锁全景星系和特别事件。</li>
+          <li>成长档案自动记录情绪、效率与收获，形成可视化报告。</li>
+        </ul>
+        <div class="cta-group">
+          <a class="button button--primary" href="mailto:yutang_work@163.com?subject=Limstar%20合作咨询">预约体验</a>
+          <a class="button button--ghost" href="goalhabit.html">查看 GoalHabit</a>
         </div>
-    </main>
+      </div>
 
-    <div class="copyright" style="text-align:center;margin-top: 240px;">
-        <a href="../privacy.html" style="color:#000">隐私政策</a>&nbsp;|&nbsp;<a href="../terms.html"
-            style="color:#000">协议条款</a>
+      <div class="device-gallery" data-gallery-autoplay="false">
+        <div class="device-gallery__frame">
+          <div class="device-gallery__screen">
+            <img src="images/apps.svg" alt="Limstar 航线图标" class="device-gallery__slide is-active" data-gallery-slide>
+            <img src="images/schedule.svg" alt="Limstar 行程规划" class="device-gallery__slide" data-gallery-slide>
+            <img src="images/timer.svg" alt="Limstar 任务节奏" class="device-gallery__slide" data-gallery-slide>
+          </div>
+        </div>
+        <p class="device-gallery__caption">概念性界面元素，用于展示 Limstar 的设计语言。</p>
+      </div>
+    </section>
+
+    <section class="feature-section">
+      <h2 class="section__title">航行系统</h2>
+      <div class="feature-grid">
+        <div class="feature-card">
+          <strong>航线计划</strong>
+          <p>为每个目标设定星系航线，系统自动安排任务节点与补给提醒。</p>
+        </div>
+        <div class="feature-card">
+          <strong>舰长日志</strong>
+          <p>用每日日志记录心情与效率指数，生成独特的宇宙轨迹。</p>
+        </div>
+        <div class="feature-card">
+          <strong>队员联动</strong>
+          <p>邀请伙伴加入舰队，相互助推目标，共享里程碑成就。</p>
+        </div>
+        <div class="feature-card">
+          <strong>情绪光谱</strong>
+          <p>将情绪波动可视化为极光，让状态管理一目了然。</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="feature-section">
+      <h2 class="section__title">谁会爱上 Limstar</h2>
+      <ul class="use-case-list">
+        <li>需要长期坚持健身、学习或创作计划，希望保持动力的人。</li>
+        <li>热爱科幻与仪式感，希望为日常注入想象力的用户。</li>
+        <li>想与伙伴共同行动，通过互助机制彼此鼓励的团队。</li>
+        <li>追求数据可视化，希望沉淀完整成长档案的自律爱好者。</li>
+      </ul>
+      <div class="pill-group">
+        <span class="pill">长期计划</span>
+        <span class="pill">沉浸体验</span>
+        <span class="pill">伙伴共修</span>
+        <span class="pill">情绪管理</span>
+      </div>
+    </section>
+  </main>
+
+  <footer class="page-footer">
+    <span>© 2025 Linutech · Limstar</span>
+    <div class="page-footer__links">
+      <a href="privacy.html">隐私政策</a>
+      <a href="mailto:yutang_work@163.com">客服邮箱</a>
     </div>
-    <div style="text-align:center">Customer Support: yutang_work@163.com</div>
-
-    <script>
-        document.addEventListener('DOMContentLoaded', function () {
-            const images = document.querySelectorAll('.phone-image');
-            const dots = document.querySelectorAll('.dot');
-            let currentImage = 0;
-            let interval;
-
-            // 预加载图片
-            function preloadImages() {
-                const imagePromises = Array.from(images).map(img => {
-                    return new Promise((resolve, reject) => {
-                        if (img.complete) {
-                            resolve();
-                        } else {
-                            img.onload = resolve;
-                            img.onerror = reject;
-                        }
-                    });
-                });
-
-                return Promise.all(imagePromises);
-            }
-
-            function showImage(index) {
-                if (!images[index]) return;
-
-                images.forEach(img => img.classList.remove('active'));
-                dots.forEach(dot => dot.classList.remove('active'));
-
-                images[index].classList.add('active');
-                dots[index].classList.add('active');
-            }
-
-            function nextImage() {
-                currentImage = (currentImage + 1) % images.length;
-                showImage(currentImage);
-            }
-
-            function startSlideshow() {
-                if (interval) clearInterval(interval);
-                interval = setInterval(nextImage, 3000);
-            }
-
-            // 点击圆点切换图片
-            dots.forEach((dot, index) => {
-                dot.addEventListener('click', () => {
-                    currentImage = index;
-                    showImage(currentImage);
-                    startSlideshow(); // 重置定时器
-                });
-            });
-
-            // 等待图片加载完成后开始轮播
-            preloadImages().then(() => {
-                showImage(0); // 显示第一张图片
-                startSlideshow(); // 开始自动轮播
-            }).catch(error => {
-                console.error('图片加载失败:', error);
-            });
-        });
-    </script>
+  </footer>
 </body>
-
 </html>
