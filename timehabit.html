@@ -5,11 +5,14 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>TimeHabit | 隐私友好的屏幕管理工具</title>
   <meta name="description" content="TimeHabit 让你自由管理设备上的应用，可按时间段隐藏、禁用或限制使用，帮助你打造高效专注的数字生活。">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Poppins:wght@500;600&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="stylesheets/site.css">
   <script src="javascripts/site.js" defer></script>
 </head>
 <body class="product-page">
-  <header class="top-nav">
+  <header class="top-nav" data-animate>
     <a class="brand" href="index.html">Linutech</a>
     <nav class="top-nav__links">
       <a href="index.html#products">全部产品</a>
@@ -19,28 +22,32 @@
   </header>
 
   <main>
-    <section class="product-hero">
-      <div class="product-hero__content">
+    <section class="product-hero" data-animate>
+      <div class="product-hero__content" data-animate data-animate-delay="0.08s">
+        <div class="product-hero__badge" data-animate data-animate-delay="0.04s">
+          <span class="product-hero__badge-dot"></span>
+          Beta 体验计划
+        </div>
         <span class="product-hero__eyebrow">屏幕与专注管理</span>
         <h1 class="product-hero__title">TimeHabit</h1>
         <p class="product-hero__lead">TimeHabit 让你对设备保持绝对掌控：按照分组和时间段隐藏、禁用或限制应用，帮助你在工作、学习与休息之间建立清晰边界。</p>
-        <div class="product-meta">
+        <div class="product-meta" data-animate data-animate-delay="0.12s">
           <span class="product-tag">iOS &amp; iPadOS</span>
           <span class="product-tag">隐私优先</span>
           <span class="product-tag">云端同步</span>
         </div>
-        <ul class="highlight-list">
+        <ul class="highlight-list" data-animate data-animate-delay="0.16s">
           <li>智能分组：把常用 App 按场景分类，一键切换状态。</li>
           <li>多重限制：支持隐藏、禁用与限时模式，灵活应对不同专注需求。</li>
           <li>自动化流程：设定时间段和触发条件，让专注模式按计划生效。</li>
         </ul>
-        <div class="cta-group">
+        <div class="cta-group" data-animate data-animate-delay="0.2s">
           <a class="button button--primary" href="mailto:yutang_work@163.com?subject=TimeHabit%20合作咨询">申请体验版</a>
           <a class="button button--ghost" href="privacy.html">查看隐私政策</a>
         </div>
       </div>
 
-      <div class="device-gallery" data-gallery data-gallery-autoplay="true">
+      <div class="device-gallery" data-gallery data-gallery-autoplay="true" data-animate data-animate-delay="0.24s">
         <div class="device-gallery__frame">
           <div class="device-gallery__screen">
             <img src="images/intro_pic_1_1.png" alt="TimeHabit 应用分组界面" class="device-gallery__slide is-active" data-gallery-slide>
@@ -53,37 +60,37 @@
       </div>
     </section>
 
-    <section class="feature-section">
+    <section class="feature-section" data-animate data-animate-delay="0.04s">
       <h2 class="section__title">为每一个专注瞬间量身打造</h2>
       <div class="feature-grid">
-        <div class="feature-card">
+        <div class="feature-card" data-animate data-animate-delay="0.06s">
           <strong>多层次应用分组</strong>
           <p>通过工作、娱乐、自定义等分组同时管理多个 App，快速切换不同生活模式。</p>
         </div>
-        <div class="feature-card">
+        <div class="feature-card" data-animate data-animate-delay="0.12s">
           <strong>时间段自动化</strong>
           <p>设置工作日、周末或自定义时间段，让指定分组按照计划自动隐藏或恢复。</p>
         </div>
-        <div class="feature-card">
+        <div class="feature-card" data-animate data-animate-delay="0.18s">
           <strong>行为提醒与复盘</strong>
           <p>限时到达后即时提醒，并通过历史记录回顾一周的专注表现，找出可优化的时段。</p>
         </div>
-        <div class="feature-card">
+        <div class="feature-card" data-animate data-animate-delay="0.24s">
           <strong>安全与隐私保护</strong>
           <p>离线即可使用主要功能，所有设置本地加密存储，并支持密码或生物识别保护。</p>
         </div>
       </div>
     </section>
 
-    <section class="feature-section">
+    <section class="feature-section" data-animate data-animate-delay="0.08s">
       <h2 class="section__title">适用于这些场景</h2>
-      <ul class="use-case-list">
+      <ul class="use-case-list" data-animate data-animate-delay="0.1s">
         <li>希望在工作时间保持专注，只开放与项目相关的工具。</li>
         <li>为孩子或长辈设置使用时间，帮助建立健康的屏幕习惯。</li>
         <li>准备考试或写作，借助阶段性隐藏社交媒体减少干扰。</li>
         <li>自由职业者需要在工作日结束后快速切换到生活模式。</li>
       </ul>
-      <div class="pill-group">
+      <div class="pill-group" data-animate data-animate-delay="0.14s">
         <span class="pill">工作日模式</span>
         <span class="pill">学习冲刺</span>
         <span class="pill">家庭共享设备</span>
@@ -92,7 +99,7 @@
     </section>
   </main>
 
-  <footer class="page-footer">
+  <footer class="page-footer" data-animate data-animate-delay="0.12s">
     <span>© 2025 Linutech · TimeHabit</span>
     <div class="page-footer__links">
       <a href="privacy.html">隐私政策</a>

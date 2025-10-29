@@ -1,10 +1,17 @@
 document.addEventListener('DOMContentLoaded', () => {
+  initGalleries();
+  initRevealAnimations();
+});
+
+function initGalleries() {
   const galleries = document.querySelectorAll('[data-gallery]');
+  if (!galleries.length) {
+    return;
+  }
 
   galleries.forEach((gallery) => {
     const slides = Array.from(gallery.querySelectorAll('[data-gallery-slide]'));
-
-    if (slides.length === 0) {
+    if (!slides.length) {
       return;
     }
 
@@ -52,18 +59,23 @@ document.addEventListener('DOMContentLoaded', () => {
 
     const startAutoplay = () => {
       const shouldAutoplay = gallery.getAttribute('data-gallery-autoplay') !== 'false' && slides.length > 1;
-      if (!shouldAutoplay || timerId) return;
+      if (!shouldAutoplay || timerId) {
+        return;
+      }
+
+      const interval = Number(gallery.getAttribute('data-gallery-interval')) || 5000;
       timerId = window.setInterval(() => {
         const nextIndex = (activeIndex + 1) % slides.length;
         updateActiveSlide(nextIndex);
-      }, 5000);
+      }, interval);
     };
 
     const stopAutoplay = () => {
-      if (timerId) {
-        window.clearInterval(timerId);
-        timerId = null;
+      if (!timerId) {
+        return;
       }
+      window.clearInterval(timerId);
+      timerId = null;
     };
 
     gallery.addEventListener('mouseenter', stopAutoplay);
@@ -74,4 +86,60 @@ document.addEventListener('DOMContentLoaded', () => {
     updateActiveSlide(activeIndex);
     startAutoplay();
   });
-});
+}
+
+function initRevealAnimations() {
+  const animatedElements = document.querySelectorAll('[data-animate]');
+  if (!animatedElements.length) {
+    return;
+  }
+
+  animatedElements.forEach((element) => {
+    const delay = element.getAttribute('data-animate-delay');
+    if (delay) {
+      element.style.setProperty('--delay', delay);
+    } else if (!element.style.getPropertyValue('--delay')) {
+      element.style.setProperty('--delay', '0s');
+    }
+  });
+
+  const mediaQuery = window.matchMedia('(prefers-reduced-motion: reduce)');
+  const revealImmediately = () => {
+    animatedElements.forEach((element) => {
+      element.classList.add('is-visible');
+    });
+  };
+
+  if (mediaQuery.matches) {
+    revealImmediately();
+    return;
+  }
+
+  const observer = new IntersectionObserver(
+    (entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('is-visible');
+          observer.unobserve(entry.target);
+        }
+      });
+    },
+    {
+      rootMargin: '0px 0px -10% 0px',
+      threshold: 0.2,
+    }
+  );
+
+  animatedElements.forEach((element) => {
+    observer.observe(element);
+  });
+
+  if (typeof mediaQuery.addEventListener === 'function') {
+    mediaQuery.addEventListener('change', (event) => {
+      if (event.matches) {
+        observer.disconnect();
+        revealImmediately();
+      }
+    });
+  }
+}

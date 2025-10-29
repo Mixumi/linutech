@@ -5,11 +5,14 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>TimingHabit | 智能时间节奏助手</title>
   <meta name="description" content="TimingHabit 通过节奏模板、番茄策略与跨平台日程同步，帮助你建立可持续的专注节奏。">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Poppins:wght@500;600&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="stylesheets/site.css">
   <script src="javascripts/site.js" defer></script>
 </head>
 <body class="product-page">
-  <header class="top-nav">
+  <header class="top-nav" data-animate>
     <a class="brand" href="index.html">Linutech</a>
     <nav class="top-nav__links">
       <a href="index.html#products">全部产品</a>
@@ -19,28 +22,32 @@
   </header>
 
   <main>
-    <section class="product-hero">
-      <div class="product-hero__content">
+    <section class="product-hero" data-animate>
+      <div class="product-hero__content" data-animate data-animate-delay="0.08s">
+        <div class="product-hero__badge" data-animate data-animate-delay="0.04s">
+          <span class="product-hero__badge-dot"></span>
+          节奏实验室
+        </div>
         <span class="product-hero__eyebrow">专注节奏</span>
         <h1 class="product-hero__title">TimingHabit</h1>
         <p class="product-hero__lead">TimingHabit 提供灵活的时间节奏模板，结合番茄工作法、能量追踪与跨平台同步，让你在工作与生活之间保持稳定节奏。</p>
-        <div class="product-meta">
+        <div class="product-meta" data-animate data-animate-delay="0.12s">
           <span class="product-tag">节奏模板</span>
           <span class="product-tag">跨平台</span>
           <span class="product-tag">能量追踪</span>
         </div>
-        <ul class="highlight-list">
+        <ul class="highlight-list" data-animate data-animate-delay="0.16s">
           <li>内置多种工作/学习节奏模板，可根据日程自定义组合。</li>
           <li>番茄计时与休息提醒无缝衔接，自动记录专注时长。</li>
           <li>根据注意力与情绪反馈，推荐最佳工作时间带。</li>
         </ul>
-        <div class="cta-group">
+        <div class="cta-group" data-animate data-animate-delay="0.2s">
           <a class="button button--primary" href="mailto:yutang_work@163.com?subject=TimingHabit%20合作咨询">预约演示</a>
           <a class="button button--ghost" href="taskmatrix.html">结合 TaskMatrix 使用</a>
         </div>
       </div>
 
-      <div class="device-gallery" data-gallery-autoplay="false">
+      <div class="device-gallery" data-gallery data-gallery-autoplay="false" data-animate data-animate-delay="0.24s">
         <div class="device-gallery__frame">
           <div class="device-gallery__screen">
             <img src="images/hourglass.svg" alt="TimingHabit 节奏模板图标" class="device-gallery__slide is-active" data-gallery-slide>
@@ -52,37 +59,37 @@
       </div>
     </section>
 
-    <section class="feature-section">
+    <section class="feature-section" data-animate data-animate-delay="0.04s">
       <h2 class="section__title">功能亮点</h2>
       <div class="feature-grid">
-        <div class="feature-card">
+        <div class="feature-card" data-animate data-animate-delay="0.06s">
           <strong>节奏模板市场</strong>
           <p>精选工作日、考试复习、深度创作等节奏模板，一键套用。</p>
         </div>
-        <div class="feature-card">
+        <div class="feature-card" data-animate data-animate-delay="0.12s">
           <strong>注意力雷达</strong>
           <p>记录你的专注、能量与心情，自动生成专属雷达图。</p>
         </div>
-        <div class="feature-card">
+        <div class="feature-card" data-animate data-animate-delay="0.18s">
           <strong>跨时区协同</strong>
           <p>智能转换时区，帮助远程团队保持一致节奏。</p>
         </div>
-        <div class="feature-card">
+        <div class="feature-card" data-animate data-animate-delay="0.24s">
           <strong>多端同步</strong>
           <p>支持 iOS、Android 与 Web 端，数据实时同步到所有设备。</p>
         </div>
       </div>
     </section>
 
-    <section class="feature-section">
+    <section class="feature-section" data-animate data-animate-delay="0.08s">
       <h2 class="section__title">理想用户</h2>
-      <ul class="use-case-list">
+      <ul class="use-case-list" data-animate data-animate-delay="0.1s">
         <li>希望构建稳定作息的自由职业者与创作者。</li>
         <li>正在备考、备赛，需要科学安排复习节奏的学生。</li>
         <li>需要跨时区协同的远程团队成员。</li>
         <li>注重身心平衡，希望把能量管理纳入日程的专业人士。</li>
       </ul>
-      <div class="pill-group">
+      <div class="pill-group" data-animate data-animate-delay="0.14s">
         <span class="pill">自由职业</span>
         <span class="pill">学习备考</span>
         <span class="pill">远程协作</span>
@@ -91,7 +98,7 @@
     </section>
   </main>
 
-  <footer class="page-footer">
+  <footer class="page-footer" data-animate data-animate-delay="0.12s">
     <span>© 2025 Linutech · TimingHabit</span>
     <div class="page-footer__links">
       <a href="privacy.html">隐私政策</a>

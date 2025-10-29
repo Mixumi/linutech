@@ -5,11 +5,14 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>GoalHabit | 目标与习惯双引擎</title>
   <meta name="description" content="GoalHabit 通过可视化目标与数据洞察，帮助你记录习惯、追踪成果并保持长期动力。">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Poppins:wght@500;600&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="stylesheets/site.css">
   <script src="javascripts/site.js" defer></script>
 </head>
 <body class="product-page">
-  <header class="top-nav">
+  <header class="top-nav" data-animate>
     <a class="brand" href="index.html">Linutech</a>
     <nav class="top-nav__links">
       <a href="index.html#products">全部产品</a>
@@ -19,28 +22,32 @@
   </header>
 
   <main>
-    <section class="product-hero">
-      <div class="product-hero__content">
+    <section class="product-hero" data-animate>
+      <div class="product-hero__content" data-animate data-animate-delay="0.08s">
+        <div class="product-hero__badge" data-animate data-animate-delay="0.04s">
+          <span class="product-hero__badge-dot"></span>
+          数据洞察实验室
+        </div>
         <span class="product-hero__eyebrow">个人成长</span>
         <h1 class="product-hero__title">GoalHabit</h1>
         <p class="product-hero__lead">GoalHabit 将目标拆解为可视化的日常行动，通过多维度统计与提醒机制，帮助你看见每一次坚持的价值。</p>
-        <div class="product-meta">
+        <div class="product-meta" data-animate data-animate-delay="0.12s">
           <span class="product-tag">可视化目标</span>
           <span class="product-tag">多维统计</span>
           <span class="product-tag">激励机制</span>
         </div>
-        <ul class="highlight-list">
+        <ul class="highlight-list" data-animate data-animate-delay="0.16s">
           <li>目标形状墙帮助你直观感受完成度，点击即可标记进展。</li>
           <li>按照标签、时间、情绪维度输出统计，洞察最佳习惯节奏。</li>
           <li>自定义奖章、语音提醒与节日挑战，让坚持更具仪式感。</li>
         </ul>
-        <div class="cta-group">
+        <div class="cta-group" data-animate data-animate-delay="0.2s">
           <a class="button button--primary" href="mailto:yutang_work@163.com?subject=GoalHabit%20合作咨询">申请测试资格</a>
           <a class="button button--ghost" href="limstar.html">了解 Limstar</a>
         </div>
       </div>
 
-      <div class="device-gallery" data-gallery>
+      <div class="device-gallery" data-gallery data-animate data-animate-delay="0.24s">
         <div class="device-gallery__frame">
           <div class="device-gallery__screen">
             <img src="images/goalhabit-1.png" alt="GoalHabit 目标墙" class="device-gallery__slide is-active" data-gallery-slide>
@@ -54,37 +61,37 @@
       </div>
     </section>
 
-    <section class="feature-section">
+    <section class="feature-section" data-animate data-animate-delay="0.04s">
       <h2 class="section__title">数据驱动习惯养成</h2>
       <div class="feature-grid">
-        <div class="feature-card">
+        <div class="feature-card" data-animate data-animate-delay="0.06s">
           <strong>多维统计面板</strong>
           <p>按周、月、年度输出趋势图，自动识别高效时间段。</p>
         </div>
-        <div class="feature-card">
+        <div class="feature-card" data-animate data-animate-delay="0.12s">
           <strong>目标拆解向导</strong>
           <p>以倒推法拆解目标，生成每日行动清单与缓冲时间。</p>
         </div>
-        <div class="feature-card">
+        <div class="feature-card" data-animate data-animate-delay="0.18s">
           <strong>激励体系</strong>
           <p>完成动作即可解锁奖章与鼓励语，支持自定义提示语。</p>
         </div>
-        <div class="feature-card">
+        <div class="feature-card" data-animate data-animate-delay="0.24s">
           <strong>社群互助</strong>
           <p>邀请朋友加入目标小组，相互见证成长，分享经验。</p>
         </div>
       </div>
     </section>
 
-    <section class="feature-section">
+    <section class="feature-section" data-animate data-animate-delay="0.08s">
       <h2 class="section__title">适用人群</h2>
-      <ul class="use-case-list">
+      <ul class="use-case-list" data-animate data-animate-delay="0.1s">
         <li>准备考试、考证或语言学习，希望提升学习节奏的用户。</li>
         <li>正在坚持健身、阅读、写作等长期习惯的人群。</li>
         <li>希望量化目标、复盘数据并寻找成长曲线的自驱人士。</li>
         <li>需要与伙伴互相监督、共享进展的好友或团队。</li>
       </ul>
-      <div class="pill-group">
+      <div class="pill-group" data-animate data-animate-delay="0.14s">
         <span class="pill">考研考证</span>
         <span class="pill">创作者</span>
         <span class="pill">运动健康</span>
@@ -93,7 +100,7 @@
     </section>
   </main>
 
-  <footer class="page-footer">
+  <footer class="page-footer" data-animate data-animate-delay="0.12s">
     <span>© 2025 Linutech · GoalHabit</span>
     <div class="page-footer__links">
       <a href="privacy.html">隐私政策</a>

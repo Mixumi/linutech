@@ -5,7 +5,11 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
   <title>Linutech 隐私政策</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Poppins:wght@500;600&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="stylesheets/site.css">
+  <script src="javascripts/site.js" defer></script>
   <style>
     .policy-page main {
       padding-top: 48px;
@@ -21,6 +25,28 @@
       border: 1px solid var(--stroke-light);
       box-shadow: var(--shadow-lg);
       margin-bottom: 48px;
+      position: relative;
+      overflow: hidden;
+      isolation: isolate;
+    }
+
+    .policy-hero::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      border-radius: inherit;
+      background:
+        radial-gradient(circle at 15% 20%, rgba(56, 189, 248, 0.24), transparent 60%),
+        radial-gradient(circle at 80% 10%, rgba(129, 140, 248, 0.18), transparent 60%),
+        linear-gradient(160deg, rgba(15, 23, 42, 0.15), transparent 75%);
+      opacity: 0.9;
+      z-index: 0;
+      pointer-events: none;
+    }
+
+    .policy-hero > * {
+      position: relative;
+      z-index: 1;
     }
 
     .policy-hero__title {
@@ -61,7 +87,9 @@
       background: rgba(15, 23, 42, 0.55);
       border: 1px solid rgba(148, 163, 184, 0.2);
       color: var(--text-secondary);
-      transition: transform var(--transition), border-color var(--transition), color var(--transition);
+      backdrop-filter: blur(18px);
+      box-shadow: 0 20px 40px rgba(15, 23, 42, 0.28);
+      transition: transform var(--transition), border-color var(--transition), color var(--transition), box-shadow var(--transition);
     }
 
     .policy-toc a::after {
@@ -89,6 +117,32 @@
       background: rgba(15, 23, 42, 0.68);
       border: 1px solid rgba(148, 163, 184, 0.24);
       box-shadow: var(--shadow-sm);
+      position: relative;
+      overflow: hidden;
+      transition: transform var(--transition), border-color var(--transition), box-shadow var(--transition);
+    }
+
+    .policy-card::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      border-radius: inherit;
+      background: linear-gradient(135deg, rgba(56, 189, 248, 0.18), transparent 60%);
+      opacity: 0;
+      transition: opacity var(--transition);
+      pointer-events: none;
+    }
+
+    .policy-card:hover,
+    .policy-card:focus-within {
+      transform: translateY(-6px);
+      border-color: rgba(56, 189, 248, 0.32);
+      box-shadow: 0 30px 70px rgba(56, 189, 248, 0.18);
+    }
+
+    .policy-card:hover::after,
+    .policy-card:focus-within::after {
+      opacity: 0.45;
     }
 
     .policy-card__header {
@@ -162,6 +216,18 @@
       font-size: 0.9rem;
       display: grid;
       gap: 6px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .policy-footer::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      border-radius: inherit;
+      background: radial-gradient(circle at 15% 20%, rgba(56, 189, 248, 0.16), transparent 60%);
+      opacity: 0.9;
+      pointer-events: none;
     }
 
     @media (max-width: 768px) {
@@ -176,7 +242,7 @@
   </style>
 </head>
 <body class="policy-page">
-  <header class="top-nav">
+  <header class="top-nav" data-animate>
     <a class="brand" href="index.html">Linutech</a>
     <nav class="top-nav__links">
       <a href="index.html#products">全部产品</a>
@@ -186,20 +252,20 @@
   </header>
 
   <main>
-    <section class="policy-hero">
+    <section class="policy-hero" data-animate>
       <h1 class="policy-hero__title">Linutech 产品隐私政策</h1>
       <p class="policy-hero__subtitle">
         我们致力于构建安全、透明的数字工具。无论您使用 TimeHabit、GoalHabit、TimingHabit、TaskMatrix、LimStar
         或 TastePost，所有产品均遵循相同的核心原则：尽量减少数据收集、本地优先存储、绝不出售个人信息，并提供清晰的控制选项。
       </p>
-      <div class="policy-hero__meta">
+      <div class="policy-hero__meta" data-animate data-animate-delay="0.08s">
         <span>适用产品：TimeHabit · GoalHabit · TimingHabit · TaskMatrix · LimStar · TastePost</span>
         <span>最近更新：2025 年 2 月 22 日</span>
         <span>如有疑问，请发送邮件至 <a href="mailto:yutang_work@163.com">yutang_work@163.com</a></span>
       </div>
     </section>
 
-    <ul class="policy-toc">
+    <ul class="policy-toc" data-animate data-animate-delay="0.12s">
       <li><a href="#timehabit">TimeHabit · 屏幕与专注管理</a></li>
       <li><a href="#goalhabit">GoalHabit · 目标追踪</a></li>
       <li><a href="#timinghabit">TimingHabit · 计时专注</a></li>
@@ -209,7 +275,7 @@
     </ul>
 
     <div class="policy-grid">
-      <section class="policy-card" id="timehabit">
+      <section class="policy-card" id="timehabit" data-animate data-animate-delay="0.04s">
         <header class="policy-card__header">
           <h2 class="policy-card__title">TimeHabit</h2>
           <span class="policy-tag">iOS · 专注与屏幕时间管理</span>
@@ -243,7 +309,7 @@
         </div>
       </section>
 
-      <section class="policy-card" id="goalhabit">
+      <section class="policy-card" id="goalhabit" data-animate data-animate-delay="0.08s">
         <header class="policy-card__header">
           <h2 class="policy-card__title">GoalHabit</h2>
           <span class="policy-tag">iOS · 目标与习惯追踪</span>
@@ -277,7 +343,7 @@
         </div>
       </section>
 
-      <section class="policy-card" id="timinghabit">
+      <section class="policy-card" id="timinghabit" data-animate data-animate-delay="0.12s">
         <header class="policy-card__header">
           <h2 class="policy-card__title">TimingHabit</h2>
           <span class="policy-tag">iOS · 番茄钟与效率计时</span>
@@ -311,7 +377,7 @@
         </div>
       </section>
 
-      <section class="policy-card" id="taskmatrix">
+      <section class="policy-card" id="taskmatrix" data-animate data-animate-delay="0.16s">
         <header class="policy-card__header">
           <h2 class="policy-card__title">TaskMatrix</h2>
           <span class="policy-tag">Web &amp; 桌面 · 项目协同</span>
@@ -348,7 +414,7 @@
         </div>
       </section>
 
-      <section class="policy-card" id="limstar">
+      <section class="policy-card" id="limstar" data-animate data-animate-delay="0.2s">
         <header class="policy-card__header">
           <h2 class="policy-card__title">LimStar</h2>
           <span class="policy-tag">iOS &amp; Web · 灵感收集与创作</span>
@@ -382,7 +448,7 @@
         </div>
       </section>
 
-      <section class="policy-card" id="tastepost">
+      <section class="policy-card" id="tastepost" data-animate data-animate-delay="0.24s">
         <header class="policy-card__header">
           <h2 class="policy-card__title">TastePost</h2>
           <span class="policy-tag">移动端 · 美食日记</span>
@@ -417,13 +483,13 @@
       </section>
     </div>
 
-    <footer class="policy-footer">
+    <footer class="policy-footer" data-animate data-animate-delay="0.3s">
       <span>如需访问、更新或删除您的个人信息，请发送邮件至 <a href="mailto:yutang_work@163.com">yutang_work@163.com</a>，我们将在 7 个工作日内响应。</span>
       <span>本隐私政策适用于 Linutech 旗下所有面向公众发布的产品与服务，如有重大变更，我们将通过站内公告或邮件通知。</span>
     </footer>
   </main>
 
-  <footer class="page-footer">
+  <footer class="page-footer" data-animate data-animate-delay="0.32s">
     <span>© 2025 Linutech</span>
     <div class="page-footer__links">
       <a href="privacy.html" aria-current="page">隐私政策</a>

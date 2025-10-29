@@ -5,11 +5,14 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>TastePost | 记录独一无二的风味记忆</title>
   <meta name="description" content="TastePost 以邮票式卡片记录美食体验，让每一次灵感、地点与风味都被细致保存与分享。">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Poppins:wght@500;600&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="stylesheets/site.css">
   <script src="javascripts/site.js" defer></script>
 </head>
 <body class="product-page">
-  <header class="top-nav">
+  <header class="top-nav" data-animate>
     <a class="brand" href="index.html">Linutech</a>
     <nav class="top-nav__links">
       <a href="index.html#products">全部产品</a>
@@ -19,28 +22,32 @@
   </header>
 
   <main>
-    <section class="product-hero">
-      <div class="product-hero__content">
+    <section class="product-hero" data-animate>
+      <div class="product-hero__content" data-animate data-animate-delay="0.08s">
+        <div class="product-hero__badge" data-animate data-animate-delay="0.04s">
+          <span class="product-hero__badge-dot"></span>
+          灵感邮票内测
+        </div>
         <span class="product-hero__eyebrow">灵感表达</span>
         <h1 class="product-hero__title">TastePost</h1>
         <p class="product-hero__lead">TastePost 将每次餐桌灵感化为邮票，结合地点、心情、风味标签与照片，让你的美食记忆更具故事性。</p>
-        <div class="product-meta">
+        <div class="product-meta" data-animate data-animate-delay="0.12s">
           <span class="product-tag">美食日记</span>
           <span class="product-tag">灵感采集</span>
           <span class="product-tag">卡片社交</span>
         </div>
-        <ul class="highlight-list">
+        <ul class="highlight-list" data-animate data-animate-delay="0.16s">
           <li>卡片式记录方式，涵盖菜品、味型、氛围与灵感注记。</li>
           <li>支持地点、风味、伙伴等多维标签，快速检索过往体验。</li>
           <li>以邮票墙呈现你的风味地图，并可一键生成分享故事。</li>
         </ul>
-        <div class="cta-group">
+        <div class="cta-group" data-animate data-animate-delay="0.2s">
           <a class="button button--primary" href="mailto:yutang_work@163.com?subject=TastePost%20合作咨询">加入内测名单</a>
           <a class="button button--ghost" href="goalhabit.html">探索 GoalHabit</a>
         </div>
       </div>
 
-      <div class="device-gallery" data-gallery-autoplay="false">
+      <div class="device-gallery" data-gallery data-gallery-autoplay="false" data-animate data-animate-delay="0.24s">
         <div class="device-gallery__frame">
           <div class="device-gallery__screen">
             <img src="images/browser-bar.png" alt="TastePost 卡片预览" class="device-gallery__slide is-active" data-gallery-slide>
@@ -52,37 +59,37 @@
       </div>
     </section>
 
-    <section class="feature-section">
+    <section class="feature-section" data-animate data-animate-delay="0.04s">
       <h2 class="section__title">体验亮点</h2>
       <div class="feature-grid">
-        <div class="feature-card">
+        <div class="feature-card" data-animate data-animate-delay="0.06s">
           <strong>邮票墙</strong>
           <p>自动生成风味邮票墙，按时间轴或城市浏览你的独特味觉旅程。</p>
         </div>
-        <div class="feature-card">
+        <div class="feature-card" data-animate data-animate-delay="0.12s">
           <strong>灵感草稿箱</strong>
           <p>灵感随手记支持语音、图片与手写，出门在外也能快速记录。</p>
         </div>
-        <div class="feature-card">
+        <div class="feature-card" data-animate data-animate-delay="0.18s">
           <strong>故事模板</strong>
           <p>提供多款图文排版模板，一键生成可分享的美食故事卡片。</p>
         </div>
-        <div class="feature-card">
+        <div class="feature-card" data-animate data-animate-delay="0.24s">
           <strong>私密空间</strong>
           <p>可设置私密或共享模式，灵活管理个人记忆与好友互动。</p>
         </div>
       </div>
     </section>
 
-    <section class="feature-section">
+    <section class="feature-section" data-animate data-animate-delay="0.08s">
       <h2 class="section__title">适合谁</h2>
-      <ul class="use-case-list">
+      <ul class="use-case-list" data-animate data-animate-delay="0.1s">
         <li>热爱探店、料理或记录生活日常的你。</li>
         <li>想要整理口味偏好，打造专属食谱收藏夹。</li>
         <li>餐饮品牌主理人，希望更好呈现菜品故事。</li>
         <li>喜欢创作内容，想在社交平台分享风味见闻的创作者。</li>
       </ul>
-      <div class="pill-group">
+      <div class="pill-group" data-animate data-animate-delay="0.14s">
         <span class="pill">探店达人</span>
         <span class="pill">料理爱好者</span>
         <span class="pill">品牌主理人</span>
@@ -91,7 +98,7 @@
     </section>
   </main>
 
-  <footer class="page-footer">
+  <footer class="page-footer" data-animate data-animate-delay="0.12s">
     <span>© 2025 Linutech · TastePost</span>
     <div class="page-footer__links">
       <a href="privacy.html">隐私政策</a>
