@@ -5,11 +5,14 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>TaskMatrix | 四象限任务协同系统</title>
   <meta name="description" content="TaskMatrix 将四象限工作法与现代协作工具融合，帮助团队和个人聚焦真正重要的工作。">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Poppins:wght@500;600&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="stylesheets/site.css">
   <script src="javascripts/site.js" defer></script>
 </head>
 <body class="product-page">
-  <header class="top-nav">
+  <header class="top-nav" data-animate>
     <a class="brand" href="index.html">Linutech</a>
     <nav class="top-nav__links">
       <a href="index.html#products">全部产品</a>
@@ -19,28 +22,32 @@
   </header>
 
   <main>
-    <section class="product-hero">
-      <div class="product-hero__content">
+    <section class="product-hero" data-animate>
+      <div class="product-hero__content" data-animate data-animate-delay="0.08s">
+        <div class="product-hero__badge" data-animate data-animate-delay="0.04s">
+          <span class="product-hero__badge-dot"></span>
+          团队试用·Q3
+        </div>
         <span class="product-hero__eyebrow">团队效率</span>
         <h1 class="product-hero__title">TaskMatrix</h1>
         <p class="product-hero__lead">TaskMatrix 将经典的“重要/紧急”四象限方法与现代协同体验结合，帮助个人与团队建立聚焦、透明、可复盘的工作节奏。</p>
-        <div class="product-meta">
+        <div class="product-meta" data-animate data-animate-delay="0.12s">
           <span class="product-tag">四象限法</span>
           <span class="product-tag">实时协作</span>
           <span class="product-tag">跨平台</span>
         </div>
-        <ul class="highlight-list">
+        <ul class="highlight-list" data-animate data-animate-delay="0.16s">
           <li>自定义象限模板和看板视图，适配不同项目阶段。</li>
           <li>自动提醒、优先级标记、进度燃尽图，确保重要事项按时推进。</li>
           <li>支持成员评论与文件同步，让团队沟通留痕更高效。</li>
         </ul>
-        <div class="cta-group">
+        <div class="cta-group" data-animate data-animate-delay="0.2s">
           <a class="button button--primary" href="mailto:yutang_work@163.com?subject=TaskMatrix%20合作咨询">申请团队试用</a>
           <a class="button button--ghost" href="timehabit.html">查看 TimeHabit</a>
         </div>
       </div>
 
-      <div class="device-gallery" data-gallery>
+      <div class="device-gallery" data-gallery data-animate data-animate-delay="0.24s">
         <div class="device-gallery__frame">
           <div class="device-gallery__screen">
             <img src="images/TaskMatrix-1.png" alt="TaskMatrix 四象限面板" class="device-gallery__slide is-active" data-gallery-slide>
@@ -52,37 +59,37 @@
       </div>
     </section>
 
-    <section class="feature-section">
+    <section class="feature-section" data-animate data-animate-delay="0.04s">
       <h2 class="section__title">核心能力</h2>
       <div class="feature-grid">
-        <div class="feature-card">
+        <div class="feature-card" data-animate data-animate-delay="0.06s">
           <strong>象限智能调度</strong>
           <p>根据任务完成情况与截止时间自动调整优先级，减少人工维护负担。</p>
         </div>
-        <div class="feature-card">
+        <div class="feature-card" data-animate data-animate-delay="0.12s">
           <strong>节奏化复盘</strong>
           <p>周/月度复盘模板、回顾摘要与趋势分析帮助团队沉淀经验。</p>
         </div>
-        <div class="feature-card">
+        <div class="feature-card" data-animate data-animate-delay="0.18s">
           <strong>集成生态</strong>
           <p>可与主流日历、IM、云盘对接，让信息流贯通在同一工作台。</p>
         </div>
-        <div class="feature-card">
+        <div class="feature-card" data-animate data-animate-delay="0.24s">
           <strong>权限与安全</strong>
           <p>细粒度权限控制、操作日志与企业级加密保障数据安全。</p>
         </div>
       </div>
     </section>
 
-    <section class="feature-section">
+    <section class="feature-section" data-animate data-animate-delay="0.08s">
       <h2 class="section__title">适用团队</h2>
-      <ul class="use-case-list">
+      <ul class="use-case-list" data-animate data-animate-delay="0.1s">
         <li>需要清晰优先级的项目团队，如产品、市场、内容、研发协作。</li>
         <li>正在推行 OKR 或季度目标管理的中小企业。</li>
         <li>个人自由职业者与助理协同，快速梳理每日焦点。</li>
         <li>希望在碎片化沟通中保持结构化记录的远程团队。</li>
       </ul>
-      <div class="pill-group">
+      <div class="pill-group" data-animate data-animate-delay="0.14s">
         <span class="pill">产品运营</span>
         <span class="pill">创意团队</span>
         <span class="pill">远程协作</span>
@@ -91,7 +98,7 @@
     </section>
   </main>
 
-  <footer class="page-footer">
+  <footer class="page-footer" data-animate data-animate-delay="0.12s">
     <span>© 2025 Linutech · TaskMatrix</span>
     <div class="page-footer__links">
       <a href="privacy.html">隐私政策</a>
