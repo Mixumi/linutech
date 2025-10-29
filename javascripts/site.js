@@ -28,7 +28,7 @@ function getInitialTheme() {
     return 'light';
   }
 
-  return 'dark';
+  return 'light';
 }
 
 function applyTheme(theme, shouldPersist = true) {
