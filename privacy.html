@@ -175,6 +175,22 @@
       gap: 24px;
     }
 
+    .policy-note {
+      margin-bottom: 48px;
+      padding: 24px 32px;
+      border-radius: var(--radius-lg);
+      background: rgba(56, 189, 248, 0.12);
+      border: 1px solid rgba(56, 189, 248, 0.35);
+      color: var(--text-primary);
+      display: grid;
+      gap: 8px;
+      box-shadow: 0 20px 40px rgba(15, 23, 42, 0.25);
+    }
+
+    .policy-note strong {
+      font-size: 1.05rem;
+    }
+
     .policy-topic h3 {
       margin-top: 0;
       font-size: 1.1rem;
@@ -258,14 +274,20 @@
     <section class="policy-hero" data-animate>
       <h1 class="policy-hero__title">Linutech 产品隐私政策</h1>
       <p class="policy-hero__subtitle">
-        我们致力于构建安全、透明的数字工具。无论您使用 TimeHabit、GoalHabit、TimingHabit、TaskMatrix、LimStar
-        或 TastePost，所有产品均遵循相同的核心原则：尽量减少数据收集、本地优先存储、绝不出售个人信息，并提供清晰的控制选项。
+        我们致力于构建安全、透明的数字工具。无论您使用 TimeHabit、GoalHabit、TimingHabit、TaskMatrix、LimStar、TastePost
+        或 ReadyGo，所有产品均遵循相同的核心原则：尽量减少数据收集、本地优先存储、绝不出售个人信息，并提供清晰的控制选项。
       </p>
       <div class="policy-hero__meta" data-animate data-animate-delay="0.08s">
-        <span>适用产品：TimeHabit · GoalHabit · TimingHabit · TaskMatrix · LimStar · TastePost</span>
+        <span>适用产品：TimeHabit · GoalHabit · TimingHabit · TaskMatrix · LimStar · TastePost · ReadyGo</span>
         <span>最近更新：2025 年 2 月 22 日</span>
         <span>如有疑问，请发送邮件至 <a href="mailto:yutang_work@163.com">yutang_work@163.com</a></span>
       </div>
+    </section>
+
+    <section class="policy-note" data-animate data-animate-delay="0.1s">
+      <strong>关于 ReadyGo 画中画能力</strong>
+      <p>ReadyGo 仅在您主动开启实时提醒时请求系统画中画权限，用于在其他 App 上方显示待办悬浮窗，便于即时查看任务。</p>
+      <p>画中画窗口只读取本地待办内容，不会上传、分享或与第三方同步；您可随时在系统设置中关闭该权限。</p>
     </section>
 
     <ul class="policy-toc" data-animate data-animate-delay="0.12s">
@@ -275,6 +297,7 @@
       <li><a href="#taskmatrix">TaskMatrix · 项目协作</a></li>
       <li><a href="#limstar">LimStar · 创意灵感库</a></li>
       <li><a href="#tastepost">TastePost · 美食记录</a></li>
+      <li><a href="#readygo">ReadyGo · 便利贴清单</a></li>
     </ul>
 
     <div class="policy-grid">
@@ -480,6 +503,40 @@
             <ul>
               <li>应用内提供批量删除与数据导出工具。</li>
               <li>注销账号后，TastePost 会在 30 天内清除云端备份。</li>
+            </ul>
+          </div>
+        </div>
+      </section>
+
+      <section class="policy-card" id="readygo" data-animate data-animate-delay="0.28s">
+        <header class="policy-card__header">
+          <h2 class="policy-card__title">ReadyGo</h2>
+          <span class="policy-tag">iOS · 便利贴清单</span>
+        </header>
+        <div class="policy-card__sections">
+          <div class="policy-topic">
+            <h3>我们收集的数据</h3>
+            <ul>
+              <li>ReadyGo 的待办、备注、进度百分比均存储在本地数据库，不会上传至服务器。</li>
+              <li>若启用 iCloud 备份，仅同步加密后的清单，用于跨设备恢复，Linutech 无法读取内容。</li>
+            </ul>
+          </div>
+          <div class="policy-topic">
+            <h3>画中画与小组件</h3>
+            <ul>
+              <li>画中画悬浮窗用于实时提醒，仅在屏幕上显示当前待办，不会采集屏幕内容。</li>
+              <li>桌面组件读取本地数据渲染，系统会提示相关权限，您可随时关闭。</li>
+            </ul>
+          </div>
+          <div class="policy-topic">
+            <h3>第三方服务</h3>
+            <p>ReadyGo 不集成广告或追踪 SDK，也不会向第三方分析平台发送使用行为。</p>
+          </div>
+          <div class="policy-topic">
+            <h3>您的控制权</h3>
+            <ul>
+              <li>可在应用内一键导出或删除全部便利贴数据。</li>
+              <li>卸载应用或关闭 iCloud 同步后，所有数据会从设备与云端备份中清除。</li>
             </ul>
           </div>
         </div>

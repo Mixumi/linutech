@@ -1,0 +1,371 @@
+<!DOCTYPE html>
+<html lang="zh-CN" data-theme="light">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ReadyGo | 便利贴式清单工具</title>
+  <meta name="description" content="ReadyGo 以便利贴风格记录每日计划，支持画中画提醒、桌面组件与多维统计，帮助你清晰掌握每一步。">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Poppins:wght@500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="stylesheets/site.css">
+  <script src="javascripts/site.js" defer></script>
+  <style>
+    :root {
+      --readygo-purple: #5f5bdb;
+      --readygo-ink: #1f1f3d;
+      --readygo-gray: #f4f5fb;
+    }
+
+    body.product-page.readygo-page {
+      background: radial-gradient(circle at top, rgba(95, 91, 219, 0.12), transparent 55%) var(--page-bg, #f7f8fd);
+      color: var(--readygo-ink);
+    }
+
+    .readygo-hero {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+      gap: 36px;
+      align-items: center;
+      padding-block: 48px 24px;
+    }
+
+    .readygo-hero__content span,
+    .readygo-hero__content p {
+      color: rgba(15, 23, 42, 0.75);
+    }
+
+    .readygo-gallery {
+      position: relative;
+      padding: 28px;
+      border-radius: 32px;
+      background: linear-gradient(160deg, #fdf5ff, #eef2ff);
+      box-shadow: 0 30px 80px rgba(95, 91, 219, 0.15);
+    }
+
+    .readygo-phone {
+      width: min(360px, 100%);
+      margin-inline: auto;
+      border-radius: 40px;
+      padding: 18px 18px 28px;
+      background: #0f172a;
+      box-shadow: 0 40px 120px rgba(15, 23, 42, 0.45);
+      position: relative;
+      color: #0f172a;
+    }
+
+    .readygo-notch {
+      width: 160px;
+      height: 16px;
+      border-radius: 999px;
+      background: #0c1220;
+      margin: 0 auto 18px;
+    }
+
+    .readygo-screen {
+      background: #f9f7f5;
+      border-radius: 28px;
+      padding: 24px;
+      display: grid;
+      gap: 16px;
+      min-height: 560px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .sticky-note {
+      border-radius: 18px 18px 32px 18px;
+      padding: 18px;
+      display: grid;
+      gap: 6px;
+      box-shadow: 0 15px 30px rgba(15, 23, 42, 0.12);
+      font-size: 0.95rem;
+    }
+
+    .sticky-note__title {
+      font-weight: 600;
+    }
+
+    .sticky-note--yellow { background: #fff5a1; }
+    .sticky-note--green { background: #c9f0c4; }
+    .sticky-note--pink { background: #ffd1e8; }
+    .sticky-note--purple { background: #d9d3ff; }
+
+    .sticky-note__meta {
+      font-size: 0.8rem;
+      display: flex;
+      gap: 4px;
+      color: rgba(15, 23, 42, 0.6);
+    }
+
+    .sticky-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 14px;
+    }
+
+    .readygo-widget {
+      background: linear-gradient(160deg, #fff, #f5f0ff);
+      border-radius: 26px;
+      padding: 16px;
+      display: grid;
+      gap: 12px;
+      margin-top: 8px;
+      box-shadow: inset 0 0 0 1px rgba(15, 23, 42, 0.08);
+    }
+
+    .readygo-widget__card {
+      background: #fff;
+      border-radius: 20px;
+      padding: 14px;
+      display: grid;
+      gap: 8px;
+      border: 1px solid rgba(95, 91, 219, 0.15);
+    }
+
+    .readygo-widget__progress {
+      height: 6px;
+      border-radius: 999px;
+      background: rgba(95, 91, 219, 0.2);
+      overflow: hidden;
+    }
+
+    .readygo-widget__progress span {
+      display: block;
+      height: 100%;
+      width: var(--value, 60%);
+      background: linear-gradient(90deg, #ffb347, #ffcc33);
+      border-radius: inherit;
+    }
+
+    .readygo-section {
+      margin-top: 72px;
+    }
+
+    .readygo-section__title {
+      font-size: clamp(1.8rem, 3vw, 2.6rem);
+      margin-bottom: 18px;
+    }
+
+    .readygo-feature-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 20px;
+    }
+
+    .readygo-feature {
+      padding: 24px;
+      border-radius: 20px;
+      background: rgba(255, 255, 255, 0.9);
+      border: 1px solid rgba(95, 91, 219, 0.1);
+      box-shadow: 0 15px 40px rgba(15, 23, 42, 0.08);
+    }
+
+    .readygo-feature strong {
+      display: block;
+      margin-bottom: 8px;
+      font-size: 1.05rem;
+    }
+
+    .pip-banner {
+      margin-top: 28px;
+      padding: 20px 24px;
+      border-radius: 24px;
+      background: linear-gradient(120deg, rgba(95, 91, 219, 0.12), rgba(255, 179, 71, 0.25));
+      border: 1px solid rgba(95, 91, 219, 0.2);
+      display: flex;
+      gap: 16px;
+      align-items: center;
+      flex-wrap: wrap;
+    }
+
+    .pip-banner__icon {
+      width: 48px;
+      height: 48px;
+      border-radius: 16px;
+      background: #fff;
+      display: grid;
+      place-items: center;
+      font-size: 1.4rem;
+      color: #5f5bdb;
+      box-shadow: inset 0 0 0 1px rgba(95, 91, 219, 0.08);
+    }
+
+    .readygo-cta {
+      margin-top: 64px;
+      padding: 32px;
+      border-radius: 28px;
+      background: #fff;
+      border: 1px solid rgba(95, 91, 219, 0.1);
+      box-shadow: 0 20px 60px rgba(15, 23, 42, 0.08);
+      text-align: center;
+      display: grid;
+      gap: 18px;
+    }
+
+    .readygo-pills {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      justify-content: center;
+    }
+
+    .readygo-pills span {
+      padding: 8px 14px;
+      border-radius: 999px;
+      background: rgba(95, 91, 219, 0.1);
+      color: #3b378b;
+      font-size: 0.9rem;
+    }
+
+    @media (max-width: 640px) {
+      .sticky-grid { grid-template-columns: 1fr; }
+      .readygo-phone { padding: 12px 12px 20px; }
+      .readygo-screen { min-height: 0; }
+    }
+  </style>
+</head>
+<body class="product-page readygo-page">
+  <header class="top-nav" data-animate>
+    <a class="brand" href="index.html">Linutech</a>
+    <div class="top-nav__controls">
+      <nav class="top-nav__links">
+        <a href="index.html#products">全部产品</a>
+        <a href="privacy.html">隐私政策</a>
+        <a href="mailto:yutang_work@163.com">联系客服</a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <section class="readygo-hero" data-animate>
+      <div class="readygo-hero__content" data-animate data-animate-delay="0.04s">
+        <span class="product-hero__eyebrow">便利贴式清单 · iOS</span>
+        <h1 class="product-hero__title">ReadyGo</h1>
+        <p class="product-hero__lead">ReadyGo 把每日计划变成随手可贴的便利贴，醒目的色块配合画中画与桌面组件，保证每一个提醒都能按时出现。</p>
+        <ul class="highlight-list" data-animate data-animate-delay="0.08s">
+          <li>灵感式卡片记录：随手添加待办、进度和备注，信息结构一目了然。</li>
+          <li>日历视图与清单统计结合，帮助你掌握每周完成趋势。</li>
+          <li>画中画悬浮窗与锁屏组件实时提醒，确保关键待办不错过。</li>
+        </ul>
+        <div class="product-meta" data-animate data-animate-delay="0.12s">
+          <span class="product-tag">iPhone · iPad</span>
+          <span class="product-tag">便利贴视感</span>
+          <span class="product-tag">画中画提醒</span>
+        </div>
+        <div class="cta-group" data-animate data-animate-delay="0.16s">
+          <a class="button button--primary" href="mailto:yutang_work@163.com?subject=ReadyGo%20体验咨询">申请测试版</a>
+          <a class="button button--ghost" href="privacy.html#readygo">查看隐私政策</a>
+        </div>
+      </div>
+
+      <div class="readygo-gallery" data-animate data-animate-delay="0.1s">
+        <div class="readygo-phone">
+          <div class="readygo-notch"></div>
+          <div class="readygo-screen">
+            <div class="sticky-grid">
+              <article class="sticky-note sticky-note--yellow">
+                <span class="sticky-note__title">欢迎来到 ReadyGo</span>
+                <p>用便利贴一样的方式创建每日日清单。</p>
+                <div class="sticky-note__meta">
+                  <span>进度</span>
+                  <strong>1/4</strong>
+                </div>
+              </article>
+              <article class="sticky-note sticky-note--pink">
+                <span class="sticky-note__title">完成任务见证自己的进步</span>
+                <p>彩色卡片实时累积完成度。</p>
+              </article>
+              <article class="sticky-note sticky-note--green">
+                <span class="sticky-note__title">像贴纸一样创建新的每日清单</span>
+                <p>轻点即可新增，支持分类标签。</p>
+              </article>
+              <article class="sticky-note sticky-note--purple">
+                <span class="sticky-note__title">准备好了吗？Ready, Go!</span>
+                <p>长按拖动排序，安排今日优先级。</p>
+              </article>
+            </div>
+            <div class="readygo-widget">
+              <div class="readygo-widget__card">
+                <strong>星期间概览</strong>
+                <p>清单总数 16 · 已完成 14 · 完成率 87.5%</p>
+                <div class="readygo-widget__progress"><span style="--value:87%"></span></div>
+              </div>
+              <div class="readygo-widget__card">
+                <strong>月度养成</strong>
+                <p>30 分钟学习 · 3 公里慢跑 · 家务日程</p>
+              </div>
+              <div class="readygo-widget__card">
+                <strong>画中画提醒</strong>
+                <p>今日待办随时浮现，锁屏也能查进度。</p>
+              </div>
+            </div>
+          </div>
+        </div>
+        <p class="device-gallery__caption">视觉演示基于真实界面，呈现 ReadyGo 的便利贴风格。</p>
+      </div>
+    </section>
+
+    <section class="readygo-section" data-animate data-animate-delay="0.04s">
+      <h2 class="readygo-section__title">每日计划，清楚可见</h2>
+      <div class="readygo-feature-grid">
+        <div class="readygo-feature" data-animate data-animate-delay="0.06s">
+          <strong>清单分区与进度</strong>
+          <p>在“今日摘要”“每周专注”“家务计划”等分区里管理任务，彩色进度条自动计算完成率。</p>
+        </div>
+        <div class="readygo-feature" data-animate data-animate-delay="0.1s">
+          <strong>长按拖动排序</strong>
+          <p>通过手势重排便利贴，实时调整优先级，确保最重要的任务始终在上方。</p>
+        </div>
+        <div class="readygo-feature" data-animate data-animate-delay="0.14s">
+          <strong>日历概览</strong>
+          <p>切换到日历统计视图，即可看到本周与本月的习惯坚持情况，复盘更轻松。</p>
+        </div>
+        <div class="readygo-feature" data-animate data-animate-delay="0.18s">
+          <strong>桌面与小组件</strong>
+          <p>提供多款桌面组件和画中画模式，让任务在主屏幕、锁屏或悬浮窗里实时显示。</p>
+        </div>
+      </div>
+      <div class="pip-banner" data-animate data-animate-delay="0.2s">
+        <div class="pip-banner__icon">🗂️</div>
+        <div>
+          <strong>画中画提醒</strong>
+          <p>ReadyGo 利用系统画中画能力在任何 App 上方悬浮清单，提醒不会被错过，同时不会上传你的任务内容。</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="readygo-section" data-animate data-animate-delay="0.08s">
+      <h2 class="readygo-section__title">适合这些人群</h2>
+      <ul class="use-case-list">
+        <li>喜欢视觉化计划的学生或自由职业者。</li>
+        <li>希望用便利贴记下家庭家务与健康目标的用户。</li>
+        <li>经常在多个 App 间切换，需要悬浮提醒避免忘记事项的人。</li>
+      </ul>
+      <div class="readygo-pills">
+        <span>学习冲刺</span>
+        <span>家庭计划</span>
+        <span>健身提醒</span>
+        <span>写作灵感</span>
+      </div>
+    </section>
+
+    <section class="readygo-cta" data-animate data-animate-delay="0.12s">
+      <h2>想体验 ReadyGo？</h2>
+      <p>发送邮件至 <a href="mailto:yutang_work@163.com">yutang_work@163.com</a> 获取最新内测包，我们会第一时间邀请你体验。</p>
+      <div class="cta-group" style="justify-content:center;">
+        <a class="button button--primary" href="mailto:yutang_work@163.com?subject=ReadyGo%20内测申请">申请内测</a>
+        <a class="button button--ghost" href="privacy.html#readygo">了解数据与权限</a>
+      </div>
+    </section>
+  </main>
+
+  <footer class="page-footer" data-animate data-animate-delay="0.14s">
+    <span>© 2025 Linutech · ReadyGo</span>
+    <div class="page-footer__links">
+      <a href="privacy.html">隐私政策</a>
+      <a href="mailto:yutang_work@163.com">客服邮箱</a>
+    </div>
+  </footer>
+</body>
+</html>
