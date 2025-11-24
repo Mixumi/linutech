@@ -1,250 +1,322 @@
 <!DOCTYPE html>
-<html lang="zh-CN" data-theme="light">
+<html lang="zh-CN">
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Linutech | 数字习惯产品矩阵</title>
-  <meta name="description" content="Linutech 通过一系列面向个人与团队的应用，帮助你保持专注、管理时间、培养好习惯。了解 TimeHabit、TaskMatrix、Limstar、GoalHabit、TastePost 与 TimingHabit。">
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Poppins:wght@500;600&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="stylesheets/site.css">
-  <script src="javascripts/site.js" defer></script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>狸奴科技 LinuTech - 创造美好数字生活</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@400;700;900&family=Gochi+Hand&display=swap" rel="stylesheet">
+    
+    <style>
+        body {
+            font-family: 'Noto Sans SC', sans-serif;
+            background-color: #0f0f0f;
+            color: #ffffff;
+            overflow-x: hidden;
+        }
+        
+        /* 字体：用于涂鸦文字 */
+        .font-doodle {
+            font-family: 'Gochi Hand', cursive;
+        }
+
+        /* Bento 卡片 */
+        .bento-card {
+            border-radius: 1.5rem;
+            padding: 2rem;
+            transition: all 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
+            position: relative;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            z-index: 20; 
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+        }
+        .bento-card:hover {
+            transform: translateY(-5px) scale(1.01);
+            box-shadow: 0 20px 40px -15px rgba(0,0,0,0.8);
+            z-index: 30;
+        }
+
+        /* 玻璃拟态 */
+        .glass {
+            background: rgba(35, 35, 35, 0.7);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+        }
+
+        /* 涂鸦通用样式 */
+        .doodle-svg {
+            position: absolute;
+            pointer-events: none;
+            fill: none;
+            stroke-linecap: round;
+            stroke-linejoin: round;
+        }
+        
+        /* 浮动动画 - 增加不同的时长让画面更随机 */
+        @keyframes float-slow { 0%, 100% { transform: translate(0,0) rotate(0deg); } 50% { transform: translate(-10px, -15px) rotate(3deg); } }
+        @keyframes float-fast { 0%, 100% { transform: translate(0,0) rotate(0deg); } 50% { transform: translate(10px, 10px) rotate(-3deg); } }
+        
+        .animate-float-1 { animation: float-slow 8s ease-in-out infinite; }
+        .animate-float-2 { animation: float-fast 10s ease-in-out infinite; }
+        .animate-float-3 { animation: float-slow 12s ease-in-out infinite; }
+    </style>
 </head>
-<body>
-  <header class="top-nav" data-animate>
-    <a class="brand" href="index.html">Linutech</a>
-    <div class="top-nav__controls">
-      <nav class="top-nav__links">
-        <a href="#products">产品矩阵</a>
-        <a href="#services">我们的方式</a>
-        <a href="mailto:yutang_work@163.com">联系客服</a>
-      </nav>
-      
+<body class="min-h-screen flex flex-col relative selection:bg-yellow-400 selection:text-black">
+
+    <!-- === 密集涂鸦背景层 (Start) === -->
+    <div class="fixed inset-0 z-0 overflow-hidden pointer-events-none">
+        <!-- 1. 基础网格 (笔记本风格) -->
+        <div class="absolute inset-0 opacity-[0.03]" 
+             style="background-image: linear-gradient(#fff 1px, transparent 1px), linear-gradient(90deg, #fff 1px, transparent 1px); background-size: 30px 30px;">
+        </div>
+
+        <!-- 2. 大涂鸦：左上角 猫咪 -->
+        <svg class="doodle-svg animate-float-1 top-[2%] left-[-2%] w-64 h-64 text-gray-600 opacity-10 rotate-[-10deg]" viewBox="0 0 200 200">
+            <!-- 猫头轮廓 -->
+            <path d="M40,100 Q30,60 60,50 L80,20 L100,50 Q130,50 140,80 L160,60 L150,110 Q160,150 100,160 Q40,150 40,100" stroke="currentColor" stroke-width="3" />
+            <!-- 眼睛 -->
+            <path d="M70,90 Q80,80 90,90" stroke="currentColor" stroke-width="3" />
+            <path d="M110,90 Q120,80 130,90" stroke="currentColor" stroke-width="3" />
+            <!-- 胡须 -->
+            <path d="M40,110 L20,105 M40,120 L20,125 M160,110 L180,105 M160,120 L180,125" stroke="currentColor" stroke-width="2" />
+        </svg>
+
+        <!-- 3. 大涂鸦：右上角 笑脸 -->
+        <svg class="doodle-svg animate-float-2 top-[5%] right-[-5%] w-56 h-56 text-yellow-500 opacity-10 rotate-[15deg]" viewBox="0 0 200 200">
+            <circle cx="100" cy="100" r="80" stroke="currentColor" stroke-width="4" stroke-dasharray="10 5" />
+            <circle cx="70" cy="80" r="10" fill="currentColor" />
+            <circle cx="130" cy="80" r="10" fill="currentColor" />
+            <path d="M60,120 Q100,170 140,120" stroke="currentColor" stroke-width="4" stroke-linecap="round" />
+        </svg>
+
+        <!-- 4. 文字涂鸦：Meow -->
+        <div class="absolute top-[20%] left-[10%] font-doodle text-4xl text-gray-500 opacity-10 -rotate-12 animate-float-3">Meow~</div>
+        
+        <!-- 5. 涂鸦：猫爪印 (一串) -->
+        <div class="absolute bottom-[20%] left-[5%] flex flex-col gap-8 opacity-5 rotate-12">
+            <i class="fa-solid fa-paw text-4xl animate-pulse"></i>
+            <i class="fa-solid fa-paw text-4xl translate-x-4 animate-pulse delay-75"></i>
+            <i class="fa-solid fa-paw text-4xl translate-x-8 animate-pulse delay-150"></i>
+        </div>
+
+        <!-- 6. 涂鸦：右侧中间 弹簧线 -->
+        <svg class="doodle-svg animate-float-1 top-[40%] right-[5%] w-40 h-40 text-blue-500 opacity-10" viewBox="0 0 200 200">
+            <path d="M50,150 C50,150 20,100 50,50 C80,0 120,50 100,100 C80,150 150,150 150,150" stroke="currentColor" stroke-width="3" fill="none" />
+        </svg>
+
+        <!-- 7. 涂鸦：左下角 小笑脸群 -->
+        <div class="absolute bottom-[10%] left-[20%] opacity-10 text-rose-400 text-3xl flex gap-4 animate-float-2">
+            <i class="fa-regular fa-face-smile rotate-12"></i>
+            <i class="fa-regular fa-face-grin-wink -rotate-6"></i>
+            <i class="fa-regular fa-face-laugh-beam rotate-45"></i>
+        </div>
+
+        <!-- 8. 涂鸦：底部中间 皇冠（致敬猫主子） -->
+        <svg class="doodle-svg bottom-[5%] left-[50%] -translate-x-1/2 w-32 h-32 text-yellow-600 opacity-10" viewBox="0 0 100 100">
+            <path d="M20,70 L80,70 L90,30 L70,50 L50,20 L30,50 L10,30 Z" stroke="currentColor" stroke-width="2" />
+        </svg>
+
+        <!-- 9. 密集填充：随机的星星和点 -->
+        <div class="absolute top-1/4 left-1/3 text-white opacity-5 text-xl">✦</div>
+        <div class="absolute top-1/2 right-1/4 text-white opacity-5 text-xl">✦</div>
+        <div class="absolute bottom-1/3 left-1/4 text-white opacity-5 text-xl">●</div>
+        <div class="absolute top-10 right-1/3 text-white opacity-5 text-sm">x</div>
+        <div class="absolute bottom-10 right-10 text-white opacity-5 text-xl">★</div>
+
+        <!-- 10. 涂鸦：指向 GoalHabit 的箭头 -->
+        <svg class="doodle-svg animate-float-3 bottom-[25%] right-[20%] w-32 h-32 text-green-500 opacity-10 rotate-[-45deg]" viewBox="0 0 100 100">
+            <path d="M10,50 Q50,20 90,50" stroke="currentColor" stroke-width="2" marker-end="url(#arrowhead)" />
+            <path d="M80,40 L90,50 L80,60" stroke="currentColor" stroke-width="2" />
+        </svg>
     </div>
-  </header>
+    <!-- === 密集涂鸦背景层 (End) === -->
 
-  <main>
-    <section class="hero" data-animate>
-      <div class="hero__content" data-animate>
-        <span class="eyebrow">linutech product studio</span>
-        <h1 class="hero__title">打造面向未来的数字自律生态</h1>
-        <p class="hero__subtitle">我们通过一系列互相协同的工具，帮助你在不同阶段保持专注、养成习惯、实现目标。每一款产品都围绕“人”而设计，让科技真正成为长期坚持的助力。</p>
-        <div class="cta-group" data-animate data-animate-delay="0.08s">
-          <a class="button button--primary" href="#products">探索产品矩阵</a>
-          <a class="button button--ghost" href="mailto:yutang_work@163.com">预约沟通</a>
+
+    <!-- 顶部导航 -->
+    <header class="relative z-30 max-w-7xl mx-auto w-full p-6 flex justify-between items-center">
+        <div class="flex items-center gap-3">
+            <div class="w-10 h-10 bg-white text-black rounded-full flex items-center justify-center text-xl font-bold shadow-[0_0_20px_rgba(255,255,255,0.4)]">
+                <i class="fa-solid fa-cat"></i>
+            </div>
+            <span class="text-2xl font-bold tracking-wider bg-clip-text text-transparent bg-gradient-to-r from-white to-gray-500">
+                LinuTech
+            </span>
         </div>
-        <div class="hero-stats">
-          <div class="hero-stat" data-animate data-animate-delay="0.12s">
-            <strong>6+</strong>
-            <span>多场景数字习惯产品</span>
-          </div>
-          <div class="hero-stat" data-animate data-animate-delay="0.18s">
-            <strong>3</strong>
-            <span>核心能力：专注、成长、表达</span>
-          </div>
-          <div class="hero-stat" data-animate data-animate-delay="0.24s">
-            <strong>24/7</strong>
-            <span>原生客服支持 &amp; 更新节奏</span>
-          </div>
+        <a href="mailto:contact@linuteh.com" class="glass px-5 py-2 rounded-full text-sm font-medium text-gray-300 hover:text-white hover:bg-white/10 transition border-white/20">
+            <i class="fa-regular fa-envelope mr-2"></i>联系我们
+        </a>
+    </header>
+
+    <!-- 主内容 -->
+    <main class="relative z-30 flex-grow p-4 md:p-6">
+        <div class="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 auto-rows-[minmax(180px,auto)] gap-5 md:gap-6">
+
+            <!-- 1. 品牌介绍 -->
+            <div class="bento-card glass col-span-1 md:col-span-2 row-span-2 justify-start border-l-4 border-l-yellow-400">
+                <div>
+                    <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-yellow-400/10 border border-yellow-400/20 text-xs font-mono mb-4 text-yellow-400">
+                        <i class="fa-solid fa-code"></i> Coding for Fun
+                    </div>
+                    <h1 class="text-4xl md:text-5xl font-black mb-4 leading-tight">
+                        狸奴科技<br>
+                        <span class="text-gray-500 font-doodle text-3xl md:text-4xl">Creative & Chill.</span>
+                    </h1>
+                    <p class="text-gray-400 text-lg max-w-md leading-relaxed">
+                        我们像猫一样敏锐，像飞船一样探索。<br>
+                        打造小而美的独立应用，让数字生活既高效又治愈。
+                    </p>
+                </div>
+                <div class="mt-8 flex flex-wrap gap-4">
+                    <a href="#products" class="group px-8 py-3 bg-white text-black rounded-full font-bold hover:bg-gray-200 transition flex items-center gap-2">
+                        <span>查看产品</span>
+                        <i class="fa-solid fa-arrow-down group-hover:translate-y-1 transition"></i>
+                    </a>
+                </div>
+                <!-- 卡片内部装饰 -->
+                <i class="fa-solid fa-cat absolute -right-6 -bottom-6 text-9xl text-white opacity-[0.03] rotate-12"></i>
+            </div>
+
+            <!-- 2. ReadyGo -->
+            <div class="bento-card bg-[#F7D032] text-black col-span-1 row-span-2 relative group overflow-visible">
+                <!-- 模拟贴纸阴影 -->
+                <div class="absolute inset-0 bg-black/10 translate-x-1 translate-y-1 rounded-[1.5rem] -z-10"></div>
+                
+                <div class="flex justify-between items-start">
+                    <div class="w-12 h-12 bg-black text-white rounded-xl flex items-center justify-center text-2xl shadow-lg transform -rotate-3 group-hover:rotate-0 transition">
+                        <i class="fa-solid fa-check"></i>
+                    </div>
+                    <span class="bg-black/10 px-2 py-1 rounded text-xs font-bold font-mono">1.0</span>
+                </div>
+                <div class="mt-auto relative z-10">
+                    <h3 class="text-3xl font-black mb-1">ReadyGo</h3>
+                    <p class="text-sm font-bold opacity-80 mb-3 font-doodle text-lg">Don't overthink it.</p>
+                    <p class="text-xs leading-relaxed mb-5 font-bold opacity-80">
+                        撕掉繁琐，留下专注。<br>最纯粹的便利贴式清单。
+                    </p>
+                    <button class="w-full py-3 bg-black text-white rounded-xl text-sm font-bold hover:bg-neutral-800 transition flex items-center justify-center gap-2">
+                        <i class="fa-brands fa-apple"></i> Download
+                    </button>
+                </div>
+            </div>
+
+            <!-- 3. 星喵专注 -->
+            <div class="bento-card bg-gradient-to-b from-[#1e1b4b] to-[#000000] col-span-1 overflow-hidden border border-white/10">
+                <!-- 内部星空背景 -->
+                <div class="absolute inset-0 opacity-50" style="background-image: radial-gradient(white 1px, transparent 1px); background-size: 20px 20px;"></div>
+                
+                <div class="flex items-center gap-3 mb-2 relative z-10">
+                    <div class="w-8 h-8 rounded-full bg-indigo-500 flex items-center justify-center">
+                        <i class="fa-solid fa-rocket text-white text-xs"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-indigo-100">星喵专注</h3>
+                </div>
+                <div class="flex-grow flex items-center justify-center my-2">
+                     <!-- 一个小的CSS星球 -->
+                    <div class="w-16 h-16 rounded-full bg-gradient-to-br from-purple-500 to-blue-600 shadow-[0_0_20px_rgba(99,102,241,0.5)] relative">
+                        <div class="absolute w-24 h-4 border border-white/20 rounded-full top-6 -left-4 rotate-[-20deg]"></div>
+                    </div>
+                </div>
+                <p class="text-xs text-indigo-200 mb-3 relative z-10 text-center">与猫咪副驾一起<br>飞向自律宇宙。</p>
+            </div>
+
+            <!-- 4. 社交媒体 -->
+            <div class="bento-card glass col-span-1 flex items-center justify-center text-center group cursor-pointer hover:bg-white/5">
+                <div>
+                    <div class="flex justify-center -space-x-2 mb-3">
+                         <!-- 模拟头像堆叠 -->
+                        <div class="w-8 h-8 rounded-full bg-gray-600 border border-black"></div>
+                        <div class="w-8 h-8 rounded-full bg-gray-500 border border-black"></div>
+                        <div class="w-8 h-8 rounded-full bg-white text-black flex items-center justify-center font-bold text-xs border border-black">+3</div>
+                    </div>
+                    <p class="text-sm font-bold text-white mb-1">加入社区</p>
+                    <div class="flex justify-center gap-3 text-lg text-gray-400">
+                        <i class="fa-brands fa-weixin hover:text-green-500 transition"></i>
+                        <i class="fa-brands fa-weibo hover:text-red-500 transition"></i>
+                        <i class="fa-brands fa-instagram hover:text-pink-500 transition"></i>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 5. GoalHabit -->
+            <div class="bento-card bg-gradient-to-br from-rose-500 to-orange-600 col-span-1 md:col-span-2 flex-row items-center gap-6 overflow-hidden">
+                 <!-- 涂鸦背景：内部 -->
+                 <div class="absolute inset-0 opacity-10 font-doodle text-6xl font-black text-black pointer-events-none select-none overflow-hidden">
+                    <span class="absolute top-2 left-2 rotate-12">GOAL</span>
+                    <span class="absolute bottom-2 right-2 -rotate-12">WIN</span>
+                 </div>
+
+                <div class="flex-1 relative z-10">
+                    <div class="flex items-center gap-3 mb-3">
+                        <div class="w-10 h-10 bg-white/20 backdrop-blur rounded-lg flex items-center justify-center text-lg text-white">
+                            <i class="fa-solid fa-gamepad"></i>
+                        </div>
+                        <h3 class="text-2xl font-bold">GoalHabit</h3>
+                    </div>
+                    <p class="text-sm text-white/90 mb-4 font-medium">
+                        让习惯养成像玩消消乐一样上瘾。<br>
+                        <span class="opacity-70 text-xs">Gamified Habit Tracker.</span>
+                    </p>
+                    <div class="flex gap-2">
+                        <button class="px-4 py-2 bg-white text-rose-600 rounded-lg text-xs font-bold hover:bg-gray-100 transition">
+                            App Store
+                        </button>
+                    </div>
+                </div>
+                <!-- 右侧装饰：消除方块 -->
+                <div class="hidden sm:flex flex-col gap-2 rotate-6 mr-6 relative z-10">
+                    <div class="flex gap-2">
+                        <div class="w-8 h-8 bg-white rounded-lg animate-pulse"></div>
+                        <div class="w-8 h-8 bg-yellow-300 rounded-lg shadow-lg"></div>
+                    </div>
+                    <div class="flex gap-2">
+                        <div class="w-8 h-8 bg-blue-300 rounded-lg shadow-lg"></div>
+                        <div class="w-8 h-8 bg-white/50 rounded-lg"></div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 6. 招聘/Slogan -->
+            <div class="bento-card bg-neutral-900 border border-neutral-800 col-span-1 group">
+                <div class="h-full flex flex-col justify-center items-center text-center">
+                    <div class="w-12 h-12 rounded-full bg-blue-500/10 flex items-center justify-center mb-3 group-hover:scale-110 transition">
+                        <i class="fa-solid fa-hand-spock text-blue-400"></i>
+                    </div>
+                    <h4 class="font-bold">We are happy</h4>
+                </div>
+            </div>
+            
+             <!-- 7. Footer Info -->
+             <div class="bento-card glass col-span-1 justify-between p-6">
+                <div class="flex justify-between items-start">
+                    <i class="fa-solid fa-code-branch text-gray-500"></i>
+                    <div class="flex gap-2">
+                        <div class="w-2 h-2 rounded-full bg-red-500"></div>
+                        <div class="w-2 h-2 rounded-full bg-yellow-500"></div>
+                        <div class="w-2 h-2 rounded-full bg-green-500"></div>
+                    </div>
+                </div>
+                <div class="text-right mt-4">
+                    <p class="text-[10px] text-gray-500 uppercase tracking-widest mb-1">Since 2023</p>
+                    <p class="text-xs font-bold text-gray-300">LinuTech Studio</p>
+                </div>
+            </div>
+
         </div>
-      </div>
+    </main>
 
-      <div class="hero__visual" data-animate data-animate-delay="0.16s">
-        <div class="hero-orb hero-orb--one"></div>
-        <div class="hero-orb hero-orb--two"></div>
-        <div class="hero-card" data-animate data-animate-delay="0.2s">
-          <span class="hero-card__title">以用户体验为核心</span>
-          <p class="hero-card__subtitle">从 iOS 到 Android，从个人效率到灵感表达，Linutech 正在构建一个可持续的数字生活方式。</p>
-          <div class="hero-card__grid">
-            <span class="hero-pill">跨平台体验</span>
-            <span class="hero-pill">隐私优先</span>
-            <span class="hero-pill">数据洞察</span>
-            <span class="hero-pill">沉浸交互</span>
-          </div>
+    <!-- 底部 -->
+    <footer class="relative z-30 max-w-7xl mx-auto w-full p-8 text-center text-gray-600 text-xs">
+        <p class="mb-2 font-doodle text-sm opacity-50">Made with <i class="fa-solid fa-heart text-red-900 mx-1"></i> and Cat Food.</p>
+        <div class="flex justify-center gap-6">
+            <a href="#" class="hover:text-gray-400">Privacy</a>
+            <a href="#" class="hover:text-gray-400">Terms</a>
         </div>
-      </div>
-    </section>
+    </footer>
 
-    <section id="products" class="section" data-animate>
-      <div class="section__header" data-animate>
-        <h2 class="section__title">产品矩阵</h2>
-        <p class="section__subtitle">覆盖“管理时间 → 建立习惯 → 深化表达”的完整路径，适合追求自律、需要平衡工作与生活的每一个人。</p>
-      </div>
-
-      <div class="product-grid">
-        <a class="product-card" href="timehabit.html" data-animate>
-          <span class="product-card__badge">屏幕与专注</span>
-          <h3 class="product-card__title">TimeHabit</h3>
-          <p class="product-card__desc">隐私友好的屏幕管理工具，可隐藏、限制或自动恢复应用，让你的专注由你掌控。</p>
-          <ul class="product-card__list">
-            <li>智能分组与一键禁用/隐藏</li>
-            <li>基于时间段的自动化日程</li>
-            <li>多场景使用限制提醒</li>
-          </ul>
-          <span class="product-card__cta">了解 TimeHabit
-            <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
-              <path d="M6 12h12m0 0-4-4m4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
-            </svg>
-          </span>
-        </a>
-
-        <a class="product-card" href="taskmatrix.html" data-animate data-animate-delay="0.06s">
-          <span class="product-card__badge">团队效率</span>
-          <h3 class="product-card__title">TaskMatrix</h3>
-          <p class="product-card__desc">以四象限法为内核的任务系统，帮助你在复杂日程中保持清晰优先级，打造持续复盘的工作流。</p>
-          <ul class="product-card__list">
-            <li>拖拽式四象限面板</li>
-            <li>进度追踪与提醒自动化</li>
-            <li>跨设备实时同步</li>
-          </ul>
-          <span class="product-card__cta">浏览 TaskMatrix
-            <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
-              <path d="M6 12h12m0 0-4-4m4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
-            </svg>
-          </span>
-        </a>
-
-        <a class="product-card" href="limstar.html" data-animate data-animate-delay="0.12s">
-          <span class="product-card__badge">自律养成</span>
-          <h3 class="product-card__title">Limstar</h3>
-          <p class="product-card__desc">以星际航行为灵感的成长日程表，通过旅程式体验让自律更具仪式感。</p>
-          <ul class="product-card__list">
-            <li>任务航线与目标里程碑</li>
-            <li>沉浸式动画激励系统</li>
-            <li>可视化成长档案</li>
-          </ul>
-          <span class="product-card__cta">体验 Limstar
-            <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
-              <path d="M6 12h12m0 0-4-4m4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
-            </svg>
-          </span>
-        </a>
-
-        <a class="product-card" href="goalhabit.html" data-animate data-animate-delay="0.18s">
-          <span class="product-card__badge">个人成长</span>
-          <h3 class="product-card__title">GoalHabit</h3>
-          <p class="product-card__desc">通过可视化目标和多维度统计，让每一次坚持都有迹可循，持续放大正向反馈。</p>
-          <ul class="product-card__list">
-            <li>目标图形化管理</li>
-            <li>多维统计与趋势洞察</li>
-            <li>自定义提醒与奖章</li>
-          </ul>
-          <span class="product-card__cta">查看 GoalHabit
-            <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
-              <path d="M6 12h12m0 0-4-4m4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
-            </svg>
-          </span>
-        </a>
-
-        <a class="product-card" href="tastepost.html" data-animate data-animate-delay="0.24s">
-          <span class="product-card__badge">灵感表达</span>
-          <h3 class="product-card__title">TastePost</h3>
-          <p class="product-card__desc">把每一次餐桌灵感保存下来，以邮票式记录建立你的个人风味档案。</p>
-          <ul class="product-card__list">
-            <li>卡片化美食日记</li>
-            <li>地点与风味标签体系</li>
-            <li>朋友圈式分享体验</li>
-          </ul>
-          <span class="product-card__cta">探索 TastePost
-            <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
-              <path d="M6 12h12m0 0-4-4m4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
-            </svg>
-          </span>
-        </a>
-
-        <a class="product-card" href="readygo.html" data-animate data-animate-delay="0.27s">
-          <span class="product-card__badge">便利贴清单</span>
-          <h3 class="product-card__title">ReadyGo</h3>
-          <p class="product-card__desc">以便利贴风格管理每日任务，结合画中画提醒和桌面组件，保证每个计划都能按时完成。</p>
-          <ul class="product-card__list">
-            <li>彩色卡片清单与进度统计</li>
-            <li>日历概览与每日摘要</li>
-            <li>画中画悬浮提醒</li>
-          </ul>
-          <span class="product-card__cta">体验 ReadyGo
-            <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
-              <path d="M6 12h12m0 0-4-4m4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
-            </svg>
-          </span>
-        </a>
-
-        <a class="product-card" href="timinghabit.html" data-animate data-animate-delay="0.3s">
-          <span class="product-card__badge">专注节奏</span>
-          <h3 class="product-card__title">TimingHabit</h3>
-          <p class="product-card__desc">用节奏化的时间管理方式，协调日程、能量和注意力，打造可持续的高效每一天。</p>
-          <ul class="product-card__list">
-            <li>节奏模板与番茄策略</li>
-            <li>跨时区日历协同</li>
-            <li>能量水平追踪</li>
-          </ul>
-          <span class="product-card__cta">了解 TimingHabit
-            <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
-              <path d="M6 12h12m0 0-4-4m4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
-            </svg>
-          </span>
-        </a>
-      </div>
-    </section>
-
-    <section id="services" class="section" data-animate>
-      <div class="section__header" data-animate>
-        <h2 class="section__title">我们如何持续打磨体验</h2>
-        <p class="section__subtitle">Linutech 不只是交付工具，更关注长期陪伴。我们在每一次版本迭代中倾听用户反馈、维护隐私安全并提供专业支持。</p>
-      </div>
-
-      <div class="value-cards">
-        <div class="value-card" data-animate>
-          <strong>隐私优先的架构</strong>
-          <p>遵循最小化数据原则，核心功能均可离线运行，确保个人信息始终掌握在你自己手中。</p>
-        </div>
-        <div class="value-card" data-animate data-animate-delay="0.08s">
-          <strong>可持续更新</strong>
-          <p>保持双周至月度迭代节奏，围绕真实场景打磨细节，让产品随你的需求而成长。</p>
-        </div>
-        <div class="value-card" data-animate data-animate-delay="0.16s">
-          <strong>专业支持团队</strong>
-          <p>由产品、设计与工程师组成的支持小组，提供 24 小时内响应的邮箱沟通渠道。</p>
-        </div>
-      </div>
-    </section>
-  </main>
-
-  <footer class="page-footer" data-animate>
-    <div class="page-footer__grid">
-      <div class="page-footer__brand">
-        <a class="brand brand--footer" href="index.html">Linutech</a>
-        <p>我们专注于打造轻盈、可持续的数字习惯体验，让你的每一天都更有秩序与灵感。</p>
-      </div>
-      <div class="page-footer__column">
-        <span class="page-footer__title">产品</span>
-        <a href="timehabit.html">TimeHabit</a>
-        <a href="taskmatrix.html">TaskMatrix</a>
-        <a href="limstar.html">Limstar</a>
-        <a href="goalhabit.html">GoalHabit</a>
-        <a href="tastepost.html">TastePost</a>
-        <a href="timinghabit.html">TimingHabit</a>
-      </div>
-      <div class="page-footer__column">
-        <span class="page-footer__title">资源</span>
-        <a href="#services">体验方法</a>
-        <a href="mailto:yutang_work@163.com">客户支持</a>
-        <a href="privacy.html">隐私政策</a>
-      </div>
-      <div class="page-footer__column">
-        <span class="page-footer__title">联系我们</span>
-        <a href="mailto:yutang_work@163.com">yutang_work@163.com</a>
-        <a href="mailto:yutang_work@163.com">预约演示</a>
-        <a href="mailto:yutang_work@163.com">成为合作伙伴</a>
-      </div>
-    </div>
-    <div class="page-footer__bottom">
-      <span>© 2025 Linutech. All rights reserved.</span>
-      <div class="page-footer__links">
-        <a href="#products">产品矩阵</a>
-        <a href="#services">我们的方式</a>
-      </div>
-    </div>
-  </footer>
 </body>
 </html>
