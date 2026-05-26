@@ -1,0 +1,781 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+    <meta name="theme-color" content="#2f6b4f">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-title" content="树木题库">
+    <meta name="apple-mobile-web-app-status-bar-style" content="default">
+    <title>树木题库</title>
+    <link rel="icon" href="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAxMjggMTI4IiByb2xlPSJpbWciIGFyaWEtbGFiZWw9IuagkeacqOmimOW6kyI+CiAgPHJlY3Qgd2lkdGg9IjEyOCIgaGVpZ2h0PSIxMjgiIHJ4PSIyMiIgZmlsbD0iIzJmNmI0ZiIvPgogIDxwYXRoIGQ9Ik0zNiA4NGMyMi0zIDM5LTIwIDQ2LTQ1IDE5IDEyIDIyIDM3IDcgNTMtMTMgMTUtMzYgMTUtNTMtOFoiIGZpbGw9IiNkY2VlZTMiLz4KICA8cGF0aCBkPSJNMzUgODVjMjAtMTMgMzQtMjkgNDQtNTAiIGZpbGw9Im5vbmUiIHN0cm9rZT0iIzIwNDkzNSIgc3Ryb2tlLXdpZHRoPSI4IiBzdHJva2UtbGluZWNhcD0icm91bmQiLz4KICA8cGF0aCBkPSJNNDMgOTJoNDQiIHN0cm9rZT0iI2Y0ZjdlZiIgc3Ryb2tlLXdpZHRoPSI4IiBzdHJva2UtbGluZWNhcD0icm91bmQiLz4KPC9zdmc+" type="image/svg+xml">
+    <style>
+:root {
+  color-scheme: light;
+  --bg: #f4f7ef;
+  --surface: #ffffff;
+  --surface-soft: #eef4ea;
+  --ink: #17251d;
+  --muted: #647366;
+  --line: #dbe5d7;
+  --green: #2f6b4f;
+  --green-deep: #204935;
+  --mint: #dceee3;
+  --red: #b94d3a;
+  --red-soft: #f7ded8;
+  --amber: #e8a93d;
+  --blue: #385f7f;
+  --shadow: 0 18px 60px rgba(31, 55, 42, 0.12);
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  min-height: 100%;
+}
+
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--ink);
+}
+
+button {
+  font: inherit;
+}
+
+[hidden] {
+  display: none !important;
+}
+
+.app-shell {
+  width: min(1120px, 100%);
+  min-height: 100vh;
+  margin: 0 auto;
+  padding: max(18px, env(safe-area-inset-top)) 18px max(18px, env(safe-area-inset-bottom));
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 220px;
+  gap: 16px;
+  align-items: start;
+  align-content: start;
+}
+
+.quiz-panel,
+.stats-panel {
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  box-shadow: var(--shadow);
+}
+
+.quiz-panel {
+  min-height: calc(100vh - 36px);
+  display: grid;
+  grid-template-rows: auto 1fr auto;
+}
+
+.topbar {
+  padding: 18px;
+  border-bottom: 1px solid var(--line);
+  display: flex;
+  gap: 14px;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.brand {
+  min-width: 0;
+  display: flex;
+  gap: 12px;
+  align-items: center;
+}
+
+.brand-mark {
+  flex: 0 0 auto;
+  border-radius: 8px;
+  background: var(--surface-soft);
+}
+
+h1,
+h2,
+p {
+  margin: 0;
+}
+
+h1 {
+  font-size: 20px;
+  line-height: 1.2;
+  letter-spacing: 0;
+}
+
+#status-line {
+  margin-top: 4px;
+  color: var(--muted);
+  font-size: 14px;
+}
+
+.mode-switch {
+  flex: 0 0 auto;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  padding: 3px;
+  border-radius: 8px;
+  background: var(--surface-soft);
+  border: 1px solid var(--line);
+}
+
+.mode-button {
+  min-width: 58px;
+  min-height: 36px;
+  border: 0;
+  border-radius: 6px;
+  background: transparent;
+  color: var(--muted);
+}
+
+.mode-button.is-active {
+  background: var(--green);
+  color: #fff;
+}
+
+.question-stage {
+  padding: 26px;
+  display: grid;
+  grid-template-rows: auto auto 1fr auto;
+  gap: 18px;
+}
+
+.question-meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.question-meta span {
+  min-height: 28px;
+  display: inline-flex;
+  align-items: center;
+  padding: 0 10px;
+  border-radius: 8px;
+  background: var(--surface-soft);
+  color: var(--green-deep);
+  font-size: 14px;
+  font-weight: 650;
+}
+
+#question-text {
+  max-width: 920px;
+  font-size: clamp(22px, 2.6vw, 34px);
+  line-height: 1.45;
+  letter-spacing: 0;
+}
+
+.options {
+  display: grid;
+  gap: 12px;
+  align-content: start;
+}
+
+.option-button {
+  width: 100%;
+  min-height: 62px;
+  padding: 13px 14px;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background: #fff;
+  color: var(--ink);
+  display: grid;
+  grid-template-columns: 38px 1fr;
+  gap: 12px;
+  align-items: center;
+  text-align: left;
+}
+
+.option-button:disabled {
+  opacity: 1;
+}
+
+.option-button:not(:disabled):active {
+  transform: translateY(1px);
+}
+
+.option-key {
+  width: 38px;
+  height: 38px;
+  border-radius: 8px;
+  display: grid;
+  place-items: center;
+  background: var(--surface-soft);
+  color: var(--green-deep);
+  font-weight: 800;
+}
+
+.option-text {
+  min-width: 0;
+  font-size: 18px;
+  line-height: 1.45;
+}
+
+.option-button.is-correct {
+  border-color: rgba(47, 107, 79, 0.5);
+  background: var(--mint);
+}
+
+.option-button.is-correct .option-key {
+  background: var(--green);
+  color: #fff;
+}
+
+.option-button.is-wrong {
+  border-color: rgba(185, 77, 58, 0.48);
+  background: var(--red-soft);
+}
+
+.option-button.is-wrong .option-key {
+  background: var(--red);
+  color: #fff;
+}
+
+.result {
+  padding: 14px 16px;
+  border-radius: 8px;
+  border: 1px solid var(--line);
+  display: grid;
+  gap: 6px;
+}
+
+.result.is-correct {
+  background: var(--mint);
+  border-color: rgba(47, 107, 79, 0.35);
+}
+
+.result.is-wrong {
+  background: var(--red-soft);
+  border-color: rgba(185, 77, 58, 0.35);
+}
+
+.result-title {
+  font-weight: 800;
+}
+
+.result-answer {
+  color: var(--ink);
+  line-height: 1.45;
+}
+
+.action-bar {
+  padding: 16px 18px;
+  border-top: 1px solid var(--line);
+  display: flex;
+  gap: 10px;
+  align-items: center;
+}
+
+.primary-action,
+.secondary-action,
+.icon-action {
+  min-height: 46px;
+  border-radius: 8px;
+  border: 1px solid transparent;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.primary-action {
+  flex: 1 1 auto;
+  gap: 10px;
+  padding: 0 18px;
+  background: var(--green);
+  color: #fff;
+  font-weight: 760;
+}
+
+.secondary-action {
+  flex: 0 0 auto;
+  gap: 8px;
+  padding: 0 14px;
+  background: var(--surface-soft);
+  color: var(--green-deep);
+  border-color: var(--line);
+  font-weight: 720;
+}
+
+.reset-icon {
+  width: 24px;
+  height: 24px;
+  display: grid;
+  place-items: center;
+  border-radius: 8px;
+  background: #fff;
+  font-size: 18px;
+  line-height: 1;
+}
+
+.button-icon {
+  width: 28px;
+  height: 28px;
+  display: grid;
+  place-items: center;
+  border-radius: 8px;
+  background: rgba(255, 255, 255, 0.16);
+  font-size: 28px;
+  line-height: 1;
+}
+
+.icon-action {
+  width: 48px;
+  background: var(--surface-soft);
+  color: var(--green-deep);
+  border-color: var(--line);
+  font-size: 22px;
+}
+
+.stats-panel {
+  padding: 14px;
+  display: grid;
+  gap: 10px;
+  position: sticky;
+  top: 18px;
+}
+
+.stat-block {
+  min-height: 74px;
+  padding: 12px;
+  border-radius: 8px;
+  background: var(--surface-soft);
+  display: grid;
+  align-content: center;
+  gap: 4px;
+}
+
+.stat-label {
+  color: var(--muted);
+  font-size: 13px;
+}
+
+.stat-block strong {
+  color: var(--blue);
+  font-size: 28px;
+  line-height: 1;
+}
+
+.is-empty {
+  color: var(--muted);
+}
+
+@media (max-width: 840px) {
+  .app-shell {
+    grid-template-columns: 1fr;
+    padding: max(12px, env(safe-area-inset-top)) 12px max(12px, env(safe-area-inset-bottom));
+  }
+
+  .quiz-panel {
+    min-height: auto;
+  }
+
+  .stats-panel {
+    position: static;
+    grid-template-columns: repeat(4, 1fr);
+    order: -1;
+  }
+
+  .stat-block {
+    min-height: 64px;
+  }
+}
+
+@media (max-width: 620px) {
+  .topbar {
+    align-items: stretch;
+    flex-direction: column;
+  }
+
+  .mode-switch {
+    width: 100%;
+  }
+
+  .question-stage {
+    padding: 20px 16px;
+  }
+
+  #question-text {
+    font-size: 22px;
+  }
+
+  .option-button {
+    min-height: 58px;
+    grid-template-columns: 34px 1fr;
+  }
+
+  .option-key {
+    width: 34px;
+    height: 34px;
+  }
+
+  .option-text {
+    font-size: 16px;
+  }
+
+  .stats-panel {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+    </style>
+  </head>
+  <body>
+    <main class="app-shell">
+      <section class="quiz-panel" aria-labelledby="app-title">
+        <header class="topbar">
+          <div class="brand">
+            <img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAxMjggMTI4IiByb2xlPSJpbWciIGFyaWEtbGFiZWw9IuagkeacqOmimOW6kyI+CiAgPHJlY3Qgd2lkdGg9IjEyOCIgaGVpZ2h0PSIxMjgiIHJ4PSIyMiIgZmlsbD0iIzJmNmI0ZiIvPgogIDxwYXRoIGQ9Ik0zNiA4NGMyMi0zIDM5LTIwIDQ2LTQ1IDE5IDEyIDIyIDM3IDcgNTMtMTMgMTUtMzYgMTUtNTMtOFoiIGZpbGw9IiNkY2VlZTMiLz4KICA8cGF0aCBkPSJNMzUgODVjMjAtMTMgMzQtMjkgNDQtNTAiIGZpbGw9Im5vbmUiIHN0cm9rZT0iIzIwNDkzNSIgc3Ryb2tlLXdpZHRoPSI4IiBzdHJva2UtbGluZWNhcD0icm91bmQiLz4KICA8cGF0aCBkPSJNNDMgOTJoNDQiIHN0cm9rZT0iI2Y0ZjdlZiIgc3Ryb2tlLXdpZHRoPSI4IiBzdHJva2UtbGluZWNhcD0icm91bmQiLz4KPC9zdmc+" alt="" class="brand-mark" width="44" height="44">
+            <div>
+              <h1 id="app-title">树木题库</h1>
+              <p id="status-line">正在读取题库</p>
+            </div>
+          </div>
+          <div class="mode-switch" role="tablist" aria-label="练习模式">
+            <button class="mode-button is-active" type="button" data-mode="all" role="tab" aria-selected="true">全题</button>
+            <button class="mode-button" type="button" data-mode="wrong" role="tab" aria-selected="false">错题</button>
+          </div>
+        </header>
+
+        <section class="question-stage" aria-live="polite">
+          <div class="question-meta">
+            <span id="question-id">-</span>
+            <span id="page-info">-</span>
+          </div>
+          <h2 id="question-text">题目加载中...</h2>
+          <div id="options" class="options" aria-label="选项"></div>
+          <div id="result" class="result" hidden></div>
+        </section>
+
+        <footer class="action-bar">
+          <button id="next-button" class="primary-action" type="button">
+            <span class="button-icon" aria-hidden="true">›</span>
+            <span>下一题</span>
+          </button>
+          <button id="reshuffle-button" class="icon-action" type="button" title="随机换题" aria-label="随机换题">
+            <span aria-hidden="true">↻</span>
+          </button>
+          <button id="reset-button" class="secondary-action" type="button">
+            <span class="reset-icon" aria-hidden="true">↺</span>
+            <span>重置</span>
+          </button>
+        </footer>
+      </section>
+
+      <aside class="stats-panel" aria-label="练习统计">
+        <div class="stat-block">
+          <span class="stat-label">题库</span>
+          <strong id="total-count">0</strong>
+        </div>
+        <div class="stat-block">
+          <span class="stat-label">已答</span>
+          <strong id="answered-count">0</strong>
+        </div>
+        <div class="stat-block">
+          <span class="stat-label">正确率</span>
+          <strong id="accuracy">0%</strong>
+        </div>
+        <div class="stat-block">
+          <span class="stat-label">错题</span>
+          <strong id="wrong-count">0</strong>
+        </div>
+      </aside>
+    </main>
+    <script id="question-data" type="application/json">{"meta":{"sourcePdf":"（更新）校园挂牌树木习题.pdf","pageCount":68,"questionCount":292,"generatedAt":"2026-05-19T22:44:03"},"questions":[{"id":1,"rawId":1,"sourcePage":1,"prompt":"马尾松的针叶典型特征为（）。","options":[{"key":"A","text":"3 针一束，粗硬挺拔"},{"key":"B","text":"2 针一束，细长柔软似马尾"},{"key":"C","text":"5 针一束，短小密集"},{"key":"D","text":"单针散生，无束状"}],"answer":"B","answerText":"2 针一束，细长柔软似马尾"},{"id":2,"rawId":2,"sourcePage":1,"prompt":"马尾松的主要经济价值不包括（）。","options":[{"key":"A","text":"我国南方重要商品用材"},{"key":"B","text":"主要采脂树种，产松香、松节油"},{"key":"C","text":"针叶可提芳香油、作饲料添加剂"},{"key":"D","text":"优质水果经济林树种"}],"answer":"D","answerText":"优质水果经济林树种"},{"id":3,"rawId":3,"sourcePage":1,"prompt":"马尾松的生态文化价值体现在（）。","options":[{"key":"A","text":"适宜盐碱地与水涝环境生长"},{"key":"B","text":"南方荒山绿化先锋树种，象征坚韧不屈"},{"key":"C","text":"浅根性，不耐干旱瘠薄"},{"key":"D","text":"仅作观赏，无生态防护作用"}],"answer":"B","answerText":"南方荒山绿化先锋树种，象征坚韧不屈"},{"id":4,"rawId":4,"sourcePage":1,"prompt":"马尾松的核心生态习性是（）。","options":[{"key":"A","text":"强阴性，喜阴暗潮湿"},{"key":"B","text":"强阳性，耐干旱瘠薄、忌积水"},{"key":"C","text":"喜钙质土，耐盐碱"},{"key":"D","text":"适宜积水低洼环境生长"}],"answer":"B","answerText":"强阳性，耐干旱瘠薄、忌积水"},{"id":5,"rawId":5,"sourcePage":1,"prompt":"雪松的叶片着生特点为（）。","options":[{"key":"A","text":"2 针一束，柔软下垂"},{"key":"B","text":"1 针一束，短枝上簇生、长枝上螺旋排列"},{"key":"C","text":"3 针一束，坚硬直立"},{"key":"D","text":"5 针一束，密集丛生"}],"answer":"B","answerText":"1 针一束，短枝上簇生、长枝上螺旋排列"},{"id":6,"rawId":6,"sourcePage":2,"prompt":"雪松在园林中的重要地位是（）。","options":[{"key":"A","text":"我国南方荒山先锋造林树种"},{"key":"B","text":"世界五大公园树种之一"},{"key":"C","text":"主要的松脂采集树种"},{"key":"D","text":"优良的果树经济林树种"}],"answer":"B","answerText":"世界五大公园树种之一"},{"id":7,"rawId":7,"sourcePage":2,"prompt":"雪松的生态文化价值主要体现在（）。","options":[{"key":"A","text":"象征端庄坚毅、高洁不屈，为圣洁之树"},{"key":"B","text":"适合盐碱地造林，固沙保土"},{"key":"C","text":"是主要用材与采脂树种"},{"key":"D","text":"浅根性，不耐寒，观赏价值低"}],"answer":"A","answerText":"象征端庄坚毅、高洁不屈，为圣洁之树"},{"id":8,"rawId":8,"sourcePage":2,"prompt":"日本冷杉叶片的典型识别特征是（）。","options":[{"key":"A","text":"2 针一束，细长柔软"},{"key":"B","text":"叶条形，背面有 2 条白色气孔带"},{"key":"C","text":"3 针一束，粗硬尖锐"},{"key":"D","text":"叶针形，长枝螺旋排列"}],"answer":"B","answerText":"叶条形，背面有 2 条白色气孔带"},{"id":9,"rawId":9,"sourcePage":2,"prompt":"日本冷杉的核心经济价值是（）。","options":[{"key":"A","text":"主要采脂树种，生产松香松节油"},{"key":"B","text":"木材轻软纹理直，可作用材与园林绿化"},{"key":"C","text":"果实可食用，为经济林果"},{"key":"D","text":"根系可提取药用成分"}],"answer":"B","answerText":"木材轻软纹理直，可作用材与园林绿化"},{"id":10,"rawId":10,"sourcePage":3,"prompt":"日本冷杉的生态文化价值主要体现在（）。","options":[{"key":"A","text":"南方荒山造林先锋树种"},{"key":"B","text":"固持山地土壤，具清净肃穆意象"},{"key":"C","text":"世界五大公园树种之一"},{"key":"D","text":"原产中国，自古为传统吉祥树种"}],"answer":"B","answerText":"固持山地土壤，具清净肃穆意象"},{"id":11,"rawId":11,"sourcePage":3,"prompt":"日本五针松最典型的识别特征是（）。","options":[{"key":"A","text":"2 针一束，细长柔软"},{"key":"B","text":"5 针一束，针叶短而柔软"},{"key":"C","text":"3 针一束，粗硬尖锐"},{"key":"D","text":"叶条形，背面有白色气孔带"}],"answer":"B","answerText":"5 针一束，针叶短而柔软"},{"id":12,"rawId":12,"sourcePage":3,"prompt":"日本五针松的主要经济价值体现在（）。","options":[{"key":"A","text":"我国南方主要采脂树种"},{"key":"B","text":"荒山造林先锋用材树种"},{"key":"C","text":"世界著名观赏树，制作盆景主要材料之一"},{"key":"D","text":"果实可食用的经济林树种"}],"answer":"C","answerText":"世界著名观赏树，制作盆景主要材料之一"},{"id":13,"rawId":13,"sourcePage":3,"prompt":"日本五针松的生态文化价值是（）。","options":[{"key":"A","text":"原产中国，传统乡土造林树种"},{"key":"B","text":"日本皇室视为“神树”，丰富我国园林盆景资源"},{"key":"C","text":"固沙保土，南方荒山绿化主力"},{"key":"D","text":"木材专供采脂，工业价值极高"}],"answer":"B","answerText":"日本皇室视为“神树”，丰富我国园林盆景资源"},{"id":14,"rawId":14,"sourcePage":3,"prompt":"华山松最核心的识别特征是（）。","options":[{"key":"A","text":"2 针一束，叶鞘宿存"},{"key":"B","text":"5 针一束，叶鞘早落"},{"key":"C","text":"3 针一束，粗硬直立"},{"key":"D","text":"叶条形，无叶鞘"}],"answer":"B","answerText":"5 针一束，叶鞘早落"},{"id":15,"rawId":15,"sourcePage":4,"prompt":"华山松突出的经济价值体现在（）。","options":[{"key":"A","text":"主要采脂树种，生产松香"},{"key":"B","text":"优质用材，松籽为著名干果"},{"key":"C","text":"盆景七贤之一，高端造型素材"},{"key":"D","text":"果实可榨油，为油料经济林"}],"answer":"B","answerText":"优质用材，松籽为著名干果"},{"id":16,"rawId":16,"sourcePage":4,"prompt":"华山松的生态习性特点是（）。","options":[{"key":"A","text":"喜高温高湿，不耐寒冷"},{"key":"B","text":"适应性强，耐寒耐瘠薄，可生于石灰岩石缝"},{"key":"C","text":"强耐盐碱，适宜沿海滩涂种植"},{"key":"D","text":"浅根性，忌钙质土壤"}],"answer":"B","answerText":"适应性强，耐寒耐瘠薄，可生于石灰岩石缝"},{"id":17,"rawId":17,"sourcePage":4,"prompt":"华山松的生态文化价值主要为（）。","options":[{"key":"A","text":"华山标志性树种，象征刚正不阿气节"},{"key":"B","text":"日本皇室视为神树，引进观赏树种"},{"key":"C","text":"南方荒山先锋造林，固沙保土"},{"key":"D","text":"世界五大公园树种之一，园林标志性树种"}],"answer":"A","answerText":"华山标志性树种，象征刚正不阿气节"},{"id":18,"rawId":18,"sourcePage":4,"prompt":"金钱松最典型的识别特征是（）。","options":[{"key":"A","text":"常绿乔木，叶针形 2 针一束"},{"key":"B","text":"落叶乔木，叶簇生呈铜钱形，秋叶金黄"},{"key":"C","text":"常绿乔木，叶 5 针一束"},{"key":"D","text":"落叶灌木，叶对生椭圆形"}],"answer":"B","answerText":"落叶乔木，叶簇生呈铜钱形，秋叶金黄"},{"id":19,"rawId":19,"sourcePage":5,"prompt":"金钱松的重要经济价值体现在（）。","options":[{"key":"A","text":"主要采脂树种，生产松香松节油"},{"key":"B","text":"珍贵用材，世界五大公园树种之一"},{"key":"C","text":"松籽为著名干果，可食用"},{"key":"D","text":"盆景“七贤”之一，造型素材"}],"answer":"B","answerText":"珍贵用材，世界五大公园树种之一"},{"id":20,"rawId":20,"sourcePage":5,"prompt":"金钱松的生态文化价值主要为（）。","options":[{"key":"A","text":"国家二级保护植物，寓意财富繁荣"},{"key":"B","text":"日本引进树种，皇室视为神树"},{"key":"C","text":"南方荒山先锋造林，固沙保土"},{"key":"D","text":"原产欧洲，著名外来观赏树种"}],"answer":"A","answerText":"国家二级保护植物，寓意财富繁荣"},{"id":21,"rawId":21,"sourcePage":5,"prompt":"水松最具代表性的识别特征是（）。","options":[{"key":"A","text":"常绿乔木，2 针一束，细长柔软"},{"key":"B","text":"半常绿乔木，树干基部膨大，具膝状呼吸根"},{"key":"C","text":"落叶乔木，叶簇生呈铜钱形，秋叶金黄"},{"key":"D","text":"常绿乔木，5 针一束，叶鞘早落"}],"answer":"B","answerText":"半常绿乔木，树干基部膨大，具膝状呼吸根"},{"id":22,"rawId":22,"sourcePage":5,"prompt":"水松的核心经济与应用价值体现在（）。","options":[{"key":"A","text":"荒山造林先锋树种，主要采脂树种"},{"key":"B","text":"湿地绿化与水体景观优良树种，耐水湿用材"},{"key":"C","text":"世界五大公园树种之一，高端盆景素材"},{"key":"D","text":"松籽可食用，为著名干果经济林"}],"answer":"B","answerText":"湿地绿化与水体景观优良树种，耐水湿用材"},{"id":23,"rawId":23,"sourcePage":5,"prompt":"水松的典型生态习性是（）。","options":[{"key":"A","text":"极耐水湿，喜温暖湿润，不耐低温干旱"},{"key":"B","text":"强耐盐碱，适宜沿海滩涂生长"},{"key":"C","text":"耐干旱瘠薄，可生于石灰岩石缝"},{"key":"D","text":"喜高温酷暑，适应强光暴晒环境"}],"answer":"A","answerText":"极耐水湿，喜温暖湿润，不耐低温干旱"},{"id":24,"rawId":24,"sourcePage":6,"prompt":"水松的生态文化价值主要为（）。","options":[{"key":"A","text":"国家一级保护植物，被誉为“湿地活化石”"},{"key":"B","text":"日本引进珍稀观赏树，皇室视为“神树”"},{"key":"C","text":"华山标志性树种，象征刚正不阿气节"},{"key":"D","text":"南方低山丘陵主要用材与绿化树种"}],"answer":"A","answerText":"国家一级保护植物，被誉为“湿地活化石”"},{"id":25,"rawId":25,"sourcePage":6,"prompt":"水杉最典型的识别特征是（）。","options":[{"key":"A","text":"常绿乔木，针叶 2 针一束"},{"key":"B","text":"落叶大乔木，小枝与叶呈羽状排列、交互对生"},{"key":"C","text":"半常绿乔木，具膝状呼吸根"},{"key":"D","text":"落叶乔木，叶簇生呈铜钱形"}],"answer":"B","answerText":"落叶大乔木，小枝与叶呈羽状排列、交互对生"},{"id":26,"rawId":26,"sourcePage":6,"prompt":"水杉的主要经济价值体现在（）。","options":[{"key":"A","text":"木材轻软易加工，为城乡绿化优良树种"},{"key":"B","text":"松籽可食用，是著名干果经济林"},{"key":"C","text":"主要采脂树种，生产松香松节油"},{"key":"D","text":"盆景“七贤”之一，高端造型素材"}],"answer":"A","answerText":"木材轻软易加工，为城乡绿化优良树种"},{"id":27,"rawId":27,"sourcePage":6,"prompt":"水杉的核心生态习性是（）。","options":[{"key":"A","text":"极耐水湿，耐盐碱与积水"},{"key":"B","text":"喜光喜温暖湿润，不耐盐碱与积水"},{"key":"C","text":"耐干旱瘠薄，可生于岩石缝中"},{"key":"D","text":"强阴性，喜高温高湿环境"}],"answer":"B","answerText":"喜光喜温暖湿润，不耐盐碱与积水"},{"id":28,"rawId":28,"sourcePage":7,"prompt":"水杉的生态文化价值主要为（）。","options":[{"key":"A","text":"国家一级保护植物，被誉为植物界“活化石”"},{"key":"B","text":"日本引进树种，皇室视为“神树”"},{"key":"C","text":"南方荒山先锋造林，固沙保土主力"},{"key":"D","text":"世界五大公园树种之一，园林标志性树种"}],"answer":"A","answerText":"国家一级保护植物，被誉为植物界“活化石”"},{"id":29,"rawId":29,"sourcePage":7,"prompt":"金叶水杉最突出的识别特征是（）。","options":[{"key":"A","text":"叶片三季呈稳定金黄色，为水杉栽培变种"},{"key":"B","text":"叶片常绿深绿色，无季相变化"},{"key":"C","text":"叶片针形 2 针一束，柔软下垂"},{"key":"D","text":"树干基部膨大，具膝状呼吸根"}],"answer":"A","answerText":"叶片三季呈稳定金黄色，为水杉栽培变种"},{"id":30,"rawId":30,"sourcePage":7,"prompt":"侧柏最典型的识别特征是（）。","options":[{"key":"A","text":"叶鳞形，小枝扁平排成一平面"},{"key":"B","text":"针叶 2 针一束，细长柔软"},{"key":"C","text":"叶条形，呈铜钱状簇生"},{"key":"D","text":"树干具膝状呼吸根"}],"answer":"A","answerText":"叶鳞形，小枝扁平排成一平面"},{"id":31,"rawId":31,"sourcePage":7,"prompt":"侧柏的主要经济价值体现在（）。","options":[{"key":"A","text":"材用、药用，可提取芳香油"},{"key":"B","text":"松籽为著名干果，可食用"},{"key":"C","text":"世界五大公园树种之一"},{"key":"D","text":"盆景“七贤”之一，顶级素材"}],"answer":"A","answerText":"材用、药用，可提取芳香油"},{"id":32,"rawId":32,"sourcePage":8,"prompt":"侧柏的核心生态习性特点是（）。","options":[{"key":"A","text":"适应性强，耐干旱瘠薄，浅根性"},{"key":"B","text":"极耐水湿，喜酸性土壤"},{"key":"C","text":"不耐寒，忌强光高温"},{"key":"D","text":"喜盐碱，适宜沿海种植"}],"answer":"A","answerText":"适应性强，耐干旱瘠薄，浅根性"},{"id":34,"rawId":34,"sourcePage":8,"prompt":"侧柏的生态文化价值主要为（）。","options":[{"key":"A","text":"“岁寒三友”成员，象征长寿坚贞"},{"key":"B","text":"日本皇室视为“神树”"},{"key":"C","text":"湿地活化石，国家一级保护"},{"key":"D","text":"华山标志性树种，喻刚正气节"}],"answer":"A","answerText":"“岁寒三友”成员，象征长寿坚贞"},{"id":35,"rawId":35,"sourcePage":8,"prompt":"柏木最典型的识别特征是（）。","options":[{"key":"A","text":"小枝扁平细长下垂，全为鳞叶"},{"key":"B","text":"针叶 2 针一束，细长柔软"},{"key":"C","text":"叶条形呈铜钱状簇生，秋叶金黄"},{"key":"D","text":"树干基部膨大，具膝状呼吸根"}],"answer":"A","answerText":"小枝扁平细长下垂，全为鳞叶"},{"id":36,"rawId":36,"sourcePage":8,"prompt":"柏木的主要经济价值体现在（）。","options":[{"key":"A","text":"可提取芳香油、作香料，为珍贵用材"},{"key":"B","text":"松籽可食用，为著名干果经济林"},{"key":"C","text":"世界五大公园树种之一"},{"key":"D","text":"盆景“七贤”之一，顶级造型素材"}],"answer":"A","answerText":"可提取芳香油、作香料，为珍贵用材"},{"id":37,"rawId":37,"sourcePage":8,"prompt":"柏木的生态文化价值主要为（）。","options":[{"key":"A","text":"我国特有树种，象征坚韧正直廉洁"},{"key":"B","text":"日本引进品种，皇室视为“神树”"},{"key":"C","text":"国家一级保护，被誉为“湿地活化石”"},{"key":"D","text":"华山标志性树种，喻刚正不阿气节"}],"answer":"A","answerText":"我国特有树种，象征坚韧正直廉洁"},{"id":38,"rawId":38,"sourcePage":9,"prompt":"蓝冰柏最显著的识别特征是（）。","options":[{"key":"A","text":"叶片终年蓝绿色，树冠窄圆锥形"},{"key":"B","text":"针叶 2 针一束，细长柔软"},{"key":"C","text":"叶条形呈铜钱状，秋季金黄"},{"key":"D","text":"小枝扁平下垂，全为鳞叶"}],"answer":"A","answerText":"叶片终年蓝绿色，树冠窄圆锥形"},{"id":39,"rawId":39,"sourcePage":9,"prompt":"蓝冰柏的主要经济与应用价值是（）。","options":[{"key":"A","text":"国外引进彩叶观赏树，用于高端园林造景"},{"key":"B","text":"重要用材与药用树种"},{"key":"C","text":"荒山造林先锋，石灰岩山地适生"},{"key":"D","text":"松籽可食用，为经济林果"}],"answer":"A","answerText":"国外引进彩叶观赏树，用于高端园林造景"},{"id":40,"rawId":40,"sourcePage":9,"prompt":"蓝冰柏的生态文化价值主要体现在（）。","options":[{"key":"A","text":"寓意守望与静穆，融合古典风骨与现代审美"},{"key":"B","text":"我国特有，象征坚韧正直廉洁"},{"key":"C","text":"国家一级保护，被誉为活化石"},{"key":"D","text":"岁寒三友成员，象征长寿坚贞"}],"answer":"A","answerText":"寓意守望与静穆，融合古典风骨与现代审美"},{"id":41,"rawId":41,"sourcePage":9,"prompt":"圆柏最典型的识别特征是（）。","options":[{"key":"A","text":"叶二型，有刺形叶和鳞形叶"},{"key":"B","text":"针叶 2 针一束，细长柔软"},{"key":"C","text":"小枝扁平下垂，全为鳞叶"},{"key":"D","text":"叶片终年蓝绿色，窄圆锥形树冠"}],"answer":"A","answerText":"叶二型，有刺形叶和鳞形叶"},{"id":42,"rawId":42,"sourcePage":10,"prompt":"圆柏的主要经济价值体现在（）。","options":[{"key":"A","text":"优质用材、可药用、提取芳香油，适合作盆景"},{"key":"B","text":"松籽为著名干果，可食用"},{"key":"C","text":"湿地绿化专用树种"},{"key":"D","text":"世界五大公园树种之一"}],"answer":"A","answerText":"优质用材、可药用、提取芳香油，适合作盆景"},{"id":44,"rawId":44,"sourcePage":10,"prompt":"圆柏的生态文化价值主要为（）。","options":[{"key":"A","text":"象征君子坚贞气节，常用于陵园寺院绿化"},{"key":"B","text":"日本引进品种，寓意守望静穆"},{"key":"C","text":"国家一级保护，被誉为湿地活化石"},{"key":"D","text":"华山标志性树种，喻刚正不阿"}],"answer":"A","answerText":"象征君子坚贞气节，常用于陵园寺院绿化"},{"id":45,"rawId":45,"sourcePage":10,"prompt":"龙柏最典型的识别特征是（）。","options":[{"key":"A","text":"枝条扭转上升，如龙盘柱，全为鳞叶，树冠圆柱状"},{"key":"B","text":"叶片二型，有刺形叶与鳞形叶"},{"key":"C","text":"小枝扁平细长下垂，全为鳞叶"},{"key":"D","text":"叶片终年蓝绿色，窄圆锥形树冠"}],"answer":"A","answerText":"枝条扭转上升，如龙盘柱，全为鳞叶，树冠圆柱状"},{"id":46,"rawId":46,"sourcePage":10,"prompt":"龙柏的主要经济价值体现在（）。","options":[{"key":"A","text":"园林造景与盆景优质素材，枝叶可入药"},{"key":"B","text":"珍贵用材与芳香油提取树种"},{"key":"C","text":"荒山造林先锋，石灰岩适生"},{"key":"D","text":"松籽可食用，为经济林果"}],"answer":"A","answerText":"园林造景与盆景优质素材，枝叶可入药"},{"id":47,"rawId":47,"sourcePage":10,"prompt":"龙柏的生态文化价值主要为（）。","options":[{"key":"A","text":"枝条如龙形，象征吉祥尊贵与坚贞长寿"},{"key":"B","text":"国外引进，寓意守望与静穆"},{"key":"C","text":"国家一级保护，被誉为活化石"},{"key":"D","text":"华山标志性树种，喻刚正不阿"}],"answer":"A","answerText":"枝条如龙形，象征吉祥尊贵与坚贞长寿"},{"id":48,"rawId":48,"sourcePage":11,"prompt":"蜀桧最典型的识别特征是（）。","options":[{"key":"A","text":"树冠尖塔形，小枝直立密集，全为刺状鳞形叶"},{"key":"B","text":"枝条扭转上升呈龙形，无下垂枝"},{"key":"C","text":"叶二型，兼具刺形叶与鳞形叶"},{"key":"D","text":"叶片终年蓝绿色，覆盖蜡质白粉"}],"answer":"A","answerText":"树冠尖塔形，小枝直立密集，全为刺状鳞形叶"},{"id":49,"rawId":49,"sourcePage":11,"prompt":"蜀桧的主要经济价值体现在（）。","options":[{"key":"A","text":"高山水土保持造林，适合作行道树与绿篱"},{"key":"B","text":"木材芳香耐腐，为高档家具用材"},{"key":"C","text":"果实可食用，为优良经济林果"},{"key":"D","text":"盆景七贤之一，高端造型素材"}],"answer":"A","answerText":"高山水土保持造林，适合作行道树与绿篱"},{"id":50,"rawId":50,"sourcePage":11,"prompt":"蜀桧的生态文化价值主要为（）。","options":[{"key":"A","text":"水土保持核心树种，稳固坡体、涵养水源"},{"key":"B","text":"枝条如龙形，象征吉祥尊贵"},{"key":"C","text":"我国特有孑遗树种，被誉为活化石"},{"key":"D","text":"岁寒三友成员，象征坚贞长寿"}],"answer":"A","answerText":"水土保持核心树种，稳固坡体、涵养水源"},{"id":51,"rawId":51,"sourcePage":11,"prompt":"塔柏最典型的识别特征是（）。","options":[{"key":"A","text":"树冠塔状圆柱形，枝贴主干斜生，叶以刺形为主"},{"key":"B","text":"枝条扭转如龙形，全为鳞叶"},{"key":"C","text":"小枝扁平下垂，仅具鳞叶"},{"key":"D","text":"叶片终年蓝绿色，覆白粉"}],"answer":"A","answerText":"树冠塔状圆柱形，枝贴主干斜生，叶以刺形为主"},{"id":52,"rawId":52,"sourcePage":12,"prompt":"塔柏的主要经济价值体现在（）。","options":[{"key":"A","text":"优质用材、可药用、提取芳香油，适合作绿化与盆景"},{"key":"B","text":"高山水土保持专用造林树种"},{"key":"C","text":"湿地水体景观优良树种"},{"key":"D","text":"干果经济林，种子可食用"}],"answer":"A","answerText":"优质用材、可药用、提取芳香油，适合作绿化与盆景"},{"id":53,"rawId":53,"sourcePage":12,"prompt":"塔柏的生态文化价值主要为（）。","options":[{"key":"A","text":"树冠规整，象征坚守初心、忠诚肃穆，常用于陵园纪念地"},{"key":"B","text":"枝条如龙，象征吉祥尊贵"},{"key":"C","text":"我国特有孑遗“活化石”树种"},{"key":"D","text":"世界五大公园树种之一"}],"answer":"A","answerText":"树冠规整，象征坚守初心、忠诚肃穆，常用于陵园纪念地"},{"id":54,"rawId":54,"sourcePage":12,"prompt":"罗汉松最典型的识别特征是（）。","options":[{"key":"A","text":"叶条状披针形、螺旋状着生，种子具紫红色肉质种托"},{"key":"B","text":"针叶 2 针一束，细长柔软似马尾"},{"key":"C","text":"小枝扁平下垂，全为鳞形叶"},{"key":"D","text":"树冠塔状圆柱形，叶以刺形为主"}],"answer":"A","answerText":"叶条状披针形、螺旋状着生，种子具紫红色肉质种托"},{"id":55,"rawId":55,"sourcePage":12,"prompt":"罗汉松的主要经济价值体现在（）。","options":[{"key":"A","text":"高端园林观赏、盆景优质素材，种托可食用"},{"key":"B","text":"荒山造林先锋树种，主要采脂来源"},{"key":"C","text":"高山水土保持核心造林树种"},{"key":"D","text":"世界五大公园树种之一"}],"answer":"A","answerText":"高端园林观赏、盆景优质素材，种托可食用"},{"id":56,"rawId":56,"sourcePage":13,"prompt":"罗汉松的生态文化价值主要为（）。","options":[{"key":"A","text":"国家二级保护植物，象征长寿吉祥与守财"},{"key":"B","text":"枝条如龙形，寓意尊贵吉祥"},{"key":"C","text":"我国特有湿地活化石，一级保护植物"},{"key":"D","text":"岁寒三友成员，象征坚贞不屈"}],"answer":"A","answerText":"国家二级保护植物，象征长寿吉祥与守财"},{"id":57,"rawId":57,"sourcePage":13,"prompt":"三尖杉最典型的识别特征是（）。","options":[{"key":"A","text":"枝端冬芽常三个并立，叶条形扭转成两列"},{"key":"B","text":"针叶 2 针一束，细长柔软"},{"key":"C","text":"小枝扁平下垂，全为鳞叶"},{"key":"D","text":"树冠塔状圆柱形，叶以刺形为主"}],"answer":"A","answerText":"枝端冬芽常三个并立，叶条形扭转成两列"},{"id":58,"rawId":58,"sourcePage":13,"prompt":"三尖杉的主要经济价值体现在（）。","options":[{"key":"A","text":"珍贵药用与材用树种，提取物可用于医药研究"},{"key":"B","text":"主要采脂树种，生产松香松节油"},{"key":"C","text":"世界五大公园树种之一"},{"key":"D","text":"松籽可食用，为优良干果"}],"answer":"A","answerText":"珍贵药用与材用树种，提取物可用于医药研究"},{"id":59,"rawId":59,"sourcePage":13,"prompt":"三尖杉的生态文化价值主要为（）。","options":[{"key":"A","text":"我国特有古老孑遗植物，省级重点保护树种"},{"key":"B","text":"枝条如龙形，象征吉祥尊贵"},{"key":"C","text":"岁寒三友成员，象征坚贞不屈"},{"key":"D","text":"国家一级保护，被誉为湿地活化石"}],"answer":"A","answerText":"我国特有古老孑遗植物，省级重点保护树种"},{"id":60,"rawId":60,"sourcePage":13,"prompt":"红豆杉最典型的识别特征是（）。","options":[{"key":"A","text":"种子生于红色肉质杯状假种皮中，叶条形二列互生"},{"key":"B","text":"针叶 2 针一束，细长柔软"},{"key":"C","text":"小枝扁平下垂，全为鳞叶"},{"key":"D","text":"枝端三个冬芽并立"}],"answer":"A","answerText":"种子生于红色肉质杯状假种皮中，叶条形二列互生"},{"id":61,"rawId":61,"sourcePage":14,"prompt":"红豆杉的核心经济价值体现在（）。","options":[{"key":"A","text":"可提取抗癌药物紫杉醇，为高档用材与观赏树种"},{"key":"B","text":"主要采脂树种，生产松香松节油"},{"key":"C","text":"荒山造林先锋，固土保水"},{"key":"D","text":"盆景七贤之一，顶级素材"}],"answer":"A","answerText":"可提取抗癌药物紫杉醇，为高档用材与观赏树种"},{"id":62,"rawId":62,"sourcePage":14,"prompt":"红豆杉的典型生态习性是（）。","options":[{"key":"A","text":"耐阴浅根，喜温暖湿润，忌水涝与强光直射"},{"key":"B","text":"强阳性，耐干旱瘠薄"},{"key":"C","text":"极耐水湿，适宜湿地种植"},{"key":"D","text":"喜盐碱土，适合沿海绿化"}],"answer":"A","answerText":"耐阴浅根，喜温暖湿润，忌水涝与强光直射"},{"id":63,"rawId":63,"sourcePage":14,"prompt":"红豆杉的生态文化价值主要为（）。","options":[{"key":"A","text":"国家一级保护，古老孑遗树种，寓意相思与吉祥"},{"key":"B","text":"岁寒三友成员，象征坚贞不屈"},{"key":"C","text":"日本引进品种，皇室视为神树"},{"key":"D","text":"世界五大公园树种之一"}],"answer":"A","answerText":"国家一级保护，古老孑遗树种，寓意相思与吉祥"},{"id":64,"rawId":64,"sourcePage":14,"prompt":"榧树最典型的识别特征是（）。","options":[{"key":"A","text":"叶条形排成两列，小枝下垂，果实核果状"},{"key":"B","text":"针叶 2 针一束，细长柔软"},{"key":"C","text":"小枝扁平下垂，全为鳞叶"},{"key":"D","text":"种子生于红色杯状假种皮中"}],"answer":"A","answerText":"叶条形排成两列，小枝下垂，果实核果状"},{"id":65,"rawId":65,"sourcePage":15,"prompt":"榧树的核心经济价值体现在（）。","options":[{"key":"A","text":"种子为名贵干果，优质用材，可榨油与景观绿化"},{"key":"B","text":"提取抗癌药物紫杉醇，为药用专用树种"},{"key":"C","text":"世界五大公园树种之一"},{"key":"D","text":"主要采脂树种，生产松香松节油"}],"answer":"A","answerText":"种子为名贵干果，优质用材，可榨油与景观绿化"},{"id":66,"rawId":66,"sourcePage":15,"prompt":"榧树的生态文化价值主要为（）。","options":[{"key":"A","text":"国家二级保护，古老活化石，象征厚积薄发"},{"key":"B","text":"岁寒三友成员，象征坚贞不屈"},{"key":"C","text":"日本引进品种，皇室视为神树"},{"key":"D","text":"高山水土保持先锋树种"}],"answer":"A","answerText":"国家二级保护，古老活化石，象征厚积薄发"},{"id":67,"rawId":67,"sourcePage":15,"prompt":"银杏最典型的识别特征是（）。","options":[{"key":"A","text":"叶扇形，长枝互生、短枝簇生，秋季金黄"},{"key":"B","text":"针叶 2 针一束，细长柔软"},{"key":"C","text":"小枝扁平下垂，全为鳞叶"},{"key":"D","text":"种子生于红色杯状假种皮中"}],"answer":"A","answerText":"叶扇形，长枝互生、短枝簇生，秋季金黄"},{"id":68,"rawId":68,"sourcePage":15,"prompt":"银杏的核心经济价值体现在（）。","options":[{"key":"A","text":"种子可食用，叶片可药用，为优质用材与景观树种"},{"key":"B","text":"提取抗癌药物紫杉醇，专用药用树种"},{"key":"C","text":"世界五大公园树种之一"},{"key":"D","text":"主要采脂树种，生产松香松节油"}],"answer":"A","answerText":"种子可食用，叶片可药用，为优质用材与景观树种"},{"id":69,"rawId":69,"sourcePage":15,"prompt":"银杏的典型生态习性是（）。","options":[{"key":"A","text":"深根性，喜光喜暖湿，耐寒耐旱，抗污染力强"},{"key":"B","text":"耐阴忌光，喜高温高湿，不耐寒"},{"key":"C","text":"极耐水湿，适宜湿地种植"},{"key":"D","text":"喜盐碱土，适合沿海滩涂绿化"}],"answer":"A","answerText":"深根性，喜光喜暖湿，耐寒耐旱，抗污染力强"},{"id":70,"rawId":70,"sourcePage":16,"prompt":"银杏的生态文化价值主要为（）。","options":[{"key":"A","text":"国家一级保护活化石，象征长寿坚韧与世代传承"},{"key":"B","text":"岁寒三友成员，象征坚贞不屈"},{"key":"C","text":"日本引进品种，皇室视为神树"},{"key":"D","text":"高山水土保持先锋树种"}],"answer":"A","answerText":"国家一级保护活化石，象征长寿坚韧与世代传承"},{"id":71,"rawId":71,"sourcePage":16,"prompt":"玉兰最典型的识别特征是（）。","options":[{"key":"A","text":"花先叶开放，白色花被片 9 片，小枝具环状托叶痕"},{"key":"B","text":"叶扇形，秋季变金黄色"},{"key":"C","text":"针叶 2 针一束，细长柔软"},{"key":"D","text":"小枝扁平下垂，全为鳞叶"}],"answer":"A","answerText":"花先叶开放，白色花被片 9 片，小枝具环状托叶痕"},{"id":72,"rawId":72,"sourcePage":16,"prompt":"玉兰的主要经济价值体现在（）。","options":[{"key":"A","text":"早春名贵观花树，花蕾可入药，花瓣提芳香油"},{"key":"B","text":"提取抗癌药物紫杉醇，药用专用树种"},{"key":"C","text":"种子为名贵干果，可食用"},{"key":"D","text":"世界五大公园树种之一"}],"answer":"A","answerText":"早春名贵观花树，花蕾可入药，花瓣提芳香油"},{"id":73,"rawId":73,"sourcePage":16,"prompt":"玉兰的核心生态习性特点是（）。","options":[{"key":"A","text":"喜光喜温暖湿润，耐寒，不耐盐碱与积水"},{"key":"B","text":"耐阴忌强光，喜高温高湿"},{"key":"C","text":"极耐水湿，适宜湿地种植"},{"key":"D","text":"深根性，耐干旱瘠薄"}],"answer":"A","answerText":"喜光喜温暖湿润，耐寒，不耐盐碱与积水"},{"id":74,"rawId":74,"sourcePage":17,"prompt":"玉兰的生态文化价值主要为（）。","options":[{"key":"A","text":"我国特有，象征高洁典雅，有“玉堂春富贵”吉祥寓意"},{"key":"B","text":"植物活化石，国家一级保护"},{"key":"C","text":"岁寒三友成员，象征坚贞不屈"},{"key":"D","text":"日本引进品种，皇室视为神树"}],"answer":"A","answerText":"我国特有，象征高洁典雅，有“玉堂春富贵”吉祥寓意"},{"id":75,"rawId":75,"sourcePage":17,"prompt":"《诗经·召南·甘棠》写道“蔽芾甘棠，勿翦勿伐，召伯所茇。”意思是茂盛又浓密的甘棠树，不要修剪不要砍伐，召伯曾经住在树下。后世 “甘棠遗爱”表达对贤官廉吏的爱戴或怀念。甘棠是以下（）的古称。","options":[{"key":"A","text":"野梨"},{"key":"B","text":"山梨"},{"key":"C","text":"酸梨"},{"key":"D","text":"杜梨"}],"answer":"D","answerText":"杜梨"},{"id":76,"rawId":76,"sourcePage":17,"prompt":"杜梨根系发达、适应性强、抗病力好，因此在果树栽培中，常把杜梨作为砧木，嫁接其他优良品种的接穗。它最常被用作（）的砧木。","options":[{"key":"A","text":"苹果"},{"key":"B","text":"梨"},{"key":"C","text":"桃"},{"key":"D","text":"杏"}],"answer":"B","answerText":"梨"},{"id":77,"rawId":77,"sourcePage":17,"prompt":"杜梨的生态文化价值象征（）。","options":[{"key":"A","text":"爱情美满"},{"key":"B","text":"富贵吉祥"},{"key":"C","text":"为官清政"},{"key":"D","text":"健康长寿"}],"answer":"C","answerText":"为官清政"},{"id":78,"rawId":78,"sourcePage":18,"prompt":"杜梨的果实成熟时是（）","options":[{"key":"A","text":"红色"},{"key":"B","text":"黄色"},{"key":"C","text":"褐色或黄褐色"},{"key":"D","text":"黑色"}],"answer":"C","answerText":"褐色或黄褐色"},{"id":79,"rawId":79,"sourcePage":18,"prompt":"乐昌含笑的名字来源于它的发现地——广东乐昌，这种以地名命名的方式，和以下（）的命名逻辑属于同一类型。","options":[{"key":"A","text":"鹅掌楸"},{"key":"B","text":"飞黄玉兰"},{"key":"C","text":"香樟"},{"key":"D","text":"乳源木莲"}],"answer":"D","answerText":"乳源木莲"},{"id":80,"rawId":80,"sourcePage":18,"prompt":"乐昌含笑的种子颜色是（）。","options":[{"key":"A","text":"紫色"},{"key":"B","text":"黑色"},{"key":"C","text":"黄色"},{"key":"D","text":"红色"}],"answer":"D","answerText":"红色"},{"id":81,"rawId":81,"sourcePage":18,"prompt":"乐昌含笑的命名来自（）。","options":[{"key":"A","text":"人名"},{"key":"B","text":"地名"},{"key":"C","text":"花形"},{"key":"D","text":"叶形"}],"answer":"B","answerText":"地名"},{"id":82,"rawId":82,"sourcePage":19,"prompt":"乐昌含笑不仅树形优美，其花和叶片还能提取出清香型的植物精油， 这主要体现了它的（）价值。","options":[{"key":"A","text":"材用价值，因为木材可以提炼工业酒精"},{"key":"B","text":"药用价值，是制作传统中药膏的基础原料"},{"key":"C","text":"食用价值，其提炼物可作为高级食用油"},{"key":"D","text":"经济价值，可提炼天然香料用于日化产业"}],"answer":"D","answerText":"经济价值，可提炼天然香料用于日化产业"},{"id":83,"rawId":83,"sourcePage":19,"prompt":"飞黄玉兰的培育选育专家是（）。","options":[{"key":"A","text":"王飞罡"},{"key":"B","text":"李时珍"},{"key":"C","text":"袁隆平"},{"key":"D","text":"林巧稚"}],"answer":"A","answerText":"王飞罡"},{"id":84,"rawId":84,"sourcePage":19,"prompt":"飞黄玉兰是（）国家自主选育的园林观赏品种","options":[{"key":"A","text":"日本"},{"key":"B","text":"美国"},{"key":"C","text":"中国"},{"key":"D","text":"韩国"}],"answer":"C","answerText":"中国"},{"id":85,"rawId":85,"sourcePage":19,"prompt":"飞黄玉兰象征（）。","options":[{"key":"A","text":"纯洁高雅"},{"key":"B","text":"坚强勇敢"},{"key":"C","text":"财源广进"},{"key":"D","text":"步步高升"}],"answer":"A","answerText":"纯洁高雅"},{"id":86,"rawId":86,"sourcePage":20,"prompt":"古人常将玉兰、海棠、牡丹相配，寓意是（）。","options":[{"key":"A","text":"岁寒三友"},{"key":"B","text":"玉堂富贵"},{"key":"C","text":"四君子"},{"key":"D","text":"林下之风"}],"answer":"B","answerText":"玉堂富贵"},{"id":87,"rawId":87,"sourcePage":20,"prompt":"飞黄玉兰是（）的品种","options":[{"key":"A","text":"紫玉兰"},{"key":"B","text":"白玉兰"},{"key":"C","text":"二乔玉兰"},{"key":"D","text":"深山含笑"}],"answer":"B","answerText":"白玉兰"},{"id":88,"rawId":88,"sourcePage":20,"prompt":"二乔玉兰是（）杂交后选育的。","options":[{"key":"A","text":"飞黄玉兰+广玉兰"},{"key":"B","text":"白玉兰+紫玉兰"},{"key":"C","text":"紫楠+红楠"},{"key":"D","text":"含笑+厚朴"}],"answer":"B","answerText":"白玉兰+紫玉兰"},{"id":89,"rawId":89,"sourcePage":20,"prompt":"“二乔”名字来源于（）","options":[{"key":"A","text":"三国大乔小乔"},{"key":"B","text":"两位诗人"},{"key":"C","text":"两座山"},{"key":"D","text":"两座桥"}],"answer":"A","answerText":"三国大乔小乔"},{"id":90,"rawId":90,"sourcePage":20,"prompt":"二乔玉兰花期在（）","options":[{"key":"A","text":"5-6 月"},{"key":"B","text":"3-4 月"},{"key":"C","text":"7-8 月"},{"key":"D","text":"9-10 月"}],"answer":"B","answerText":"3-4 月"},{"id":91,"rawId":91,"sourcePage":21,"prompt":"二乔玉兰作为我国传统名贵园林花木，承袭玉兰高洁、典雅、吉祥的文化寓意，因兼具双亲优良性状而观赏价值极高，下列（）不属于二乔玉兰的文化象征内涵。","options":[{"key":"A","text":"高洁君子之风"},{"key":"B","text":"典雅祥瑞之气"},{"key":"C","text":"庸俗逐利之态"},{"key":"D","text":"玉堂富贵之意"}],"answer":"C","answerText":"庸俗逐利之态"},{"id":92,"rawId":92,"sourcePage":21,"prompt":"下列关于二乔玉兰的说法，正确的是（）。","options":[{"key":"A","text":"是常绿乔木，冬天不落叶"},{"key":"B","text":"树体比白玉兰更高大"},{"key":"C","text":"常作为城市园林观赏植物种植"},{"key":"D","text":"只适合在中国南方种植，北方无法存活"}],"answer":"C","answerText":"常作为城市园林观赏植物种植"},{"id":93,"rawId":93,"sourcePage":21,"prompt":"合肥市的市树是（）。","options":[{"key":"A","text":"香樟"},{"key":"B","text":"广玉兰"},{"key":"C","text":"国槐"},{"key":"D","text":"银杏"}],"answer":"B","answerText":"广玉兰"},{"id":94,"rawId":94,"sourcePage":21,"prompt":"广玉兰又称荷花玉兰，叶片革质厚实、终年常绿，花大洁白形似荷花， 是城市园林、校园景观常用的经典观赏树种，广玉兰植物类型属于（）。","options":[{"key":"A","text":"落叶乔木"},{"key":"B","text":"常绿乔木"},{"key":"C","text":"灌木"},{"key":"D","text":"藤本"}],"answer":"B","answerText":"常绿乔木"},{"id":95,"rawId":95,"sourcePage":22,"prompt":"广玉兰的花形似（）。","options":[{"key":"A","text":"梅花"},{"key":"B","text":"荷花"},{"key":"C","text":"菊花"},{"key":"D","text":"桃花"}],"answer":"B","answerText":"荷花"},{"id":96,"rawId":96,"sourcePage":22,"prompt":"广玉兰原产于（）","options":[{"key":"A","text":"北美洲"},{"key":"B","text":"欧洲"},{"key":"C","text":"亚洲"},{"key":"D","text":"非洲"}],"answer":"A","answerText":"北美洲"},{"id":97,"rawId":97,"sourcePage":22,"prompt":"广玉兰原产于北美洲，清末传入我国，因与一位晚清合肥籍重臣渊源深厚，被大量引种栽植于江淮大地，也成为合肥市代表性名木。请问广玉兰引种普及与下列（）历史名人密切相关。","options":[{"key":"A","text":"曾国藩"},{"key":"B","text":"李鸿章"},{"key":"C","text":"左宗棠"},{"key":"D","text":"张之洞"}],"answer":"B","answerText":"李鸿章"},{"id":98,"rawId":981,"sourcePage":23,"prompt":"野生凹叶厚朴属于（）保护植物。","options":[{"key":"A","text":"国家一级"},{"key":"B","text":"国家二级"},{"key":"C","text":"无保护"},{"key":"D","text":"省级保护"}],"answer":"B","answerText":"国家二级"},{"id":99,"rawId":99,"sourcePage":23,"prompt":"凹叶厚朴的（）是传统中药。","options":[{"key":"A","text":"树叶"},{"key":"B","text":"树皮"},{"key":"C","text":"花朵"},{"key":"D","text":"果实"}],"answer":"B","answerText":"树皮"},{"id":100,"rawId":100,"sourcePage":23,"prompt":"凹叶厚朴叶片顶端的明显特征是（）。","options":[{"key":"A","text":"渐尖"},{"key":"B","text":"微凹或缺刻"},{"key":"C","text":"圆形"},{"key":"D","text":"截形"}],"answer":"B","answerText":"微凹或缺刻"},{"id":101,"rawId":101,"sourcePage":23,"prompt":"凹叶厚朴是中国特有的珍稀濒危树种，原为厚朴的亚种，现已合并， 因叶片先端有明显凹缺而得名，既是名贵中药材，也是国家二级保护植物。 凹叶厚朴的模式标本采集地是（）。","options":[{"key":"A","text":"安徽黄山"},{"key":"B","text":"江西庐山"},{"key":"C","text":"浙江天目山"},{"key":"D","text":"福建武夷山"}],"answer":"B","answerText":"江西庐山"},{"id":102,"rawId":102,"sourcePage":24,"prompt":"美人梅是（）两种植物杂交选育的。","options":[{"key":"A","text":"紫叶李+宫粉梅"},{"key":"B","text":"桃+李"},{"key":"C","text":"杏+梅"},{"key":"D","text":"苹果+梨"}],"answer":"A","answerText":"紫叶李+宫粉梅"},{"id":103,"rawId":103,"sourcePage":24,"prompt":"美人梅叶片特点是（）。","options":[{"key":"A","text":"嫩叶紫红"},{"key":"B","text":"全年绿色"},{"key":"C","text":"叶色银白"},{"key":"D","text":"花叶"}],"answer":"A","answerText":"嫩叶紫红"},{"id":104,"rawId":104,"sourcePage":24,"prompt":"美人梅为樱李梅系杂交观赏花木，花姿艳丽、观赏性强，1987 年由我国两位园林专家共同从美国引种回国并推广栽培，这两位专家是（）。","options":[{"key":"A","text":"陈俊愉、黄国振"},{"key":"B","text":"梁希、郑万钧"},{"key":"C","text":"汪菊渊、胡先骕"},{"key":"D","text":"袁隆平、华罗庚"}],"answer":"A","answerText":"陈俊愉、黄国振"},{"id":105,"rawId":105,"sourcePage":24,"prompt":"关于美人梅的说法正确的是（）。","options":[{"key":"A","text":"花梗较长"},{"key":"B","text":"全年叶为绿色"},{"key":"C","text":"对空气污染敏感，不可用于道路绿化"},{"key":"D","text":"花期比梅早"}],"answer":"A","answerText":"花梗较长"},{"id":106,"rawId":106,"sourcePage":24,"prompt":"美人梅的花期通常在（）。","options":[{"key":"A","text":"春季"},{"key":"B","text":"夏季"},{"key":"C","text":"秋季"},{"key":"D","text":"冬季"}],"answer":"A","answerText":"春季"},{"id":107,"rawId":107,"sourcePage":25,"prompt":"鹅掌楸叶片形态独特、辨识度极高，是园林常见名贵乡土树种，其常用别名是（）。","options":[{"key":"A","text":"灯笼树"},{"key":"B","text":"马褂木"},{"key":"C","text":"扇子树"},{"key":"D","text":"雨伞树"}],"answer":"B","answerText":"马褂木"},{"id":108,"rawId":108,"sourcePage":25,"prompt":"鹅掌楸叶片两侧各有一裂，整体轮廓规整别致，外形酷似（）传统服饰物件。","options":[{"key":"A","text":"手掌"},{"key":"B","text":"马褂"},{"key":"C","text":"爱心"},{"key":"D","text":"圆形"}],"answer":"B","answerText":"马褂"},{"id":109,"rawId":109,"sourcePage":25,"prompt":"鹅掌楸被誉为（）","options":[{"key":"A","text":"植物活化石"},{"key":"B","text":"木材之王"},{"key":"C","text":"花卉皇后"},{"key":"D","text":"果树之母"}],"answer":"A","answerText":"植物活化石"},{"id":110,"rawId":110,"sourcePage":25,"prompt":"鹅掌楸树形端正、树干挺拔、花叶端庄素雅，其传统文化象征寓意是 （）。","options":[{"key":"A","text":"诚实守信"},{"key":"B","text":"富贵荣华"},{"key":"C","text":"多子多福"},{"key":"D","text":"一帆风顺"}],"answer":"A","answerText":"诚实守信"},{"id":111,"rawId":111,"sourcePage":26,"prompt":"野生鹅掌楸属于（）。","options":[{"key":"A","text":"国家二级保护植物"},{"key":"B","text":"无保护"},{"key":"C","text":"国家一级"},{"key":"D","text":"市级保护"}],"answer":"A","answerText":"国家二级保护植物"},{"id":112,"rawId":112,"sourcePage":26,"prompt":"紫楠木材纹理细密、质地坚硬耐腐，木材切面带有金色丝状光泽，香气清雅持久，因此紫楠木材素有美誉被称为（）。","options":[{"key":"A","text":"金丝楠木"},{"key":"B","text":"红木"},{"key":"C","text":"檀木"},{"key":"D","text":"松木"}],"answer":"A","answerText":"金丝楠木"},{"id":113,"rawId":113,"sourcePage":26,"prompt":"有一类树树干通直、纹理细腻、木质带金丝光泽、耐腐防虫，被称为金丝楠木，下列哪种树木属于金丝楠木的范畴。（）","options":[{"key":"A","text":"紫楠"},{"key":"B","text":"桃金娘"},{"key":"C","text":"桉树"},{"key":"D","text":"黄檀"}],"answer":"A","answerText":"紫楠"},{"id":114,"rawId":114,"sourcePage":27,"prompt":"紫楠在文化寓意上常象征（）。","options":[{"key":"A","text":"热情奔放"},{"key":"B","text":"平凡朴素"},{"key":"C","text":"高贵与祥瑞"},{"key":"D","text":"忧伤离别"}],"answer":"C","answerText":"高贵与祥瑞"},{"id":115,"rawId":115,"sourcePage":27,"prompt":"“楠梓之材”在古代常用来比喻（）。","options":[{"key":"A","text":"肥沃的土地"},{"key":"B","text":"优秀的栋梁之才"},{"key":"C","text":"坚固的城墙"},{"key":"D","text":"富裕的家庭"}],"answer":"B","answerText":"优秀的栋梁之才"},{"id":116,"rawId":116,"sourcePage":27,"prompt":"紫楠主要分布于我国的（）。","options":[{"key":"A","text":"西北干旱地区"},{"key":"B","text":"东北寒冷地区"},{"key":"C","text":"长江流域及以南地区"},{"key":"D","text":"青藏高原"}],"answer":"C","answerText":"长江流域及以南地区"},{"id":117,"rawId":117,"sourcePage":27,"prompt":"红楠作为樟科楠属常绿优良乡土树种，辨识度很高，其正式名称的主要由来是（）。","options":[{"key":"A","text":"芽苞及果梗呈现鲜红色"},{"key":"B","text":"树干通体红色"},{"key":"C","text":"开放的花朵为大红色"},{"key":"D","text":"成熟叶片常年泛红"}],"answer":"A","answerText":"芽苞及果梗呈现鲜红色"},{"id":118,"rawId":118,"sourcePage":27,"prompt":"红楠果实颜色是（）。","options":[{"key":"A","text":"白色"},{"key":"B","text":"红色"},{"key":"C","text":"黄色"},{"key":"D","text":"黑紫色"}],"answer":"D","answerText":"黑紫色"},{"id":119,"rawId":119,"sourcePage":28,"prompt":"红楠喜温暖湿润、疏松肥沃的微酸性土壤，生长适应性有明显偏好， 栽植生长最忌讳的是（）。","options":[{"key":"A","text":"酸性土壤"},{"key":"B","text":"盐碱土壤"},{"key":"C","text":"深厚肥沃土壤"},{"key":"D","text":"湿润通透土壤"}],"answer":"B","answerText":"盐碱土壤"},{"id":120,"rawId":120,"sourcePage":28,"prompt":"红楠俗称“猪脚楠”，主要原因是（）。","options":[{"key":"A","text":"果实像猪脚"},{"key":"B","text":"花像猪蹄，树皮有猪蹄味"},{"key":"C","text":"红色新芽像猪蹄"},{"key":"D","text":"木材纹理像猪蹄"}],"answer":"C","answerText":"红色新芽像猪蹄"},{"id":121,"rawId":121,"sourcePage":28,"prompt":"香樟是南方经典乡土常绿乔木，树形雄伟、四季常青、香气浓郁，具有净化空气、驱虫抑菌的特点，下列关于香樟说法正确的是（）。","options":[{"key":"A","text":"属于落叶树种，秋冬落叶"},{"key":"B","text":"全株自带特殊芳香，可驱虫防腐"},{"key":"C","text":"只适合北方干旱地区种植"},{"key":"D","text":"无任何经济与园林价值"}],"answer":"B","answerText":"全株自带特殊芳香，可驱虫防腐"},{"id":122,"rawId":122,"sourcePage":28,"prompt":"香樟木材有（）。","options":[{"key":"A","text":"樟脑香气"},{"key":"B","text":"玫瑰香气"},{"key":"C","text":"桂花香气"},{"key":"D","text":"茉莉香气"}],"answer":"A","answerText":"樟脑香气"},{"id":123,"rawId":123,"sourcePage":29,"prompt":"香樟叶脉特点是（）。","options":[{"key":"A","text":"平行脉"},{"key":"B","text":"离基 3 出脉"},{"key":"C","text":"网状脉"},{"key":"D","text":"弧形脉"}],"answer":"B","answerText":"离基 3 出脉"},{"id":124,"rawId":124,"sourcePage":29,"prompt":"在江南地区，香樟树常被赋予（）浪漫寓意。","options":[{"key":"A","text":"两厢厮守"},{"key":"B","text":"节节高升"},{"key":"C","text":"招财进宝"},{"key":"D","text":"驱邪避鬼"}],"answer":"A","answerText":"两厢厮守"},{"id":125,"rawId":125,"sourcePage":29,"prompt":"香樟树在民间婚俗中的“两厢厮守”说法，具体是指（）。","options":[{"key":"A","text":"新婚夫妇要共同种一棵香樟树，寓意早生贵子"},{"key":"B","text":"香樟木箱子中放丝绸，谐音“两箱丝绸”，象征夫妻恩爱相伴一生"},{"key":"C","text":"要常吃香樟的果实，延年益寿"},{"key":"D","text":"香樟树皮煮水喝，可保婚姻长久"}],"answer":"B","answerText":"香樟木箱子中放丝绸，谐音“两箱丝绸”，象征夫妻恩爱相伴一生"},{"id":126,"rawId":126,"sourcePage":29,"prompt":"紫叶李园林应用广泛，叶色紫红观赏性极强，它的常用别名是（）。","options":[{"key":"A","text":"红叶李"},{"key":"B","text":"绿叶李"},{"key":"C","text":"黄叶李"},{"key":"D","text":"花叶李"}],"answer":"A","answerText":"红叶李"},{"id":127,"rawId":127,"sourcePage":30,"prompt":"紫叶李为经典彩叶景观树种，全年叶色稳定不变，其叶片常年呈现的颜色是（）。","options":[{"key":"A","text":"绿色"},{"key":"B","text":"紫红色"},{"key":"C","text":"黄色"},{"key":"D","text":"红色"}],"answer":"B","answerText":"紫红色"},{"id":128,"rawId":128,"sourcePage":30,"prompt":"紫叶李象征（）。","options":[{"key":"A","text":"青春激情"},{"key":"B","text":"成熟稳重"},{"key":"C","text":"忧郁伤感"},{"key":"D","text":"宁静致远"}],"answer":"A","answerText":"青春激情"},{"id":129,"rawId":129,"sourcePage":30,"prompt":"紫叶李花期在（）。","options":[{"key":"A","text":"3-4 月"},{"key":"B","text":"5-6 月"},{"key":"C","text":"7-8 月"},{"key":"D","text":"9-10 月"}],"answer":"A","answerText":"3-4 月"},{"id":130,"rawId":130,"sourcePage":30,"prompt":"紫叶李主要用于（）。","options":[{"key":"A","text":"园林观赏"},{"key":"B","text":"水果生产"},{"key":"C","text":"木材加工"},{"key":"D","text":"药材采集"}],"answer":"A","answerText":"园林观赏"},{"id":131,"rawId":131,"sourcePage":31,"prompt":"刺槐别名是（）。","options":[{"key":"A","text":"国槐"},{"key":"B","text":"洋槐"},{"key":"C","text":"金枝槐"},{"key":"D","text":"龙爪槐"}],"answer":"B","answerText":"洋槐"},{"id":132,"rawId":132,"sourcePage":31,"prompt":"刺槐作为一种耐瘠薄、适应性强的树种，常被用于荒山绿化和水土保持，这主要得益于它的根系具有（）的特殊功能。","options":[{"key":"A","text":"能够像水稻一样长出气生根来呼吸"},{"key":"B","text":"与根瘤菌共生，起到固氮、改良土壤的作用"},{"key":"C","text":"主根极深，能刺穿地下岩层获取水分"},{"key":"D","text":"能长出板状根来支撑高大的树体"}],"answer":"B","answerText":"与根瘤菌共生，起到固氮、改良土壤的作用"},{"id":133,"rawId":133,"sourcePage":31,"prompt":"俗语“五月槐花香”中的“槐花”，通常指的是哪种槐树的花？（）。","options":[{"key":"A","text":"国槐"},{"key":"B","text":"刺槐"},{"key":"C","text":"紫穗槐"},{"key":"D","text":"黄花槐"}],"answer":"B","answerText":"刺槐"},{"id":134,"rawId":134,"sourcePage":31,"prompt":"下列植物中属于从国外引种的树种是（）。","options":[{"key":"A","text":"鹅掌楸"},{"key":"B","text":"刺槐"},{"key":"C","text":"省沽油"},{"key":"D","text":"梅"}],"answer":"B","answerText":"刺槐"},{"id":135,"rawId":135,"sourcePage":32,"prompt":"刺槐枝条上具有尖刺，这个刺属于以下（）的变态。","options":[{"key":"A","text":"枝刺"},{"key":"B","text":"叶刺"},{"key":"C","text":"托叶刺"},{"key":"D","text":"皮刺"}],"answer":"C","answerText":"托叶刺"},{"id":136,"rawId":136,"sourcePage":32,"prompt":"苹果与下列（）的亲缘关系最近。","options":[{"key":"A","text":"枣"},{"key":"B","text":"海棠"},{"key":"C","text":"葡萄"},{"key":"D","text":"梨"}],"answer":"B","answerText":"海棠"},{"id":137,"rawId":137,"sourcePage":32,"prompt":"苹果文化寓意深入人心，日常民俗与送礼中广为应用，苹果主要象征寓意是（）。","options":[{"key":"A","text":"平安"},{"key":"B","text":"发财"},{"key":"C","text":"长寿"},{"key":"D","text":"顺利"}],"answer":"A","answerText":"平安"},{"id":138,"rawId":138,"sourcePage":32,"prompt":"苹果不适宜（）。","options":[{"key":"A","text":"高温高湿"},{"key":"B","text":"低温干燥"},{"key":"C","text":"光照充足"},{"key":"D","text":"沙质土壤"}],"answer":"A","answerText":"高温高湿"},{"id":139,"rawId":139,"sourcePage":32,"prompt":"苹果树对气候条件的要求主要是（）。","options":[{"key":"A","text":"高温多雨的热带气候"},{"key":"B","text":"冬季有一定低温的温带气候"},{"key":"C","text":"终年严寒的寒带气候"},{"key":"D","text":"极端干旱的沙漠气候"}],"answer":"B","answerText":"冬季有一定低温的温带气候"},{"id":140,"rawId":140,"sourcePage":33,"prompt":"苹果属植物的野生种质资源主要分布在（）。","options":[{"key":"A","text":"亚洲、欧洲和北半球温带地区，集中地在中国"},{"key":"B","text":"南美洲亚马逊流域"},{"key":"C","text":"非洲热带草原"},{"key":"D","text":"北欧寒带地区"}],"answer":"A","answerText":"亚洲、欧洲和北半球温带地区，集中地在中国"},{"id":141,"rawId":141,"sourcePage":33,"prompt":"唐代诗人白居易写下名句“藤花无次第，万朵一时开”，繁花错落、 竞相盛放，这句诗描绘的是下列（）的观赏植物。","options":[{"key":"A","text":"葡萄"},{"key":"B","text":"紫藤"},{"key":"C","text":"凌霄"},{"key":"D","text":"金银花"}],"answer":"B","answerText":"紫藤"},{"id":142,"rawId":142,"sourcePage":33,"prompt":"唐代诗人李白曾为紫藤写诗，诗中“紫藤挂云木，花蔓宜阳春”的下一句是（）。","options":[{"key":"A","text":"密叶隐歌鸟，香风留美人"},{"key":"B","text":"随风潜入夜，润物细无声"},{"key":"C","text":"举头望明月，低头思故乡"},{"key":"D","text":"相看两不厌，只有敬亭山"}],"answer":"A","answerText":"密叶隐歌鸟，香风留美人"},{"id":143,"rawId":143,"sourcePage":33,"prompt":"紫藤主根特点是（）。","options":[{"key":"A","text":"根深不宜移栽"},{"key":"B","text":"根浅易移栽"},{"key":"C","text":"无根须"},{"key":"D","text":"气生根"}],"answer":"A","answerText":"根深不宜移栽"},{"id":145,"rawId":145,"sourcePage":34,"prompt":"紫藤的花通常在（）开放。","options":[{"key":"A","text":"春季"},{"key":"B","text":"夏季"},{"key":"C","text":"秋季"},{"key":"D","text":"冬季"}],"answer":"A","answerText":"春季"},{"id":146,"rawId":146,"sourcePage":34,"prompt":"紫藤的花序形态是（）。","options":[{"key":"A","text":"头状花序"},{"key":"B","text":"舌状花序"},{"key":"C","text":"伞形花序"},{"key":"D","text":"下垂的总状花序"}],"answer":"D","answerText":"下垂的总状花序"},{"id":147,"rawId":147,"sourcePage":34,"prompt":"加拿大紫荆花颜色是（）。","options":[{"key":"A","text":"白色"},{"key":"B","text":"玫瑰粉色"},{"key":"C","text":"黄色"},{"key":"D","text":"绿色"}],"answer":"B","answerText":"玫瑰粉色"},{"id":148,"rawId":148,"sourcePage":34,"prompt":"香港特别行政区有着标志性的区花，下列（）是香港特别行政区的区花。","options":[{"key":"A","text":"红花羊蹄甲"},{"key":"B","text":"加拿大紫荆"},{"key":"C","text":"紫荆"},{"key":"D","text":"巨紫荆"}],"answer":"A","answerText":"红花羊蹄甲"},{"id":149,"rawId":149,"sourcePage":35,"prompt":"加拿大紫荆象征（）。","options":[{"key":"A","text":"新生希望"},{"key":"B","text":"离别思念"},{"key":"C","text":"嫉妒怨恨"},{"key":"D","text":"骄傲自大"}],"answer":"A","answerText":"新生希望"},{"id":150,"rawId":150,"sourcePage":35,"prompt":"加拿大紫荆的果实属于（）。","options":[{"key":"A","text":"浆果"},{"key":"B","text":"核果"},{"key":"C","text":"荚果"},{"key":"D","text":"翅果"}],"answer":"C","answerText":"荚果"},{"id":151,"rawId":151,"sourcePage":35,"prompt":"在中国传统文化和文学中，紫荆常被赋予（）象征意义。","options":[{"key":"A","text":"富贵吉祥"},{"key":"B","text":"兄弟和睦、手足情深"},{"key":"C","text":"爱情忠贞"},{"key":"D","text":"长寿安康"}],"answer":"B","answerText":"兄弟和睦、手足情深"},{"id":152,"rawId":152,"sourcePage":35,"prompt":"杏梅是（）杂交选育的。","options":[{"key":"A","text":"梅+桃"},{"key":"B","text":"梅+杏"},{"key":"C","text":"梅+李"},{"key":"D","text":"梅+梨"}],"answer":"B","answerText":"梅+杏"},{"id":153,"rawId":153,"sourcePage":36,"prompt":"杏梅花期比梅花（）。","options":[{"key":"A","text":"早"},{"key":"B","text":"迟"},{"key":"C","text":"同时"},{"key":"D","text":"不确定"}],"answer":"B","answerText":"迟"},{"id":154,"rawId":154,"sourcePage":36,"prompt":"杏梅花开五瓣象征（）。","options":[{"key":"A","text":"五福"},{"key":"B","text":"四季"},{"key":"C","text":"三阳"},{"key":"D","text":"二喜"}],"answer":"A","answerText":"五福"},{"id":155,"rawId":155,"sourcePage":36,"prompt":"下列关于杏梅的说法正确的是（）。","options":[{"key":"A","text":"杏梅耐寒性不如梅"},{"key":"B","text":"杏梅具有长花梗"},{"key":"C","text":"杏梅花期比梅花早"},{"key":"D","text":"杏梅花期介于梅与杏之间"}],"answer":"D","answerText":"杏梅花期介于梅与杏之间"},{"id":156,"rawId":156,"sourcePage":36,"prompt":"国槐荚果形似（）。","options":[{"key":"A","text":"豆角"},{"key":"B","text":"串珠"},{"key":"C","text":"香肠"},{"key":"D","text":"鞭子"}],"answer":"B","answerText":"串珠"},{"id":157,"rawId":157,"sourcePage":36,"prompt":"国槐是（）的市树。","options":[{"key":"A","text":"北京"},{"key":"B","text":"合肥"},{"key":"C","text":"香港"},{"key":"D","text":"深圳"}],"answer":"A","answerText":"北京"},{"id":158,"rawId":158,"sourcePage":37,"prompt":"国槐自古常栽植于朝堂、宗祠、村落古道，历史文化底蕴深厚，下列属于国槐传统文化寓意的是（）。","options":[{"key":"A","text":"寻根祭祖、怀乡念祖"},{"key":"B","text":"阖家团圆"},{"key":"C","text":"清雅淡泊"},{"key":"D","text":"坚韧傲雪"}],"answer":"A","answerText":"寻根祭祖、怀乡念祖"},{"id":159,"rawId":159,"sourcePage":37,"prompt":"古语有“面三槐，三公位焉”的人文典故，指的是下列哪种植物？（）","options":[{"key":"A","text":"国槐"},{"key":"B","text":"刺槐"},{"key":"C","text":"红花槐"},{"key":"D","text":"龙爪槐"}],"answer":"A","answerText":"国槐"},{"id":160,"rawId":160,"sourcePage":37,"prompt":"下列哪种槐树是我国本土原生传统古树，常栽植于文庙、宗祠、古驿道？（）","options":[{"key":"A","text":"刺槐"},{"key":"B","text":"国槐"},{"key":"C","text":"香花槐"},{"key":"D","text":"紫穗槐"}],"answer":"B","answerText":"国槐"},{"id":161,"rawId":161,"sourcePage":37,"prompt":"金枝槐冬季枝条颜色是（）。","options":[{"key":"A","text":"绿色"},{"key":"B","text":"金黄色"},{"key":"C","text":"褐色"},{"key":"D","text":"灰色"}],"answer":"B","answerText":"金黄色"},{"id":162,"rawId":162,"sourcePage":38,"prompt":"金枝槐是（）的品种。","options":[{"key":"A","text":"刺槐"},{"key":"B","text":"洋槐"},{"key":"C","text":"国槐"},{"key":"D","text":"红花槐"}],"answer":"C","answerText":"国槐"},{"id":163,"rawId":163,"sourcePage":38,"prompt":"合欢是园林常见观赏花木，花形别致、叶片灵动，下列是它的典型别名的是（）。","options":[{"key":"A","text":"灯笼树"},{"key":"B","text":"扇子树"},{"key":"C","text":"绒花树"},{"key":"D","text":"雨伞树"}],"answer":"C","answerText":"绒花树"},{"id":164,"rawId":164,"sourcePage":38,"prompt":"合欢叶片具有独特的感夜运动特性，暮合晨开，它的叶片生长规律是 （）。","options":[{"key":"A","text":"昼夜无变化"},{"key":"B","text":"全天常开"},{"key":"C","text":"昼合夜开"},{"key":"D","text":"昼开夜合"}],"answer":"D","answerText":"昼开夜合"},{"id":165,"rawId":165,"sourcePage":38,"prompt":"合欢自古被赋予美好人文寓意，寓意团圆美满、情谊绵长，其核心文化象征是（）。","options":[{"key":"A","text":"兄弟同心"},{"key":"B","text":"邻里友好"},{"key":"C","text":"夫妻好合"},{"key":"D","text":"挚友情深"}],"answer":"C","answerText":"夫妻好合"},{"id":166,"rawId":166,"sourcePage":39,"prompt":"合欢花序轻盈柔美，花丝纤细秀丽，观赏价值极高，其花丝主要颜色为（）。","options":[{"key":"A","text":"纯白色"},{"key":"B","text":"明黄色"},{"key":"C","text":"粉红色"},{"key":"D","text":"淡紫色"}],"answer":"C","answerText":"粉红色"},{"id":167,"rawId":167,"sourcePage":39,"prompt":"“杏林”在医学界象征（）。","options":[{"key":"A","text":"良医"},{"key":"B","text":"病人"},{"key":"C","text":"医院"},{"key":"D","text":"药材"}],"answer":"A","answerText":"良医"},{"id":168,"rawId":168,"sourcePage":39,"prompt":"“杏坛”是（）领域的代名词。","options":[{"key":"A","text":"教育界"},{"key":"B","text":"医学界"},{"key":"C","text":"商界"},{"key":"D","text":"政界"}],"answer":"A","answerText":"教育界"},{"id":169,"rawId":169,"sourcePage":39,"prompt":"杏寓意是（）","options":[{"key":"A","text":"兴旺发达"},{"key":"B","text":"衰败没落"},{"key":"C","text":"平平淡淡"},{"key":"D","text":"坎坷曲折"}],"answer":"A","answerText":"兴旺发达"},{"id":170,"rawId":170,"sourcePage":40,"prompt":"杏花一般在（）开放。","options":[{"key":"A","text":"3 月"},{"key":"B","text":"12 月"},{"key":"C","text":"7 月"},{"key":"D","text":"9 月"}],"answer":"A","answerText":"3 月"},{"id":171,"rawId":171,"sourcePage":40,"prompt":"通常杏花开放与展叶的叶花关系是（）。","options":[{"key":"A","text":"先叶后花"},{"key":"B","text":"先花后叶"},{"key":"C","text":"花叶同时开放"},{"key":"D","text":"常年无叶只开花"}],"answer":"B","answerText":"先花后叶"},{"id":172,"rawId":172,"sourcePage":40,"prompt":"陆游名句“小楼一夜听春雨”的下一句是（）。","options":[{"key":"A","text":"深巷明朝卖桂花"},{"key":"B","text":"深巷明朝卖桃花"},{"key":"C","text":"深巷明朝卖梨花"},{"key":"D","text":"深巷明朝卖杏花"}],"answer":"D","answerText":"深巷明朝卖杏花"},{"id":173,"rawId":173,"sourcePage":40,"prompt":"宫粉梅花色是（）。","options":[{"key":"A","text":"绿色"},{"key":"B","text":"黄色"},{"key":"C","text":"紫色"},{"key":"D","text":"淡粉色"}],"answer":"D","answerText":"淡粉色"},{"id":174,"rawId":174,"sourcePage":41,"prompt":"在《全宋词》收录的咏花作品中，（）诗词数量占比高达 47.15%， 稳居各类花卉之首。","options":[{"key":"A","text":"牡丹"},{"key":"B","text":"梅花"},{"key":"C","text":"菊花"},{"key":"D","text":"兰花"}],"answer":"B","answerText":"梅花"},{"id":175,"rawId":175,"sourcePage":41,"prompt":"宫粉梅果实可加工成（）。","options":[{"key":"A","text":"蜜饯"},{"key":"B","text":"面粉"},{"key":"C","text":"大米"},{"key":"D","text":"食用油"}],"answer":"A","answerText":"蜜饯"},{"id":176,"rawId":176,"sourcePage":41,"prompt":"宫粉梅花期在（）。","options":[{"key":"A","text":"12 月至翌年 3 月"},{"key":"B","text":"4-6 月"},{"key":"C","text":"7-9 月"},{"key":"D","text":"10-11 月"}],"answer":"A","answerText":"12 月至翌年 3 月"},{"id":177,"rawId":177,"sourcePage":41,"prompt":"名句“疏影横斜水清浅，暗香浮动月黄昏”是诗人（）的经典咏梅诗句。","options":[{"key":"A","text":"王安石"},{"key":"B","text":"林逋"},{"key":"C","text":"陆游"},{"key":"D","text":"苏轼"}],"answer":"B","answerText":"林逋"},{"id":178,"rawId":178,"sourcePage":42,"prompt":"绿萼梅萼片颜色是（）。","options":[{"key":"A","text":"绿色"},{"key":"B","text":"红色"},{"key":"C","text":"黄色"},{"key":"D","text":"紫色"}],"answer":"A","answerText":"绿色"},{"id":179,"rawId":179,"sourcePage":42,"prompt":"千古名句“疏影横斜水清浅，暗香浮动月黄昏”，吟咏的是传统名花 （）。","options":[{"key":"A","text":"兰花"},{"key":"B","text":"牡丹"},{"key":"C","text":"菊花"},{"key":"D","text":"梅花"}],"answer":"D","answerText":"梅花"},{"id":180,"rawId":180,"sourcePage":42,"prompt":"绿萼梅花蕾可（）。","options":[{"key":"A","text":"开胃散郁"},{"key":"B","text":"止血"},{"key":"C","text":"止痛"},{"key":"D","text":"止痒"}],"answer":"A","answerText":"开胃散郁"},{"id":181,"rawId":181,"sourcePage":42,"prompt":"梅花花瓣 5 枚，象征（）。","options":[{"key":"A","text":"五福"},{"key":"B","text":"三灾"},{"key":"C","text":"二难"},{"key":"D","text":"一祸"}],"answer":"A","answerText":"五福"},{"id":182,"rawId":182,"sourcePage":43,"prompt":"绿萼梅不适宜栽植在（）。","options":[{"key":"A","text":"风口"},{"key":"B","text":"庭院"},{"key":"C","text":"公园"},{"key":"D","text":"绿地"}],"answer":"A","answerText":"风口"},{"id":183,"rawId":183,"sourcePage":43,"prompt":"金庸《神雕侠侣》中，人物公孙绿萼的名字，取自下列哪种植物？（）。","options":[{"key":"A","text":"梅花"},{"key":"B","text":"紫薇"},{"key":"C","text":"桂花"},{"key":"D","text":"桃花"}],"answer":"A","answerText":"梅花"},{"id":184,"rawId":184,"sourcePage":43,"prompt":"湖北海棠的主要识别要点是（）。","options":[{"key":"A","text":"叶片为单叶对生，边缘呈波状全缘"},{"key":"B","text":"花为白色或粉白色，花药黄色，花萼早落"},{"key":"C","text":"果实为大型红色浆果，成熟后可鲜食"},{"key":"D","text":"树皮光滑呈亮红色，老树永不脱落"}],"answer":"B","answerText":"花为白色或粉白色，花药黄色，花萼早落"},{"id":185,"rawId":185,"sourcePage":43,"prompt":"下列关于湖北海棠的经济用途说法正确的是（）。","options":[{"key":"A","text":"果实味甜多汁，是优质的鲜食水果"},{"key":"B","text":"木材致密坚硬，是制作高档家具的首选材料"},{"key":"C","text":"嫩叶可加工成“海棠茶”，具有保健功效"},{"key":"D","text":"根系浅而脆弱，不适合作为苹果砧木"}],"answer":"C","answerText":"嫩叶可加工成“海棠茶”，具有保健功效"},{"id":186,"rawId":186,"sourcePage":43,"prompt":"湖北海棠的生态文化价值说法错误的是（）。","options":[{"key":"A","text":"春季开花繁盛，是优良的园林观赏树种"},{"key":"B","text":"根系发达，可有效保持水土，用于生态修复"},{"key":"C","text":"果实酸涩有毒，不能为野生动物提供食物"},{"key":"D","text":"在传统文化中常作为乡土树种用于庭院绿化"}],"answer":"C","answerText":"果实酸涩有毒，不能为野生动物提供食物"},{"id":187,"rawId":187,"sourcePage":44,"prompt":"西府海棠的主要识别要点是（）。","options":[{"key":"A","text":"叶片为单叶对生，边缘呈波状全缘"},{"key":"B","text":"花序为伞形总状花序，有花 4-7 朵集生于小枝顶端"},{"key":"C","text":"果实为大型黄色浆果，成熟后可鲜食"},{"key":"D","text":"树皮光滑呈亮绿色，老树永不脱落"}],"answer":"B","answerText":"花序为伞形总状花序，有花 4-7 朵集生于小枝顶端"},{"id":189,"rawId":189,"sourcePage":44,"prompt":"西府海棠的生态文化价值主要是（）。","options":[{"key":"A","text":"西府海棠因产于陕西宝鸡（古称西府）而得名，为中国特有植物"},{"key":"B","text":"素有“花中神仙”、“花贵妃”、“花尊贵”之称，栽在皇家园林中常与玉兰、牡丹、桂花相配植，形成“玉棠富贵”的意境"},{"key":"C","text":"果实酸涩有毒，不能为野生动物提供食物，也无保健功效"},{"key":"D","text":"最宜植于水滨或小庭一隅，孤植、列植、丛植均极为美观"}],"answer":"B","answerText":"素有“花中神仙”、“花贵妃”、“花尊贵”之称，栽在皇家园林中常与玉兰、牡丹、桂花相配植，形成“玉棠富贵”的意境"},{"id":190,"rawId":190,"sourcePage":44,"prompt":"山荆子（山丁子）在植物分类学中，隶属于（）。","options":[{"key":"A","text":"蔷薇科"},{"key":"B","text":"壳斗科"},{"key":"C","text":"松科"},{"key":"D","text":"豆科"}],"answer":"A","answerText":"蔷薇科"},{"id":191,"rawId":191,"sourcePage":44,"prompt":"山荆子在北方林果生产中，最核心、最不可替代的经济用途是（）。","options":[{"key":"A","text":"鲜果直接鲜食加工"},{"key":"B","text":"苹果、海棠等果树的优质嫁接砧木"},{"key":"C","text":"提取工业天然橡胶"},{"key":"D","text":"制作高档实木家具用材"}],"answer":"B","answerText":"苹果、海棠等果树的优质嫁接砧木"},{"id":192,"rawId":192,"sourcePage":45,"prompt":"山荆子最具辨识度的特殊花部形态与物候特征是（）。","options":[{"key":"A","text":"秋季盛花，花瓣暗紫红色"},{"key":"B","text":"伞形总状花序，花白色素雅，早春先于叶片开放"},{"key":"C","text":"夜间开放、浓香扑鼻，花期持续秋冬两季"},{"key":"D","text":"花瓣肉质肥厚，呈黄色杯状，无明显花序"}],"answer":"B","answerText":"伞形总状花序，花白色素雅，早春先于叶片开放"},{"id":193,"rawId":193,"sourcePage":45,"prompt":"日本晚樱在分类上属于（）。","options":[{"key":"A","text":"蔷薇科李属"},{"key":"B","text":"蔷薇科苹果属"},{"key":"C","text":"蔷薇科梨属"},{"key":"D","text":"豆科槐属"}],"answer":"A","answerText":"蔷薇科李属"},{"id":194,"rawId":194,"sourcePage":45,"prompt":"下列（）是日本晚樱最典型的识别要点。","options":[{"key":"A","text":"花单瓣、白色、春季先叶开放"},{"key":"B","text":"花多重瓣、花色粉红/深红、常花叶同放"},{"key":"C","text":"果实大而甜、可食用"},{"key":"D","text":"叶片全年常绿"}],"answer":"B","answerText":"花多重瓣、花色粉红/深红、常花叶同放"},{"id":195,"rawId":195,"sourcePage":45,"prompt":"大岛樱最主要的经济用途是（）。","options":[{"key":"A","text":"果树栽培、产果食用"},{"key":"B","text":"名贵木材、家具用材"},{"key":"C","text":"樱花观赏苗木、文旅景观、樱花育种亲本"},{"key":"D","text":"药用提取"}],"answer":"C","answerText":"樱花观赏苗木、文旅景观、樱花育种亲本"},{"id":196,"rawId":196,"sourcePage":46,"prompt":"关于木瓜的生物学特性，正确的是（）。","options":[{"key":"A","text":"属于常绿灌木，冬季不落叶"},{"key":"B","text":"喜湿热气候，只能生长于热带雨林地区"},{"key":"C","text":"具有较强的耐寒性、耐旱性，喜光也稍耐阴"},{"key":"D","text":"花期在秋季 9-11 月，果实在次年春季成熟"}],"answer":"C","answerText":"具有较强的耐寒性、耐旱性，喜光也稍耐阴"},{"id":197,"rawId":197,"sourcePage":46,"prompt":"木瓜（皱皮木瓜、贴梗海棠）的主要经济用途是（）。","options":[{"key":"A","text":"果实味甜多汁，是重要鲜食水果"},{"key":"B","text":"干燥果实为中药“木瓜”，具有舒筋活络、和胃化湿的功效"},{"key":"C","text":"嫩叶可加工成高档茶叶，主要供出口"},{"key":"D","text":"木材致密芳香，是制作高级家具的首选材料"}],"answer":"B","answerText":"干燥果实为中药“木瓜”，具有舒筋活络、和胃化湿的功效"},{"id":198,"rawId":198,"sourcePage":46,"prompt":"木瓜特殊形态特征是（）。","options":[{"key":"A","text":"花重瓣、秋季开放"},{"key":"B","text":"先花后叶或花叶同步，花粉红色或朱红色，簇生枝上，果实木质坚硬久存不腐"},{"key":"C","text":"总状花序，花白色下垂"},{"key":"D","text":"果实圆形多汁，可直接当水果生食"}],"answer":"B","answerText":"先花后叶或花叶同步，花粉红色或朱红色，簇生枝上，果实木质坚硬久存不腐"},{"id":199,"rawId":199,"sourcePage":46,"prompt":"下列（）是枇杷最典型的识别要点。","options":[{"key":"A","text":"落叶乔木，叶片秋季脱落"},{"key":"B","text":"叶片革质厚实，背面密被灰褐色绒毛，叶缘有疏锯齿"},{"key":"C","text":"花大重瓣，夏季开放"},{"key":"D","text":"果实成熟鲜红色，无绒毛"}],"answer":"B","answerText":"叶片革质厚实，背面密被灰褐色绒毛，叶缘有疏锯齿"},{"id":200,"rawId":200,"sourcePage":47,"prompt":"枇杷的主要经济用途的是（）。","options":[{"key":"A","text":"果实味酸涩，仅供观赏，不可食用"},{"key":"B","text":"叶片为中药“枇杷叶”，具有清肺止咳、降逆止呕的功效"},{"key":"C","text":"木材坚硬致密，是制作高档红木家具的主要材料"},{"key":"D","text":"种子榨油为主要食用油来源"}],"answer":"B","answerText":"叶片为中药“枇杷叶”，具有清肺止咳、降逆止呕的功效"},{"id":201,"rawId":201,"sourcePage":47,"prompt":"枇杷最主要的生态文化价值是（）。","options":[{"key":"A","text":"仅作绿化无经济用途"},{"key":"B","text":"不畏严寒、傲然挺立的精神，被人们赞誉为高洁的象征"},{"key":"C","text":"优质硬木制作高档家具"},{"key":"D","text":"工业提取橡胶原料"}],"answer":"B","answerText":"不畏严寒、傲然挺立的精神，被人们赞誉为高洁的象征"},{"id":202,"rawId":202,"sourcePage":47,"prompt":"关于红叶石楠的经济用途，下列说法正确的是（）。","options":[{"key":"A","text":"果实味甜多汁，是重要的鲜食水果"},{"key":"B","text":"叶片可加工成高档茶叶，具有保健功能"},{"key":"C","text":"因春叶鲜红、耐修剪，是园林绿化中最常用的色块、绿篱及球类植物"},{"key":"D","text":"木材坚硬致密，是制作名贵木雕的首选材料"}],"answer":"C","answerText":"因春叶鲜红、耐修剪，是园林绿化中最常用的色块、绿篱及球类植物"},{"id":203,"rawId":203,"sourcePage":47,"prompt":"红叶石楠的主要生态价值是（）。","options":[{"key":"A","text":"防风固沙、耐荒漠干旱"},{"key":"B","text":"抗污染、耐修剪、绿篱色块、水土保持"},{"key":"C","text":"固氮改土、蜜源林"},{"key":"D","text":"水生净化、湿地绿化"}],"answer":"B","answerText":"抗污染、耐修剪、绿篱色块、水土保持"},{"id":204,"rawId":204,"sourcePage":47,"prompt":"关于贵州石楠的经济用途，下列说法正确的是（）。","options":[{"key":"A","text":"果实味甜多汁，是我国南方主要鲜食水果之一"},{"key":"B","text":"根叶可入药，具有清热解毒的功效"},{"key":"C","text":"木材坚硬致密，是制作高档红木家具的主要材料"},{"key":"D","text":"种子可榨油，为主要食用油来源"}],"answer":"B","answerText":"根叶可入药，具有清热解毒的功效"},{"id":205,"rawId":205,"sourcePage":48,"prompt":"对于贵州石楠的主要生态文化价值，下列描述正确的是（）。","options":[{"key":"A","text":"春季嫩叶紫红色，夏季白花满树，秋季红果缀枝，四季观赏价值高"},{"key":"B","text":"对烟尘和有毒气体有一定抗性，适用于工矿区绿化"},{"key":"C","text":"因树干长刺存在潜在危险，不宜用作公园造景树种"},{"key":"D","text":"花朵有特殊气味，古人曾在诗文中描述过石楠属植物的春季景象"}],"answer":"C","answerText":"因树干长刺存在潜在危险，不宜用作公园造景树种"},{"id":206,"rawId":206,"sourcePage":48,"prompt":"七叶树的主要识别特征是（）。","options":[{"key":"A","text":"奇数羽状复叶"},{"key":"B","text":"掌状复叶，小叶通常 7 枚"},{"key":"C","text":"单叶互生，全缘"},{"key":"D","text":"三出复叶"}],"answer":"B","answerText":"掌状复叶，小叶通常 7 枚"},{"id":207,"rawId":207,"sourcePage":48,"prompt":"七叶树在植物分类中属于（）。","options":[{"key":"A","text":"无患子科七叶树属"},{"key":"B","text":"七叶树科七叶树属"},{"key":"C","text":"蔷薇科"},{"key":"D","text":"木犀科"}],"answer":"B","answerText":"七叶树科七叶树属"},{"id":208,"rawId":208,"sourcePage":48,"prompt":"七叶树的主要经济用途是（）。","options":[{"key":"A","text":"果实可直接鲜食"},{"key":"B","text":"优良用材、观赏苗木、种子可药用（外用）"},{"key":"C","text":"榨油食用"},{"key":"D","text":"绿篱色块苗"}],"answer":"B","answerText":"优良用材、观赏苗木、种子可药用（外用）"},{"id":209,"rawId":209,"sourcePage":49,"prompt":"关于黄栌的生态文化价值，下列说法错误的是（）。","options":[{"key":"A","text":"秋季叶片变为鲜红色，是北京香山红叶的主要树种，具极高观赏价值"},{"key":"B","text":"对二氧化硫等有害气体有一定抗性，适用于工矿区及城市绿化"},{"key":"C","text":"因其“紫烟”状不孕花，在园林中常用于营造梦幻景观"},{"key":"D","text":"在中国传统文化中，黄栌因叶可制黄色染料，曾被列为“皇家禁木”"}],"answer":"D","answerText":"在中国传统文化中，黄栌因叶可制黄色染料，曾被列为“皇家禁木”"},{"id":210,"rawId":210,"sourcePage":49,"prompt":"黄栌的主要识别要点是（）。","options":[{"key":"A","text":"叶片为单叶对生，边缘呈波状全缘"},{"key":"B","text":"花序为大型圆锥花序，花小黄绿色，不孕花花梗密被紫色羽状长柔毛"},{"key":"C","text":"果实为红色浆果，成熟后可鲜食"},{"key":"D","text":"树皮光滑呈亮白色，呈纸状剥落"}],"answer":"B","answerText":"花序为大型圆锥花序，花小黄绿色，不孕花花梗密被紫色羽状长柔毛"},{"id":212,"rawId":212,"sourcePage":49,"prompt":"黄栌的主要经济用途是（）。","options":[{"key":"A","text":"果实味甜多汁，是我国北方主要鲜食野果之一"},{"key":"B","text":"木材金黄色，可提取黄色染料，木材可制器具"},{"key":"C","text":"叶片可加工成高档茶叶，具有降血压功效"},{"key":"D","text":"根茎入药，具有补肾壮阳的功效"}],"answer":"B","answerText":"木材金黄色，可提取黄色染料，木材可制器具"},{"id":213,"rawId":213,"sourcePage":49,"prompt":"关于黄连木的生态文化价值，下列说法错误的是（）。","options":[{"key":"A","text":"秋季叶片变为深红色或橙黄色，是优良的彩叶观赏树种"},{"key":"B","text":"对二氧化硫、氯气等有害气体有较强抗性，适用于工矿区绿化"},{"key":"C","text":"果实为许多鸟类冬季重要食物来源，具有重要生态价值"},{"key":"D","text":"具有保持水土、防风固土、调节小气候及抗污染等作用"}],"answer":"C","answerText":"果实为许多鸟类冬季重要食物来源，具有重要生态价值"},{"id":214,"rawId":214,"sourcePage":49,"prompt":"黄连木的主要经济用途是（）。","options":[{"key":"A","text":"果实味甜多汁，是我国南方主要鲜食野果之一"},{"key":"B","text":"种子可榨油，为生物柴油的重要原料；嫩叶可制茶，被称为“黄连茶”"},{"key":"C","text":"叶片可加工成高档香料，国际市场价值极高"},{"key":"D","text":"木材疏松软烂，不能作为用材林树种"}],"answer":"B","answerText":"种子可榨油，为生物柴油的重要原料；嫩叶可制茶，被称为“黄连茶”"},{"id":215,"rawId":215,"sourcePage":50,"prompt":"盐肤木的特殊形态特征是（）。","options":[{"key":"A","text":"枝条常具细长枝刺，树皮呈亮红色"},{"key":"B","text":"叶轴具宽翅（叶翼），是小叶间叶轴扁平呈翅状"},{"key":"C","text":"叶片两面均密被白色绒毛，呈银灰色"},{"key":"D","text":"花序基部膨大呈块状，内含淀粉可食"}],"answer":"B","answerText":"叶轴具宽翅（叶翼），是小叶间叶轴扁平呈翅状"},{"id":216,"rawId":216,"sourcePage":50,"prompt":"盐肤木的经济用途很多，其主要的经济用途是（）。","options":[{"key":"A","text":"果实味甜多汁，是南方主要鲜食野果之一"},{"key":"B","text":"叶上寄生五倍子蚜虫形成的虫瘿——“五倍子”，是重要工业原料（单宁酸）"},{"key":"C","text":"叶片可加工成高档茶叶，市场价值极高"},{"key":"D","text":"木材坚硬致密，是制作高档红木家具的首选材料"}],"answer":"B","answerText":"叶上寄生五倍子蚜虫形成的虫瘿——“五倍子”，是重要工业原料（单宁酸）"},{"id":217,"rawId":217,"sourcePage":50,"prompt":"下列关于南酸枣的经济用途说法正确的是（）。","options":[{"key":"A","text":"果实味甜多汁，是南方主要鲜食水果之一"},{"key":"B","text":"果肉可加工成果糕、果酒等食品，果核可制活性炭，木材可作家具"},{"key":"C","text":"叶片可加工成高档茶叶，市场价值极高"},{"key":"D","text":"木材疏松软烂，不能作为用材林树种"}],"answer":"B","answerText":"果肉可加工成果糕、果酒等食品，果核可制活性炭，木材可作家具"},{"id":218,"rawId":218,"sourcePage":50,"prompt":"南酸枣的特殊形态特征表现在（）。","options":[{"key":"A","text":"枝条常具细长枝刺，树皮呈亮红色"},{"key":"B","text":"果核顶端有 5 个小孔（萌发孔），种子由此萌发，故称“五眼果”"},{"key":"C","text":"叶片两面均密被灰白色绒毛，呈银灰色"},{"key":"D","text":"树干呈方形或五边形，具有明显纵棱"}],"answer":"B","answerText":"果核顶端有 5 个小孔（萌发孔），种子由此萌发，故称“五眼果”"},{"id":219,"rawId":219,"sourcePage":51,"prompt":"南酸枣的主要生态文化价值描述错误的是（）。","options":[{"key":"A","text":"果核顶端有 5 个孔，自古以来象征“五福临门”，被用作佛珠或饰品"},{"key":"B","text":"考古发现河姆渡遗址中存有大量南酸枣核，证明 7000 年前先民已采食南酸枣"},{"key":"C","text":"树干端直、冠大荫浓，是优良的庭荫树及行道树种"},{"key":"D","text":"果实酸涩有毒，不能为野生动物提供食物，也无生态价值"}],"answer":"D","answerText":"果实酸涩有毒，不能为野生动物提供食物，也无生态价值"},{"id":220,"rawId":220,"sourcePage":51,"prompt":"紫薇又名痒痒树、光皮树，其主要的识别要点是（）。","options":[{"key":"A","text":"叶片为单叶对生，边缘有细锐锯齿"},{"key":"B","text":"花大型，花瓣皱缩，边缘呈流苏状，花色有紫、红、粉、白等"},{"key":"C","text":"花序为伞形花序，花单生于枝顶"},{"key":"D","text":"果实为红色浆果，成熟后多汁可食"}],"answer":"B","answerText":"花大型，花瓣皱缩，边缘呈流苏状，花色有紫、红、粉、白等"},{"id":221,"rawId":221,"sourcePage":51,"prompt":"关于紫薇的经济用途，下列说法正确的是（）。","options":[{"key":"A","text":"果实味甜多汁，是我国南方主要鲜食野果之一"},{"key":"B","text":"木材坚硬致密，是制作高档红木家具的首选材料"},{"key":"C","text":"根、树皮、叶及花均可入药，也是重要的园林绿化树种之一"},{"key":"D","text":"叶片可加工成高档茶叶，市场价值极高"}],"answer":"C","answerText":"根、树皮、叶及花均可入药，也是重要的园林绿化树种之一"},{"id":222,"rawId":222,"sourcePage":51,"prompt":"下列关于紫薇的特殊形态特征说法正确的是（）。","options":[{"key":"A","text":"枝条常具细长枝刺，树皮呈亮红色"},{"key":"B","text":"用手轻抚树干，全树会微微颤动，故有“痒痒树”之称"},{"key":"C","text":"叶片两面均密被灰白色绒毛，呈银灰色"},{"key":"D","text":"花萼筒状，表面光滑无毛，花药呈黑色"}],"answer":"B","answerText":"用手轻抚树干，全树会微微颤动，故有“痒痒树”之称"},{"id":223,"rawId":223,"sourcePage":52,"prompt":"桂花又名木犀，根据其花色和开花时间，一般可分为金桂、银桂、丹桂和四季桂，其中金桂的主要经济用途是（）。","options":[{"key":"A","text":"果实味甜多汁，是我国南方主要鲜食野果之一"},{"key":"B","text":"花可食用，常用于制作桂花糕、桂花茶、桂花酒等食品"},{"key":"C","text":"叶片可加工成高档香料，国际市场价值极高"},{"key":"D","text":"木材坚硬致密，是制作高档红木家具的首选材料"}],"answer":"B","answerText":"花可食用，常用于制作桂花糕、桂花茶、桂花酒等食品"},{"id":224,"rawId":224,"sourcePage":52,"prompt":"合肥市的市花是（）。","options":[{"key":"A","text":"桂花、石榴"},{"key":"B","text":"桂花、玉兰"},{"key":"C","text":"石榴、枇杷"},{"key":"D","text":"兰花、荷花"}],"answer":"A","answerText":"桂花、石榴"},{"id":225,"rawId":225,"sourcePage":52,"prompt":"金桂开黄颜色的花，香味浓郁、色泽鲜艳，其主要的生态文化价值描述错误的是（）。","options":[{"key":"A","text":"桂与“贵”谐音，象征富贵吉祥，常与玉兰、海棠等配植取“玉堂富贵”之意"},{"key":"B","text":"在中国传统文化中，“折桂”寓意登科及第、科举高中"},{"key":"C","text":"因花色金黄如粟，在古代被视为富贵之色，深受帝王喜爱"},{"key":"D","text":"金桂树皮光滑，易被游客刻画伤害，故不宜种植于人流密集的公园"}],"answer":"D","answerText":"金桂树皮光滑，易被游客刻画伤害，故不宜种植于人流密集的公园"},{"id":226,"rawId":226,"sourcePage":52,"prompt":"关于金桂的识别要点，下列说法正确的是（）。","options":[{"key":"A","text":"叶片为单叶对生，边缘全缘无锯齿"},{"key":"B","text":"花簇生于叶腋间，花冠合瓣四裂，金黄色，极芳香"},{"key":"C","text":"果实为红色浆果，成熟后多汁可食"},{"key":"D","text":"树皮光滑呈亮白色，呈纸状剥落"}],"answer":"B","answerText":"花簇生于叶腋间，花冠合瓣四裂，金黄色，极芳香"},{"id":227,"rawId":227,"sourcePage":53,"prompt":"银桂开乳白的花，其主要的野外识别要点是（）。","options":[{"key":"A","text":"叶片椭圆形或长椭圆形，较金桂叶片更宽大"},{"key":"B","text":"叶缘全缘或先端有疏锯齿，较金桂锯齿更明显"},{"key":"C","text":"花序为圆锥花序，大型顶生，花多单生"},{"key":"D","text":"与金桂相比，银桂花色为黄白色，金桂为金黄色"}],"answer":"D","answerText":"与金桂相比，银桂花色为黄白色，金桂为金黄色"},{"id":228,"rawId":228,"sourcePage":53,"prompt":"桂花为我国十大传统花卉之一，其生物学特性描述正确的是（）。","options":[{"key":"A","text":"属于落叶灌木，冬季叶片全部脱落"},{"key":"B","text":"只能生长于热带地区，不耐寒"},{"key":"C","text":"为常绿阔叶小乔木或灌木，喜光，较耐阴，喜温暖湿润气候"},{"key":"D","text":"花期为春季 3-4 月，果期为夏季"}],"answer":"C","answerText":"为常绿阔叶小乔木或灌木，喜光，较耐阴，喜温暖湿润气候"},{"id":229,"rawId":229,"sourcePage":53,"prompt":"丹桂开橘黄色的花，关于丹桂的识别要点，下列说法正确的是（）。","options":[{"key":"A","text":"叶片为单叶互生，边缘全缘无锯齿"},{"key":"B","text":"花簇生于叶腋间，花冠合瓣四裂，橙红色或橙黄色，香气较淡"},{"key":"C","text":"果实为红色浆果，成熟后多汁可食"},{"key":"D","text":"树皮光滑呈亮白色，呈纸状剥落"}],"answer":"B","answerText":"花簇生于叶腋间，花冠合瓣四裂，橙红色或橙黄色，香气较淡"},{"id":230,"rawId":230,"sourcePage":53,"prompt":"关于丹桂的生态文化价值，下列说法不合适的是（）。","options":[{"key":"A","text":"丹桂花色红艳，象征喜庆、吉祥，常用于节日庆典及婚庆园林造景"},{"key":"B","text":"桂花与“贵”谐音，丹桂因色红，在传统文化中兼有“富贵”与“红火”之意"},{"key":"C","text":"在中国传统文化中，“丹桂”一词也指科举及第，如“蟾宫折桂”中的桂即为丹桂"},{"key":"D","text":"因丹桂树皮光滑易被刻画，且花色过艳被认为不雅，故不宜种植于庭院"}],"answer":"D","answerText":"因丹桂树皮光滑易被刻画，且花色过艳被认为不雅，故不宜种植于庭院"},{"id":231,"rawId":231,"sourcePage":54,"prompt":"下列关于四季桂的生态文化价值说法错误的是（）。","options":[{"key":"A","text":"因一年多次开花，象征“四季常青、吉祥如意”，深受群众喜爱"},{"key":"B","text":"在中国传统文化中，桂花与“贵”谐音，四季桂寓意“四季富贵”"},{"key":"C","text":"因花期长、适应性强，是城市绿化和庭院美化的理想树种"},{"key":"D","text":"四季桂花香浓郁堪比金桂，因此被作为提取桂花精油的首选品种"}],"answer":"D","answerText":"四季桂花香浓郁堪比金桂，因此被作为提取桂花精油的首选品种"},{"id":232,"rawId":232,"sourcePage":54,"prompt":"桂花品种不同，其形态特征不同，下列说法正确的是（）。","options":[{"key":"A","text":"金桂花色为黄白色，银桂花色为金黄色"},{"key":"B","text":"丹桂花色为橙红色或橙黄色，是桂花中花色最深的品种"},{"key":"C","text":"四季桂一年只开一次花，花期在秋季"},{"key":"D","text":"所有桂花品种的叶片均为单叶互生，边缘全缘无锯齿"}],"answer":"B","answerText":"丹桂花色为橙红色或橙黄色，是桂花中花色最深的品种"},{"id":233,"rawId":233,"sourcePage":54,"prompt":"女贞俗称冬青，为主要的乡土树种，在药用方面其主要的经济用途是 （）。","options":[{"key":"A","text":"果实味甜多汁，是我国南方主要鲜食野果之一"},{"key":"B","text":"果实（女贞子）为中药，具有滋补肝肾、乌须明目的功效"},{"key":"C","text":"叶片可加工成高档茶叶，市场价值极高"},{"key":"D","text":"木材坚硬致密，是制作高档红木家具的首选材料"}],"answer":"B","answerText":"果实（女贞子）为中药，具有滋补肝肾、乌须明目的功效"},{"id":234,"rawId":234,"sourcePage":54,"prompt":"女贞的用途非常广泛，在生态文化建设中，下列生态文化价值说法错误的是（）。","options":[{"key":"A","text":"因四季常青，常植于庭院、墓地，象征“坚贞不渝”"},{"key":"B","text":"女贞对二氧化硫、氯气等有害气体有较强抗性，是优良的城市绿化树种"},{"key":"C","text":"在中国传统文化中，女贞因其冬青不凋，被赋予“贞洁”“守节”的寓意"},{"key":"D","text":"女贞果实有毒，生态价值低"}],"answer":"D","answerText":"女贞果实有毒，生态价值低"},{"id":235,"rawId":235,"sourcePage":55,"prompt":"元宝槭也称为平基槭、元宝树、元宝枫，其主要的识别要点是（）。","options":[{"key":"A","text":"叶片为单叶对生，掌状 3-5 裂，裂片全缘无锯齿"},{"key":"B","text":"叶片基部呈心形或截形，裂片先端渐尖，叶背常被白粉，秋季变红或黄"},{"key":"C","text":"果实为红色浆果，成熟后可鲜食"},{"key":"D","text":"树皮光滑呈亮白色，呈纸状剥落"}],"answer":"B","answerText":"叶片基部呈心形或截形，裂片先端渐尖，叶背常被白粉，秋季变红或黄"},{"id":236,"rawId":236,"sourcePage":55,"prompt":"关于元宝槭的生态文化价值，下列说法错误的是（）。","options":[{"key":"A","text":"秋季叶片变为红色或黄色，是北方著名的彩叶观赏树种，与黄栌共为 “香山红叶”主力"},{"key":"B","text":"因翅果形似元宝，象征“招财进宝”，常植于庭院、街巷以求吉祥"},{"key":"C","text":"对二氧化硫、烟尘等有害气体有一定抗性，适用于城市及工矿区绿化"},{"key":"D","text":"元宝槭根系浅，不耐干旱，不宜用于水土保持造林"}],"answer":"D","answerText":"元宝槭根系浅，不耐干旱，不宜用于水土保持造林"},{"id":237,"rawId":237,"sourcePage":55,"prompt":"鸡爪槭因其叶片似鸡爪而得名，下列识别要点说法正确的是（）。","options":[{"key":"A","text":"叶片为单叶互生，掌状 5-7 裂，裂片全缘无锯齿"},{"key":"B","text":"叶片掌状 5-9 裂，裂片卵状披针形，边缘有尖锐重锯齿，秋叶呈红色或橙红色"},{"key":"C","text":"果实为红色浆果，成熟后可鲜食"},{"key":"D","text":"树皮光滑呈亮绿色，呈纸状剥落"}],"answer":"B","answerText":"叶片掌状 5-9 裂，裂片卵状披针形，边缘有尖锐重锯齿，秋叶呈红色或橙红色"},{"id":238,"rawId":238,"sourcePage":56,"prompt":"关于鸡爪槭的特殊形态特征，下列说法正确的是（）。","options":[{"key":"A","text":"枝条常具细长枝刺，树皮呈亮红色"},{"key":"B","text":"叶片两面均密被灰白色绒毛，呈银灰色"},{"key":"C","text":"鸡爪槭有许多园艺变种，如红枫（‘Atropurpureum’）、羽毛枫 （‘Dissectum’）等，叶色叶形变化丰富"},{"key":"D","text":"树干常呈方形或五边形，具有明显纵棱"}],"answer":"C","answerText":"鸡爪槭有许多园艺变种，如红枫（‘Atropurpureum’）、羽毛枫 （‘Dissectum’）等，叶色叶形变化丰富"},{"id":239,"rawId":239,"sourcePage":56,"prompt":"红枫是（）。","options":[{"key":"A","text":"常绿乔木"},{"key":"B","text":"落叶灌木"},{"key":"C","text":"藤本植物"},{"key":"D","text":"落叶小乔木"}],"answer":"D","answerText":"落叶小乔木"},{"id":240,"rawId":240,"sourcePage":56,"prompt":"红枫叶片最典型的特征是（）。","options":[{"key":"A","text":"叶色艳丽多为红色、掌状裂叶"},{"key":"B","text":"四季常绿不落叶"},{"key":"C","text":"叶片宽大圆形"},{"key":"D","text":"叶片常年绿色不变色"}],"answer":"A","answerText":"叶色艳丽多为红色、掌状裂叶"},{"id":241,"rawId":241,"sourcePage":56,"prompt":"在园林造景中，红枫常被用作（）。","options":[{"key":"A","text":"荒山造林主力树种"},{"key":"B","text":"庭院点缀、假山配景、行道观赏树"},{"key":"C","text":"农田防护林"},{"key":"D","text":"水土保持先锋树"}],"answer":"B","answerText":"庭院点缀、假山配景、行道观赏树"},{"id":244,"rawId":244,"sourcePage":56,"prompt":"（）属于毛脉槭的主要生态价值。","options":[{"key":"A","text":"涵养水源、美化山林环境"},{"key":"B","text":"作为农作物粮食来源"},{"key":"C","text":"大面积固沙治荒"},{"key":"D","text":"作为畜禽主要饲料"}],"answer":"A","answerText":"涵养水源、美化山林环境"},{"id":246,"rawId":246,"sourcePage":57,"prompt":"三角槭也称三角枫，其叶的形态特征是（）。","options":[{"key":"A","text":"叶片掌状五裂"},{"key":"B","text":"叶片圆形无裂口"},{"key":"C","text":"叶片针状细长"},{"key":"D","text":"叶片呈三角形，三浅裂"}],"answer":"D","answerText":"叶片呈三角形，三浅裂"},{"id":247,"rawId":247,"sourcePage":57,"prompt":"三角槭主要经济用途是（）。","options":[{"key":"A","text":"榨取食用植物油"},{"key":"B","text":"园林绿化、行道树、风景林营造"},{"key":"C","text":"作为主要工业造纸原料"},{"key":"D","text":"养殖饲料原料"}],"answer":"B","answerText":"园林绿化、行道树、风景林营造"},{"id":248,"rawId":248,"sourcePage":57,"prompt":"关于三角槭的物候习性说法正确的是（）。","options":[{"key":"A","text":"四季常绿不落叶"},{"key":"B","text":"冬季长叶夏季落叶"},{"key":"C","text":"全年叶片颜色保持翠绿不变"},{"key":"D","text":"秋季叶色变黄或变红，冬季落叶休眠"}],"answer":"D","answerText":"秋季叶色变黄或变红，冬季落叶休眠"},{"id":249,"rawId":249,"sourcePage":57,"prompt":"日本珊瑚树最主要的生态价值是（）。","options":[{"key":"A","text":"提炼食用油"},{"key":"B","text":"生产粮食作物"},{"key":"C","text":"防风隔音、净化空气、防火隔离"},{"key":"D","text":"荒漠固沙主力树种"}],"answer":"C","answerText":"防风隔音、净化空气、防火隔离"},{"id":250,"rawId":250,"sourcePage":57,"prompt":"日本珊瑚树主要经济与园林用途是（）。","options":[{"key":"A","text":"制作高档家具用材"},{"key":"B","text":"工业造纸主要原料"},{"key":"C","text":"作为果蔬食用栽培"},{"key":"D","text":"园林绿化绿篱、厂区道路绿化"}],"answer":"D","answerText":"园林绿化绿篱、厂区道路绿化"},{"id":251,"rawId":251,"sourcePage":58,"prompt":"琼花的花朵特征是（）。","options":[{"key":"A","text":"通体红色、重瓣饱满"},{"key":"B","text":"花序外围一圈白色不孕花，中心为细小可孕花"},{"key":"C","text":"花朵硕大单生、无花瓣"},{"key":"D","text":"全年持续开花"}],"answer":"B","answerText":"花序外围一圈白色不孕花，中心为细小可孕花"},{"id":252,"rawId":252,"sourcePage":58,"prompt":"（）是琼花独特的文化价值。","options":[{"key":"A","text":"扬州传统名花，象征素雅高洁"},{"key":"B","text":"代表富贵喜庆"},{"key":"C","text":"作为粮食象征丰收"},{"key":"D","text":"寓意坚韧耐旱"}],"answer":"A","answerText":"扬州传统名花，象征素雅高洁"},{"id":253,"rawId":253,"sourcePage":58,"prompt":"重瓣溲疏主要的经济与园林用途是（）。","options":[{"key":"A","text":"制作高档家具木材"},{"key":"B","text":"庭院花篱、公园丛植造景、园林绿化"},{"key":"C","text":"加工食用花果"},{"key":"D","text":"工业造纸原料"}],"answer":"B","answerText":"庭院花篱、公园丛植造景、园林绿化"},{"id":254,"rawId":254,"sourcePage":58,"prompt":"（）属于白杜突出的生态价值。","options":[{"key":"A","text":"专属水生净水植物"},{"key":"B","text":"荒漠固沙核心树种"},{"key":"C","text":"吸附烟尘有害气体"},{"key":"D","text":"作为畜禽主要饲料"}],"answer":"C","answerText":"吸附烟尘有害气体"},{"id":255,"rawId":255,"sourcePage":58,"prompt":"白杜，又称丝绵木，其主要的经济用途是（）。","options":[{"key":"A","text":"木材用于雕刻，园林绿化造景、树皮种子可入药"},{"key":"B","text":"加工食用鲜果"},{"key":"C","text":"制作高档家具板材"},{"key":"D","text":"提炼食用植物油"}],"answer":"A","answerText":"木材用于雕刻，园林绿化造景、树皮种子可入药"},{"id":256,"rawId":256,"sourcePage":59,"prompt":"苦楝主要的经济用途是（）。","options":[{"key":"A","text":"果实可直接当作水果食用"},{"key":"B","text":"大面积种植生产粮食"},{"key":"C","text":"木材可制作家具，植株可提取天然杀虫原料"},{"key":"D","text":"用于榨取优质食用油"}],"answer":"C","answerText":"木材可制作家具，植株可提取天然杀虫原料"},{"id":257,"rawId":257,"sourcePage":59,"prompt":"在植物学分类中，香椿属于（）。","options":[{"key":"A","text":"槭树科落叶灌木"},{"key":"B","text":"忍冬科藤本植物"},{"key":"C","text":"松柏科常绿乔木"},{"key":"D","text":"楝科落叶乔木"}],"answer":"D","answerText":"楝科落叶乔木"},{"id":258,"rawId":258,"sourcePage":59,"prompt":"香椿最具代表性的经济用途是（）。","options":[{"key":"A","text":"作为粮食作物量产"},{"key":"B","text":"大规模提炼工业油料"},{"key":"C","text":"嫩芽可食用，是常见乡土经济蔬菜"},{"key":"D","text":"制作纸质原材料"}],"answer":"C","answerText":"嫩芽可食用，是常见乡土经济蔬菜"},{"id":259,"rawId":259,"sourcePage":59,"prompt":"无患子的主要经济价值是（）。","options":[{"key":"A","text":"果肉甘甜，可直接当做水果食用"},{"key":"B","text":"果实坚硬无法采摘"},{"key":"C","text":"果实四季常绿不落"},{"key":"D","text":"果皮富含皂苷，遇水可起泡、天然去污"}],"answer":"D","answerText":"果皮富含皂苷，遇水可起泡、天然去污"},{"id":260,"rawId":260,"sourcePage":59,"prompt":"传统植物文化中，无患子的寓意是（）。","options":[{"key":"A","text":"财源广进、富贵满堂"},{"key":"B","text":"平安顺遂、无忧无患"},{"key":"C","text":"孤傲清冷、坚韧不屈"},{"key":"D","text":"阖家团圆、美满幸福"}],"answer":"B","answerText":"平安顺遂、无忧无患"},{"id":261,"rawId":261,"sourcePage":60,"prompt":"黄山栾树标志性的观赏特点是（）。","options":[{"key":"A","text":"果实甘甜可直接食用"},{"key":"B","text":"全年开花、花朵硕大艳丽"},{"key":"C","text":"叶片四季保持鲜红色"},{"key":"D","text":"夏秋开金黄色小花，结红色灯笼状蒴果"}],"answer":"D","answerText":"夏秋开金黄色小花，结红色灯笼状蒴果"},{"id":262,"rawId":262,"sourcePage":60,"prompt":"枳椇别名拐枣，其主要的经济价值是（）。","options":[{"key":"A","text":"肉质果梗肥厚甘甜，可食用"},{"key":"B","text":"花朵硕大，四季常开"},{"key":"C","text":"叶片常年鲜红色"},{"key":"D","text":"果实为红色灯笼状蒴果"}],"answer":"A","answerText":"肉质果梗肥厚甘甜，可食用"},{"id":263,"rawId":263,"sourcePage":60,"prompt":"板栗最主要的经济用途是（）。","options":[{"key":"A","text":"制作室内观赏盆栽"},{"key":"B","text":"提取工业染料"},{"key":"C","text":"果实可食用，重要的木本粮食"},{"key":"D","text":"加工畜禽养殖饲料"}],"answer":"C","answerText":"果实可食用，重要的木本粮食"},{"id":264,"rawId":264,"sourcePage":60,"prompt":"在植物学分类中，茅栗属于（）。","options":[{"key":"A","text":"壳斗科落叶灌木或小乔木"},{"key":"B","text":"木犀科常绿乔木"},{"key":"C","text":"蔷薇科藤本植物"},{"key":"D","text":"松科针叶乔木"}],"answer":"A","answerText":"壳斗科落叶灌木或小乔木"},{"id":265,"rawId":265,"sourcePage":60,"prompt":"茅栗最主要的经济用途是（）。","options":[{"key":"A","text":"坚果可食用、可酿酒，也是优良乡土经济灌木"},{"key":"B","text":"制作高档家具板材"},{"key":"C","text":"大规模提取工业油料"},{"key":"D","text":"加工花卉观赏切花"}],"answer":"A","answerText":"坚果可食用、可酿酒，也是优良乡土经济灌木"},{"id":266,"rawId":266,"sourcePage":60,"prompt":"（）是麻栎最突出的生态价值。","options":[{"key":"A","text":"净化水体，适配水生环境"},{"key":"B","text":"根系发达，固土护坡、防止山地水土流失"},{"key":"C","text":"专属荒漠固沙树种"},{"key":"D","text":"作为畜禽青绿饲料"}],"answer":"B","answerText":"根系发达，固土护坡、防止山地水土流失"},{"id":267,"rawId":267,"sourcePage":61,"prompt":"麻栎的环境适应能力特点是（）。","options":[{"key":"A","text":"耐旱、耐寒、抗风，山野生存能力极强"},{"key":"B","text":"极不耐旱，需频繁浇水"},{"key":"C","text":"耐寒性极差，仅南方可种植"},{"key":"D","text":"抗污染能力极差"}],"answer":"A","answerText":"耐旱、耐寒、抗风，山野生存能力极强"},{"id":268,"rawId":268,"sourcePage":61,"prompt":"栓皮栎最独特的树干特征是（）。","options":[{"key":"A","text":"树干光滑无树皮"},{"key":"B","text":"树皮厚实、质地松软，富含栓皮，可用于制作软木塞"},{"key":"C","text":"树干常年带有尖刺"},{"key":"D","text":"树皮四季脱落剥落"}],"answer":"B","answerText":"树皮厚实、质地松软，富含栓皮，可用于制作软木塞"},{"id":269,"rawId":269,"sourcePage":61,"prompt":"（）属于灰柯主要的生态价值。","options":[{"key":"A","text":"净化浅水河道、修复水生生态"},{"key":"B","text":"常绿固土、涵养山地水源，稳定山林生态，是组成南方常绿阔叶林的主要树种"},{"key":"C","text":"荒漠防风固沙、改良戈壁土壤"},{"key":"D","text":"作为畜禽优质青绿饲草"}],"answer":"B","answerText":"常绿固土、涵养山地水源，稳定山林生态，是组成南方常绿阔叶林的主要树种"},{"id":270,"rawId":270,"sourcePage":61,"prompt":"灰柯主要的经济用途是（）。","options":[{"key":"A","text":"果实鲜食、加工干果"},{"key":"B","text":"树皮提取天然食用色素"},{"key":"C","text":"木质坚硬，可制作建筑、木工用材"},{"key":"D","text":"大面积培育盆栽花卉"}],"answer":"C","answerText":"木质坚硬，可制作建筑、木工用材"},{"id":271,"rawId":271,"sourcePage":61,"prompt":"薄壳山核桃又名碧根果，其核心的经济用途是（）。","options":[{"key":"A","text":"提取工业染色原料"},{"key":"B","text":"产出优质坚果，兼具用材与林果经济价值"},{"key":"C","text":"制作室内小型观赏盆栽"},{"key":"D","text":"加工花卉切花售卖"}],"answer":"B","answerText":"产出优质坚果，兼具用材与林果经济价值"},{"id":272,"rawId":272,"sourcePage":62,"prompt":"枫杨最具辨识度的果实特征是（）。","options":[{"key":"A","text":"串状翅果，形似串串铜钱"},{"key":"B","text":"球形坚硬坚果"},{"key":"C","text":"红色肉质可食果实"},{"key":"D","text":"带刺球状果实"}],"answer":"A","answerText":"串状翅果，形似串串铜钱"},{"id":273,"rawId":273,"sourcePage":62,"prompt":"（）是枫杨最突出的生态价值。","options":[{"key":"A","text":"作为畜禽主要青绿饲料"},{"key":"B","text":"荒漠固沙、改良干旱土壤"},{"key":"C","text":"净化重度工业污水"},{"key":"D","text":"耐水湿，可用于河道护坡、滨水水土保持"}],"answer":"D","answerText":"耐水湿，可用于河道护坡、滨水水土保持"},{"id":274,"rawId":274,"sourcePage":62,"prompt":"（）是枫香树的核心生态价值。","options":[{"key":"A","text":"耐水涝，适合深水湿地种植"},{"key":"B","text":"作为畜禽优质饲草"},{"key":"C","text":"荒漠防风固沙、改良沙地"},{"key":"D","text":"根系发达，固土保水、抗烟尘"}],"answer":"D","answerText":"根系发达，固土保水、抗烟尘"},{"id":275,"rawId":275,"sourcePage":62,"prompt":"牛鼻栓材质坚硬，木材极坚韧，旧时农村常用它削成短木栓，穿在牛鼻孔里系缰绳，所以叫“（）”。","options":[{"key":"A","text":"牛笼头"},{"key":"B","text":"牛几架"},{"key":"C","text":"牛鼻栓"},{"key":"D","text":"牛缰绳"}],"answer":"C","answerText":"牛鼻栓"},{"id":276,"rawId":276,"sourcePage":62,"prompt":"蜡梅在传统文化中主要象征的意义是（）。","options":[{"key":"A","text":"坚韧不屈、孤高清雅"},{"key":"B","text":"富贵发财、财源滚滚"},{"key":"C","text":"多子多福、家庭兴旺"},{"key":"D","text":"热情奔放、活力四射"}],"answer":"A","answerText":"坚韧不屈、孤高清雅"},{"id":277,"rawId":277,"sourcePage":63,"prompt":"花色金黄如蜜蜡、花瓣带蜡质光泽，故名“蜡梅”，后因花期在腊月而俗写作 “（）”。","options":[{"key":"A","text":"冬梅"},{"key":"B","text":"腊梅"},{"key":"C","text":"春梅"},{"key":"D","text":"黄梅"}],"answer":"B","answerText":"腊梅"},{"id":278,"rawId":278,"sourcePage":63,"prompt":"山杜英最突出的生态价值是（）。","options":[{"key":"A","text":"耐火、耐烟尘，可做防火林与净化空气"},{"key":"B","text":"固氮改土，提升土壤肥力"},{"key":"C","text":"水上绿化，净化水质"},{"key":"D","text":"防风固沙，治理沙漠"}],"answer":"A","answerText":"耐火、耐烟尘，可做防火林与净化空气"},{"id":279,"rawId":279,"sourcePage":63,"prompt":"在传统文化中，“桑梓”通常用来指代（）。","options":[{"key":"A","text":"屋舍"},{"key":"B","text":"家乡"},{"key":"C","text":"山林"},{"key":"D","text":"河流"}],"answer":"B","answerText":"家乡"},{"id":280,"rawId":280,"sourcePage":63,"prompt":"桑叶最主要、最常见的用途是（）。","options":[{"key":"A","text":"造纸原料"},{"key":"B","text":"制作茶叶"},{"key":"C","text":"榨取食用油"},{"key":"D","text":"喂养蚕宝宝"}],"answer":"D","answerText":"喂养蚕宝宝"},{"id":281,"rawId":281,"sourcePage":64,"prompt":"柘树在文化与生态建设中主要象征与作用是（）。","options":[{"key":"A","text":"坚韧长寿，是荒山造林的先锋树种"},{"key":"B","text":"富贵吉祥，适合庭院观赏"},{"key":"C","text":"多子多福，适合果园种植"},{"key":"D","text":"清新淡雅，主要用于切花观赏"}],"answer":"A","answerText":"坚韧长寿，是荒山造林的先锋树种"},{"id":282,"rawId":282,"sourcePage":64,"prompt":"柘树最具特色的经济用途是（）。","options":[{"key":"A","text":"花朵提炼香精"},{"key":"B","text":"果实榨油食用"},{"key":"C","text":"木材可做家具、黄色染料，茎皮可造纸"},{"key":"D","text":"树干割取树脂"}],"answer":"C","answerText":"木材可做家具、黄色染料，茎皮可造纸"},{"id":283,"rawId":283,"sourcePage":64,"prompt":"一球悬铃木又称美国梧桐，二球悬铃木又称英国梧桐，那么三球悬铃木又称（）。","options":[{"key":"A","text":"法国梧桐"},{"key":"B","text":"中国梧桐"},{"key":"C","text":"德国梧桐"},{"key":"D","text":"印度梧桐"}],"answer":"A","answerText":"法国梧桐"},{"id":284,"rawId":284,"sourcePage":64,"prompt":"垂柳在传统文化中，最常关联的习俗是（）。","options":[{"key":"A","text":"清明插柳，象征生命力旺盛"},{"key":"B","text":"中秋赏月，象征团圆"},{"key":"C","text":"春节贴福，象征吉祥"},{"key":"D","text":"重阳登高，象征长寿"}],"answer":"A","answerText":"清明插柳，象征生命力旺盛"},{"id":285,"rawId":285,"sourcePage":65,"prompt":"垂柳最常见的实用用途是（）。","options":[{"key":"A","text":"枝条可编筐，木材可做家具，用于水景绿化"},{"key":"B","text":"果实可食用、酿酒"},{"key":"C","text":"花朵可制茶、做香料"},{"key":"D","text":"树干可割取树脂"}],"answer":"A","answerText":"枝条可编筐，木材可做家具，用于水景绿化"},{"id":286,"rawId":286,"sourcePage":65,"prompt":"杨梅最主要的经济价值是（）。","options":[{"key":"A","text":"树皮制作橡胶"},{"key":"B","text":"木材用于建筑承重"},{"key":"C","text":"花朵提取香精"},{"key":"D","text":"优质水果，可加工成果酱、果酒、蜜饯"}],"answer":"D","answerText":"优质水果，可加工成果酱、果酒、蜜饯"},{"id":287,"rawId":287,"sourcePage":65,"prompt":"中国梧桐，俗称青桐，在传统文化中主要象征（）。","options":[{"key":"A","text":"勇敢坚强"},{"key":"B","text":"财源滚滚"},{"key":"C","text":"多子多福"},{"key":"D","text":"吉祥高贵，凤凰非梧桐不栖"}],"answer":"D","answerText":"吉祥高贵，凤凰非梧桐不栖"},{"id":288,"rawId":288,"sourcePage":65,"prompt":"香橼（枸橼、香泡）最常见的实用价值是（）。","options":[{"key":"A","text":"果实可入药、做蜜饯，花可制花茶"},{"key":"B","text":"木材可做家具、建筑"},{"key":"C","text":"种子可榨食用油"},{"key":"D","text":"树皮可提取橡胶"}],"answer":"A","answerText":"果实可入药、做蜜饯，花可制花茶"},{"id":289,"rawId":289,"sourcePage":66,"prompt":"朴树在生态与文化建设方面的主要特点是（）。","options":[{"key":"A","text":"水上绿化，净化水质"},{"key":"B","text":"象征富贵吉祥，适合庭院招财"},{"key":"C","text":"冬季开花，象征坚韧不屈"},{"key":"D","text":"皖东丘陵地区重要造林树种，能够抗有害气体、吸附粉尘，象征宁静淡泊"}],"answer":"D","answerText":"皖东丘陵地区重要造林树种，能够抗有害气体、吸附粉尘，象征宁静淡泊"},{"id":290,"rawId":290,"sourcePage":66,"prompt":"榔榆最突出的生态与观赏特点是（）。","options":[{"key":"A","text":"春季开花，花香浓郁"},{"key":"B","text":"果实可食用，营养丰富"},{"key":"C","text":"适合沙漠干旱地区种植"},{"key":"D","text":"抗有害气体、滞尘强，树皮斑驳、秋叶变红"}],"answer":"D","answerText":"抗有害气体、滞尘强，树皮斑驳、秋叶变红"},{"id":291,"rawId":291,"sourcePage":66,"prompt":"榔榆在生活与生产中的主要用途是（）。","options":[{"key":"A","text":"榨取食用油，作为油料作物"},{"key":"B","text":"花朵提炼香精，制作香水"},{"key":"C","text":"木材松软，只能当柴烧"},{"key":"D","text":"材质坚韧耐水湿，适合做盆景、优质用材"}],"answer":"D","answerText":"材质坚韧耐水湿，适合做盆景、优质用材"},{"id":292,"rawId":292,"sourcePage":66,"prompt":"青檀最具代表性的文化与生态价值是（）。","options":[{"key":"A","text":"用于制作食用油原料"},{"key":"B","text":"我国特有树种，树皮是制作宣纸的核心原料，树叶可用于制茶"},{"key":"C","text":"主要作为水果树栽培"},{"key":"D","text":"适合在水中生长净化水质"}],"answer":"B","answerText":"我国特有树种，树皮是制作宣纸的核心原料，树叶可用于制茶"},{"id":293,"rawId":293,"sourcePage":66,"prompt":"油桐最突出的经济价值是（）。","options":[{"key":"A","text":"冬季开花，象征坚强不屈"},{"key":"B","text":"可监测空气污染，桐子可榨油，桐油是我国传统非遗防水、防腐原料"},{"key":"C","text":"果实可当水果食用"},{"key":"D","text":"适合沙漠绿化，防风固沙"}],"answer":"B","answerText":"可监测空气污染，桐子可榨油，桐油是我国传统非遗防水、防腐原料"},{"id":294,"rawId":294,"sourcePage":67,"prompt":"重阳木的文化寓意主要是（）。","options":[{"key":"A","text":"象征招财进宝"},{"key":"B","text":"与重阳节相关，象征敬老祈福"},{"key":"C","text":"象征爱情长久"},{"key":"D","text":"象征步步高升"}],"answer":"B","answerText":"与重阳节相关，象征敬老祈福"},{"id":295,"rawId":295,"sourcePage":67,"prompt":"乌桕最突出的生态文化特点是（）。","options":[{"key":"A","text":"秋季叶片变红，观赏价值高，名字与乌鸦食籽有关"},{"key":"B","text":"冬季开花，香气浓郁"},{"key":"C","text":"果实可食用，是著名水果"},{"key":"D","text":"生长在沙漠，防风固沙"}],"answer":"A","answerText":"秋季叶片变红，观赏价值高，名字与乌鸦食籽有关"},{"id":296,"rawId":296,"sourcePage":67,"prompt":"毛叶山桐子主要的生态作用是（）。","options":[{"key":"A","text":"净化水质，适合水边种植"},{"key":"B","text":"防风固沙，治理沙漠"},{"key":"C","text":"固土保水，适合退耕还林与矿区复绿"},{"key":"D","text":"吸收甲醛，适合室内摆放"}],"answer":"C","answerText":"固土保水，适合退耕还林与矿区复绿"},{"id":297,"rawId":297,"sourcePage":67,"prompt":"喜树最突出的生态文化价值是（）。","options":[{"key":"A","text":"果实可食用，是传统果树"},{"key":"B","text":"我国特有树种，抗有害气体，适合污染区绿化"},{"key":"C","text":"冬季开花，香气浓郁"},{"key":"D","text":"生长在沙漠，防风固沙"}],"answer":"B","answerText":"我国特有树种，抗有害气体，适合污染区绿化"},{"id":298,"rawId":298,"sourcePage":68,"prompt":"柿树在传统文化中主要（）。","options":[{"key":"A","text":"象征勇敢无畏"},{"key":"B","text":"象征清廉高洁"},{"key":"C","text":"象征事事如意、吉祥丰收"},{"key":"D","text":"象征招财进宝"}],"answer":"C","answerText":"象征事事如意、吉祥丰收"},{"id":299,"rawId":299,"sourcePage":68,"prompt":"紫竹在传统文化中主要象征（）。","options":[{"key":"A","text":"富贵发财"},{"key":"B","text":"坚韧不拔、虚心有节，寓意紫气东来"},{"key":"C","text":"多子多福"},{"key":"D","text":"热情奔放"}],"answer":"B","answerText":"坚韧不拔、虚心有节，寓意紫气东来"},{"id":300,"rawId":300,"sourcePage":68,"prompt":"孝顺竹在传统文化中主要象征（）。","options":[{"key":"A","text":"招财进宝、财源滚滚"},{"key":"B","text":"母慈子孝、家庭和睦"},{"key":"C","text":"高洁不屈、君子之风"},{"key":"D","text":"坚韧顽强、不怕困难"}],"answer":"B","answerText":"母慈子孝、家庭和睦"}]}</script>
+    <script>
+window.EMBEDDED_QUIZ_DATA = JSON.parse(document.getElementById("question-data").textContent);
+    </script>
+    <script>
+const elements = {
+  statusLine: document.querySelector("#status-line"),
+  questionId: document.querySelector("#question-id"),
+  pageInfo: document.querySelector("#page-info"),
+  questionText: document.querySelector("#question-text"),
+  options: document.querySelector("#options"),
+  result: document.querySelector("#result"),
+  nextButton: document.querySelector("#next-button"),
+  reshuffleButton: document.querySelector("#reshuffle-button"),
+  resetButton: document.querySelector("#reset-button"),
+  totalCount: document.querySelector("#total-count"),
+  answeredCount: document.querySelector("#answered-count"),
+  accuracy: document.querySelector("#accuracy"),
+  wrongCount: document.querySelector("#wrong-count"),
+  modeButtons: Array.from(document.querySelectorAll(".mode-button")),
+};
+
+const STORAGE_KEY = "tree-quiz-state-v1";
+
+const app = {
+  questions: [],
+  deck: [],
+  current: null,
+  selectedKey: "",
+  mode: "all",
+  stats: {
+    answered: 0,
+    correct: 0,
+    wrongIds: [],
+  },
+};
+
+function readStoredValue() {
+  try {
+    return localStorage.getItem(STORAGE_KEY);
+  } catch {
+    return null;
+  }
+}
+
+function writeStoredValue(value) {
+  try {
+    localStorage.setItem(STORAGE_KEY, value);
+  } catch {
+    // Some file preview environments disable localStorage.
+  }
+}
+
+function removeStoredValue() {
+  try {
+    localStorage.removeItem(STORAGE_KEY);
+  } catch {
+    // Some file preview environments disable localStorage.
+  }
+}
+
+function createEmptyStats() {
+  return {
+    answered: 0,
+    correct: 0,
+    wrongIds: [],
+  };
+}
+
+function loadStoredStats() {
+  try {
+    const value = JSON.parse(readStoredValue() || "null");
+    if (!value) return;
+    app.stats.answered = Number(value.answered) || 0;
+    app.stats.correct = Number(value.correct) || 0;
+    app.stats.wrongIds = Array.isArray(value.wrongIds) ? value.wrongIds.map(Number) : [];
+  } catch {
+    removeStoredValue();
+  }
+}
+
+function saveStoredStats() {
+  writeStoredValue(JSON.stringify(app.stats));
+}
+
+async function loadQuestions() {
+  const embeddedData = window.EMBEDDED_QUIZ_DATA;
+  if (embeddedData && Array.isArray(embeddedData.questions)) {
+    return embeddedData.questions;
+  }
+  return [];
+}
+
+function setChildren(parent, children) {
+  while (parent.firstChild) {
+    parent.removeChild(parent.firstChild);
+  }
+  children.forEach((child) => parent.appendChild(child));
+}
+
+function shuffle(items) {
+  const next = [...items];
+  for (let index = next.length - 1; index > 0; index -= 1) {
+    const swapIndex = Math.floor(Math.random() * (index + 1));
+    [next[index], next[swapIndex]] = [next[swapIndex], next[index]];
+  }
+  return next;
+}
+
+function getPool() {
+  if (app.mode === "wrong") {
+    const wrongSet = new Set(app.stats.wrongIds);
+    return app.questions.filter((question) => wrongSet.has(question.id));
+  }
+  return app.questions;
+}
+
+function resetDeck() {
+  app.deck = shuffle(getPool());
+}
+
+function nextQuestion() {
+  const pool = getPool();
+  app.selectedKey = "";
+  hideResult();
+
+  if (!pool.length) {
+    app.current = null;
+    renderEmptyState();
+    return;
+  }
+
+  if (!app.deck.length) resetDeck();
+  app.current = app.deck.pop();
+  renderQuestion();
+}
+
+function renderEmptyState() {
+  elements.questionId.textContent = app.mode === "wrong" ? "错题已清空" : "-";
+  elements.pageInfo.textContent = "-";
+  elements.questionText.textContent = app.mode === "wrong" ? "当前没有错题。" : "题库为空。";
+  elements.questionText.classList.add("is-empty");
+  setChildren(elements.options, []);
+  elements.nextButton.disabled = app.mode === "wrong";
+}
+
+function renderQuestion() {
+  const question = app.current;
+  elements.questionText.classList.remove("is-empty");
+  elements.nextButton.disabled = false;
+  elements.questionId.textContent = `第 ${question.id} 题`;
+  elements.pageInfo.textContent = `PDF 第 ${question.sourcePage} 页`;
+  elements.questionText.textContent = question.prompt;
+  setChildren(elements.options, question.options.map((option) => renderOption(option)));
+}
+
+function renderOption(option) {
+  const button = document.createElement("button");
+  button.className = "option-button";
+  button.type = "button";
+  button.dataset.key = option.key;
+  button.addEventListener("click", () => selectOption(option.key));
+
+  const key = document.createElement("span");
+  key.className = "option-key";
+  key.textContent = option.key;
+
+  const text = document.createElement("span");
+  text.className = "option-text";
+  text.textContent = option.text;
+
+  button.append(key, text);
+  return button;
+}
+
+function selectOption(key) {
+  if (!app.current || app.selectedKey) return;
+
+  app.selectedKey = key;
+  const isCorrect = key === app.current.answer;
+  app.stats.answered += 1;
+  if (isCorrect) {
+    app.stats.correct += 1;
+    app.stats.wrongIds = app.stats.wrongIds.filter((id) => id !== app.current.id);
+  } else if (!app.stats.wrongIds.includes(app.current.id)) {
+    app.stats.wrongIds.push(app.current.id);
+  }
+
+  saveStoredStats();
+  markOptions();
+  showResult(isCorrect);
+  updateStats();
+}
+
+function markOptions() {
+  Array.from(elements.options.children).forEach((button) => {
+    const key = button.dataset.key;
+    button.disabled = true;
+    if (key === app.current.answer) button.classList.add("is-correct");
+    if (key === app.selectedKey && key !== app.current.answer) button.classList.add("is-wrong");
+  });
+}
+
+function hideResult() {
+  elements.result.hidden = true;
+  elements.result.className = "result";
+  setChildren(elements.result, []);
+}
+
+function showResult(isCorrect) {
+  elements.result.hidden = false;
+  elements.result.classList.add(isCorrect ? "is-correct" : "is-wrong");
+
+  const title = document.createElement("div");
+  title.className = "result-title";
+  title.textContent = isCorrect ? "答对了" : "答错了";
+
+  const answer = document.createElement("div");
+  answer.className = "result-answer";
+  answer.textContent = `正确答案：${app.current.answer}. ${app.current.answerText}`;
+
+  setChildren(elements.result, [title, answer]);
+}
+
+function updateStats() {
+  const total = app.questions.length;
+  const answered = app.stats.answered;
+  const accuracy = answered ? Math.round((app.stats.correct / answered) * 100) : 0;
+
+  elements.totalCount.textContent = total;
+  elements.answeredCount.textContent = answered;
+  elements.accuracy.textContent = `${accuracy}%`;
+  elements.wrongCount.textContent = app.stats.wrongIds.length;
+  elements.statusLine.textContent = `${total} 题 · 当前 ${app.mode === "wrong" ? "错题" : "全题"}模式`;
+}
+
+function setMode(mode) {
+  app.mode = mode;
+  elements.modeButtons.forEach((button) => {
+    const active = button.dataset.mode === mode;
+    button.classList.toggle("is-active", active);
+    button.setAttribute("aria-selected", String(active));
+  });
+  resetDeck();
+  nextQuestion();
+  updateStats();
+}
+
+function resetAllProgress() {
+  const confirmed = window.confirm("重置所有练习记录？之前做过的题、正确率和错题都会清空。");
+  if (!confirmed) return;
+
+  app.stats = createEmptyStats();
+  app.selectedKey = "";
+  app.current = null;
+  removeStoredValue();
+  setMode("all");
+}
+
+async function init() {
+  loadStoredStats();
+
+  try {
+    app.questions = await loadQuestions();
+    resetDeck();
+    nextQuestion();
+    updateStats();
+  } catch (error) {
+    elements.statusLine.textContent = "题库读取失败";
+    elements.questionId.textContent = "-";
+    elements.pageInfo.textContent = "-";
+    elements.questionText.textContent = "请通过本地服务器或已部署的网址打开应用。";
+    setChildren(elements.options, []);
+    console.error(error);
+  }
+
+  elements.nextButton.addEventListener("click", nextQuestion);
+  elements.reshuffleButton.addEventListener("click", () => {
+    resetDeck();
+    nextQuestion();
+  });
+  elements.resetButton.addEventListener("click", resetAllProgress);
+  elements.modeButtons.forEach((button) => {
+    button.addEventListener("click", () => setMode(button.dataset.mode));
+  });
+}
+
+init();
+    </script>
+  </body>
+</html>
