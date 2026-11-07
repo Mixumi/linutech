@@ -283,6 +283,7 @@
     document.title = 'ReadyGo · ' + copy.ui.policy + ' | Linutech';
     document.querySelector('meta[name="description"]').content = copy.ui.intro;
     select.value = lang;
+    document.querySelectorAll('a[href^="readygo.html"]').forEach(link => { link.href = "readygo.html?lang=" + lang; });
     document.querySelectorAll('[data-i18n]').forEach(node => { node.textContent = copy.ui[node.dataset.i18n]; });
     document.querySelectorAll('[data-summary-title]').forEach(node => { node.textContent = copy.ui.summary[Number(node.dataset.summaryTitle)][0]; });
     document.querySelectorAll('[data-summary-text]').forEach(node => { node.textContent = copy.ui.summary[Number(node.dataset.summaryText)][1]; });
@@ -322,3 +323,4 @@
 </script>
 </body>
 </html>
+

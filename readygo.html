@@ -1,371 +1,98 @@
 <!DOCTYPE html>
-<html lang="zh-CN" data-theme="light">
-<head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>ReadyGo | 便利贴式清单工具</title>
-  <meta name="description" content="ReadyGo 以便利贴风格记录每日计划，支持画中画提醒、桌面组件与多维统计，帮助你清晰掌握每一步。">
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Poppins:wght@500;600&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="stylesheets/site.css">
-  <script src="javascripts/site.js" defer></script>
-  <style>
-    :root {
-      --readygo-purple: #5f5bdb;
-      --readygo-ink: #1f1f3d;
-      --readygo-gray: #f4f5fb;
-    }
-
-    body.product-page.readygo-page {
-      background: radial-gradient(circle at top, rgba(95, 91, 219, 0.12), transparent 55%) var(--page-bg, #f7f8fd);
-      color: var(--readygo-ink);
-    }
-
-    .readygo-hero {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-      gap: 36px;
-      align-items: center;
-      padding-block: 48px 24px;
-    }
-
-    .readygo-hero__content span,
-    .readygo-hero__content p {
-      color: rgba(15, 23, 42, 0.75);
-    }
-
-    .readygo-gallery {
-      position: relative;
-      padding: 28px;
-      border-radius: 32px;
-      background: linear-gradient(160deg, #fdf5ff, #eef2ff);
-      box-shadow: 0 30px 80px rgba(95, 91, 219, 0.15);
-    }
-
-    .readygo-phone {
-      width: min(360px, 100%);
-      margin-inline: auto;
-      border-radius: 40px;
-      padding: 18px 18px 28px;
-      background: #0f172a;
-      box-shadow: 0 40px 120px rgba(15, 23, 42, 0.45);
-      position: relative;
-      color: #0f172a;
-    }
-
-    .readygo-notch {
-      width: 160px;
-      height: 16px;
-      border-radius: 999px;
-      background: #0c1220;
-      margin: 0 auto 18px;
-    }
-
-    .readygo-screen {
-      background: #f9f7f5;
-      border-radius: 28px;
-      padding: 24px;
-      display: grid;
-      gap: 16px;
-      min-height: 560px;
-      position: relative;
-      overflow: hidden;
-    }
-
-    .sticky-note {
-      border-radius: 18px 18px 32px 18px;
-      padding: 18px;
-      display: grid;
-      gap: 6px;
-      box-shadow: 0 15px 30px rgba(15, 23, 42, 0.12);
-      font-size: 0.95rem;
-    }
-
-    .sticky-note__title {
-      font-weight: 600;
-    }
-
-    .sticky-note--yellow { background: #fff5a1; }
-    .sticky-note--green { background: #c9f0c4; }
-    .sticky-note--pink { background: #ffd1e8; }
-    .sticky-note--purple { background: #d9d3ff; }
-
-    .sticky-note__meta {
-      font-size: 0.8rem;
-      display: flex;
-      gap: 4px;
-      color: rgba(15, 23, 42, 0.6);
-    }
-
-    .sticky-grid {
-      display: grid;
-      grid-template-columns: repeat(2, minmax(0, 1fr));
-      gap: 14px;
-    }
-
-    .readygo-widget {
-      background: linear-gradient(160deg, #fff, #f5f0ff);
-      border-radius: 26px;
-      padding: 16px;
-      display: grid;
-      gap: 12px;
-      margin-top: 8px;
-      box-shadow: inset 0 0 0 1px rgba(15, 23, 42, 0.08);
-    }
-
-    .readygo-widget__card {
-      background: #fff;
-      border-radius: 20px;
-      padding: 14px;
-      display: grid;
-      gap: 8px;
-      border: 1px solid rgba(95, 91, 219, 0.15);
-    }
-
-    .readygo-widget__progress {
-      height: 6px;
-      border-radius: 999px;
-      background: rgba(95, 91, 219, 0.2);
-      overflow: hidden;
-    }
-
-    .readygo-widget__progress span {
-      display: block;
-      height: 100%;
-      width: var(--value, 60%);
-      background: linear-gradient(90deg, #ffb347, #ffcc33);
-      border-radius: inherit;
-    }
-
-    .readygo-section {
-      margin-top: 72px;
-    }
-
-    .readygo-section__title {
-      font-size: clamp(1.8rem, 3vw, 2.6rem);
-      margin-bottom: 18px;
-    }
-
-    .readygo-feature-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-      gap: 20px;
-    }
-
-    .readygo-feature {
-      padding: 24px;
-      border-radius: 20px;
-      background: rgba(255, 255, 255, 0.9);
-      border: 1px solid rgba(95, 91, 219, 0.1);
-      box-shadow: 0 15px 40px rgba(15, 23, 42, 0.08);
-    }
-
-    .readygo-feature strong {
-      display: block;
-      margin-bottom: 8px;
-      font-size: 1.05rem;
-    }
-
-    .pip-banner {
-      margin-top: 28px;
-      padding: 20px 24px;
-      border-radius: 24px;
-      background: linear-gradient(120deg, rgba(95, 91, 219, 0.12), rgba(255, 179, 71, 0.25));
-      border: 1px solid rgba(95, 91, 219, 0.2);
-      display: flex;
-      gap: 16px;
-      align-items: center;
-      flex-wrap: wrap;
-    }
-
-    .pip-banner__icon {
-      width: 48px;
-      height: 48px;
-      border-radius: 16px;
-      background: #fff;
-      display: grid;
-      place-items: center;
-      font-size: 1.4rem;
-      color: #5f5bdb;
-      box-shadow: inset 0 0 0 1px rgba(95, 91, 219, 0.08);
-    }
-
-    .readygo-cta {
-      margin-top: 64px;
-      padding: 32px;
-      border-radius: 28px;
-      background: #fff;
-      border: 1px solid rgba(95, 91, 219, 0.1);
-      box-shadow: 0 20px 60px rgba(15, 23, 42, 0.08);
-      text-align: center;
-      display: grid;
-      gap: 18px;
-    }
-
-    .readygo-pills {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 10px;
-      justify-content: center;
-    }
-
-    .readygo-pills span {
-      padding: 8px 14px;
-      border-radius: 999px;
-      background: rgba(95, 91, 219, 0.1);
-      color: #3b378b;
-      font-size: 0.9rem;
-    }
-
-    @media (max-width: 640px) {
-      .sticky-grid { grid-template-columns: 1fr; }
-      .readygo-phone { padding: 12px 12px 20px; }
-      .readygo-screen { min-height: 0; }
-    }
-  </style>
-</head>
-<body class="product-page readygo-page">
-  <header class="top-nav" data-animate>
-    <a class="brand" href="index.html">Linutech</a>
-    <div class="top-nav__controls">
-      <nav class="top-nav__links">
-        <a href="index.html#products">全部产品</a>
-        <a href="privacy.html">隐私政策</a>
-        <a href="mailto:yutang_work@163.com">联系客服</a>
-      </nav>
-    </div>
-  </header>
-
-  <main>
-    <section class="readygo-hero" data-animate>
-      <div class="readygo-hero__content" data-animate data-animate-delay="0.04s">
-        <span class="product-hero__eyebrow">便利贴式清单 · iOS</span>
-        <h1 class="product-hero__title">ReadyGo</h1>
-        <p class="product-hero__lead">ReadyGo 把每日计划变成随手可贴的便利贴，醒目的色块配合画中画与桌面组件，保证每一个提醒都能按时出现。</p>
-        <ul class="highlight-list" data-animate data-animate-delay="0.08s">
-          <li>灵感式卡片记录：随手添加待办、进度和备注，信息结构一目了然。</li>
-          <li>日历视图与清单统计结合，帮助你掌握每周完成趋势。</li>
-          <li>画中画悬浮窗与锁屏组件实时提醒，确保关键待办不错过。</li>
-        </ul>
-        <div class="product-meta" data-animate data-animate-delay="0.12s">
-          <span class="product-tag">iPhone · iPad</span>
-          <span class="product-tag">便利贴视感</span>
-          <span class="product-tag">画中画提醒</span>
-        </div>
-        <div class="cta-group" data-animate data-animate-delay="0.16s">
-          <a class="button button--primary" href="mailto:yutang_work@163.com?subject=ReadyGo%20体验咨询">申请测试版</a>
-          <a class="button button--ghost" href="privacy.html#readygo">查看隐私政策</a>
-        </div>
-      </div>
-
-      <div class="readygo-gallery" data-animate data-animate-delay="0.1s">
-        <div class="readygo-phone">
-          <div class="readygo-notch"></div>
-          <div class="readygo-screen">
-            <div class="sticky-grid">
-              <article class="sticky-note sticky-note--yellow">
-                <span class="sticky-note__title">欢迎来到 ReadyGo</span>
-                <p>用便利贴一样的方式创建每日日清单。</p>
-                <div class="sticky-note__meta">
-                  <span>进度</span>
-                  <strong>1/4</strong>
-                </div>
-              </article>
-              <article class="sticky-note sticky-note--pink">
-                <span class="sticky-note__title">完成任务见证自己的进步</span>
-                <p>彩色卡片实时累积完成度。</p>
-              </article>
-              <article class="sticky-note sticky-note--green">
-                <span class="sticky-note__title">像贴纸一样创建新的每日清单</span>
-                <p>轻点即可新增，支持分类标签。</p>
-              </article>
-              <article class="sticky-note sticky-note--purple">
-                <span class="sticky-note__title">准备好了吗？Ready, Go!</span>
-                <p>长按拖动排序，安排今日优先级。</p>
-              </article>
-            </div>
-            <div class="readygo-widget">
-              <div class="readygo-widget__card">
-                <strong>星期间概览</strong>
-                <p>清单总数 16 · 已完成 14 · 完成率 87.5%</p>
-                <div class="readygo-widget__progress"><span style="--value:87%"></span></div>
-              </div>
-              <div class="readygo-widget__card">
-                <strong>月度养成</strong>
-                <p>30 分钟学习 · 3 公里慢跑 · 家务日程</p>
-              </div>
-              <div class="readygo-widget__card">
-                <strong>画中画提醒</strong>
-                <p>今日待办随时浮现，锁屏也能查进度。</p>
-              </div>
-            </div>
-          </div>
-        </div>
-        <p class="device-gallery__caption">视觉演示基于真实界面，呈现 ReadyGo 的便利贴风格。</p>
-      </div>
-    </section>
-
-    <section class="readygo-section" data-animate data-animate-delay="0.04s">
-      <h2 class="readygo-section__title">每日计划，清楚可见</h2>
-      <div class="readygo-feature-grid">
-        <div class="readygo-feature" data-animate data-animate-delay="0.06s">
-          <strong>清单分区与进度</strong>
-          <p>在“今日摘要”“每周专注”“家务计划”等分区里管理任务，彩色进度条自动计算完成率。</p>
-        </div>
-        <div class="readygo-feature" data-animate data-animate-delay="0.1s">
-          <strong>长按拖动排序</strong>
-          <p>通过手势重排便利贴，实时调整优先级，确保最重要的任务始终在上方。</p>
-        </div>
-        <div class="readygo-feature" data-animate data-animate-delay="0.14s">
-          <strong>日历概览</strong>
-          <p>切换到日历统计视图，即可看到本周与本月的习惯坚持情况，复盘更轻松。</p>
-        </div>
-        <div class="readygo-feature" data-animate data-animate-delay="0.18s">
-          <strong>桌面与小组件</strong>
-          <p>提供多款桌面组件和画中画模式，让任务在主屏幕、锁屏或悬浮窗里实时显示。</p>
-        </div>
-      </div>
-      <div class="pip-banner" data-animate data-animate-delay="0.2s">
-        <div class="pip-banner__icon">🗂️</div>
-        <div>
-          <strong>画中画提醒</strong>
-          <p>ReadyGo 利用系统画中画能力在任何 App 上方悬浮清单，提醒不会被错过，同时不会上传你的任务内容。</p>
-        </div>
-      </div>
-    </section>
-
-    <section class="readygo-section" data-animate data-animate-delay="0.08s">
-      <h2 class="readygo-section__title">适合这些人群</h2>
-      <ul class="use-case-list">
-        <li>喜欢视觉化计划的学生或自由职业者。</li>
-        <li>希望用便利贴记下家庭家务与健康目标的用户。</li>
-        <li>经常在多个 App 间切换，需要悬浮提醒避免忘记事项的人。</li>
-      </ul>
-      <div class="readygo-pills">
-        <span>学习冲刺</span>
-        <span>家庭计划</span>
-        <span>健身提醒</span>
-        <span>写作灵感</span>
-      </div>
-    </section>
-
-    <section class="readygo-cta" data-animate data-animate-delay="0.12s">
-      <h2>想体验 ReadyGo？</h2>
-      <p>发送邮件至 <a href="mailto:yutang_work@163.com">yutang_work@163.com</a> 获取最新内测包，我们会第一时间邀请你体验。</p>
-      <div class="cta-group" style="justify-content:center;">
-        <a class="button button--primary" href="mailto:yutang_work@163.com?subject=ReadyGo%20内测申请">申请内测</a>
-        <a class="button button--ghost" href="privacy.html#readygo">了解数据与权限</a>
-      </div>
-    </section>
-  </main>
-
-  <footer class="page-footer" data-animate data-animate-delay="0.14s">
-    <span>© 2025 Linutech · ReadyGo</span>
-    <div class="page-footer__links">
-      <a href="privacy.html">隐私政策</a>
-      <a href="mailto:yutang_work@163.com">客服邮箱</a>
-    </div>
-  </footer>
-</body>
-</html>
+<html lang="zh-Hans"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><meta name="color-scheme" content="light dark"><meta name="description" content="用彩色清单整理日常待办与场景准备。了解 ReadyGo 1.7 的无限画布、场景模板、小组件、提醒与月度复盘。"><meta name="referrer" content="strict-origin-when-cross-origin">
+<title>ReadyGo · 把要做的事，放在看得见的地方</title><link rel="canonical" href="https://mixumi.github.io/linutech/readygo.html">
+<style>:root{--bg:#faf9f6;--paper:#fffefa;--ink:#29283c;--muted:#62616e;--rule:#e3e0e7;--purple:#655096;--tint:#eee7fb;--dot:#dcd8e3;--green:#35664d;--blue:#e6eef0;--yellow:#f4edc9;color-scheme:light dark;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","Noto Sans",Arial,sans-serif;font-synthesis:none}*{box-sizing:border-box}html{scroll-behavior:smooth;scroll-padding-top:30px}body{margin:0;background:var(--bg);color:var(--ink);font-size:16px;line-height:1.75;-webkit-font-smoothing:antialiased}a{color:var(--purple);text-decoration-thickness:1px;text-underline-offset:4px}a:hover{text-decoration:underline}a:focus-visible,select:focus-visible,button:focus-visible,summary:focus-visible,[tabindex="0"]:focus-visible{outline:3px solid var(--purple);outline-offset:5px;border-radius:4px}button,select{font:inherit}h1,h2,h3,p,figure{margin:0}[hidden]{display:none!important}.sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}.skip-link{position:absolute;left:20px;top:-100px;padding:10px 18px;background:var(--paper);z-index:10}.skip-link:focus{top:10px}.site-header,.site-footer,main{max-width:1160px;margin-inline:auto}.site-header{min-height:96px;display:flex;align-items:center;justify-content:space-between;gap:24px;padding:20px 40px;border-bottom:1px solid var(--rule)}.brand{display:flex;gap:12px;align-items:center;font-weight:760;font-size:24px;letter-spacing:-.8px;color:var(--ink);text-decoration:none}.brand-mark{display:grid;place-items:center;line-height:1;width:32px;height:36px;border:1.5px solid var(--ink);border-radius:7px;background:var(--paper);font-size:24px;position:relative}.brand-mark:before{content:"";position:absolute;top:-4px;left:7px;right:7px;height:7px;background:#cbb9e9;transform:rotate(-7deg);opacity:.9}.header-actions,.header-actions nav{display:flex;align-items:center;gap:24px;font-size:13px}.header-actions nav a{color:var(--muted);text-decoration:none}.language-control{display:flex;align-items:center;gap:5px;min-height:44px;padding:0 10px 0 14px;background:var(--paper);border:1px solid var(--rule);border-radius:24px}.language-control label{font-size:24px;line-height:1;color:var(--purple)}select{color:var(--ink);background:transparent;border:0;max-width:160px;min-height:42px;padding:4px 8px;cursor:pointer;font-size:14px}select option{background:var(--paper);color:var(--ink)}main{padding:0 40px}.product-hero{display:grid;grid-template-columns:minmax(0,1.25fr) minmax(0,1fr);gap:55px;align-items:center;padding:58px 0 50px}.hero-copy{min-width:0}.eyebrow{display:flex;align-items:center;gap:9px;color:var(--purple);font-size:12px;font-weight:650;letter-spacing:1.8px;margin-bottom:22px}.status-dot{width:6px;height:6px;flex-shrink:0;background:var(--purple);border-radius:50%}h1{font-size:clamp(38px,4.6vw,57px);line-height:1.26;letter-spacing:-2.2px;font-weight:740;white-space:pre-line;overflow-wrap:anywhere;hyphens:auto}.hero-intro{font-size:16px;line-height:1.9;color:var(--muted);margin-top:24px;max-width:530px}.cta-row{display:flex;flex-wrap:wrap;align-items:center;gap:20px 25px;margin-top:30px}.button{display:inline-flex;justify-content:center;align-items:center;gap:17px;padding:13px 22px;min-height:49px;border-radius:9px;text-decoration:none;font-size:14px;font-weight:600;line-height:1.6}.button:hover{text-decoration:none;filter:brightness(1.09)}.primary{color:#fff;background:#655096}.text-link{display:inline-flex;gap:12px;align-items:center;font-size:13px;text-decoration:none;font-weight:550}.fine-print{font-size:12px;color:var(--muted);line-height:1.8;margin-top:17px}.hero-tag{font-size:11px;color:var(--muted);margin-top:40px;display:flex;align-items:center;gap:8px}.hero-tag:before{content:"";width:23px;height:1px;background:var(--rule)}.hero-visual{position:relative;min-width:0;text-align:center;padding:8px 0 0;background-image:radial-gradient(var(--dot) 1px,transparent 1px);background-size:20px 20px}.hero-visual:before{content:"";position:absolute;left:8%;right:6%;top:16%;bottom:11%;background:var(--tint);transform:rotate(-7deg);border-radius:12px;z-index:0}.screenshot-mat{position:relative;max-width:242px;margin-inline:auto;background:var(--paper);padding:8px;border:1px solid var(--rule);border-radius:12px;box-shadow:0 16px 42px #29283c12}.screenshot-mat:before{content:"";position:absolute;top:-13px;left:calc(50% - 38px);height:24px;width:76px;background:#c8b4e4bd;transform:rotate(3deg);pointer-events:none;z-index:1}.screenshot-mat a,.gallery-visual a{display:block}.screenshot-mat img,.gallery-visual img{display:block;width:100%;height:auto}.hero-visual figcaption{position:relative;font-size:11px;margin-top:15px;color:var(--muted);background:var(--bg);display:inline-block;padding:3px 10px}.highlights{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:28px;border-block:1px solid var(--rule);padding:27px 0}.highlights>div{display:grid;grid-template-columns:28px minmax(0,1fr);column-gap:10px}.number{font-size:11px;color:var(--purple);grid-row:span 2;padding-top:3px}.highlights h2{font-size:14px;font-weight:650}.highlights p{font-size:12px;color:var(--muted);margin-top:3px}.intro-band,.section-heading{display:grid;grid-template-columns:190px minmax(0,1fr);gap:45px;align-items:start}.intro-band{padding:64px 0 40px}.section-label{display:flex;gap:14px;font-size:11px;letter-spacing:1px;color:var(--muted);padding-top:8px}.section-label>span:first-child{color:var(--rule)}h2{font-size:32px;line-height:1.4;font-weight:680;letter-spacing:-.9px;white-space:pre-line;overflow-wrap:anywhere;hyphens:auto}.intro-band p,.section-intro{font-size:15px;line-height:1.9;color:var(--muted);margin-top:14px;max-width:650px}.showcase{background:var(--paper);border:1px solid var(--rule);border-radius:18px;padding:45px 50px;display:grid;grid-template-columns:minmax(0,.85fr) minmax(0,1.15fr);gap:65px;align-items:center}.gallery-visual{max-width:254px;justify-self:center;width:100%;border:1px solid var(--rule);padding:7px;background:var(--paper);border-radius:10px}.gallery-content{min-width:0}.gallery-content h2{font-size:29px}.gallery-tabs{display:flex;flex-wrap:wrap;gap:7px;margin-top:28px}.gallery-tabs button{border:1px solid var(--rule);color:var(--muted);background:transparent;padding:9px 12px;min-height:42px;border-radius:7px;cursor:pointer;font-size:12px;line-height:1.5}.gallery-tabs button[aria-selected="true"]{background:var(--tint);color:var(--purple);border-color:var(--tint);font-weight:600}.gallery-copy{border-top:1px solid var(--rule);margin-top:22px;padding-top:23px}.gallery-copy h3{font-size:17px;font-weight:620;line-height:1.6}.gallery-copy p{font-size:14px;color:var(--muted);line-height:1.9;margin-top:12px}.screenshot-credit{font-size:11px;color:var(--muted);margin-top:19px}.features-block,.surfaces-block,.help-block{padding-top:76px}.features-grid{display:grid;grid-template-columns:1fr 1fr;gap:0 48px;margin-top:30px}.features-grid-item{position:relative;padding:28px 0 30px 37px;border-top:1px solid var(--rule)}.line-icon{position:absolute;left:0;top:32px;font-size:11px;color:var(--purple)}.features-grid h3,.surfaces-grid h3{font-size:18px;font-weight:630;line-height:1.55}.features-grid p,.surfaces-grid p{font-size:14px;line-height:1.95;color:var(--muted);margin-top:12px}.surfaces-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:35px;margin-top:32px}.surfaces-grid-item{position:relative;padding-top:42px;border-top:1px solid var(--rule)}.surfaces-grid .line-icon{top:11px}.system-note{font-size:12px;color:var(--muted);line-height:1.85;max-width:850px;margin-top:27px}.membership-block{margin-top:72px;padding:42px;background:var(--tint);border-radius:15px;display:grid;grid-template-columns:1fr 1fr;gap:55px}.membership-block h2{font-size:29px}.membership-block .eyebrow{margin-bottom:14px}.membership-block ul{list-style:none;margin:0;padding:0;display:grid;gap:15px;font-size:14px}.membership-block li{display:flex;gap:12px}.membership-block li span{color:var(--purple)}.privacy-block{padding:40px 0;display:grid;grid-template-columns:50px minmax(0,1fr);gap:20px;border-bottom:1px solid var(--rule)}.privacy-symbol{display:grid;place-items:center;width:48px;height:48px;border-radius:14px;background:var(--tint);color:var(--purple)}.privacy-symbol svg{width:28px;height:28px}.privacy-block h2{font-size:21px;letter-spacing:0}.privacy-block p{font-size:14px;color:var(--muted);line-height:1.9;max-width:830px;margin:12px 0}.privacy-block .text-link{margin-top:5px}.faq{margin:28px 0 0 235px}.faq details{border-top:1px solid var(--rule)}.faq details:last-child{border-bottom:1px solid var(--rule)}.faq summary{display:flex;align-items:center;justify-content:space-between;gap:20px;list-style:none;padding:20px 0;cursor:pointer;font-size:15px;font-weight:550;line-height:1.7}.faq summary::-webkit-details-marker{display:none}.faq summary b{font-size:18px;font-weight:400;color:var(--purple);flex-shrink:0}.faq details[open] summary b{transform:rotate(45deg)}.faq details p{font-size:14px;color:var(--muted);line-height:1.95;padding:0 25px 22px 0}.support{margin:35px 0 0 235px;display:grid;gap:20px}.support h3{font-size:18px;font-weight:600}.support p{font-size:13px;line-height:1.9;color:var(--muted);margin-top:8px}.support a{font-size:14px;width:fit-content}.final-cta{text-align:center;padding:78px 20px 65px;margin-top:70px;border-top:1px solid var(--rule)}.final-cta h2{font-size:35px}.final-cta>p{color:var(--muted);font-size:15px;margin-top:13px}.final-cta .button{margin-top:25px}.final-cta .fine-print{font-size:12px;margin-top:25px}.site-footer{display:flex;justify-content:space-between;align-items:center;gap:20px;padding:26px 40px 38px;border-top:1px solid var(--rule);font-size:12px;color:var(--muted)}.site-footer>div{display:grid;gap:5px}.site-footer>div>a{color:var(--ink);font-weight:650;letter-spacing:.3px}.site-footer nav{display:flex;flex-wrap:wrap;gap:12px 25px}.site-footer a{text-decoration:none}.noscript-note{font-size:13px;padding:20px}
+@media(max-width:960px){.header-actions nav a:nth-child(2),.header-actions nav a:nth-child(3){display:none}.product-hero{gap:35px}h1{font-size:43px}.showcase{padding:35px;gap:40px}.intro-band,.section-heading{grid-template-columns:130px minmax(0,1fr);gap:30px}.faq,.support{margin-left:160px}}
+@media(max-width:700px){.site-header{min-height:78px;padding:16px 22px;gap:15px}.brand{font-size:22px;gap:10px}.brand-mark{width:28px;height:31px}.header-actions{gap:8px}.header-actions nav{display:none}.language-control{padding-left:10px}select{font-size:13px;max-width:130px}main{padding:0 22px}.product-hero{grid-template-columns:minmax(0,1fr);gap:40px;padding:43px 0 30px}h1{font-size:clamp(34px,8.8vw,53px);letter-spacing:-1.4px;line-height:1.32}.eyebrow{font-size:11px;margin-bottom:18px}.hero-intro{font-size:15px;margin-top:20px}.cta-row{margin-top:25px;gap:18px 22px}.button{font-size:13px;padding:12px 18px}.hero-tag{display:none}.hero-visual{max-width:370px;width:100%;justify-self:center}.screenshot-mat{max-width:218px}.hero-visual:before{left:7%;right:7%}.fine-print{font-size:11px}.highlights{gap:18px;padding:22px 0;grid-template-columns:1fr}.highlights>div{column-gap:10px}.highlights h2{font-size:14px}.intro-band,.section-heading{grid-template-columns:minmax(0,1fr);gap:12px}.intro-band{padding:42px 0 25px}.section-label{font-size:10px;padding-top:0}h2{font-size:28px;letter-spacing:-.6px}.intro-band p,.section-intro{font-size:14px;margin-top:13px}.showcase{padding:26px 20px;grid-template-columns:minmax(0,1fr);gap:28px}.gallery-content{grid-row:1}.gallery-content h2{font-size:25px}.gallery-visual{max-width:218px}.gallery-tabs{margin-top:20px;gap:6px}.gallery-tabs button{padding:8px 10px;font-size:11px}.gallery-copy{margin-top:18px;padding-top:18px}.gallery-copy h3{font-size:17px}.gallery-copy p{font-size:13px}.gallery-content .fine-print{display:none}.screenshot-credit{font-size:10px;margin-top:15px}.features-block,.surfaces-block,.help-block{padding-top:44px}.features-grid,.surfaces-grid{grid-template-columns:minmax(0,1fr);gap:0;margin-top:23px}.features-grid-item{padding:23px 0 25px 28px}.line-icon{top:27px}.features-grid h3,.surfaces-grid h3{font-size:17px}.features-grid p,.surfaces-grid p{font-size:13px}.surfaces-grid-item{padding:22px 0 25px 28px}.surfaces-grid .line-icon{top:26px}.system-note{font-size:11px;margin-top:0}.membership-block{margin-top:40px;padding:26px 22px;grid-template-columns:minmax(0,1fr);gap:25px}.membership-block h2{font-size:26px}.membership-block ul{font-size:13px}.privacy-block{grid-template-columns:35px minmax(0,1fr);gap:15px;padding:30px 0}.privacy-symbol{width:35px;height:40px;border-radius:10px}.privacy-symbol svg{width:24px}.privacy-block h2{font-size:20px}.privacy-block p{font-size:13px}.faq,.support{margin-left:0}.faq summary{font-size:14px;padding:18px 0}.faq details p{font-size:13px;padding-right:0}.support{margin-top:27px}.final-cta{margin-top:43px;padding:44px 0}.final-cta h2{font-size:29px}.final-cta>p{font-size:14px}.final-cta .fine-print{font-size:11px;line-height:1.9}.site-footer{padding:25px 22px;display:block;font-size:11px}.site-footer nav{margin-top:18px;gap:12px 20px}}
+@media(prefers-color-scheme:dark){:root{--bg:#1c1b22;--paper:#26242d;--ink:#efedf4;--muted:#b8b4c3;--rule:#3b3845;--purple:#c5b1ef;--tint:#373045;--dot:#453f50;--green:#b3d8bc}.brand-mark:before{background:#947cb7}.screenshot-mat:before{background:#8a72b5c9}}
+@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+@media print{:root{--bg:#fff;--paper:#fff;--ink:#000;--muted:#222;--rule:#ccc;--purple:#333;--tint:#eee}.site-header,.hero-visual,.gallery-visual,.gallery-tabs,.cta-row,.button,.site-footer{display:none!important}main{max-width:none;padding:0}.product-hero,.showcase,.membership-block{display:block;padding:20px 0}.intro-band,.section-heading{display:block}.faq,.support{margin-left:0}.faq details>p{display:block}h1{font-size:30pt}h2{font-size:20pt}section{break-inside:avoid}}
+</style></head>
+<body><a class="skip-link" href="#features" data-copy="skip">跳至正文</a>
+<header class="site-header" id="top"><a class="brand" href="readygo.html"><span class="brand-mark" aria-hidden="true">✓</span><span>ReadyGo</span></a><div class="header-actions"><nav aria-label="ReadyGo"><a href="#features" data-copy="features">功能</a><a href="#membership" data-copy="membership">会员</a><a href="#help" data-copy="help">帮助</a><a class="privacy-link" href="privacy.html?lang=zh-Hans#readygo" data-copy="privacy">隐私政策</a></nav><div class="language-control" hidden><label for="language-select"><span aria-hidden="true">◎</span><span class="sr-only" data-copy="language">语言</span></label><select id="language-select"><option value="zh-Hans" lang="zh-Hans">简体中文</option><option value="zh-Hant" lang="zh-Hant">繁體中文</option><option value="en" lang="en">English</option><option value="ja" lang="ja">日本語</option><option value="ko" lang="ko">한국어</option><option value="fr" lang="fr">Français</option><option value="ru" lang="ru">Русский</option></select></div></div></header>
+<main>
+<section class="product-hero"><div class="hero-copy"><div class="eyebrow"><span class="status-dot" aria-hidden="true"></span><span class="" data-copy="eyebrow">READYGO 1.7</span></div><h1 class="" data-copy="hero">把要做的事，
+放在看得见的地方。</h1><p class="hero-intro" data-copy="intro">日常的小事、周末的行李、下一场会议。用一张彩色清单收好准备事项，把细节放在眼前，完成一项，就勾掉一项。</p><div class="cta-row"><a class="button primary" href="https://apps.apple.com/app/id6754930286"><span class="" data-copy="download">前往 App Store</span><span aria-hidden="true">↗</span></a><a class="text-link" href="#features"><span class="" data-copy="secondary">了解功能</span><span aria-hidden="true">↓</span></a></div><p class="fine-print" data-copy="downloadNote">适用于 iPhone 与 iPad · 提供 App 内购买</p><div class="hero-tag"><span class="" data-copy="shotCaption">App 实际截图 · 示例数据</span></div></div><figure class="hero-visual"><div class="screenshot-mat"><a id="hero-image-link" href="images/readygo/zh-Hans-daily.png" target="_blank" rel="noopener"><img id="hero-image" src="images/readygo/zh-Hans-daily.png" width="1206" height="2622" alt="ReadyGo 每日便签墙，展示彩色清单与完成进度" fetchpriority="high"></a></div><figcaption><span class="" data-copy="daily">每日清单</span><span aria-hidden="true"> / </span><span class="" data-copy="shotOpen">查看完整截图</span></figcaption></figure></section>
+<div class="locale-text highlights" lang="zh-Hans" data-language="zh-Hans"><div><span class="number">01</span><h2>看得见</h2><p>彩色便签，清楚的进度。</p></div><div><span class="number">02</span><h2>合习惯</h2><p>画布、模板和字体选择。</p></div><div><span class="number">03</span><h2>有节奏</h2><p>单次安排，也能规律重复。</p></div></div><div class="locale-text highlights" lang="zh-Hant" data-language="zh-Hant"><div><span class="number">01</span><h2>一眼看清楚</h2><p>繽紛便條，清楚的進度。</p></div><div><span class="number">02</span><h2>用你喜歡的方式</h2><p>畫布、範本與字型。</p></div><div><span class="number">03</span><h2>照自己的步調</h2><p>單次與重複計畫。</p></div></div><div class="locale-text highlights" lang="en" data-language="en"><div><span class="number">01</span><h2>Make it visible</h2><p>Colorful notes, clear progress.</p></div><div><span class="number">02</span><h2>Make it yours</h2><p>Canvas, templates and fonts.</p></div><div><span class="number">03</span><h2>Keep your rhythm</h2><p>One-time and repeating plans.</p></div></div><div class="locale-text highlights" lang="ja" data-language="ja"><div><span class="number">01</span><h2>ひと目でわかる</h2><p>カラフルなメモで、進捗をすっきり。</p></div><div><span class="number">02</span><h2>自分らしく整える</h2><p>キャンバス、テンプレート、フォント。</p></div><div><span class="number">03</span><h2>自分のペースで</h2><p>一度きりの予定も、繰り返す計画も。</p></div></div><div class="locale-text highlights" lang="ko" data-language="ko"><div><span class="number">01</span><h2>한눈에 확인하기</h2><p>다채로운 메모, 명확한 진행 상황.</p></div><div><span class="number">02</span><h2>나답게 꾸미기</h2><p>캔버스, 템플릿, 글꼴.</p></div><div><span class="number">03</span><h2>나만의 리듬 지키기</h2><p>한 번의 일정도, 반복되는 계획도.</p></div></div><div class="locale-text highlights" lang="fr" data-language="fr"><div><span class="number">01</span><h2>Rendez-le visible</h2><p>Des notes colorées, une progression claire.</p></div><div><span class="number">02</span><h2>À votre image</h2><p>Toile, modèles et polices.</p></div><div><span class="number">03</span><h2>Gardez votre rythme</h2><p>Des projets ponctuels ou récurrents.</p></div></div><div class="locale-text highlights" lang="ru" data-language="ru"><div><span class="number">01</span><h2>Держите на виду</h2><p>Цветные заметки, понятный прогресс.</p></div><div><span class="number">02</span><h2>Устройте по-своему</h2><p>Холст, шаблоны и шрифты.</p></div><div><span class="number">03</span><h2>Сохраняйте свой ритм</h2><p>Разовые и повторяющиеся планы.</p></div></div>
+<section class="intro-band" id="features"><div class="section-label">01 <span aria-hidden="true">/</span> <span class="" data-copy="features">功能</span></div><div><h2 class="" data-copy="latest">给今天，多一点自由。</h2><p class="" data-copy="latestIntro">在 1.7 中，用无限画布自由摆放便签，从场景模板开始准备，再选一种读起来舒服的字体。</p></div></section>
+<section class="showcase"><div class="gallery-visual"><a id="gallery-image-link" href="images/readygo/zh-Hans-canvas.png" target="_blank" rel="noopener"><img id="gallery-image" src="images/readygo/zh-Hans-canvas.png" width="1206" height="2622" alt="ReadyGo 无限画布，自由摆放的多张便签清单" loading="lazy" decoding="async"></a></div><div class="gallery-content"><h2 class="" data-copy="galleryTitle">你的清单，按你的方式摆放。</h2><p class="section-intro" data-copy="galleryIntro">喜欢整齐的日常布局，也可以把便签摆成自己的样子。熟悉的准备从模板开始，不必反复重写事项。</p><div class="gallery-tabs" role="tablist" aria-label="你的清单，按你的方式摆放。">
+<button id="tab-daily" type="button" role="tab" aria-controls="gallery-panel" aria-selected="false" tabindex="-1" data-view="daily" data-copy="daily">每日清单</button><button id="tab-canvas" type="button" role="tab" aria-controls="gallery-panel" aria-selected="true" tabindex="0" data-view="canvas" data-copy="canvas">无限画布</button><button id="tab-templates" type="button" role="tab" aria-controls="gallery-panel" aria-selected="false" tabindex="-1" data-view="templates" data-copy="templates">场景模板</button></div>
+<div id="gallery-panel" role="tabpanel" aria-labelledby="tab-canvas" tabindex="0"><div class="gallery-copy" lang="zh-Hans" data-language="zh-Hans" data-view="daily"><h3>今天的安排，清楚可见</h3><p>给每张清单选个颜色，写下备注，标记重要事项。每日摘要把已完成和待完成的清单汇在一起。</p></div><div class="gallery-copy" lang="zh-Hans" data-language="zh-Hans" data-view="canvas"><h3>一块可以自由挪动的画布</h3><p>自由移动便签，再通过平移和缩放查看安排。想回到整齐的普通布局时，也可以随时切换。</p></div><div class="gallery-copy" lang="zh-Hans" data-language="zh-Hans" data-view="templates"><h3>熟悉的准备，从模板开始</h3><p>选择预置场景模板，也可以创建、编辑自己的模板。将事项复制到新清单后，再单独设置日期、重复与提醒规则。</p></div><div class="gallery-copy" lang="zh-Hant" data-language="zh-Hant" data-view="daily"><h3>清楚看見今天</h3><p>為每張清單選個顏色，補上備註、標記重要事項。每日總覽將已完成與未完成的清單集中呈現。</p></div><div class="gallery-copy" lang="zh-Hant" data-language="zh-Hant" data-view="canvas"><h3>自由安排的畫布</h3><p>移動便條，透過平移與縮放，用自己的方式查看一天的安排。需要時，隨時切回一般版面。</p></div><div class="gallery-copy" lang="zh-Hant" data-language="zh-Hant" data-view="templates"><h3>從熟悉的內容開始</h3><p>選擇現成的場景範本，或建立、編輯自己的範本。將其中的事項複製到新清單，再分別設定日期、重複規則與提醒。</p></div><div class="gallery-copy" lang="en" data-language="en" data-view="daily"><h3>A clear view of today</h3><p>Give each list a color, add notes and mark important items. Your daily overview brings completed and unfinished lists together.</p></div><div class="gallery-copy" lang="en" data-language="en" data-view="canvas"><h3>A canvas with room to move</h3><p>Move your notes around, then pan and zoom to see your day your way. Switch back to the regular layout whenever it suits you.</p></div><div class="gallery-copy" lang="en" data-language="en" data-view="templates"><h3>A familiar starting point</h3><p>Choose a ready-made scene template or create and edit your own. Copy its items into a new checklist, then set dates, repeats and reminders separately.</p></div><div class="gallery-copy" lang="ja" data-language="ja" data-view="daily"><h3>今日の予定を、見渡せる</h3><p>リストごとに色を選び、メモを添えて、大切な項目をマーク。毎日の一覧で、完了したリストと未完了のリストをまとめて確認できます。</p></div><div class="gallery-copy" lang="ja" data-language="ja" data-view="canvas"><h3>自由に広げるキャンバス</h3><p>メモを動かし、キャンバスを移動・拡大縮小して、自分に合った見え方に。いつでも通常のレイアウトに戻せます。</p></div><div class="gallery-copy" lang="ja" data-language="ja" data-view="templates"><h3>いつもの内容から、すぐに開始</h3><p>用意されたシーンテンプレートを選ぶほか、自分で作成・編集することもできます。項目を新しいチェックリストにコピーし、日付、繰り返し、リマインダーは個別に設定します。</p></div><div class="gallery-copy" lang="ko" data-language="ko" data-view="daily"><h3>오늘을 한눈에</h3><p>목록마다 색을 고르고, 메모를 더하고, 중요한 항목을 표시하세요. 일일 개요에서 완료한 목록과 아직 남은 목록을 함께 볼 수 있습니다.</p></div><div class="gallery-copy" lang="ko" data-language="ko" data-view="canvas"><h3>자유롭게 펼치는 캔버스</h3><p>메모를 옮기고 캔버스를 이동하거나 확대·축소하며, 나에게 맞는 방식으로 하루를 살펴보세요. 원할 때 언제든 일반 레이아웃으로 돌아갈 수 있습니다.</p></div><div class="gallery-copy" lang="ko" data-language="ko" data-view="templates"><h3>익숙한 내용으로 바로 시작</h3><p>준비된 상황별 템플릿을 선택하거나 직접 만들고 편집하세요. 항목을 새 체크리스트로 복사한 다음 날짜, 반복, 알림을 각각 설정합니다.</p></div><div class="gallery-copy" lang="fr" data-language="fr" data-view="daily"><h3>Une vue claire de la journée</h3><p>Attribuez une couleur à chaque liste, ajoutez des notes et marquez les éléments importants. Votre vue quotidienne réunit les listes terminées et celles qui restent à faire.</p></div><div class="gallery-copy" lang="fr" data-language="fr" data-view="canvas"><h3>Une toile où tout peut bouger</h3><p>Déplacez vos notes, puis faites glisser la toile et zoomez pour organiser votre journée à votre façon. Revenez à la présentation classique quand vous le souhaitez.</p></div><div class="gallery-copy" lang="fr" data-language="fr" data-view="templates"><h3>Un point de départ familier</h3><p>Choisissez un modèle de situation prêt à l’emploi ou créez et modifiez le vôtre. Copiez ses éléments dans une nouvelle liste, puis définissez séparément les dates, les répétitions et les rappels.</p></div><div class="gallery-copy" lang="ru" data-language="ru" data-view="daily"><h3>Весь день перед глазами</h3><p>Выберите цвет для каждого списка, добавьте заметки и выделите важные пункты. Ежедневный обзор объединяет завершённые списки и те, что ещё предстоит выполнить.</p></div><div class="gallery-copy" lang="ru" data-language="ru" data-view="canvas"><h3>Холст со свободой движения</h3><p>Перемещайте заметки, сдвигайте холст и меняйте масштаб, чтобы видеть свой день так, как вам удобно. Возвращайтесь к обычному расположению в любой момент.</p></div><div class="gallery-copy" lang="ru" data-language="ru" data-view="templates"><h3>Знакомая отправная точка</h3><p>Выберите готовый сценарный шаблон или создайте и отредактируйте свой. Скопируйте его пункты в новый список, а затем отдельно настройте даты, повторения и напоминания.</p></div></div><p class="fine-print" data-copy="galleryCaption">截图随所选语言切换。</p><div class="screenshot-credit"><span class="" data-copy="shotCaption">App 实际截图 · 示例数据</span></div></div></section>
+<section class="features-block"><div class="section-heading"><div class="section-label">02 <span aria-hidden="true">/</span> ReadyGo</div><div><h2 class="" data-copy="featureTitle">从做好准备，
+到一项项完成。</h2><p class="section-intro" data-copy="featureIntro">照顾每天的小事，也为重要时刻留一份清楚的准备。</p></div></div><div id="content-zh-Hans" class="locale-text features-grid" lang="zh-Hans" data-language="zh-Hans"><div class="features-grid-item"><span class="line-icon" aria-hidden="true">01</span><h3>灵活安排日期</h3><p>创建单次清单、让一张清单在日期区间内持续有效，或按每日、指定星期、每月日期和间隔天数重复。</p></div><div class="features-grid-item"><span class="line-icon" aria-hidden="true">02</span><h3>需要时，设一个提醒</h3><p>为清单开启定时提醒，并允许 iOS 通知。声音和预览内容的显示方式，可以在系统设置中调整。</p></div><div class="features-grid-item"><span class="line-icon" aria-hidden="true">03</span><h3>回头看看，已经走了多远</h3><p>查看过去的每日记录、月度清单完成率和日历热力图。完整月度复盘会根据保存的记录整理完成情况。</p></div><div class="features-grid-item"><span class="line-icon" aria-hidden="true">04</span><h3>用自己喜欢的样子</h3><p>选择便签颜色和读起来舒服的字体。在清单的便利之外，也保留一点纸质便签的温度。</p></div></div><div id="content-zh-Hant" class="locale-text features-grid" lang="zh-Hant" data-language="zh-Hant"><div class="features-grid-item"><span class="line-icon" aria-hidden="true">01</span><h3>靈活安排日期</h3><p>建立單次清單、讓清單在一段日期期間內持續有效，或設定每天、指定星期幾、每月指定日期及間隔重複。</p></div><div class="features-grid-item"><span class="line-icon" aria-hidden="true">02</span><h3>在需要時提醒你</h3><p>為清單啟用時間提醒，並在 iOS 中允許通知。聲音與預覽方式可在系統設定中管理。</p></div><div class="features-grid-item"><span class="line-icon" aria-hidden="true">03</span><h3>回顧走過的進度</h3><p>查看過往每日紀錄，以月曆熱力圖了解每月清單完成率。完整的每月回顧依據你儲存的使用紀錄呈現。</p></div><div class="features-grid-item"><span class="line-icon" aria-hidden="true">04</span><h3>熟悉又自在的風格</h3><p>挑選便條顏色與讀起來舒服的字型。保留清單的便利，也保留紙張便條的溫度。</p></div></div><div id="content-en" class="locale-text features-grid" lang="en" data-language="en"><div class="features-grid-item"><span class="line-icon" aria-hidden="true">01</span><h3>Flexible schedules</h3><p>Create a one-time list, keep one active over a date range, or repeat daily, on selected weekdays or dates of the month, or at an interval.</p></div><div class="features-grid-item"><span class="line-icon" aria-hidden="true">02</span><h3>Reminders when you need them</h3><p>Enable time-based reminders for a list and allow notifications in iOS. Use your system settings to control sounds and previews.</p></div><div class="features-grid-item"><span class="line-icon" aria-hidden="true">03</span><h3>Look back at your progress</h3><p>Browse past daily records and monthly checklist completion rates with a calendar heatmap. The full monthly review draws on your saved activity.</p></div><div class="features-grid-item"><span class="line-icon" aria-hidden="true">04</span><h3>A style that feels familiar</h3><p>Choose note colors and a font you enjoy reading. Keep the convenience of a checklist with the warmth of a paper note.</p></div></div><div id="content-ja" class="locale-text features-grid" lang="ja" data-language="ja"><div class="features-grid-item"><span class="line-icon" aria-hidden="true">01</span><h3>柔軟なスケジュール</h3><p>一度きりのリストや、指定した期間中に使うリストを作成できます。毎日、指定の曜日、毎月の指定日、一定の間隔での繰り返しにも対応します。</p></div><div class="features-grid-item"><span class="line-icon" aria-hidden="true">02</span><h3>必要な時間にリマインダー</h3><p>リストに時刻指定のリマインダーを設定し、iOS で通知を許可します。サウンドとプレビューはシステム設定で管理できます。</p></div><div class="features-grid-item"><span class="line-icon" aria-hidden="true">03</span><h3>積み重ねを振り返る</h3><p>過去の日々の記録を確認し、カレンダーのヒートマップで月ごとのリスト完了率を見られます。月ごとの振り返りの全文は、保存された活動記録をもとに表示します。</p></div><div class="features-grid-item"><span class="line-icon" aria-hidden="true">04</span><h3>しっくりくる見た目に</h3><p>メモの色と読みやすいフォントを選んで。チェックリストの便利さに、紙のメモのような温かみを添えます。</p></div></div><div id="content-ko" class="locale-text features-grid" lang="ko" data-language="ko"><div class="features-grid-item"><span class="line-icon" aria-hidden="true">01</span><h3>유연한 일정 설정</h3><p>한 번만 쓰는 목록을 만들거나, 지정한 날짜 범위 동안 유지하거나, 매일·선택한 요일·매월 지정일·일정 간격으로 반복할 수 있습니다.</p></div><div class="features-grid-item"><span class="line-icon" aria-hidden="true">02</span><h3>필요한 시간에 알림</h3><p>목록에 시간 알림을 설정하고 iOS에서 알림을 허용하세요. 소리와 미리보기는 시스템 설정에서 관리할 수 있습니다.</p></div><div class="features-grid-item"><span class="line-icon" aria-hidden="true">03</span><h3>쌓아 온 진행 상황 돌아보기</h3><p>지난 일일 기록을 확인하고 달력 히트맵으로 월별 체크리스트 완료율을 살펴보세요. 전체 월간 회고는 저장된 활동 기록을 바탕으로 보여 줍니다.</p></div><div class="features-grid-item"><span class="line-icon" aria-hidden="true">04</span><h3>익숙하고 편안한 스타일</h3><p>메모 색과 읽기 편한 글꼴을 선택하세요. 체크리스트의 편리함에 종이 메모의 따뜻함을 더합니다.</p></div></div><div id="content-fr" class="locale-text features-grid" lang="fr" data-language="fr"><div class="features-grid-item"><span class="line-icon" aria-hidden="true">01</span><h3>Des plannings souples</h3><p>Créez une liste ponctuelle, gardez-en une active sur une période ou répétez-la chaque jour, certains jours de la semaine, certaines dates du mois ou à intervalle régulier.</p></div><div class="features-grid-item"><span class="line-icon" aria-hidden="true">02</span><h3>Des rappels quand il le faut</h3><p>Activez des rappels horaires pour une liste et autorisez les notifications dans iOS. Gérez les sons et les aperçus dans les réglages du système.</p></div><div class="features-grid-item"><span class="line-icon" aria-hidden="true">03</span><h3>Revenez sur vos progrès</h3><p>Consultez vos anciens enregistrements quotidiens et vos taux mensuels de réalisation des listes sur un calendrier à intensité de couleur. Le bilan mensuel complet s’appuie sur votre activité enregistrée.</p></div><div class="features-grid-item"><span class="line-icon" aria-hidden="true">04</span><h3>Un style qui vous parle</h3><p>Choisissez les couleurs des notes et une police agréable à lire. Retrouvez la simplicité d’une liste et la chaleur d’une note sur papier.</p></div></div><div id="content-ru" class="locale-text features-grid" lang="ru" data-language="ru"><div class="features-grid-item"><span class="line-icon" aria-hidden="true">01</span><h3>Гибкое расписание</h3><p>Создайте разовый список, оставьте его активным на выбранный период или повторяйте ежедневно, по определённым дням недели, датам месяца либо через заданный интервал.</p></div><div class="features-grid-item"><span class="line-icon" aria-hidden="true">02</span><h3>Напоминания к нужному времени</h3><p>Включите напоминания по времени для списка и разрешите уведомления в iOS. Управляйте звуками и показом содержимого через системные настройки.</p></div><div class="features-grid-item"><span class="line-icon" aria-hidden="true">03</span><h3>Оглянитесь на свой прогресс</h3><p>Просматривайте ежедневные записи за прошлые дни и месячную долю выполненных списков на календаре с цветовой шкалой. Полный месячный обзор строится на сохранённой активности.</p></div><div class="features-grid-item"><span class="line-icon" aria-hidden="true">04</span><h3>Стиль, который вам близок</h3><p>Выберите цвета заметок и шрифт, который приятно читать. Удобство списка сочетается с теплом бумажной записки.</p></div></div></section>
+<section class="surfaces-block"><div class="section-heading"><div class="section-label">03 <span aria-hidden="true">/</span> iOS</div><div><h2 class="" data-copy="surfacesTitle">下一步，随时看一眼。</h2><p class="section-intro" data-copy="surfacesIntro">在主屏幕查看进度，需要时再手动开启实时显示。</p></div></div><div class="locale-text surfaces-grid" lang="zh-Hans" data-language="zh-Hans"><div class="surfaces-grid-item"><span class="line-icon" aria-hidden="true">01</span><h3>小组件</h3><p>在支持的主屏幕和锁屏小组件中查看清单、每日进度与月度信息。部分小组件支持直接勾选事项。</p></div><div class="surfaces-grid-item"><span class="line-icon" aria-hidden="true">02</span><h3>实时活动</h3><p>从 ReadyGo 手动开启，在锁屏以及兼容设备的灵动岛上显示清单与进度。</p></div><div class="surfaces-grid-item"><span class="line-icon" aria-hidden="true">03</span><h3>画中画</h3><p>在使用其他 App 时，打开悬浮的只读清单。编辑或勾选事项，请返回 ReadyGo。</p></div></div><div class="locale-text surfaces-grid" lang="zh-Hant" data-language="zh-Hant"><div class="surfaces-grid-item"><span class="line-icon" aria-hidden="true">01</span><h3>小工具</h3><p>透過支援的主畫面與鎖定畫面小工具，查看清單、每日進度及每月資訊。部分小工具支援直接勾選完成事項。</p></div><div class="surfaces-grid-item"><span class="line-icon" aria-hidden="true">02</span><h3>即時動態</h3><p>從 ReadyGo 啟動即時動態，在鎖定畫面顯示清單與進度；相容裝置也可在動態島查看。</p></div><div class="surfaces-grid-item"><span class="line-icon" aria-hidden="true">03</span><h3>子母畫面</h3><p>使用其他 App 時，開啟懸浮的唯讀清單。編輯或勾選事項時，請返回 ReadyGo。</p></div></div><div class="locale-text surfaces-grid" lang="en" data-language="en"><div class="surfaces-grid-item"><span class="line-icon" aria-hidden="true">01</span><h3>Widgets</h3><p>See lists, daily progress and monthly information on supported Home Screen and Lock Screen widgets. Some widgets let you check off items directly.</p></div><div class="surfaces-grid-item"><span class="line-icon" aria-hidden="true">02</span><h3>Live Activities</h3><p>Start an activity from ReadyGo to show your checklist and progress on the Lock Screen and, on compatible devices, Dynamic Island.</p></div><div class="surfaces-grid-item"><span class="line-icon" aria-hidden="true">03</span><h3>Picture in Picture</h3><p>Open a floating, read-only checklist while you use other apps. Return to ReadyGo to edit or check off items.</p></div></div><div class="locale-text surfaces-grid" lang="ja" data-language="ja"><div class="surfaces-grid-item"><span class="line-icon" aria-hidden="true">01</span><h3>ウィジェット</h3><p>対応するホーム画面やロック画面のウィジェットで、リスト、毎日の進捗、月ごとの情報を確認できます。一部のウィジェットでは、その場で項目にチェックを付けられます。</p></div><div class="surfaces-grid-item"><span class="line-icon" aria-hidden="true">02</span><h3>ライブアクティビティ</h3><p>ReadyGo から開始すると、ロック画面にチェックリストと進捗を表示します。対応端末では Dynamic Island にも表示されます。</p></div><div class="surfaces-grid-item"><span class="line-icon" aria-hidden="true">03</span><h3>ピクチャ・イン・ピクチャ</h3><p>他のアプリを使いながら、閲覧専用のチェックリストをフローティング表示できます。編集や完了のチェックは ReadyGo に戻って行います。</p></div></div><div class="locale-text surfaces-grid" lang="ko" data-language="ko"><div class="surfaces-grid-item"><span class="line-icon" aria-hidden="true">01</span><h3>위젯</h3><p>지원되는 홈 화면 및 잠금 화면 위젯에서 목록, 일일 진행 상황, 월별 정보를 확인하세요. 일부 위젯에서는 항목을 바로 완료할 수 있습니다.</p></div><div class="surfaces-grid-item"><span class="line-icon" aria-hidden="true">02</span><h3>실시간 현황</h3><p>ReadyGo에서 시작하면 잠금 화면에 체크리스트와 진행 상황을 표시합니다. 호환되는 기기에서는 Dynamic Island에서도 볼 수 있습니다.</p></div><div class="surfaces-grid-item"><span class="line-icon" aria-hidden="true">03</span><h3>화면 속 화면</h3><p>다른 앱을 사용하는 동안 읽기 전용 체크리스트를 떠 있는 창으로 볼 수 있습니다. 항목을 수정하거나 완료하려면 ReadyGo로 돌아오세요.</p></div></div><div class="locale-text surfaces-grid" lang="fr" data-language="fr"><div class="surfaces-grid-item"><span class="line-icon" aria-hidden="true">01</span><h3>Widgets</h3><p>Consultez vos listes, votre progression quotidienne et vos données mensuelles dans les widgets compatibles de l’écran d’accueil et de l’écran verrouillé. Certains widgets permettent de cocher directement des éléments.</p></div><div class="surfaces-grid-item"><span class="line-icon" aria-hidden="true">02</span><h3>Activités en direct</h3><p>Lancez une activité depuis ReadyGo pour afficher votre liste et votre progression sur l’écran verrouillé et, sur les appareils compatibles, dans la Dynamic Island.</p></div><div class="surfaces-grid-item"><span class="line-icon" aria-hidden="true">03</span><h3>Image dans l’image</h3><p>Ouvrez une liste flottante en lecture seule pendant que vous utilisez d’autres apps. Revenez dans ReadyGo pour modifier ou cocher les éléments.</p></div></div><div class="locale-text surfaces-grid" lang="ru" data-language="ru"><div class="surfaces-grid-item"><span class="line-icon" aria-hidden="true">01</span><h3>Виджеты</h3><p>Просматривайте списки, прогресс за день и месячную информацию в поддерживаемых виджетах экрана «Домой» и экрана блокировки. В некоторых виджетах можно отмечать пункты выполненными прямо на месте.</p></div><div class="surfaces-grid-item"><span class="line-icon" aria-hidden="true">02</span><h3>Live Activities</h3><p>Запустите активность из ReadyGo, чтобы видеть список и прогресс на экране блокировки, а на совместимых устройствах — и в Dynamic Island.</p></div><div class="surfaces-grid-item"><span class="line-icon" aria-hidden="true">03</span><h3>Картинка в картинке</h3><p>Откройте плавающий список только для чтения, пока пользуетесь другими приложениями. Чтобы изменить пункты или отметить их выполненными, вернитесь в ReadyGo.</p></div></div><p class="system-note" data-copy="systemNote">通知和实时显示受设备支持、iOS 设置及系统运行条件影响。实时活动与画中画需要会员，并由你手动开启。</p></section>
+<section class="membership-block" id="membership"><div><p class="eyebrow" data-copy="memberKicker">READYGO 会员</p><h2 class="" data-copy="memberTitle">给清单，多一点空间。</h2><p class="section-intro" data-copy="memberIntro">从日常清单开始使用，会员可解锁以下能力：</p></div><div><div class="locale-text " lang="zh-Hans" data-language="zh-Hans"><ul><li><span aria-hidden="true">✓</span>当天已有 3 张清单后，继续创建新清单。</li><li><span aria-hidden="true">✓</span>手动开启实时活动与画中画。</li><li><span aria-hidden="true">✓</span>查看完整月度复盘。</li></ul></div><div class="locale-text " lang="zh-Hant" data-language="zh-Hant"><ul><li><span aria-hidden="true">✓</span>當天已有三張清單時，繼續建立新清單。</li><li><span aria-hidden="true">✓</span>啟動即時動態與子母畫面。</li><li><span aria-hidden="true">✓</span>閱讀完整的每月回顧。</li></ul></div><div class="locale-text " lang="en" data-language="en"><ul><li><span aria-hidden="true">✓</span>Create another checklist when the current day already has three.</li><li><span aria-hidden="true">✓</span>Start Live Activities and Picture in Picture.</li><li><span aria-hidden="true">✓</span>Read the full monthly review.</li></ul></div><div class="locale-text " lang="ja" data-language="ja"><ul><li><span aria-hidden="true">✓</span>当日のリストがすでに 3 件ある場合に、さらにリストを作成。</li><li><span aria-hidden="true">✓</span>ライブアクティビティとピクチャ・イン・ピクチャを開始。</li><li><span aria-hidden="true">✓</span>月ごとの振り返りの全文を表示。</li></ul></div><div class="locale-text " lang="ko" data-language="ko"><ul><li><span aria-hidden="true">✓</span>현재 날짜에 목록이 이미 3개 있을 때 새 체크리스트를 추가로 만들기.</li><li><span aria-hidden="true">✓</span>실시간 현황과 화면 속 화면 시작하기.</li><li><span aria-hidden="true">✓</span>전체 월간 회고 읽기.</li></ul></div><div class="locale-text " lang="fr" data-language="fr"><ul><li><span aria-hidden="true">✓</span>Créer une liste supplémentaire quand la journée en cours en compte déjà trois.</li><li><span aria-hidden="true">✓</span>Lancer des activités en direct et le mode Image dans l’image.</li><li><span aria-hidden="true">✓</span>Lire le bilan mensuel complet.</li></ul></div><div class="locale-text " lang="ru" data-language="ru"><ul><li><span aria-hidden="true">✓</span>Создавать ещё один список, когда на текущий день уже есть три.</li><li><span aria-hidden="true">✓</span>Запускать Live Activities и режим «Картинка в картинке».</li><li><span aria-hidden="true">✓</span>Читать полный месячный обзор.</li></ul></div><p class="fine-print" data-copy="memberNote">在 App 内通过 App Store 购买或恢复会员，实际价格和商品条款以购买界面为准。</p></div></section>
+<section class="privacy-block"><span class="privacy-symbol" aria-hidden="true"><svg viewBox="0 0 32 32" fill="none"><rect x="8" y="14" width="16" height="13" rx="4" stroke="currentColor" stroke-width="2"/><path d="M11 14V9a5 5 0 0 1 10 0v5M16 19v3" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg></span><div><h2 class="" data-copy="privacyTitle">你的清单，由你掌握。</h2><p class="" data-copy="privacyBody">记录保存在设备上，iCloud 可用时可同步所支持的数据，你可以在设置中管理。ReadyGo 不集成广告或跨 App 追踪 SDK。关闭同步不会删除已有云端数据。</p><a class="privacy-link text-link" href="privacy.html?lang=zh-Hans#readygo"><span class="" data-copy="privacyLink">阅读隐私政策</span><span aria-hidden="true">↗</span></a></div></section>
+<section class="help-block" id="help"><div class="section-heading"><div class="section-label">04 <span aria-hidden="true">/</span> <span class="" data-copy="help">帮助</span></div><h2 class="" data-copy="faqTitle">你可能想了解。</h2></div><div class="faq"><div class="locale-text " lang="zh-Hans" data-language="zh-Hans"><details><summary><span>场景模板和重复计划有什么区别？</span><b aria-hidden="true">＋</b></summary><p>场景模板是可复用的清单内容。复制成新清单后，再单独选择日期和重复规则；重复计划则决定何时生成每日清单。修改复制后的清单，不会改变原场景模板。</p></details><details><summary><span>画中画里可以勾选事项吗？</span><b aria-hidden="true">＋</b></summary><p>画中画仅供查看，完成或编辑事项请返回 ReadyGo。部分交互小组件可以直接完成事项，与画中画的操作方式不同。</p></details><details><summary><span>为什么没有收到提醒？</span><b aria-hidden="true">＋</b></summary><p>请检查清单的提醒设置、ReadyGo 的通知权限，以及 iOS 的专注模式和通知设置。提醒投递及实时显示更新由 iOS 管理，受系统运行条件影响，无法保证每次都在设定时刻出现。</p></details><details><summary><span>三张清单的限制是什么意思？</span><b aria-hidden="true">＋</b></summary><p>当天已有 3 张清单时，继续创建需要会员。它并不是最多只能保存 3 个模板，也不是历史记录总共只能保留 3 张。</p></details><details><summary><span>关闭 iCloud 会删除清单吗？</span><b aria-hidden="true">＋</b></summary><p>不会。关闭操作成功后，会停止该设备后续同步，已有本地与 iCloud 数据仍然保留。云端存储、其他设备和系统备份需要分别管理。</p></details><details><summary><span>如何恢复购买？</span><b aria-hidden="true">＋</b></summary><p>使用原购买时的 Apple 账户，在 ReadyGo 会员购买页选择「恢复购买」。App 会通过 App Store 检查可用的购买权益。</p></details><details><summary><span>月度复盘是 AI 生成的吗？</span><b aria-hidden="true">＋</b></summary><p>不是。ReadyGo 根据设备中保存的记录和内置规则计算复盘，不会把清单发送给 AI 服务。</p></details></div><div class="locale-text " lang="zh-Hant" data-language="zh-Hant"><details><summary><span>場景範本和重複計畫有什麼不同？</span><b aria-hidden="true">＋</b></summary><p>場景範本是可重複使用的清單內容。複製到新清單後，再分別設定日期與重複規則。重複計畫則決定何時產生每日清單。修改複製後的清單，不會改變原本的場景範本。</p></details><details><summary><span>可以在子母畫面中勾選事項嗎？</span><b aria-hidden="true">＋</b></summary><p>子母畫面僅供查看。請返回 ReadyGo 完成或編輯事項。部分互動式小工具支援直接完成事項，其操作方式與子母畫面不同。</p></details><details><summary><span>為什麼沒有收到提醒？</span><b aria-hidden="true">＋</b></summary><p>請檢查清單的提醒設定、ReadyGo 的通知權限，以及 iOS 的專注模式和通知設定。提醒送達與即時顯示更新由 iOS 管理，可能受系統狀況影響，無法保證每個預定時間都一定顯示。</p></details><details><summary><span>三張清單的限制是什麼意思？</span><b aria-hidden="true">＋</b></summary><p>當天已有三張清單時，建立另一張清單需要會員資格。這不是指總共只能儲存三個範本，或保留三筆歷史紀錄。</p></details><details><summary><span>關閉 iCloud 會刪除我的清單嗎？</span><b aria-hidden="true">＋</b></summary><p>不會。關閉同步的設定生效後，該裝置會停止後續同步，既有的本機與 iCloud 資料仍會保留。雲端儲存空間、其他裝置及系統備份需分別管理。</p></details><details><summary><span>如何回復購買？</span><b aria-hidden="true">＋</b></summary><p>請使用原本購買時的 Apple 帳號，在 ReadyGo 的會員購買畫面選擇「回復購買」。App 會透過 App Store 檢查可用的使用權益。</p></details><details><summary><span>每月回顧是由 AI 產生的嗎？</span><b aria-hidden="true">＋</b></summary><p>不是。ReadyGo 依據你儲存的紀錄與內建規則計算回顧內容，不會將清單傳送至 AI 服務。</p></details></div><div class="locale-text " lang="en" data-language="en"><details><summary><span>How is a scene template different from a repeating plan?</span><b aria-hidden="true">＋</b></summary><p>A scene template is reusable checklist content. Copy it into a new list, then choose dates and repeat rules separately. A repeating plan determines when daily lists are generated. Editing a copied checklist does not change the scene template.</p></details><details><summary><span>Can I check off items in Picture in Picture?</span><b aria-hidden="true">＋</b></summary><p>Picture in Picture is read-only. Return to ReadyGo to complete or edit items. Some interactive widgets support completing items directly; they work differently from Picture in Picture.</p></details><details><summary><span>Why didn&#x27;t a reminder appear?</span><b aria-hidden="true">＋</b></summary><p>Check the list&#x27;s reminder setting, ReadyGo&#x27;s notification permission, and iOS Focus and notification settings. Reminder delivery and live display updates are managed by iOS and can be affected by system conditions; they are not guaranteed to appear at every scheduled moment.</p></details><details><summary><span>What does the three-list limit mean?</span><b aria-hidden="true">＋</b></summary><p>Membership is required to create another checklist when the current day already has three. This is not a limit of three saved templates or three historical records in total.</p></details><details><summary><span>Will turning off iCloud delete my lists?</span><b aria-hidden="true">＋</b></summary><p>No. Turning sync off stops further syncing on that device after the change succeeds. Existing local and iCloud data remains. Cloud storage, other devices and system backups must be managed separately.</p></details><details><summary><span>How do I restore a purchase?</span><b aria-hidden="true">＋</b></summary><p>Open the membership purchase screen in ReadyGo and select Restore Purchases while using the Apple Account that made the purchase. The app checks the available entitlement through the App Store.</p></details><details><summary><span>Is the monthly review generated by AI?</span><b aria-hidden="true">＋</b></summary><p>No. ReadyGo calculates the review from your stored records and built-in rules. It does not send your checklists to an AI service.</p></details></div><div class="locale-text " lang="ja" data-language="ja"><details><summary><span>シーンテンプレートと繰り返しの計画は何が違いますか？</span><b aria-hidden="true">＋</b></summary><p>シーンテンプレートは、再利用できるチェックリストの内容です。新しいリストにコピーしてから、日付と繰り返しルールを別に設定します。繰り返しの計画は、毎日のリストをいつ作成するかを決めます。コピーしたリストを編集しても、元のシーンテンプレートは変わりません。</p></details><details><summary><span>ピクチャ・イン・ピクチャで項目にチェックを付けられますか？</span><b aria-hidden="true">＋</b></summary><p>ピクチャ・イン・ピクチャは閲覧専用です。項目の完了や編集は ReadyGo に戻って行ってください。一部のインタラクティブウィジェットでは、その場で項目を完了できます。ピクチャ・イン・ピクチャとは動作が異なります。</p></details><details><summary><span>リマインダーが表示されないのはなぜですか？</span><b aria-hidden="true">＋</b></summary><p>リストのリマインダー設定、ReadyGo の通知許可、iOS の集中モードと通知設定をご確認ください。リマインダーの配信とリアルタイム表示の更新は iOS が管理しており、システムの状態に影響されます。すべての設定時刻に必ず表示されることを保証するものではありません。</p></details><details><summary><span>リスト 3 件の制限とは何ですか？</span><b aria-hidden="true">＋</b></summary><p>当日のリストがすでに 3 件ある場合、さらにリストを作成するにはメンバーシップが必要です。保存できるテンプレートや過去の記録が、合計 3 件までという意味ではありません。</p></details><details><summary><span>iCloud を無効にするとリストは消えますか？</span><b aria-hidden="true">＋</b></summary><p>いいえ。同期を無効にする設定が正常に反映されると、その端末での以後の同期が停止します。端末内と iCloud の既存データは残ります。クラウドストレージ、他の端末、システムのバックアップは個別に管理する必要があります。</p></details><details><summary><span>購入を復元するにはどうすればよいですか？</span><b aria-hidden="true">＋</b></summary><p>購入時と同じ Apple Account を使用して、ReadyGo のメンバーシップ購入画面を開き、「購入を復元」を選択してください。アプリが App Store を通じて利用可能な権利を確認します。</p></details><details><summary><span>月ごとの振り返りは AI が生成していますか？</span><b aria-hidden="true">＋</b></summary><p>いいえ。ReadyGo は保存された記録と内蔵のルールから振り返りを計算します。チェックリストを AI サービスに送信することはありません。</p></details></div><div class="locale-text " lang="ko" data-language="ko"><details><summary><span>상황별 템플릿과 반복 계획은 무엇이 다른가요?</span><b aria-hidden="true">＋</b></summary><p>상황별 템플릿은 다시 사용할 수 있는 체크리스트 내용입니다. 새 목록에 복사한 다음 날짜와 반복 규칙을 별도로 정합니다. 반복 계획은 일일 목록을 언제 생성할지 결정합니다. 복사한 체크리스트를 수정해도 원래 상황별 템플릿은 바뀌지 않습니다.</p></details><details><summary><span>화면 속 화면에서 항목을 완료할 수 있나요?</span><b aria-hidden="true">＋</b></summary><p>화면 속 화면은 읽기 전용입니다. 항목을 완료하거나 수정하려면 ReadyGo로 돌아오세요. 일부 인터랙티브 위젯은 항목을 바로 완료할 수 있으며, 화면 속 화면과는 작동 방식이 다릅니다.</p></details><details><summary><span>알림이 표시되지 않은 이유는 무엇인가요?</span><b aria-hidden="true">＋</b></summary><p>목록의 알림 설정, ReadyGo의 알림 권한, iOS의 집중 모드와 알림 설정을 확인하세요. 알림 전달과 실시간 표시 업데이트는 iOS가 관리하며 시스템 상태의 영향을 받을 수 있습니다. 모든 예약 시간에 반드시 표시되는 것은 아닙니다.</p></details><details><summary><span>목록 3개 제한은 무슨 뜻인가요?</span><b aria-hidden="true">＋</b></summary><p>현재 날짜에 목록이 이미 3개 있으면 새 체크리스트를 만들 때 멤버십이 필요합니다. 저장할 수 있는 템플릿이나 과거 기록이 총 3개로 제한된다는 뜻은 아닙니다.</p></details><details><summary><span>iCloud를 끄면 목록이 삭제되나요?</span><b aria-hidden="true">＋</b></summary><p>아니요. 동기화 끄기 설정이 정상 적용되면 해당 기기에서 이후의 동기화가 중단됩니다. 기존 기기 내 데이터와 iCloud 데이터는 남아 있습니다. 클라우드 저장 공간, 다른 기기, 시스템 백업은 별도로 관리해야 합니다.</p></details><details><summary><span>구입을 복원하려면 어떻게 하나요?</span><b aria-hidden="true">＋</b></summary><p>구입 당시 사용한 Apple 계정으로 ReadyGo의 멤버십 구입 화면을 열고 &#x27;구입 복원&#x27;을 선택하세요. 앱이 App Store를 통해 이용 가능한 권한을 확인합니다.</p></details><details><summary><span>월간 회고는 AI가 생성하나요?</span><b aria-hidden="true">＋</b></summary><p>아니요. ReadyGo는 저장된 기록과 내장 규칙을 바탕으로 회고를 계산합니다. 체크리스트를 AI 서비스에 전송하지 않습니다.</p></details></div><div class="locale-text " lang="fr" data-language="fr"><details><summary><span>Quelle différence entre un modèle de situation et un plan récurrent ?</span><b aria-hidden="true">＋</b></summary><p>Un modèle de situation contient des éléments de liste réutilisables. Copiez-le dans une nouvelle liste, puis choisissez séparément les dates et les règles de répétition. Un plan récurrent détermine quand les listes quotidiennes sont générées. Modifier une liste copiée ne change pas le modèle de situation.</p></details><details><summary><span>Puis-je cocher des éléments en mode Image dans l’image ?</span><b aria-hidden="true">＋</b></summary><p>Le mode Image dans l’image est en lecture seule. Revenez dans ReadyGo pour terminer ou modifier des éléments. Certains widgets interactifs permettent de cocher des éléments directement ; leur fonctionnement diffère de celui du mode Image dans l’image.</p></details><details><summary><span>Pourquoi un rappel n’est-il pas apparu ?</span><b aria-hidden="true">＋</b></summary><p>Vérifiez le réglage du rappel dans la liste, l’autorisation de notification de ReadyGo, ainsi que les réglages Concentration et Notifications d’iOS. L’envoi des rappels et les mises à jour des affichages en direct sont gérés par iOS et peuvent être affectés par les conditions du système ; leur affichage à chaque horaire prévu n’est pas garanti.</p></details><details><summary><span>Que signifie la limite de trois listes ?</span><b aria-hidden="true">＋</b></summary><p>L’adhésion est nécessaire pour créer une liste supplémentaire lorsque la journée en cours en compte déjà trois. Il ne s’agit pas d’une limite de trois modèles enregistrés ou de trois enregistrements historiques au total.</p></details><details><summary><span>Désactiver iCloud supprimera-t-il mes listes ?</span><b aria-hidden="true">＋</b></summary><p>Non. Une fois la modification effectuée, désactiver la synchronisation arrête les synchronisations suivantes sur cet appareil. Les données locales et iCloud existantes restent présentes. Le stockage cloud, les autres appareils et les sauvegardes du système se gèrent séparément.</p></details><details><summary><span>Comment restaurer un achat ?</span><b aria-hidden="true">＋</b></summary><p>Ouvrez l’écran d’achat de l’adhésion dans ReadyGo et choisissez Restaurer les achats en utilisant le compte Apple ayant effectué l’achat. L’app vérifie les droits d’accès disponibles auprès de l’App Store.</p></details><details><summary><span>Le bilan mensuel est-il généré par une IA ?</span><b aria-hidden="true">＋</b></summary><p>Non. ReadyGo calcule le bilan à partir de vos données enregistrées et de règles intégrées. Vos listes ne sont pas envoyées à un service d’IA.</p></details></div><div class="locale-text " lang="ru" data-language="ru"><details><summary><span>Чем сценарный шаблон отличается от повторяющегося плана?</span><b aria-hidden="true">＋</b></summary><p>Сценарный шаблон — это содержимое списка для повторного использования. Скопируйте его в новый список, затем отдельно выберите даты и правила повторения. Повторяющийся план определяет, когда создаются ежедневные списки. Изменение скопированного списка не меняет сценарный шаблон.</p></details><details><summary><span>Можно ли отмечать пункты в режиме «Картинка в картинке»?</span><b aria-hidden="true">＋</b></summary><p>Режим «Картинка в картинке» предназначен только для просмотра. Для выполнения или изменения пунктов вернитесь в ReadyGo. Некоторые интерактивные виджеты позволяют отмечать пункты напрямую; они работают иначе, чем режим «Картинка в картинке».</p></details><details><summary><span>Почему напоминание не появилось?</span><b aria-hidden="true">＋</b></summary><p>Проверьте настройку напоминания в списке, разрешение на уведомления для ReadyGo, а также параметры фокусирования и уведомлений iOS. Доставкой напоминаний и обновлением отображаемых данных управляет iOS, и на них могут влиять условия работы системы; появление в каждый запланированный момент не гарантируется.</p></details><details><summary><span>Что означает ограничение в три списка?</span><b aria-hidden="true">＋</b></summary><p>Платный доступ требуется, чтобы создать ещё один список, когда на текущий день уже есть три. Это не ограничение в три сохранённых шаблона или три записи за всё время.</p></details><details><summary><span>Удалятся ли списки, если отключить iCloud?</span><b aria-hidden="true">＋</b></summary><p>Нет. После успешного изменения настройки отключение синхронизации прекращает дальнейшую синхронизацию на этом устройстве. Существующие локальные данные и данные iCloud сохраняются. Облачным хранилищем, другими устройствами и системными резервными копиями нужно управлять отдельно.</p></details><details><summary><span>Как восстановить покупку?</span><b aria-hidden="true">＋</b></summary><p>Откройте экран покупки доступа в ReadyGo и выберите «Восстановить покупки», используя Аккаунт Apple, с которого была совершена покупка. Приложение проверит доступные права через App Store.</p></details><details><summary><span>Месячный обзор создаётся искусственным интеллектом?</span><b aria-hidden="true">＋</b></summary><p>Нет. ReadyGo рассчитывает обзор по сохранённым записям и встроенным правилам. Ваши списки не отправляются в сервисы искусственного интеллекта.</p></details></div></div><div class="support"><div><h3 class="" data-copy="supportTitle">需要一点帮助？</h3><p class="" data-copy="supportBody">请发送邮件至 linutech@163.com，说明 App 版本、设备型号、iOS 版本及复现步骤。发送截图前，请遮盖私人内容。</p></div><a href="mailto:linutech@163.com">linutech@163.com <span aria-hidden="true">↗</span></a></div></section>
+<section class="final-cta"><h2 class="" data-copy="finalTitle">给重要的小事，留个位置。</h2><p class="" data-copy="finalBody">要做的、要带的、要记得的，都放进清单里。</p><a class="button primary" href="https://apps.apple.com/app/id6754930286"><span class="" data-copy="download">前往 App Store</span><span aria-hidden="true">↗</span></a><p class="fine-print" data-copy="footerNote">支持简体中文、繁体中文、英语、日语、韩语、法语和俄语。</p></section>
+<noscript><div class="noscript-note">JavaScript / JavaScript 未启用：<a href="#content-zh-Hans" lang="zh-Hans">简体中文</a> · <a href="#content-zh-Hant" lang="zh-Hant">繁體中文</a> · <a href="#content-en" lang="en">English</a> · <a href="#content-ja" lang="ja">日本語</a> · <a href="#content-ko" lang="ko">한국어</a> · <a href="#content-fr" lang="fr">Français</a> · <a href="#content-ru" lang="ru">Русский</a></div></noscript>
+</main>
+<footer class="site-footer"><div><a href="index.html">Linutech</a><span>© 2026 Linutech · ReadyGo</span></div><nav><a class="privacy-link" href="privacy.html?lang=zh-Hans#readygo" data-copy="privacy">隐私政策</a><a href="mailto:linutech@163.com">linutech@163.com</a><a href="#top" data-copy="backTop">返回顶部</a></nav></footer>
+<div class="sr-only" aria-live="polite" aria-atomic="true" id="page-status"></div>
+<script type="application/json" id="locales">{"zh-Hans": {"name": "简体中文", "ui": {"pageTitle": "ReadyGo · 把要做的事，放在看得见的地方", "description": "用彩色清单整理日常待办与场景准备。了解 ReadyGo 1.7 的无限画布、场景模板、小组件、提醒与月度复盘。", "language": "语言", "skip": "跳至正文", "features": "功能", "membership": "会员", "help": "帮助", "privacy": "隐私政策", "download": "前往 App Store", "downloadNote": "适用于 iPhone 与 iPad · 提供 App 内购买", "eyebrow": "READYGO 1.7", "hero": "把要做的事，\n放在看得见的地方。", "intro": "日常的小事、周末的行李、下一场会议。用一张彩色清单收好准备事项，把细节放在眼前，完成一项，就勾掉一项。", "secondary": "了解功能", "shotCaption": "App 实际截图 · 示例数据", "shotAlt": "ReadyGo 每日便签墙，展示彩色清单与完成进度", "shotOpen": "查看完整截图", "latest": "给今天，多一点自由。", "latestIntro": "在 1.7 中，用无限画布自由摆放便签，从场景模板开始准备，再选一种读起来舒服的字体。", "galleryTitle": "你的清单，按你的方式摆放。", "galleryIntro": "喜欢整齐的日常布局，也可以把便签摆成自己的样子。熟悉的准备从模板开始，不必反复重写事项。", "galleryCaption": "截图随所选语言切换。", "daily": "每日清单", "canvas": "无限画布", "templates": "场景模板", "canvasAlt": "ReadyGo 无限画布，自由摆放的多张便签清单", "templatesAlt": "ReadyGo 场景模板选择页，展示可复用的清单模板", "featureTitle": "从做好准备，\n到一项项完成。", "featureIntro": "照顾每天的小事，也为重要时刻留一份清楚的准备。", "surfacesTitle": "下一步，随时看一眼。", "surfacesIntro": "在主屏幕查看进度，需要时再手动开启实时显示。", "systemNote": "通知和实时显示受设备支持、iOS 设置及系统运行条件影响。实时活动与画中画需要会员，并由你手动开启。", "memberKicker": "READYGO 会员", "memberTitle": "给清单，多一点空间。", "memberIntro": "从日常清单开始使用，会员可解锁以下能力：", "memberNote": "在 App 内通过 App Store 购买或恢复会员，实际价格和商品条款以购买界面为准。", "privacyTitle": "你的清单，由你掌握。", "privacyBody": "记录保存在设备上，iCloud 可用时可同步所支持的数据，你可以在设置中管理。ReadyGo 不集成广告或跨 App 追踪 SDK。关闭同步不会删除已有云端数据。", "privacyLink": "阅读隐私政策", "faqTitle": "你可能想了解。", "supportTitle": "需要一点帮助？", "supportBody": "请发送邮件至 linutech@163.com，说明 App 版本、设备型号、iOS 版本及复现步骤。发送截图前，请遮盖私人内容。", "finalTitle": "给重要的小事，留个位置。", "finalBody": "要做的、要带的、要记得的，都放进清单里。", "backTop": "返回顶部", "allProducts": "Linutech 的全部产品", "footerNote": "支持简体中文、繁体中文、英语、日语、韩语、法语和俄语。", "galleryStatus": "当前画面"}}, "zh-Hant": {"name": "繁體中文", "ui": {"pageTitle": "ReadyGo · 讓計畫隨時在眼前", "description": "用繽紛清單安排日常，為重要時刻做好準備。探索 ReadyGo 1.7：無限畫布、可重用範本、小工具、提醒與每月回顧。", "language": "語言", "skip": "跳至主要內容", "features": "功能", "membership": "會員", "help": "使用說明", "privacy": "隱私權政策", "download": "在 App Store 查看", "downloadNote": "適用於 iPhone 與 iPad · 提供 App 內購買", "eyebrow": "READYGO 1.7", "hero": "讓你的計畫，\n隨時在眼前。", "intro": "日常待辦、週末行李、下一場會議。用一張繽紛清單收好細節，再一項一項完成。", "secondary": "探索功能", "shotCaption": "App 實際截圖 · 範例資料", "shotAlt": "ReadyGo 每日清單牆，以繽紛便條顯示清單與完成進度", "shotOpen": "開啟完整截圖", "latest": "讓每一天，多一點空間。", "latestIntro": "在 1.7 版，你可以在無限畫布上安排便條，從場景範本開始，並挑選喜歡的字型。", "galleryTitle": "你的清單，由你安排。", "galleryIntro": "使用熟悉的清單版面，或自由安排自己的空間。從範本開始，不必反覆輸入相同事項。", "galleryCaption": "截圖會隨所選語言切換。", "daily": "每日清單", "canvas": "無限畫布", "templates": "場景範本", "canvasAlt": "ReadyGo 無限畫布，可自由排列清單便條", "templatesAlt": "ReadyGo 場景範本選擇器，提供可重複使用的清單範本", "featureTitle": "從準備妥當，\n到一一完成。", "featureIntro": "照顧每天要做的事，也為重要時刻做好準備。", "surfacesTitle": "下一步，就在身邊。", "surfacesIntro": "在主畫面查看進度，或在需要時開啟即時顯示。", "systemNote": "通知與即時顯示會受裝置支援、iOS 設定及系統狀況影響。即時動態與子母畫面需手動啟動，並需要會員資格。", "memberKicker": "READYGO 會員", "memberTitle": "為清單，多留一點空間。", "memberIntro": "從日常清單開始。加入會員，可解鎖以下功能：", "memberNote": "在 App 內透過 App Store 購買或回復會員資格。目前價格及商品條款請以購買畫面為準。", "privacyTitle": "你的清單，屬於你。", "privacyBody": "紀錄儲存在你的裝置上。iCloud 可在服務可用時同步支援的資料，你可以在設定中管理。ReadyGo 不含廣告或跨 App 追蹤 SDK。關閉同步不會刪除已有的雲端資料。", "privacyLink": "閱讀隱私權政策", "faqTitle": "幾個實用的解答。", "supportTitle": "需要幫忙嗎？", "supportBody": "請寄信至 linutech@163.com，附上 App 版本、裝置、iOS 版本，以及問題發生前的操作步驟。截圖中的私人資訊請先遮蔽。", "finalTitle": "為重要的事，留個位置。", "finalBody": "要做的事、要帶的東西、要記住的細節，都有自己的位置。", "backTop": "返回頂部", "allProducts": "所有 Linutech 產品", "footerNote": "支援英文、簡體中文、繁體中文、日文、韓文、法文及俄文。", "galleryStatus": "目前檢視"}}, "en": {"name": "English", "ui": {"pageTitle": "ReadyGo · Keep your plans in sight", "description": "Colorful checklists for daily tasks and getting ready. Explore ReadyGo 1.7: an infinite canvas, reusable templates, widgets, reminders and monthly review.", "language": "Language", "skip": "Skip to content", "features": "Features", "membership": "Membership", "help": "Help", "privacy": "Privacy policy", "download": "View on the App Store", "downloadNote": "For iPhone and iPad · In-app purchases available", "eyebrow": "READYGO 1.7", "hero": "Keep your plans\nin sight.", "intro": "Everyday tasks, a weekend bag, your next meeting. Give them a colorful checklist, keep the details close, and check things off one at a time.", "secondary": "Explore the features", "shotCaption": "Actual app screenshots · Example data", "shotAlt": "ReadyGo daily checklist wall with colorful notes and completion progress", "shotOpen": "Open full screenshot", "latest": "A little more room for your day.", "latestIntro": "In 1.7, arrange notes on an infinite canvas, start from a scene template, and choose a font that feels like you.", "galleryTitle": "Your lists. Your arrangement.", "galleryIntro": "Choose a familiar list layout or make room for your own arrangement. Templates help you get started without rewriting the same items.", "galleryCaption": "Screenshots change with the selected language.", "daily": "Daily lists", "canvas": "Infinite canvas", "templates": "Scene templates", "canvasAlt": "ReadyGo infinite canvas with freely arranged checklist notes", "templatesAlt": "ReadyGo scene template picker with reusable checklist templates", "featureTitle": "From getting ready\nto getting it done.", "featureIntro": "For the things you do every day, and the moments you want to be ready for.", "surfacesTitle": "Keep the next step nearby.", "surfacesIntro": "Check your progress on the Home Screen, or start a live display when you need it.", "systemNote": "Notifications and live displays depend on device support, iOS settings and system conditions. Live Activities and Picture in Picture are started manually and require membership.", "memberKicker": "READYGO MEMBERSHIP", "memberTitle": "More room for your lists.", "memberIntro": "Start with everyday checklists. Membership unlocks these additional capabilities:", "memberNote": "Purchase and restore membership in the app through the App Store. See the purchase screen for the current price and product terms.", "privacyTitle": "Your lists belong to you.", "privacyBody": "Your records are stored on your device. iCloud can sync supported data when available, and you can manage it in settings. ReadyGo has no advertising or cross-app tracking SDKs. Turning sync off does not delete existing cloud data.", "privacyLink": "Read the privacy policy", "faqTitle": "A few useful answers.", "supportTitle": "Need a hand?", "supportBody": "Email linutech@163.com with your app version, device, iOS version and the steps that led to the issue. Hide private details in screenshots.", "finalTitle": "Make space for what matters.", "finalBody": "A place for the things to do, bring and remember.", "backTop": "Back to top", "allProducts": "All Linutech products", "footerNote": "Available in English, Simplified Chinese, Traditional Chinese, Japanese, Korean, French and Russian.", "galleryStatus": "Selected view"}}, "ja": {"name": "日本語", "ui": {"pageTitle": "ReadyGo · 予定を、いつも見える場所に", "description": "毎日のタスクや大切な準備を、カラフルなチェックリストに。ReadyGo 1.7 の無限キャンバス、再利用できるテンプレート、ウィジェット、リマインダー、月ごとの振り返りをご紹介します。", "language": "言語", "skip": "本文へ移動", "features": "機能", "membership": "メンバーシップ", "help": "ヘルプ", "privacy": "プライバシーポリシー", "download": "App Store で見る", "downloadNote": "iPhone・iPad 対応 · アプリ内購入あり", "eyebrow": "READYGO 1.7", "hero": "予定を、いつも\n見える場所に。", "intro": "毎日の用事も、週末の荷造りも、次の会議も。カラフルなチェックリストにまとめて、大事なことを手元に。一つずつ、チェックしていきましょう。", "secondary": "機能を見る", "shotCaption": "実際のアプリ画面 · サンプルデータ", "shotAlt": "カラフルなメモと完了状況を表示する ReadyGo の毎日のチェックリスト画面", "shotOpen": "スクリーンショット全体を開く", "latest": "毎日に、もう少し余白を。", "latestIntro": "1.7 では、無限キャンバスにメモを並べたり、シーンテンプレートから始めたり、自分らしいフォントを選んだりできます。", "galleryTitle": "あなたのリストを、好きな並びに。", "galleryIntro": "使い慣れたリスト表示でも、自分好みの配置でも。同じ項目を何度も入力せず、テンプレートから始められます。", "galleryCaption": "スクリーンショットは選択した言語に合わせて切り替わります。", "daily": "毎日のリスト", "canvas": "無限キャンバス", "templates": "シーンテンプレート", "canvasAlt": "チェックリストのメモを自由に配置した ReadyGo の無限キャンバス", "templatesAlt": "再利用できるチェックリストを選ぶ ReadyGo のシーンテンプレート画面", "featureTitle": "準備するところから、\nやり終えるところまで。", "featureIntro": "毎日することにも、しっかり備えておきたい瞬間にも。", "surfacesTitle": "次にすることを、すぐそばに。", "surfacesIntro": "ホーム画面で進捗を確認。必要なときにはリアルタイム表示も始められます。", "systemNote": "通知とリアルタイム表示の動作は、端末の対応状況、iOS の設定、システムの状態によって異なります。ライブアクティビティとピクチャ・イン・ピクチャは手動で開始し、メンバーシップが必要です。", "memberKicker": "READYGO メンバーシップ", "memberTitle": "リストを、もっと自由に。", "memberIntro": "まずは毎日のチェックリストから。メンバーシップでは、次の機能をご利用いただけます。", "memberNote": "アプリ内で App Store を通じてメンバーシップを購入・復元できます。現在の価格と商品の利用条件は、購入画面をご確認ください。", "privacyTitle": "あなたのリストは、あなたのもの。", "privacyBody": "記録はご自身の端末に保存されます。iCloud が利用できる場合は対応するデータを同期でき、設定で管理できます。ReadyGo は広告やアプリ間追跡の SDK を使用しません。同期を無効にしても、既存のクラウドデータは削除されません。", "privacyLink": "プライバシーポリシーを読む", "faqTitle": "よくある疑問にお答えします。", "supportTitle": "お困りですか？", "supportBody": "アプリのバージョン、端末、iOS のバージョン、問題が起きるまでの操作手順を添えて、linutech@163.com までご連絡ください。スクリーンショット内の個人情報は隠してください。", "finalTitle": "大切なことに、居場所を。", "finalBody": "すること、持っていくもの、覚えておくことを、一つの場所に。", "backTop": "ページの先頭へ", "allProducts": "Linutech の全製品", "footerNote": "英語、簡体字中国語、繁体字中国語、日本語、韓国語、フランス語、ロシア語に対応。", "galleryStatus": "選択中の表示"}}, "ko": {"name": "한국어", "ui": {"pageTitle": "ReadyGo · 계획을 늘 눈앞에", "description": "일상의 할 일과 준비를 다채로운 체크리스트로 정리하세요. ReadyGo 1.7의 무한 캔버스, 재사용 가능한 템플릿, 위젯, 알림, 월간 회고를 만나 보세요.", "language": "언어", "skip": "본문으로 이동", "features": "기능", "membership": "멤버십", "help": "도움말", "privacy": "개인정보 처리방침", "download": "App Store에서 보기", "downloadNote": "iPhone 및 iPad용 · 앱 내 구입 제공", "eyebrow": "READYGO 1.7", "hero": "나의 계획을\n늘 눈앞에.", "intro": "매일의 할 일, 주말 여행 가방, 다음 회의까지. 다채로운 체크리스트에 필요한 것을 담고, 하나씩 완료해 보세요.", "secondary": "기능 살펴보기", "shotCaption": "실제 앱 스크린샷 · 예시 데이터", "shotAlt": "다채로운 메모와 완료 진행 상황이 표시된 ReadyGo 일일 체크리스트 화면", "shotOpen": "전체 스크린샷 열기", "latest": "하루에 여유를 조금 더.", "latestIntro": "1.7에서는 무한 캔버스에 메모를 배치하고, 상황별 템플릿으로 시작하고, 나에게 맞는 글꼴을 고를 수 있습니다.", "galleryTitle": "나의 목록, 나만의 배치.", "galleryIntro": "익숙한 목록 레이아웃을 쓰거나 원하는 대로 배치해 보세요. 템플릿을 사용하면 같은 항목을 매번 다시 적지 않아도 됩니다.", "galleryCaption": "선택한 언어에 따라 스크린샷이 바뀝니다.", "daily": "일일 목록", "canvas": "무한 캔버스", "templates": "상황별 템플릿", "canvasAlt": "체크리스트 메모를 자유롭게 배치한 ReadyGo 무한 캔버스", "templatesAlt": "재사용할 체크리스트를 고르는 ReadyGo 상황별 템플릿 선택 화면", "featureTitle": "준비하는 순간부터\n마치는 순간까지.", "featureIntro": "매일 하는 일에도, 잘 준비하고 싶은 중요한 순간에도.", "surfacesTitle": "다음 할 일을 가까이에.", "surfacesIntro": "홈 화면에서 진행 상황을 확인하거나, 필요할 때 실시간 표시를 시작하세요.", "systemNote": "알림과 실시간 표시는 기기 지원 여부, iOS 설정, 시스템 상태에 따라 달라집니다. 실시간 현황과 화면 속 화면은 직접 시작해야 하며 멤버십이 필요합니다.", "memberKicker": "READYGO 멤버십", "memberTitle": "더 많은 목록을 위한 공간.", "memberIntro": "일상의 체크리스트부터 시작하세요. 멤버십으로 다음 기능을 이용할 수 있습니다.", "memberNote": "앱에서 App Store를 통해 멤버십을 구입하거나 복원할 수 있습니다. 현재 가격과 상품 조건은 구입 화면을 확인하세요.", "privacyTitle": "나의 목록은 나의 것.", "privacyBody": "기록은 사용자의 기기에 저장됩니다. iCloud를 이용할 수 있으면 지원되는 데이터를 동기화하며, 설정에서 관리할 수 있습니다. ReadyGo에는 광고 또는 앱 간 추적 SDK가 없습니다. 동기화를 꺼도 기존 클라우드 데이터는 삭제되지 않습니다.", "privacyLink": "개인정보 처리방침 읽기", "faqTitle": "궁금한 점을 모았어요.", "supportTitle": "도움이 필요하세요?", "supportBody": "앱 버전, 기기, iOS 버전, 문제가 발생하기 전의 조작 순서를 적어 linutech@163.com으로 보내 주세요. 스크린샷의 개인정보는 가려 주세요.", "finalTitle": "중요한 것을 위한 자리.", "finalBody": "해야 할 일, 챙길 물건, 기억할 내용을 한곳에.", "backTop": "맨 위로", "allProducts": "모든 Linutech 제품", "footerNote": "영어, 중국어 간체, 중국어 번체, 일본어, 한국어, 프랑스어, 러시아어를 지원합니다.", "galleryStatus": "선택한 보기"}}, "fr": {"name": "Français", "ui": {"pageTitle": "ReadyGo · Gardez vos projets en vue", "description": "Des listes colorées pour vos tâches quotidiennes et vos préparatifs. Découvrez ReadyGo 1.7 : une toile infinie, des modèles réutilisables, des widgets, des rappels et un bilan mensuel.", "language": "Langue", "skip": "Aller au contenu", "features": "Fonctionnalités", "membership": "Adhésion", "help": "Aide", "privacy": "Confidentialité", "download": "Voir sur l’App Store", "downloadNote": "Pour iPhone et iPad · Achats intégrés disponibles", "eyebrow": "READYGO 1.7", "hero": "Vos projets\nen vue.", "intro": "Les tâches du quotidien, un sac pour le week-end, votre prochaine réunion. Offrez-leur une liste colorée, gardez les détails à portée de main et cochez chaque étape à votre rythme.", "secondary": "Découvrir les fonctionnalités", "shotCaption": "Captures réelles de l’app · Données d’exemple", "shotAlt": "Mur de listes quotidiennes ReadyGo avec notes colorées et progression", "shotOpen": "Ouvrir la capture entière", "latest": "Un peu plus de place pour votre journée.", "latestIntro": "Avec la version 1.7, disposez vos notes sur une toile infinie, partez d’un modèle de situation et choisissez une police qui vous ressemble.", "galleryTitle": "Vos listes. Votre disposition.", "galleryIntro": "Choisissez une présentation classique ou créez votre propre disposition. Les modèles vous aident à commencer sans réécrire les mêmes éléments.", "galleryCaption": "Les captures suivent la langue sélectionnée.", "daily": "Listes quotidiennes", "canvas": "Toile infinie", "templates": "Modèles de situations", "canvasAlt": "Toile infinie de ReadyGo avec notes de listes disposées librement", "templatesAlt": "Sélecteur de modèles de situations ReadyGo avec listes réutilisables", "featureTitle": "Des préparatifs\nà l’accomplissement.", "featureIntro": "Pour les choses de tous les jours et les moments auxquels vous voulez être prêt.", "surfacesTitle": "La prochaine étape, à portée de main.", "surfacesIntro": "Consultez votre progression sur l’écran d’accueil ou lancez un affichage en direct quand vous en avez besoin.", "systemNote": "Les notifications et les affichages en direct dépendent de la compatibilité de l’appareil, des réglages iOS et des conditions du système. Les activités en direct et le mode Image dans l’image se lancent manuellement et nécessitent l’adhésion.", "memberKicker": "ADHÉSION READYGO", "memberTitle": "Plus de place pour vos listes.", "memberIntro": "Commencez avec les listes du quotidien. L’adhésion débloque ces possibilités supplémentaires :", "memberNote": "Achetez ou restaurez votre adhésion dans l’app via l’App Store. Consultez l’écran d’achat pour connaître le prix actuel et les conditions du produit.", "privacyTitle": "Vos listes vous appartiennent.", "privacyBody": "Vos données sont stockées sur votre appareil. iCloud peut synchroniser les données prises en charge lorsqu’il est disponible, et vous pouvez gérer cette fonction dans les réglages. ReadyGo n’intègre aucun SDK publicitaire ou de suivi entre apps. Désactiver la synchronisation ne supprime pas les données cloud existantes.", "privacyLink": "Lire la politique de confidentialité", "faqTitle": "Quelques réponses utiles.", "supportTitle": "Besoin d’un coup de main ?", "supportBody": "Écrivez à linutech@163.com en précisant la version de l’app, votre appareil, la version d’iOS et les étapes ayant mené au problème. Masquez les informations privées sur les captures d’écran.", "finalTitle": "Faites de la place à l’essentiel.", "finalBody": "Un endroit pour ce qu’il faut faire, emporter et retenir.", "backTop": "Retour en haut", "allProducts": "Tous les produits Linutech", "footerNote": "Disponible en anglais, chinois simplifié, chinois traditionnel, japonais, coréen, français et russe.", "galleryStatus": "Vue sélectionnée"}}, "ru": {"name": "Русский", "ui": {"pageTitle": "ReadyGo · Ваши планы всегда на виду", "description": "Цветные списки для повседневных дел и подготовки к событиям. ReadyGo 1.7: бесконечный холст, многоразовые шаблоны, виджеты, напоминания и месячный обзор.", "language": "Язык", "skip": "Перейти к содержимому", "features": "Возможности", "membership": "Доступ", "help": "Помощь", "privacy": "Конфиденциальность", "download": "Открыть в App Store", "downloadNote": "Для iPhone и iPad · Есть встроенные покупки", "eyebrow": "READYGO 1.7", "hero": "Планы\nна виду.", "intro": "Повседневные дела, сумка на выходные, следующая встреча. Создайте для них цветной список, держите детали под рукой и отмечайте сделанное шаг за шагом.", "secondary": "Узнать о возможностях", "shotCaption": "Реальные снимки приложения · Примеры данных", "shotAlt": "Ежедневные списки ReadyGo в виде цветных заметок с прогрессом выполнения", "shotOpen": "Открыть снимок целиком", "latest": "Чуть больше места для вашего дня.", "latestIntro": "В версии 1.7 можно размещать заметки на бесконечном холсте, начинать со сценарного шаблона и выбирать шрифт по душе.", "galleryTitle": "Ваши списки. Ваш порядок.", "galleryIntro": "Выберите привычное расположение списков или создайте собственную композицию. Шаблоны помогут начать без повторного ввода одних и тех же пунктов.", "galleryCaption": "Снимки меняются вместе с выбранным языком.", "daily": "Списки на день", "canvas": "Бесконечный холст", "templates": "Сценарные шаблоны", "canvasAlt": "Бесконечный холст ReadyGo со свободно расположенными списками-заметками", "templatesAlt": "Выбор сценарных шаблонов ReadyGo с многоразовыми списками", "featureTitle": "От подготовки\nк результату.", "featureIntro": "Для повседневных дел и моментов, к которым хочется быть готовым.", "surfacesTitle": "Следующий шаг — под рукой.", "surfacesIntro": "Следите за прогрессом на экране «Домой» или запускайте отображение текущих данных, когда оно нужно.", "systemNote": "Уведомления и отображение текущих данных зависят от совместимости устройства, настроек iOS и условий работы системы. Live Activities и режим «Картинка в картинке» запускаются вручную и требуют платного доступа.", "memberKicker": "ПЛАТНЫЙ ДОСТУП READYGO", "memberTitle": "Больше места для списков.", "memberIntro": "Начните с повседневных списков. Платный доступ открывает дополнительные возможности:", "memberNote": "Покупайте и восстанавливайте доступ в приложении через App Store. Актуальная цена и условия продукта указаны на экране покупки.", "privacyTitle": "Ваши списки принадлежат вам.", "privacyBody": "Ваши записи хранятся на устройстве. Когда iCloud доступен, он может синхронизировать поддерживаемые данные; управлять синхронизацией можно в настройках. В ReadyGo нет рекламных SDK или средств отслеживания между приложениями. Отключение синхронизации не удаляет существующие данные в облаке.", "privacyLink": "Читать политику конфиденциальности", "faqTitle": "Ответы, которые пригодятся.", "supportTitle": "Нужна помощь?", "supportBody": "Напишите на linutech@163.com, указав версию приложения, устройство, версию iOS и шаги, приведшие к проблеме. Скройте личные сведения на снимках экрана.", "finalTitle": "Освободите место для важного.", "finalBody": "Место для того, что нужно сделать, взять и запомнить.", "backTop": "Наверх", "allProducts": "Все продукты Linutech", "footerNote": "Доступно на английском, упрощённом и традиционном китайском, японском, корейском, французском и русском языках.", "galleryStatus": "Выбранный вид"}}}</script><script>(() => {
+ 'use strict';
+ const locales=JSON.parse(document.getElementById('locales').textContent);
+ const select=document.getElementById('language-select');
+ const views=['daily','canvas','templates'];
+ let activeLanguage='zh-Hans';
+ let activeView='canvas';
+ function matchLanguage(value){
+   if(!value)return null;
+   const code=value.toLowerCase();
+   if(/^zh(?:-|$)/.test(code))return /hant|tw|hk|mo/.test(code)?'zh-Hant':'zh-Hans';
+   return Object.keys(locales).find(lang=>lang.toLowerCase()===code||lang===code.split('-')[0])||null;
+ }
+ function preferredLanguage(){
+   const explicit=matchLanguage(new URL(location.href).searchParams.get('lang'));
+   return explicit||(navigator.languages||[navigator.language]).map(matchLanguage).find(Boolean)||'en';
+ }
+ function preferredView(){const view=new URL(location.href).searchParams.get('view');return views.includes(view)?view:'canvas';}
+ function setImage(image,link,feature,alt){
+   const path='images/readygo/'+activeLanguage+'-'+feature+'.png';
+   if(image.getAttribute('src')!==path)image.src=path;
+   image.alt=alt;link.href=path;
+   link.setAttribute('aria-label',locales[activeLanguage].ui.shotOpen+' — '+locales[activeLanguage].ui[feature]);
+ }
+ function renderGallery(announce=false){
+   const copy=locales[activeLanguage].ui;
+   document.querySelectorAll('.gallery-copy').forEach(node=>{node.hidden=node.dataset.language!==activeLanguage||node.dataset.view!==activeView;});
+   document.querySelectorAll('.gallery-tabs button').forEach(button=>{const on=button.dataset.view===activeView;button.setAttribute('aria-selected',String(on));button.tabIndex=on?0:-1;});
+   document.getElementById('gallery-panel').setAttribute('aria-labelledby','tab-'+activeView);
+   setImage(document.getElementById('gallery-image'),document.getElementById('gallery-image-link'),activeView,copy[activeView==='daily'?'shotAlt':activeView+'Alt']);
+   if(announce)document.getElementById('page-status').textContent=copy.galleryStatus+': '+copy[activeView];
+ }
+ function render(lang,view,announce=false){
+   activeLanguage=lang;activeView=view;
+   const copy=locales[lang].ui;
+   document.documentElement.lang=lang;document.title=copy.pageTitle;
+   document.querySelector('meta[name="description"]').content=copy.description;
+   select.value=lang;
+   document.querySelectorAll('[data-copy]').forEach(node=>{node.textContent=copy[node.dataset.copy];});
+   document.querySelectorAll('.locale-text').forEach(node=>{node.hidden=node.dataset.language!==lang;node.style.marginTop='';});
+   document.querySelectorAll('.locale-text:not([hidden])').forEach(node=>{if(node.classList.contains('highlights'))node.style.marginTop='0';});
+   document.querySelectorAll('.privacy-link').forEach(a=>{a.href='privacy.html?lang='+lang+'#readygo';});
+   document.querySelector('.gallery-tabs').setAttribute('aria-label',copy.galleryTitle);
+   document.querySelector('.language-control').hidden=false;
+   setImage(document.getElementById('hero-image'),document.getElementById('hero-image-link'),'daily',copy.shotAlt);
+   renderGallery();
+   if(announce)document.getElementById('page-status').textContent=copy.pageTitle+' — '+locales[lang].name;
+ }
+ function saveURL(){const url=new URL(location.href);url.searchParams.set('lang',activeLanguage);url.searchParams.set('view',activeView);history.pushState(null,'',url);}
+ select.addEventListener('change',()=>{render(select.value,activeView,true);saveURL();});
+ document.querySelectorAll('.gallery-tabs button').forEach(button=>{
+   button.addEventListener('click',()=>{activeView=button.dataset.view;renderGallery(true);saveURL();});
+   button.addEventListener('keydown',event=>{
+     let next=views.indexOf(activeView);
+     if(event.key==='ArrowRight')next=(next+1)%views.length;
+     else if(event.key==='ArrowLeft')next=(next+views.length-1)%views.length;
+     else if(event.key==='Home')next=0;
+     else if(event.key==='End')next=views.length-1;
+     else return;
+     event.preventDefault();activeView=views[next];renderGallery(true);saveURL();document.getElementById('tab-'+activeView).focus();
+   });
+ });
+ window.addEventListener('popstate',()=>render(preferredLanguage(),preferredView()));
+ render(preferredLanguage(),preferredView());
+})();
+</script></body></html>
