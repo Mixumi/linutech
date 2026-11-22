@@ -439,3 +439,13 @@ h1,h2,.guide-panel h3{font-family:var(--display);font-weight:400;line-height:1.1
   .operation-peek img{position:absolute;width:250px;max-width:none}
   .operation-peek .tour-marker{width:22px;height:22px}
 }
+
+@media(max-width:460px){
+  html:lang(zh) .hero h1{font-size:clamp(1.85rem,8.55vw,2.55rem)}
+  .hero-body{font-size:.94rem;line-height:1.6;margin-top:12px}
+  .actions{column-gap:10px;row-gap:5px;margin-top:16px}
+  .actions .primary{padding-inline:13px;min-height:46px;font-size:.87rem}
+  .actions .secondary{font-size:.84rem}
+  .preview{font-size:.74rem;margin-top:11px}
+  .hero-preview{margin-top:6px}
+}
