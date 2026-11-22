@@ -44,7 +44,6 @@
   "review2": "Desplázate por la cronología del día.",
   "review3": "Abre el menú ··· para acceder a Análisis, Bandeja de entrada o Diario.",
   "reviewAlt": "Pantalla Resumen con un calendario mensual y la cronología de un día.",
-  "capture": "Pantallas de TimeHabit 6.0 con datos de ejemplo. Las capturas muestran la interfaz en inglés.",
   "privacyTitle": "Política de privacidad de TimeHabit",
   "privacyIntro": "Esta política se aplica a TimeHabit 6.0 y a esta página del producto.",
   "policyDate": "Actualizada el 22 de noviembre de 2026",
@@ -123,5 +122,7 @@
   "reviewDetail5Title": "Anotar una idea y convertirla en un plan",
   "reviewDetail5Body": "Toca ··· → Bandeja de entrada y guarda una idea o un enlace. Cuando sepas qué quieres hacer, abre el menú del elemento y elige Convertir para crear una tarea o un evento.",
   "reviewDetail6Title": "Volver al registro original desde el diario",
-  "reviewDetail6Body": "Dentro de las notas del día del Diario, toca el registro de un evento o la nota de un hábito para abrir el registro original. Toca la fecha en Diario para ir a otro día."
+  "reviewDetail6Body": "Dentro de las notas del día del Diario, toca el registro de un evento o la nota de un hábito para abrir el registro original. Toca la fecha en Diario para ir a otro día.",
+  "viewScreen": "Ver la pantalla completa",
+  "closeScreen": "Cerrar la vista previa"
 }

@@ -44,7 +44,6 @@
   "review2": "Faites défiler la chronologie de la journée.",
   "review3": "Dans le menu ···, choisissez « Analyse », « Boîte de réception » ou « Journal ».",
   "reviewAlt": "Écran Bilan avec un calendrier mensuel et la chronologie d’une journée.",
-  "capture": "Écrans de TimeHabit 6.0 avec des données d’exemple. Les captures montrent l’interface en anglais.",
   "privacyTitle": "Politique de confidentialité de TimeHabit",
   "privacyIntro": "Cette politique s’applique à TimeHabit 6.0 et à cette page produit.",
   "policyDate": "Mis à jour le 22 novembre 2026",
@@ -123,5 +122,7 @@
   "reviewDetail5Title": "Noter une idée et la transformer en action",
   "reviewDetail5Body": "Touchez ··· → Boîte de réception et enregistrez une idée ou un lien. Lorsque vous savez quoi en faire, ouvrez le menu de l’élément et choisissez Convertir pour en faire une tâche ou un événement.",
   "reviewDetail6Title": "Retrouver la fiche d’origine depuis le journal",
-  "reviewDetail6Body": "Dans les notes du jour du Journal, touchez le compte rendu d’un événement ou une note d’habitude pour ouvrir sa fiche d’origine. Touchez la date dans Journal pour accéder à un autre jour."
+  "reviewDetail6Body": "Dans les notes du jour du Journal, touchez le compte rendu d’un événement ou une note d’habitude pour ouvrir sa fiche d’origine. Touchez la date dans Journal pour accéder à un autre jour.",
+  "viewScreen": "Voir l’écran entier",
+  "closeScreen": "Fermer l’aperçu"
 }

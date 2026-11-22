@@ -1,5 +1,5 @@
 (() => {
-  const scriptUrl = import.meta.url;
+  const scriptUrl = new URL(import.meta.url);
   const languages = ["zh-Hans", "zh-Hant", "en", "ja", "ko", "fr", "it", "es-ES", "pt-PT", "ru"];
   const picker = document.querySelector("#language-select");
   const languageLinks = [...document.querySelectorAll("[data-language-link]")];
@@ -31,7 +31,10 @@
     const request = ++languageRequest;
     try {
       if (!translations.has(language)) {
-        const response = await fetch(new URL("i18n/" + language + ".json", scriptUrl));
+        const translationUrl = new URL("i18n/" + language + ".json", scriptUrl);
+        const version = scriptUrl.searchParams.get("v");
+        if (version) translationUrl.searchParams.set("v", version);
+        const response = await fetch(translationUrl);
         if (!response.ok) throw new Error("Translation unavailable");
         const copy = await response.json();
         if (!Object.keys(defaultCopy).every(key => typeof copy[key] === "string" && copy[key])) {

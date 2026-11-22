@@ -8,15 +8,15 @@
   <meta name="description" content="TimeHabit 是一款有手绘熊猫花花陪伴的 iPhone 和 iPad 应用，帮你安排任务、日程和习惯，专注计时，管控屏幕使用时间。" data-copy-attr="content metaDescription">
   <link rel="canonical" href="https://mixumi.github.io/linutech/timehabit.html">
   <link rel="icon" type="image/webp" href="images/timehabit/app-icon.webp">
-  <link rel="stylesheet" href="images/timehabit/page.css">
-  <script type="module" src="images/timehabit/page.js"></script>
+  <link rel="stylesheet" href="images/timehabit/showcase.css">
+  <script type="module" src="images/timehabit/showcase.js"></script>
 </head>
 <body>
   <a class="skip" href="#main" data-copy="skip">跳到正文</a>
   <header class="wrap">
-    <div class="header-inner">
-      <a class="brand" href="#top"><img src="images/timehabit/app-icon.webp" width="96" height="96" alt="">TimeHabit</a>
-      <nav class="header-nav" aria-label="页面导航" data-copy-attr="aria-label navigation">
+    <div class="site-header">
+      <a class="brand" href="#top"><img src="images/timehabit/app-icon.webp" alt="" width="36" height="36">TimeHabit</a>
+      <nav class="page-nav" aria-label="页面导航" data-copy-attr="aria-label navigation">
         <a href="#guide" data-copy="guideNav">使用指南</a>
         <a href="timehabit-privacy.html" data-language-link data-copy="privacyNav">隐私政策</a>
       </nav>
@@ -37,201 +37,231 @@
     </div>
   </header>
 
-  <main id="main" class="wrap">
-    <section class="hero" aria-labelledby="hero-title">
-      <div class="hero-text">
-        <h1 id="hero-title">
-          <span data-copy="heroLine1">安排好今天，</span>
-          <span class="hero-last" data-copy="heroLine2">给自己留点时间。</span>
-        </h1>
-        <p class="hero-body" data-copy="heroBody">用 TimeHabit 安排待办、日程和习惯，专心做一件事，给容易分心的 App 设个界限。花花陪你一起。</p>
-        <div class="actions">
-          <a class="primary" href="https://apps.apple.com/app/id6480261329" data-copy="store">在 App Store 查看</a>
-          <a class="secondary" href="#guide" data-copy="explore">看看 6.0 怎么用</a>
-        </div>
-        <p class="preview" data-copy="preview">6.0 版本预览 · 适用于 iOS 17 或 iPadOS 17 及以上版本。App Store 目前提供 5.1.4。</p>
-      </div>
-      <div class="hero-preview">
-        <figure class="hero-art" data-scene="today">
-          <div class="sheet-back" aria-hidden="true"></div>
-          <div class="sheet-front" aria-hidden="true"></div>
-          <div class="tape" aria-hidden="true"></div>
-          <div class="sketch-ring" aria-hidden="true"></div>
-          <div class="spark" aria-hidden="true"></div>
-          <div class="spark spark-small" aria-hidden="true"></div>
-          <div class="spark spark-low" aria-hidden="true"></div>
-          <div class="scene-scatter" aria-hidden="true">
-            <img src="images/timehabit/panda-focus.webp" width="216" height="141" alt="" class="scatter-focus">
-            <img src="images/timehabit/panda-review.webp" width="240" height="160" alt="" class="scatter-review">
-          </div>
-          <div class="scene-shot phone phone-hero" data-shot="today" aria-hidden="false"><img src="images/timehabit/screen-cover.webp" width="650" height="1414" alt="TimeHabit 6.0 的今天页面，显示示例任务、进度和专注快捷入口。" data-copy-attr="alt heroAlt"></div>
-          <div class="scene-shot phone phone-hero" data-shot="focus" aria-hidden="true"><img src="images/timehabit/screen-focus.webp" width="650" height="1414" alt="专注准备页显示 25 分钟倒计时和手绘竹林。" data-copy-attr="alt focusAlt"></div>
-          <div class="scene-shot phone phone-hero" data-shot="limits" aria-hidden="true"><img src="images/timehabit/screen-control.webp" width="650" height="1414" alt="管控页面显示屏幕使用时间授权入口、新建按钮和工具。" data-copy-attr="alt limitsAlt"></div>
-          <div class="scene-shot phone phone-hero" data-shot="review" aria-hidden="true"><img src="images/timehabit/screen-review.webp" width="650" height="1414" alt="回顾页面显示月历和所选日期的时间线。" data-copy-attr="alt reviewAlt"></div>
-          <div class="mascot">
+  <main class="wrap" id="main">
+    <section class="launch" aria-labelledby="hero-title">
+      <h1 id="hero-title"><span data-copy="heroLine1">安排好今天，</span><span class="ink-line" data-copy="heroLine2">给自己留点时间。</span></h1>
+      <p class="hero-lead" data-copy="heroBody">待办、日程、习惯、专注和屏幕时间管控。花花陪你安排每一天。</p>
+      <div class="showcase" data-scene="today">
+        <div class="demo-stage" aria-labelledby="hero-title">
+          <div class="mascot-stage">
+            <span class="doodle-spark" aria-hidden="true"></span>
+            <span class="doodle-dash" aria-hidden="true"></span>
             <button type="button" id="wave-button" aria-label="和花花打个招呼" data-copy-attr="aria-label wave" disabled>
-          <span class="scene-panda" data-panda="today" aria-hidden="false"><img src="images/timehabit/huahua.webp" width="550" height="550" alt=""><canvas width="640" height="640" aria-hidden="true" hidden></canvas></span>
-          <span class="scene-panda" data-panda="focus" aria-hidden="true"><img src="images/timehabit/panda-focus.webp" width="216" height="141" alt=""></span>
-          <span class="scene-panda" data-panda="limits" aria-hidden="true"><img src="images/timehabit/panda-limits.webp" width="216" height="157" alt=""></span>
-          <span class="scene-panda" data-panda="review" aria-hidden="true"><img src="images/timehabit/panda-review.webp" width="240" height="160" alt=""></span>
+              <span class="panda-pose" data-panda="today"><img src="images/timehabit/huahua.webp" alt=""><canvas width="640" height="640" aria-hidden="true" hidden></canvas></span>
+              <span class="panda-pose" data-panda="focus" hidden><img src="images/timehabit/panda-focus.webp" alt=""></span>
+              <span class="panda-pose" data-panda="limits" hidden><img src="images/timehabit/panda-limits.webp" alt=""></span>
+              <span class="panda-pose" data-panda="review" hidden><img src="images/timehabit/panda-review.webp" alt=""></span>
             </button>
             <span class="wave-reply" id="wave-reply" role="status" aria-live="polite"></span>
             <span id="wave-copy" hidden data-copy="waveReply">你好呀！</span>
+            <button type="button" class="screen-open" id="screen-open" aria-label="查看完整画面" data-copy-attr="aria-label viewScreen" hidden><span aria-hidden="true"></span></button>
           </div>
-        </figure>
-        <div class="scene-picker" hidden>
-          <div class="scene-stickers" role="group" aria-label="功能画面预览" data-copy-attr="aria-label scenePreview">
-          <button type="button" class="scene-sticker" data-preview="today" aria-pressed="false"><img src="images/timehabit/panda-today.webp" width="216" height="211" alt=""><span data-copy="todayTab">今天</span></button>
-          <button type="button" class="scene-sticker" data-preview="focus" aria-pressed="false"><img src="images/timehabit/panda-focus.webp" width="216" height="141" alt=""><span data-copy="focusTab">专注</span></button>
-          <button type="button" class="scene-sticker" data-preview="limits" aria-pressed="false"><img src="images/timehabit/panda-limits.webp" width="216" height="157" alt=""><span data-copy="limitsTab">管控</span></button>
-          <button type="button" class="scene-sticker" data-preview="review" aria-pressed="false"><img src="images/timehabit/panda-review.webp" width="240" height="160" alt=""><span data-copy="reviewTab">回顾</span></button>
+          <div class="phone-home" id="phone-home">
+            <figure class="phone" id="preview-phone">
+              <div class="phone-inner">
+                <img id="preview-image" src="images/timehabit/screen-cover.webp" width="650" height="1414" decoding="async" alt="TimeHabit 6.0 的今天页面，显示示例任务、进度和专注快捷入口。" data-copy-attr="alt heroAlt">
+                <span class="tour-marker" id="tour-marker" hidden aria-hidden="true"><i></i></span>
+              </div>
+            </figure>
           </div>
         </div>
+        <div class="demo-controls" hidden>
+          <div class="scene-tabs" role="group" aria-label="功能画面预览" data-copy-attr="aria-label scenePreview">
+            <button type="button" class="scene-tab" data-topic="today" aria-pressed="true"><img src="images/timehabit/panda-today.webp" alt=""><span data-copy="todayTab">今天</span></button>
+            <button type="button" class="scene-tab" data-topic="focus" aria-pressed="false"><img src="images/timehabit/panda-focus.webp" alt=""><span data-copy="focusTab">专注</span></button>
+            <button type="button" class="scene-tab" data-topic="limits" aria-pressed="false"><img src="images/timehabit/panda-limits.webp" alt=""><span data-copy="limitsTab">管控</span></button>
+            <button type="button" class="scene-tab" data-topic="review" aria-pressed="false"><img src="images/timehabit/panda-review.webp" alt=""><span data-copy="reviewTab">回顾</span></button>
+          </div>
+          <div class="walkthrough">
+            <div class="steps" role="group" aria-label="使用指南" data-copy-attr="aria-label guideNav">
+              <button type="button" data-step="1" aria-pressed="true">1</button>
+              <button type="button" data-step="2" aria-pressed="false">2</button>
+              <button type="button" data-step="3" aria-pressed="false">3</button>
+            </div>
+            <div class="step-copy" aria-live="polite">
+            <p data-step-copy="today-1" data-copy="today1">打开「今天」，点「＋」。</p>
+            <p data-step-copy="today-2" hidden data-copy="today2">选任务、安排或习惯，按需要设置截止日期、时段或目标。</p>
+            <p data-step-copy="today-3" hidden data-copy="today3">回到「今天」，勾选完成的任务，或为习惯打卡。</p>
+            <p data-step-copy="focus-1" hidden data-copy="focus1">点「今天」的「专注」，或点任务旁的时钟。</p>
+            <p data-step-copy="focus-2" hidden data-copy="focus2">选正计时、倒计时或番茄钟。</p>
+            <p data-step-copy="focus-3" hidden data-copy="focus3">开始专注。需要时可以暂停，结束后查看这次的用时。</p>
+            <p data-step-copy="limits-1" hidden data-copy="limits1">打开「管控」，连接系统的「屏幕使用时间」。</p>
+            <p data-step-copy="limits-2" hidden data-copy="limits2">点「＋」，选择规则类型，例如「按时段管控」。</p>
+            <p data-step-copy="limits-3" hidden data-copy="limits3">选择要管控的 App 和时段，保存规则。</p>
+            <p data-step-copy="review-1" hidden data-copy="review1">打开「回顾」，在日历里选择日期。</p>
+            <p data-step-copy="review-2" hidden data-copy="review2">向下浏览这一天的时间线。</p>
+            <p data-step-copy="review-3" hidden data-copy="review3">点「···」，进入「分析」「收集箱」或「日记」。</p>
+            </div>
+          </div>
+        </div>
+        <div class="screen-copy" hidden>
+          <span data-screen-copy="cover" data-copy="heroAlt">TimeHabit 6.0 的今天页面，显示示例任务、进度和专注快捷入口。</span>
+          <span data-screen-copy="today" data-copy="todayAlt">今天页面显示示例任务列表和习惯卡片。</span>
+          <span data-screen-copy="focus" data-copy="focusAlt">专注准备页显示 25 分钟倒计时和手绘竹林。</span>
+          <span data-screen-copy="control" data-copy="limitsAlt">管控页面显示屏幕使用时间授权入口、新建按钮和工具。</span>
+          <span data-screen-copy="review" data-copy="reviewAlt">回顾页面显示月历和所选日期的时间线。</span>
+        </div>
       </div>
+      <div class="launch-actions">
+        <a class="primary" href="https://apps.apple.com/app/id6480261329" data-copy="store">在 App Store 查看</a>
+        <a class="secondary" href="#guide" data-copy="explore">看看 6.0 怎么用</a>
+      </div>
+      <p class="version" data-copy="preview">6.0 预览 · 适用于 iOS / iPadOS 17 及以上。App Store 目前提供 5.1.4。</p>
     </section>
 
     <section class="guide" id="guide" aria-labelledby="guide-title">
-      <header class="section-head">
-        <h2 id="guide-title" data-copy="guideTitle">跟着花花，用好一天</h2>
-      </header>
-      <nav class="guide-tabs" aria-label="TimeHabit 功能" data-copy-attr="aria-label tabsLabel">
-        <a class="guide-tab" id="tab-today" href="#guide-today" data-copy="todayTab">今天</a>
-        <a class="guide-tab" id="tab-focus" href="#guide-focus" data-copy="focusTab">专注</a>
-        <a class="guide-tab" id="tab-limits" href="#guide-limits" data-copy="limitsTab">管控</a>
-        <a class="guide-tab" id="tab-review" href="#guide-review" data-copy="reviewTab">回顾</a>
-      </nav>
-      <div class="guide-panels">
-        <article class="guide-panel" id="guide-today" data-topic="today">
-          <div class="guide-copy">
-            <h3 id="title-today" data-copy="todayTitle">把今天安排明白</h3>
-            <div class="walkthrough" aria-labelledby="title-today">
-              <div class="step-targets" role="group" aria-labelledby="title-today" hidden>
-                <button type="button" class="step-target" aria-controls="today-step-1" aria-pressed="false" data-step="1">1</button> <button type="button" class="step-target" aria-controls="today-step-2" aria-pressed="false" data-step="2">2</button> <button type="button" class="step-target" aria-controls="today-step-3" aria-pressed="false" data-step="3">3</button>
-              </div>
-              <ol class="steps">
-              <li id="today-step-1"><span class="step-number" aria-hidden="true">1</span><span data-copy="today1">打开「今天」，点「＋」。</span></li>
-              <li id="today-step-2"><span class="step-number" aria-hidden="true">2</span><span data-copy="today2">选任务、安排或习惯，按需要设置截止日期、时段或目标。</span></li>
-              <li id="today-step-3"><span class="step-number" aria-hidden="true">3</span><span data-copy="today3">回到「今天」，勾选完成的任务，或为习惯打卡。</span></li>
-              </ol>
-            </div>
-            <div class="operations">
-            <details class="operation" name="today-operations" data-operation="1"><summary data-copy="todayDetail1Title">点熊猫展开今日概览</summary><p data-copy="todayDetail1Body">点「今天」标题旁的熊猫，顶部会展开任务、安排和习惯概览。向下滚动时概览会留在顶部，再点一次熊猫即可收起。</p></details>
-            <details class="operation" name="today-operations" data-operation="2"><summary data-copy="todayDetail2Title">右滑任务卡片修改或删除</summary><p data-copy="todayDetail2Body">向右滑动卡片，左侧会露出「修改」和「删除」。向左滑或点空白处收起。删除重复任务时，留意确认框里的本次和系列范围。</p></details>
-            <details class="operation" name="today-operations" data-operation="3"><summary data-copy="todayDetail3Title">点卡片完成，展开后逐步勾选</summary><p data-copy="todayDetail3Body">收起右滑操作后，点任务卡片或圆圈即可完成。点已完成任务可恢复未完成。任务有步骤时，展开步骤列表即可逐项勾选。</p></details>
-            <details class="operation" name="today-operations" data-operation="4"><summary data-copy="todayDetail4Title">用「今天做」把逾期任务移回今天</summary><p data-copy="todayDetail4Body">在「之前未完成」找到任务，点「今天做」将计划日改为今天，任务仍待完成。</p></details>
-            <details class="operation" name="today-operations" data-operation="5"><summary data-copy="todayDetail5Title">记录习惯进度和小记</summary><p data-copy="todayDetail5Body">在「今天」点习惯的记录按钮。打卡型习惯直接打卡，数量型习惯录入完成量。打开习惯记录可以调整数量或写小记。</p></details>
-            <details class="operation" name="today-operations" data-operation="6"><summary data-copy="todayDetail6Title">把常用任务保存为模板</summary><p data-copy="todayDetail6Body">在任务编辑器点「···」里的「保存为模板」。下次可在任务编辑器用「从模板新建」填入草稿，核对后点保存。</p></details>
-            </div>
-          </div>
-          <figure class="guide-art">
-            <div class="phone guide-phone" data-screen="today">
-              <div class="guide-viewport"><img data-guide-screen="today" aria-hidden="false" src="images/timehabit/screen-today.webp" width="650" height="1414" alt="今天页面显示示例任务列表和习惯卡片。" data-copy-attr="alt todayAlt" class="guide-shot"><img data-guide-screen="cover" aria-hidden="true" src="images/timehabit/screen-cover.webp" width="650" height="1414" alt="" class="guide-shot">
-                <span class="tour-marker" aria-hidden="true" hidden><i></i></span>
-              </div>
-            </div>
-            <img src="images/timehabit/panda-today.webp" width="216" height="211" alt="" class="guide-panda" loading="lazy">
-          </figure>
-        </article>
-        <article class="guide-panel" id="guide-focus" data-topic="focus">
-          <div class="guide-copy">
-            <h3 id="title-focus" data-copy="focusTitle">一次只做一件事</h3>
-            <div class="walkthrough" aria-labelledby="title-focus">
-              <div class="step-targets" role="group" aria-labelledby="title-focus" hidden>
-                <button type="button" class="step-target" aria-controls="focus-step-1" aria-pressed="false" data-step="1">1</button> <button type="button" class="step-target" aria-controls="focus-step-2" aria-pressed="false" data-step="2">2</button> <button type="button" class="step-target" aria-controls="focus-step-3" aria-pressed="false" data-step="3">3</button>
-              </div>
-              <ol class="steps">
-              <li id="focus-step-1"><span class="step-number" aria-hidden="true">1</span><span data-copy="focus1">点「今天」的「专注」，或点任务旁的时钟。</span></li>
-              <li id="focus-step-2"><span class="step-number" aria-hidden="true">2</span><span data-copy="focus2">选正计时、倒计时或番茄钟。</span></li>
-              <li id="focus-step-3"><span class="step-number" aria-hidden="true">3</span><span data-copy="focus3">开始专注。需要时可以暂停，结束后查看这次的用时。</span></li>
-              </ol>
-            </div>
-            <div class="operations">
-            <details class="operation" name="focus-operations" data-operation="1"><summary data-copy="focusDetail1Title">点任务旁的时钟直接专注</summary><p data-copy="focusDetail1Body">点任务卡片上的时钟，记录这项任务的用时。任务有进行中的专注时，再点同一入口就能回到该计时。</p></details>
-            <details class="operation" name="focus-operations" data-operation="2"><summary data-copy="focusDetail2Title">点计时数字或番茄设置调整参数</summary><p data-copy="focusDetail2Body">正计时从零开始，倒计时适合给自己限定一段时间，番茄钟用来交替安排专注和休息。开始前可以点时长，或点番茄钟的轮数与休息参数调整。</p></details>
-            <details class="operation" name="focus-operations" data-operation="3"><summary data-copy="focusDetail3Title">开计时前设声音和保护</summary><p data-copy="focusDetail3Body">进入专注设置选声音。需要屏蔽干扰时，在设置中选择要限制或允许的 App。保护随本次专注开始时启用。</p></details>
-            <details class="operation" name="focus-operations" data-operation="4"><summary data-copy="focusDetail4Title">收起页面，计时继续</summary><p data-copy="focusDetail4Body">计时中点左上角收起，可以继续用 App。回到「今天」点「专注」，就能重新打开正在进行的计时。</p></details>
-            <details class="operation" name="focus-operations" data-operation="5"><summary data-copy="focusDetail5Title">暂停、结束和完成任务</summary><p data-copy="focusDetail5Body">用「暂停」和「继续」控制同一次会话。点「结束」可收尾。任务专注中点「完成任务」，会结束并记录当前专注，同时完成任务。</p></details>
-            <details class="operation" name="focus-operations" data-operation="6"><summary data-copy="focusDetail6Title">按日、周、月、年看专注记录</summary><p data-copy="focusDetail6Body">打开「回顾 → ··· → 分析 → 专注」，按日、周、月或年查看这段时间的专注记录和累计时长。</p></details>
-            </div>
-          </div>
-          <figure class="guide-art">
-            <div class="phone guide-phone" data-screen="focus">
-              <div class="guide-viewport"><img data-guide-screen="focus" aria-hidden="false" src="images/timehabit/screen-focus.webp" width="650" height="1414" alt="专注准备页显示 25 分钟倒计时和手绘竹林。" data-copy-attr="alt focusAlt" class="guide-shot"><img data-guide-screen="cover" aria-hidden="true" src="images/timehabit/screen-cover.webp" width="650" height="1414" alt="" class="guide-shot"><img data-guide-screen="analysis" aria-hidden="true" src="images/timehabit/screen-analysis.webp" width="650" height="1414" alt="" class="guide-shot">
-                <span class="tour-marker" aria-hidden="true" hidden><i></i></span>
-              </div>
-            </div>
-            <img src="images/timehabit/panda-focus.webp" width="216" height="141" alt="" class="guide-panda" loading="lazy">
-          </figure>
-        </article>
-        <article class="guide-panel" id="guide-limits" data-topic="limits">
-          <div class="guide-copy">
-            <h3 id="title-limits" data-copy="limitsTitle">给分心设个界限</h3>
-            <div class="walkthrough" aria-labelledby="title-limits">
-              <div class="step-targets" role="group" aria-labelledby="title-limits" hidden>
-                <button type="button" class="step-target" aria-controls="limits-step-1" aria-pressed="false" data-step="1">1</button> <button type="button" class="step-target" aria-controls="limits-step-2" aria-pressed="false" data-step="2">2</button> <button type="button" class="step-target" aria-controls="limits-step-3" aria-pressed="false" data-step="3">3</button>
-              </div>
-              <ol class="steps">
-              <li id="limits-step-1"><span class="step-number" aria-hidden="true">1</span><span data-copy="limits1">打开「管控」，连接系统的「屏幕使用时间」。</span></li>
-              <li id="limits-step-2"><span class="step-number" aria-hidden="true">2</span><span data-copy="limits2">点「＋」，选择规则类型，例如「按时段管控」。</span></li>
-              <li id="limits-step-3"><span class="step-number" aria-hidden="true">3</span><span data-copy="limits3">选择要管控的 App 和时段，保存规则。</span></li>
-              </ol>
-            </div>
-            <div class="operations">
-            <details class="operation" name="limits-operations" data-operation="1"><summary data-copy="limitsDetail1Title">现在专心</summary><p data-copy="limitsDetail1Body">希望立刻减少干扰时，选择要限制的 App，再设定本次锁定多久。</p></details>
-            <details class="operation" name="limits-operations" data-operation="2"><summary data-copy="limitsDetail2Title">按时段管控</summary><p data-copy="limitsDetail2Body">选择规则生效的日期或星期，再加上一个或多个时间段。例如在工作日的睡前时段限制社交 App。</p></details>
-            <details class="operation" name="limits-operations" data-operation="3"><summary data-copy="limitsDetail3Title">限制使用时长</summary><p data-copy="limitsDetail3Body">给所选 App 设置共享用量。它们的累计使用时间达到设定额度后，规则会限制访问。</p></details>
-            <details class="operation" name="limits-operations" data-operation="4"><summary data-copy="limitsDetail4Title">有意识地打开</summary><p data-copy="limitsDetail4Body">设置规则可批准的临时开放次数和每次时长。需要使用时，进规则详情申请临时开放。</p></details>
-            <details class="operation" name="limits-operations" data-operation="5"><summary data-copy="limitsDetail5Title">完成后再用</summary><p data-copy="limitsDetail5Body">设定一个先完成的条件，例如任务、习惯或专注，再设置达标后开放哪些 App 和开放时长。</p></details>
-            <details class="operation" name="limits-operations" data-operation="6"><summary data-copy="limitsDetail6Title">用一会儿，休息一下</summary><p data-copy="limitsDetail6Body">设置一轮可用时长和休息时间。用到上限后，所选 App 会在休息期间受限。</p></details>
-            <details class="operation" name="limits-operations" data-operation="7"><summary data-copy="limitsDetail7Title">提前结束一次临时开放</summary><p data-copy="limitsDetail7Body">点规则卡片进入详情。这条规则允许临放时，可点「申请临时使用」。已经开放时，也可以从详情页点「提前结束本次开放」。</p></details>
-            <details class="operation" name="limits-operations" data-operation="8"><summary data-copy="limitsDetail8Title">从规则详情编辑或修复</summary><p data-copy="limitsDetail8Body">规则详情会显示当前状态和选中的 App。要调整时点「编辑」。如果提示需要重新连接或重选 App，按这一条规则的提示操作。</p></details>
-            <details class="operation" name="limits-operations" data-operation="9"><summary data-copy="limitsDetail9Title">从「工具」找使用时间报告</summary><p data-copy="limitsDetail9Body">打开「管控 → 工具 → 使用时间」看系统记录的 App 使用情况。自己开启专注所记录的用时，可以在「回顾 → 分析 → 专注」查看。</p></details>
-            </div>
-          </div>
-          <figure class="guide-art">
-            <div class="phone guide-phone" data-screen="control">
-              <div class="guide-viewport"><img data-guide-screen="control" aria-hidden="false" src="images/timehabit/screen-control.webp" width="650" height="1414" alt="管控页面显示屏幕使用时间授权入口、新建按钮和工具。" data-copy-attr="alt limitsAlt" class="guide-shot">
-                <span class="tour-marker" aria-hidden="true" hidden><i></i></span>
-              </div>
-            </div>
-            <img src="images/timehabit/panda-limits.webp" width="216" height="157" alt="" class="guide-panda" loading="lazy">
-          </figure>
-        </article>
-        <article class="guide-panel" id="guide-review" data-topic="review">
-          <div class="guide-copy">
-            <h3 id="title-review" data-copy="reviewTitle">看看时间花在哪儿</h3>
-            <div class="walkthrough" aria-labelledby="title-review">
-              <div class="step-targets" role="group" aria-labelledby="title-review" hidden>
-                <button type="button" class="step-target" aria-controls="review-step-1" aria-pressed="false" data-step="1">1</button> <button type="button" class="step-target" aria-controls="review-step-2" aria-pressed="false" data-step="2">2</button> <button type="button" class="step-target" aria-controls="review-step-3" aria-pressed="false" data-step="3">3</button>
-              </div>
-              <ol class="steps">
-              <li id="review-step-1"><span class="step-number" aria-hidden="true">1</span><span data-copy="review1">打开「回顾」，在日历里选择日期。</span></li>
-              <li id="review-step-2"><span class="step-number" aria-hidden="true">2</span><span data-copy="review2">向下浏览这一天的时间线。</span></li>
-              <li id="review-step-3"><span class="step-number" aria-hidden="true">3</span><span data-copy="review3">点「···」，进入「分析」「收集箱」或「日记」。</span></li>
-              </ol>
-            </div>
-            <div class="operations">
-            <details class="operation" name="review-operations" data-operation="1"><summary data-copy="reviewDetail1Title">切换日视图和月视图</summary><p data-copy="reviewDetail1Body">在「回顾」顶部点「日」或「月」。点日历上的日期查看当天时间线，或用日期旁的箭头切到前后一天或一月。</p></details>
-            <details class="operation" name="review-operations" data-operation="2"><summary data-copy="reviewDetail2Title">点当前周期，直接跳到目标日期</summary><p data-copy="reviewDetail2Body">点「··· → 分析」，可以按日、周、月、年查看统计。点屏幕上当前显示的周期可直接选择日期或周期，也能切到「专注」看专注记录。</p></details>
-            <details class="operation" name="review-operations" data-operation="3"><summary data-copy="reviewDetail3Title">给日记贴一枚熊猫邮票</summary><p data-copy="reviewDetail3Body">点「··· → 日记」，选好日期后点日记本图标。先选邮票，再写正文并保存。编辑页还可以添加心情、标签、图片或网址。</p></details>
-            <details class="operation" name="review-operations" data-operation="4"><summary data-copy="reviewDetail4Title">点铅笔写便签，点放大镜找日记</summary><p data-copy="reviewDetail4Body">在「日记」点铅笔写便签，横滑底部纸面来选择样式。想找以前的内容时，点放大镜搜索已有日记。</p></details>
-            <details class="operation" name="review-operations" data-operation="5"><summary data-copy="reviewDetail5Title">把收集箱的灵感转成事项</summary><p data-copy="reviewDetail5Body">点「··· → 收集箱」记下灵感或网址。想好如何安排后，打开该条目的菜单，点「转成」，即可带着内容新建任务或安排。</p></details>
-            <details class="operation" name="review-operations" data-operation="6"><summary data-copy="reviewDetail6Title">从当天小记打开原记录</summary><p data-copy="reviewDetail6Body">点「日记」下方当天小记里的安排记录或习惯小记，直接回到对应的记录。点日记页的日期可跳到其他天。</p></details>
-            </div>
-          </div>
-          <figure class="guide-art">
-            <div class="phone guide-phone" data-screen="review">
-              <div class="guide-viewport"><img data-guide-screen="review" aria-hidden="false" src="images/timehabit/screen-review.webp" width="650" height="1414" alt="回顾页面显示月历和所选日期的时间线。" data-copy-attr="alt reviewAlt" class="guide-shot"><img data-guide-screen="analysis" aria-hidden="true" src="images/timehabit/screen-analysis.webp" width="650" height="1414" alt="" class="guide-shot"><img data-guide-screen="journal" aria-hidden="true" src="images/timehabit/screen-journal.webp" width="650" height="1414" alt="" class="guide-shot"><img data-guide-screen="inbox" aria-hidden="true" src="images/timehabit/screen-inbox.webp" width="650" height="1414" alt="" class="guide-shot">
-                <span class="tour-marker" aria-hidden="true" hidden><i></i></span>
-              </div>
-            </div>
-            <img src="images/timehabit/panda-review.webp" width="240" height="160" alt="" class="guide-panda" loading="lazy">
-          </figure>
-        </article>
+      <h2 id="guide-title" data-copy="guideTitle">跟着花花，用好一天</h2>
+      <div class="guide-tabs" role="group" aria-label="TimeHabit 功能" data-copy-attr="aria-label tabsLabel" hidden>
+        <button type="button" data-topic="today" aria-pressed="true" aria-controls="guide-today" data-copy="todayTab">今天</button> <button type="button" data-topic="focus" aria-pressed="false" aria-controls="guide-focus" data-copy="focusTab">专注</button> <button type="button" data-topic="limits" aria-pressed="false" aria-controls="guide-limits" data-copy="limitsTab">管控</button> <button type="button" data-topic="review" aria-pressed="false" aria-controls="guide-review" data-copy="reviewTab">回顾</button>
       </div>
-      <p class="capture" data-copy="capture">TimeHabit 6.0 原生界面，使用示例数据。截图为英文界面。</p>
+      <section class="guide-topic" id="guide-today" data-guide-topic="today" aria-labelledby="title-today">
+        <h3 id="title-today" data-copy="todayTitle">把今天安排明白</h3>
+        <details class="operation" name="today-operations" data-operation="1">
+          <summary data-copy="todayDetail1Title">点熊猫展开今日概览</summary>
+          <p data-copy="todayDetail1Body">点「今天」标题旁的熊猫，顶部会展开任务、安排和习惯概览。向下滚动时概览会留在顶部，再点一次熊猫即可收起。</p>
+          <button type="button" class="operation-view" hidden data-copy="viewScreen">查看完整画面</button>
+        </details>
+        <details class="operation" name="today-operations" data-operation="2">
+          <summary data-copy="todayDetail2Title">右滑任务卡片修改或删除</summary>
+          <p data-copy="todayDetail2Body">向右滑动卡片，左侧会露出「修改」和「删除」。向左滑或点空白处收起。删除重复任务时，留意确认框里的本次和系列范围。</p>
+          <button type="button" class="operation-view" hidden data-copy="viewScreen">查看完整画面</button>
+        </details>
+        <details class="operation" name="today-operations" data-operation="3">
+          <summary data-copy="todayDetail3Title">点卡片完成，展开后逐步勾选</summary>
+          <p data-copy="todayDetail3Body">收起右滑操作后，点任务卡片或圆圈即可完成。点已完成任务可恢复未完成。任务有步骤时，展开步骤列表即可逐项勾选。</p>
+          <button type="button" class="operation-view" hidden data-copy="viewScreen">查看完整画面</button>
+        </details>
+        <details class="operation" name="today-operations" data-operation="4">
+          <summary data-copy="todayDetail4Title">用「今天做」把逾期任务移回今天</summary>
+          <p data-copy="todayDetail4Body">在「之前未完成」找到任务，点「今天做」将计划日改为今天，任务仍待完成。</p>
+          <button type="button" class="operation-view" hidden data-copy="viewScreen">查看完整画面</button>
+        </details>
+        <details class="operation" name="today-operations" data-operation="5">
+          <summary data-copy="todayDetail5Title">记录习惯进度和小记</summary>
+          <p data-copy="todayDetail5Body">在「今天」点习惯的记录按钮。打卡型习惯直接打卡，数量型习惯录入完成量。打开习惯记录可以调整数量或写小记。</p>
+          <button type="button" class="operation-view" hidden data-copy="viewScreen">查看完整画面</button>
+        </details>
+        <details class="operation" name="today-operations" data-operation="6">
+          <summary data-copy="todayDetail6Title">把常用任务保存为模板</summary>
+          <p data-copy="todayDetail6Body">在任务编辑器点「···」里的「保存为模板」。下次可在任务编辑器用「从模板新建」填入草稿，核对后点保存。</p>
+          <button type="button" class="operation-view" hidden data-copy="viewScreen">查看完整画面</button>
+        </details>
+      </section>
+      <section class="guide-topic" id="guide-focus" data-guide-topic="focus" aria-labelledby="title-focus">
+        <h3 id="title-focus" data-copy="focusTitle">一次只做一件事</h3>
+        <details class="operation" name="focus-operations" data-operation="1">
+          <summary data-copy="focusDetail1Title">点任务旁的时钟直接专注</summary>
+          <p data-copy="focusDetail1Body">点任务卡片上的时钟，记录这项任务的用时。任务有进行中的专注时，再点同一入口就能回到该计时。</p>
+          <button type="button" class="operation-view" hidden data-copy="viewScreen">查看完整画面</button>
+        </details>
+        <details class="operation" name="focus-operations" data-operation="2">
+          <summary data-copy="focusDetail2Title">点计时数字或番茄设置调整参数</summary>
+          <p data-copy="focusDetail2Body">正计时从零开始，倒计时适合给自己限定一段时间，番茄钟用来交替安排专注和休息。开始前可以点时长，或点番茄钟的轮数与休息参数调整。</p>
+          <button type="button" class="operation-view" hidden data-copy="viewScreen">查看完整画面</button>
+        </details>
+        <details class="operation" name="focus-operations" data-operation="3">
+          <summary data-copy="focusDetail3Title">开计时前设声音和保护</summary>
+          <p data-copy="focusDetail3Body">进入专注设置选声音。需要屏蔽干扰时，在设置中选择要限制或允许的 App。保护随本次专注开始时启用。</p>
+          <button type="button" class="operation-view" hidden data-copy="viewScreen">查看完整画面</button>
+        </details>
+        <details class="operation" name="focus-operations" data-operation="4">
+          <summary data-copy="focusDetail4Title">收起页面，计时继续</summary>
+          <p data-copy="focusDetail4Body">计时中点左上角收起，可以继续用 App。回到「今天」点「专注」，就能重新打开正在进行的计时。</p>
+          <button type="button" class="operation-view" hidden data-copy="viewScreen">查看完整画面</button>
+        </details>
+        <details class="operation" name="focus-operations" data-operation="5">
+          <summary data-copy="focusDetail5Title">暂停、结束和完成任务</summary>
+          <p data-copy="focusDetail5Body">用「暂停」和「继续」控制同一次会话。点「结束」可收尾。任务专注中点「完成任务」，会结束并记录当前专注，同时完成任务。</p>
+          <button type="button" class="operation-view" hidden data-copy="viewScreen">查看完整画面</button>
+        </details>
+        <details class="operation" name="focus-operations" data-operation="6">
+          <summary data-copy="focusDetail6Title">按日、周、月、年看专注记录</summary>
+          <p data-copy="focusDetail6Body">打开「回顾 → ··· → 分析 → 专注」，按日、周、月或年查看这段时间的专注记录和累计时长。</p>
+          <button type="button" class="operation-view" hidden data-copy="viewScreen">查看完整画面</button>
+        </details>
+      </section>
+      <section class="guide-topic" id="guide-limits" data-guide-topic="limits" aria-labelledby="title-limits">
+        <h3 id="title-limits" data-copy="limitsTitle">给分心设个界限</h3>
+        <details class="operation" name="limits-operations" data-operation="1">
+          <summary data-copy="limitsDetail1Title">现在专心</summary>
+          <p data-copy="limitsDetail1Body">希望立刻减少干扰时，选择要限制的 App，再设定本次锁定多久。</p>
+          <button type="button" class="operation-view" hidden data-copy="viewScreen">查看完整画面</button>
+        </details>
+        <details class="operation" name="limits-operations" data-operation="2">
+          <summary data-copy="limitsDetail2Title">按时段管控</summary>
+          <p data-copy="limitsDetail2Body">选择规则生效的日期或星期，再加上一个或多个时间段。例如在工作日的睡前时段限制社交 App。</p>
+          <button type="button" class="operation-view" hidden data-copy="viewScreen">查看完整画面</button>
+        </details>
+        <details class="operation" name="limits-operations" data-operation="3">
+          <summary data-copy="limitsDetail3Title">限制使用时长</summary>
+          <p data-copy="limitsDetail3Body">给所选 App 设置共享用量。它们的累计使用时间达到设定额度后，规则会限制访问。</p>
+          <button type="button" class="operation-view" hidden data-copy="viewScreen">查看完整画面</button>
+        </details>
+        <details class="operation" name="limits-operations" data-operation="4">
+          <summary data-copy="limitsDetail4Title">有意识地打开</summary>
+          <p data-copy="limitsDetail4Body">设置规则可批准的临时开放次数和每次时长。需要使用时，进规则详情申请临时开放。</p>
+          <button type="button" class="operation-view" hidden data-copy="viewScreen">查看完整画面</button>
+        </details>
+        <details class="operation" name="limits-operations" data-operation="5">
+          <summary data-copy="limitsDetail5Title">完成后再用</summary>
+          <p data-copy="limitsDetail5Body">设定一个先完成的条件，例如任务、习惯或专注，再设置达标后开放哪些 App 和开放时长。</p>
+          <button type="button" class="operation-view" hidden data-copy="viewScreen">查看完整画面</button>
+        </details>
+        <details class="operation" name="limits-operations" data-operation="6">
+          <summary data-copy="limitsDetail6Title">用一会儿，休息一下</summary>
+          <p data-copy="limitsDetail6Body">设置一轮可用时长和休息时间。用到上限后，所选 App 会在休息期间受限。</p>
+          <button type="button" class="operation-view" hidden data-copy="viewScreen">查看完整画面</button>
+        </details>
+        <details class="operation" name="limits-operations" data-operation="7">
+          <summary data-copy="limitsDetail7Title">提前结束一次临时开放</summary>
+          <p data-copy="limitsDetail7Body">点规则卡片进入详情。这条规则允许临放时，可点「申请临时使用」。已经开放时，也可以从详情页点「提前结束本次开放」。</p>
+          <button type="button" class="operation-view" hidden data-copy="viewScreen">查看完整画面</button>
+        </details>
+        <details class="operation" name="limits-operations" data-operation="8">
+          <summary data-copy="limitsDetail8Title">从规则详情编辑或修复</summary>
+          <p data-copy="limitsDetail8Body">规则详情会显示当前状态和选中的 App。要调整时点「编辑」。如果提示需要重新连接或重选 App，按这一条规则的提示操作。</p>
+          <button type="button" class="operation-view" hidden data-copy="viewScreen">查看完整画面</button>
+        </details>
+        <details class="operation" name="limits-operations" data-operation="9">
+          <summary data-copy="limitsDetail9Title">从「工具」找使用时间报告</summary>
+          <p data-copy="limitsDetail9Body">打开「管控 → 工具 → 使用时间」看系统记录的 App 使用情况。自己开启专注所记录的用时，可以在「回顾 → 分析 → 专注」查看。</p>
+          <button type="button" class="operation-view" hidden data-copy="viewScreen">查看完整画面</button>
+        </details>
+      </section>
+      <section class="guide-topic" id="guide-review" data-guide-topic="review" aria-labelledby="title-review">
+        <h3 id="title-review" data-copy="reviewTitle">看看时间花在哪儿</h3>
+        <details class="operation" name="review-operations" data-operation="1">
+          <summary data-copy="reviewDetail1Title">切换日视图和月视图</summary>
+          <p data-copy="reviewDetail1Body">在「回顾」顶部点「日」或「月」。点日历上的日期查看当天时间线，或用日期旁的箭头切到前后一天或一月。</p>
+          <button type="button" class="operation-view" hidden data-copy="viewScreen">查看完整画面</button>
+        </details>
+        <details class="operation" name="review-operations" data-operation="2">
+          <summary data-copy="reviewDetail2Title">点当前周期，直接跳到目标日期</summary>
+          <p data-copy="reviewDetail2Body">点「··· → 分析」，可以按日、周、月、年查看统计。点屏幕上当前显示的周期可直接选择日期或周期，也能切到「专注」看专注记录。</p>
+          <button type="button" class="operation-view" hidden data-copy="viewScreen">查看完整画面</button>
+        </details>
+        <details class="operation" name="review-operations" data-operation="3">
+          <summary data-copy="reviewDetail3Title">给日记贴一枚熊猫邮票</summary>
+          <p data-copy="reviewDetail3Body">点「··· → 日记」，选好日期后点日记本图标。先选邮票，再写正文并保存。编辑页还可以添加心情、标签、图片或网址。</p>
+          <button type="button" class="operation-view" hidden data-copy="viewScreen">查看完整画面</button>
+        </details>
+        <details class="operation" name="review-operations" data-operation="4">
+          <summary data-copy="reviewDetail4Title">点铅笔写便签，点放大镜找日记</summary>
+          <p data-copy="reviewDetail4Body">在「日记」点铅笔写便签，横滑底部纸面来选择样式。想找以前的内容时，点放大镜搜索已有日记。</p>
+          <button type="button" class="operation-view" hidden data-copy="viewScreen">查看完整画面</button>
+        </details>
+        <details class="operation" name="review-operations" data-operation="5">
+          <summary data-copy="reviewDetail5Title">把收集箱的灵感转成事项</summary>
+          <p data-copy="reviewDetail5Body">点「··· → 收集箱」记下灵感或网址。想好如何安排后，打开该条目的菜单，点「转成」，即可带着内容新建任务或安排。</p>
+          <button type="button" class="operation-view" hidden data-copy="viewScreen">查看完整画面</button>
+        </details>
+        <details class="operation" name="review-operations" data-operation="6">
+          <summary data-copy="reviewDetail6Title">从当天小记打开原记录</summary>
+          <p data-copy="reviewDetail6Body">点「日记」下方当天小记里的安排记录或习惯小记，直接回到对应的记录。点日记页的日期可跳到其他天。</p>
+          <button type="button" class="operation-view" hidden data-copy="viewScreen">查看完整画面</button>
+        </details>
+      </section>
     </section>
-
   </main>
 
   <footer class="wrap">
@@ -242,5 +272,14 @@
       <a href="#top" data-copy="backTop">回到顶部</a>
     </div>
   </footer>
+
+  <dialog class="screen-dialog" id="screen-dialog" aria-label="查看完整画面" data-copy-attr="aria-label viewScreen">
+    <div class="screen-dialog-inner">
+      <form method="dialog">
+        <button type="submit" class="dialog-close" aria-label="关闭画面" data-copy-attr="aria-label closeScreen" autofocus><span aria-hidden="true">×</span></button>
+      </form>
+      <div class="dialog-phone" id="dialog-phone"></div>
+    </div>
+  </dialog>
 </body>
 </html>

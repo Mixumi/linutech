@@ -44,7 +44,6 @@
   "review2": "Scorri la cronologia della giornata.",
   "review3": "Apri il menu ··· per accedere ad Analisi, Posta in arrivo o Diario.",
   "reviewAlt": "Schermata Riepilogo con un calendario mensile e la cronologia di una giornata.",
-  "capture": "Schermate di TimeHabit 6.0 con dati di esempio. L’interfaccia nelle immagini è in inglese.",
   "privacyTitle": "Informativa sulla privacy di TimeHabit",
   "privacyIntro": "Questa informativa si applica a TimeHabit 6.0 e a questa pagina del prodotto.",
   "policyDate": "Aggiornata il 22 novembre 2026",
@@ -123,5 +122,7 @@
   "reviewDetail5Title": "Annotare un’idea e trasformarla in un piano",
   "reviewDetail5Body": "Tocca ··· → Posta in arrivo e salva un’idea o un link. Quando hai deciso che cosa farne, apri il menu dell’elemento e scegli Converti per trasformarlo in un’attività o in un evento.",
   "reviewDetail6Title": "Passare da una nota del diario alla scheda originale",
-  "reviewDetail6Body": "Nelle note della giornata del Diario, tocca la registrazione di un evento o una nota sull’abitudine per aprire la scheda originale. Tocca la data in Diario per andare a un altro giorno."
+  "reviewDetail6Body": "Nelle note della giornata del Diario, tocca la registrazione di un evento o una nota sull’abitudine per aprire la scheda originale. Tocca la data in Diario per andare a un altro giorno.",
+  "viewScreen": "Visualizza la schermata intera",
+  "closeScreen": "Chiudi l’anteprima"
 }

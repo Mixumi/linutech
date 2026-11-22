@@ -44,7 +44,6 @@
   "review2": "Scroll through the day’s timeline.",
   "review3": "Open the ··· menu for tag analysis, Inbox or Journal.",
   "reviewAlt": "Review screen with a monthly calendar and a daily timeline.",
-  "capture": "TimeHabit 6.0 screens with sample data. The screenshots show the English interface.",
   "privacyTitle": "TimeHabit Privacy Policy",
   "privacyIntro": "This policy describes TimeHabit 6.0 and this product page.",
   "policyDate": "Updated November 22, 2026",
@@ -123,5 +122,7 @@
   "reviewDetail5Title": "Capture an idea and turn it into a plan",
   "reviewDetail5Body": "Tap ··· → Inbox and save an idea or link. Open the item’s menu and choose Convert to turn it into a task or event when you know what to do with it.",
   "reviewDetail6Title": "Go back to a record from the journal",
-  "reviewDetail6Body": "Tap an event record or habit note shown in the journal’s daily notes to open that source record. Use the date in Journal to jump to another day."
+  "reviewDetail6Body": "Tap an event record or habit note shown in the journal’s daily notes to open that source record. Use the date in Journal to jump to another day.",
+  "viewScreen": "View full screen",
+  "closeScreen": "Close preview"
 }

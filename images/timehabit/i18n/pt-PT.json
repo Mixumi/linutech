@@ -44,7 +44,6 @@
   "review2": "Percorra a cronologia do dia.",
   "review3": "Abra o menu ··· para ver a análise por etiqueta, a Caixa de entrada ou o Diário.",
   "reviewAlt": "Ecrã Revisão com um calendário mensal e a cronologia de um dia.",
-  "capture": "Ecrãs do TimeHabit 6.0 com dados de exemplo. As capturas mostram a interface em inglês.",
   "privacyTitle": "Política de privacidade do TimeHabit",
   "privacyIntro": "Esta política aplica-se ao TimeHabit 6.0 e a esta página do produto.",
   "policyDate": "Atualizada a 22 de novembro de 2026",
@@ -123,5 +122,7 @@
   "reviewDetail5Title": "Registe uma ideia e transforme-a num plano",
   "reviewDetail5Body": "Toque em ··· → Caixa de entrada e guarde uma ideia ou uma ligação. Quando souber o que fazer com ela, abra o menu do item e escolha Converter para criar uma tarefa ou um evento.",
   "reviewDetail6Title": "Volte ao registo original a partir do diário",
-  "reviewDetail6Body": "Toque num registo de evento ou numa nota de hábito nas notas diárias do Diário para abrir o registo original. Use a data no Diário para ir para outro dia."
+  "reviewDetail6Body": "Toque num registo de evento ou numa nota de hábito nas notas diárias do Diário para abrir o registo original. Use a data no Diário para ir para outro dia.",
+  "viewScreen": "Ver o ecrã inteiro",
+  "closeScreen": "Fechar a pré-visualização"
 }
