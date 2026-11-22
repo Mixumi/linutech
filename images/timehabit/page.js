@@ -1,4 +1,5 @@
 import "./language.js";
+import { enableGuide } from "./guide.js";
 import { setupWave } from "./mascot.js";
 
 (() => {
@@ -17,7 +18,11 @@ import { setupWave } from "./mascot.js";
   const openingPanda = pandas[0].querySelector("img");
   const wave = setupWave(pandas[0].querySelector("canvas"), openingPanda, reduceMotion);
   let replyTimer;
+  let swipeStart;
+  let activeScene = 0;
+  panels.forEach(panel => enableGuide(panel, reduceMotion));
   function activateTab(index, moveFocus = false) {
+    activeScene = index;
     tabs.forEach((tab, i) => {
       const active = i === index;
       tab.setAttribute("aria-selected", String(active));
@@ -70,6 +75,20 @@ import { setupWave } from "./mascot.js";
   stickers.forEach((sticker, index) => {
     sticker.addEventListener("click", () => activateTab(index));
   });
+  preview.addEventListener("pointerdown", event => {
+    if (!event.isPrimary || event.pointerType === "mouse" || event.target.closest("button")) return;
+    swipeStart = { x: event.clientX, y: event.clientY };
+  });
+  preview.addEventListener("pointerup", event => {
+    if (!swipeStart) return;
+    const dx = event.clientX - swipeStart.x;
+    const dy = event.clientY - swipeStart.y;
+    swipeStart = undefined;
+    if (Math.abs(dx) > 42 && Math.abs(dx) > 1.35 * Math.abs(dy)) {
+      activateTab((activeScene + (dx < 0 ? 1 : stickers.length - 1)) % stickers.length);
+    }
+  });
+  preview.addEventListener("pointercancel", () => { swipeStart = undefined; });
   scenePicker.hidden = false;
   waveButton.disabled = false;
   waveButton.addEventListener("click", () => {
